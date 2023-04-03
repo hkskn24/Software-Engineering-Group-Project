@@ -2,8 +2,10 @@ package main.java.Pages;
 
 import main.java.Data;
 import main.java.Entity.Module;
+import main.java.Controller.*;
 
 import java.awt.*;
+import javax.swing.border.EmptyBorder;
 import javax.swing.table.DefaultTableModel;
 import java.awt.BorderLayout;
 import java.awt.event.ActionEvent;
@@ -19,6 +21,9 @@ import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.JTextField;
 import javax.swing.ListSelectionModel;
+import javax.swing.JComboBox;
+import javax.swing.table.TableRowSorter;
+
 
 
 public class ModulePage extends JFrame {
@@ -58,6 +63,7 @@ public class ModulePage extends JFrame {
 
         DefaultTableModel tableModel = new DefaultTableModel(tableValues,columnNames);  //table on the frame
         JTable table = new JTable(tableModel);
+        TableRowSorter<DefaultTableModel> sorter = new TableRowSorter<>(tableModel);
         JScrollPane scrollPane = new JScrollPane(table);  //to be scrolled
         getContentPane().add(scrollPane,BorderLayout.CENTER);
         setVisible(true);  //to be seen
@@ -160,5 +166,43 @@ public class ModulePage extends JFrame {
             }
         });
         panel.add(delButton);
+
+        // select by semester
+        JPanel filterPanel = new JPanel();
+
+        String[] semesterOptions = {"All", "1", "2", "3", "4", "5", "6", "7", "8"};
+        JComboBox<String> semesterComboBox = new JComboBox<>(semesterOptions);
+        filterPanel.add(new JLabel("Filter by semester: "));
+        filterPanel.add(semesterComboBox);
+
+        JButton filterButton = new JButton("Filter");
+        filterButton.addActionListener(ModuleController.createFilterActionListener(table, sorter, semesterComboBox));
+        filterPanel.add(filterButton);
+
+        table.setRowSorter(sorter);
+
+        //set border
+        panel.setBorder(new EmptyBorder(10, 10, 10, 10));
+
+        //layout
+        JPanel combinedPanel = new JPanel(new GridBagLayout());
+        getContentPane().add(combinedPanel, BorderLayout.SOUTH);
+
+        GridBagConstraints gbc = new GridBagConstraints();
+        gbc.gridx = 0;
+        gbc.gridy = 0;
+        gbc.weightx = 1.0;
+        gbc.weighty = 0.0;
+        gbc.fill = GridBagConstraints.HORIZONTAL;
+        gbc.anchor = GridBagConstraints.NORTH;
+
+        combinedPanel.add(filterPanel, gbc);
+
+        gbc.gridy = 1;
+        gbc.weighty = 0;
+
+        combinedPanel.add(panel, gbc);
+
+        combinedPanel.setBorder(new EmptyBorder(10, 10, 10, 10));
     }
 }

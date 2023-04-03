@@ -1,0 +1,29 @@
+[
+    {
+      "name": "Linear Algebra",
+      "code": "3412110079",
+      "credits": 3,
+      "hours": 48,
+      "semester": 1,
+      "type": "Compulsory",
+      "grades": 88
+    },
+    {
+      "name": "Intermediate English Reading and Writing",
+      "code": "3312111130",
+      "credits": 2,
+      "hours": 32,
+      "semester": 2,
+      "type": "Elective",
+      "grades": 79
+    },
+    {
+      "name": "适当放松i就放松i附件i",
+      "code": "算法危机i",
+      "credits": 12,
+      "hours": 32,
+      "semester": 2,
+      "type": "Elective",
+      "grades": 79
+    }
+  ]

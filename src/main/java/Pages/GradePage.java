@@ -211,7 +211,7 @@ public class GradePage extends JFrame {
         filterPanel.add(semesterComboBox);
 
         JButton filterButton = new JButton("Filter");
-        filterButton.addActionListener(ModuleController.createFilterActionListener(table, sorter, semesterComboBox));
+        filterButton.addActionListener(GradeController.createFilterActionListener(table, sorter, semesterComboBox));
         filterPanel.add(filterButton);
 
         return filterPanel;

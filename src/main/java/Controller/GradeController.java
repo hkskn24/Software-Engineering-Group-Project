@@ -5,9 +5,8 @@ import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableRowSorter;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.sql.SQLOutput;
 
-public class ModuleController {
+public class GradeController {
     public static ActionListener createFilterActionListener(JTable table, TableRowSorter<DefaultTableModel> sorter, JComboBox<String> semesterComboBox) {
         return new ActionListener() {
             @Override

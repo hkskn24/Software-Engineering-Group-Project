@@ -24,11 +24,7 @@ public class LogInPage extends JFrame implements ActionListener {
         JButton retrievePasswordButton = new JButton("密码找回");
         JButton recoverPasswordButton = new JButton("修改密码");
         JButton quitButton = new JButton("退出");
-        quitButton.addActionListener(new ActionListener(){
-            public void actionPerformed(ActionEvent ae){
-                System.exit(0);
-            }
-        });
+        quitButton.addActionListener(ae -> System.exit(0));
 
         panel.add(usernameLabel);
         panel.add(usernameField);
@@ -112,49 +108,47 @@ public class LogInPage extends JFrame implements ActionListener {
             panel.add(new JLabel());
             panel.add(registerButton);
 
-            registerButton.addActionListener(new ActionListener() {
-                public void actionPerformed(ActionEvent e) {
-                    String username = usernameField.getText().trim();
-                    String password = new String(passwordField.getPassword()).trim();
-                    String phone = phoneField.getText().trim();
-                    try{
-                        BufferedReader reader = new BufferedReader(new FileReader("students.txt"));
-                        String line1;
-                        while ((line1 = reader.readLine()) != null) {
-                            String[] sparts = line1.split(" ");
-                            if (sparts[0].equals(username)||sparts[2].equals(phone)) {
-                                JOptionPane.showMessageDialog(registerWindow, "用户名或手机号码已存在，请重新输入。");
-                                return;
-                            }
-                            reader.close();
+            registerButton.addActionListener(e1 -> {
+                String username = usernameField.getText().trim();
+                String password = new String(passwordField.getPassword()).trim();
+                String phone = phoneField.getText().trim();
+                try{
+                    BufferedReader reader = new BufferedReader(new FileReader("students.txt"));
+                    String line1;
+                    while ((line1 = reader.readLine()) != null) {
+                        String[] sparts = line1.split(" ");
+                        if (sparts[0].equals(username)||sparts[2].equals(phone)) {
+                            JOptionPane.showMessageDialog(registerWindow, "用户名或手机号码已存在，请重新输入。");
+                            return;
                         }
-                    }catch (IOException ex) {
+                        reader.close();
                     }
-
-                    if (!username.matches("[a-zA-Z\u4e00-\u9fa5]{1,10}")) {
-                        JOptionPane.showMessageDialog(registerWindow, "用户名格式有误，请输入汉字或者英文字符。");
-                        return;
-                    }
-                    if (!password.matches("[a-zA-Z0-9]{6,10}")) {
-                        JOptionPane.showMessageDialog(registerWindow, "密码格式有误，请输入6-10位数字或英文字符。");
-                        return;
-                    }
-                    if (!phone.matches("\\d{11}")) {
-                        JOptionPane.showMessageDialog(registerWindow, "电话号码格式有误，请输入11位数字。");
-                        return;
-                    }
-                    try {
-                        BufferedWriter writer = new BufferedWriter(new FileWriter("students.txt", true));
-                        writer.write(username + " " + password + " " + phone);
-                        writer.newLine();
-                        JOptionPane.showMessageDialog(registerWindow, "注册成功！");
-                        writer.close();
-                    } catch (IOException ex) {
-                        JOptionPane.showMessageDialog(registerWindow, "读取文件时发生错误: " + ex.getMessage());
-                    }
-
-                    registerWindow.dispose();
+                }catch (IOException ignored) {
                 }
+
+                if (!username.matches("[a-zA-Z\u4e00-\u9fa5]{1,10}")) {
+                    JOptionPane.showMessageDialog(registerWindow, "用户名格式有误，请输入汉字或者英文字符。");
+                    return;
+                }
+                if (!password.matches("[a-zA-Z0-9]{6,10}")) {
+                    JOptionPane.showMessageDialog(registerWindow, "密码格式有误，请输入6-10位数字或英文字符。");
+                    return;
+                }
+                if (!phone.matches("\\d{11}")) {
+                    JOptionPane.showMessageDialog(registerWindow, "电话号码格式有误，请输入11位数字。");
+                    return;
+                }
+                try {
+                    BufferedWriter writer = new BufferedWriter(new FileWriter("students.txt", true));
+                    writer.write(username + " " + password + " " + phone);
+                    writer.newLine();
+                    JOptionPane.showMessageDialog(registerWindow, "注册成功！");
+                    writer.close();
+                } catch (IOException ex) {
+                    JOptionPane.showMessageDialog(registerWindow, "读取文件时发生错误: " + ex.getMessage());
+                }
+
+                registerWindow.dispose();
             });
 
             registerWindow.add(panel);
@@ -225,7 +219,7 @@ public class LogInPage extends JFrame implements ActionListener {
                 reader.close();
                 for(String pw : list) {
                     //for (String line : new String(java.nio.file.Files.readAllBytes(java.nio.file.Paths.get("students.txt"))).split("\\r?\\n")) {
-                    String dpart[] = pw.split(" ");
+                    String[] dpart = pw.split(" ");
                     if (phone.equals(dpart[2])) {
                         username = dpart[0];
                         String newpassword = JOptionPane.showInputDialog(username+"，你好！请输入新密码:");

@@ -1,6 +1,6 @@
 package main.java.Pages;
 
-import java.awt.GridLayout;
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.*;
@@ -14,16 +14,49 @@ public class LogInPage extends JFrame implements ActionListener {
 
     public LogInPage() {
         super("学生信息管理系统");
-        JPanel panel = new JPanel(new GridLayout(5,1,4,4));
-        JLabel usernameLabel = new JLabel("姓名:");
-        JLabel passwordLabel = new JLabel("密码:");
+
+        // 设置字体
+        Font labelFont = new Font("宋体", Font.BOLD, 20);
+        Font buttonFont = new Font("宋体", Font.BOLD, 20);
+
+        // 设置按钮颜色和文字颜色
+        Color buttonColor = new Color(255, 182, 193);
+        Color buttonTextColor = Color.WHITE;
+
+        JPanel panel = new JPanel(new GridLayout(0, 2, 4, 5)) {
+            @Override
+            public void setOpaque(boolean isOpaque) {
+                super.setOpaque(false);
+            }
+        };
+        panel.setOpaque(false);
+
+        // 设置背景图片
+        ImageIcon backgroundImageIcon = new ImageIcon("src/main/resources/login.JPG");
+        JLabel backgroundImage = new JLabel(backgroundImageIcon);
+        backgroundImage.setLayout(new GridLayout(0, 2, 4, 5));
+
+        JLabel usernameLabel = new JLabel("Username:");
+        JLabel passwordLabel = new JLabel("Password:");
+        usernameLabel.setFont(labelFont);
+        passwordLabel.setFont(labelFont);
+
         usernameField = new JTextField(10);
         passwordField = new JPasswordField(10);
-        JButton loginButton = new JButton("登录");
-        JButton registerButton = new JButton("注册");
-        JButton retrievePasswordButton = new JButton("密码找回");
-        JButton recoverPasswordButton = new JButton("修改密码");
-        JButton quitButton = new JButton("退出");
+        JButton loginButton = new JButton("Log in");
+        JButton registerButton = new JButton("Sign up");
+        JButton retrievePasswordButton = new JButton("Forgotten password");
+        JButton recoverPasswordButton = new JButton("Change password");
+        JButton quitButton = new JButton("Exit");
+
+        // 设置按钮样式
+        JButton[] buttons = {loginButton, registerButton, retrievePasswordButton, recoverPasswordButton, quitButton};
+        for (JButton button : buttons) {
+            button.setFont(buttonFont);
+            button.setBackground(buttonColor);
+            button.setForeground(buttonTextColor);
+        }
+
         quitButton.addActionListener(ae -> System.exit(0));
 
         panel.add(usernameLabel);
@@ -42,10 +75,12 @@ public class LogInPage extends JFrame implements ActionListener {
         retrievePasswordButton.addActionListener(new RetrievePasswordActionListener());
         recoverPasswordButton.addActionListener(new RecoverPasswordActionListener());
 
-        add(panel);
+        backgroundImage.add(panel);
+        add(backgroundImage);
 
+        // 设置窗口大小为背景图片的大小
+        setSize(backgroundImageIcon.getIconWidth(), backgroundImageIcon.getIconHeight());
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        pack();
         setLocationRelativeTo(null);
         setVisible(true);
     }

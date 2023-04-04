@@ -23,7 +23,7 @@ public class LogInPage extends JFrame implements ActionListener {
         Color buttonColor = new Color(255, 182, 193);
         Color buttonTextColor = Color.WHITE;
 
-        JPanel panel = new JPanel(new GridLayout(0, 2, 4, 5)) {
+        JPanel panel = new JPanel(new GridBagLayout()) {
             @Override
             public void setOpaque(boolean isOpaque) {
                 super.setOpaque(false);
@@ -36,17 +36,23 @@ public class LogInPage extends JFrame implements ActionListener {
         JLabel backgroundImage = new JLabel(backgroundImageIcon);
         backgroundImage.setLayout(new GridLayout(0, 2, 4, 5));
 
+        GridBagConstraints gbc = new GridBagConstraints();
+        gbc.fill = GridBagConstraints.HORIZONTAL;
+        gbc.insets = new Insets(4, 5, 4, 5);
+
         JLabel usernameLabel = new JLabel("Username:");
         JLabel passwordLabel = new JLabel("Password:");
         usernameLabel.setFont(labelFont);
         passwordLabel.setFont(labelFont);
+        usernameLabel.setForeground(Color.WHITE); // 设置文本颜色为白色
+        passwordLabel.setForeground(Color.WHITE); // 设置文本颜色为白色
 
         usernameField = new JTextField(10);
         passwordField = new JPasswordField(10);
         JButton loginButton = new JButton("Log in");
         JButton registerButton = new JButton("Sign up");
-        JButton retrievePasswordButton = new JButton("Forgotten password");
-        JButton recoverPasswordButton = new JButton("Change password");
+        JButton retrievePasswordButton = new JButton("Forgotten");
+        JButton recoverPasswordButton = new JButton("Change");
         JButton quitButton = new JButton("Exit");
 
         // 设置按钮样式
@@ -55,6 +61,7 @@ public class LogInPage extends JFrame implements ActionListener {
             button.setFont(buttonFont);
             button.setBackground(buttonColor);
             button.setForeground(buttonTextColor);
+            button.setPreferredSize(new Dimension(200, 30)); // 增加按钮宽度以显示完整文本
         }
 
         quitButton.addActionListener(ae -> System.exit(0));
@@ -77,6 +84,36 @@ public class LogInPage extends JFrame implements ActionListener {
 
         backgroundImage.add(panel);
         add(backgroundImage);
+
+        gbc.gridx = 0;
+        gbc.gridy = 0;
+        gbc.weightx = 0.5;
+        gbc.weighty = 0.5;
+        panel.add(usernameLabel, gbc);
+        gbc.gridx = 1;
+        gbc.gridy = 0;
+        panel.add(usernameField, gbc);
+        gbc.gridx = 0;
+        gbc.gridy = 1;
+        panel.add(passwordLabel, gbc);
+        gbc.gridx = 1;
+        gbc.gridy = 1;
+        panel.add(passwordField, gbc);
+        gbc.gridx = 0;
+        gbc.gridy = 2;
+        panel.add(loginButton, gbc);
+        gbc.gridx = 1;
+        gbc.gridy = 2;
+        panel.add(registerButton, gbc);
+        gbc.gridx = 0;
+        gbc.gridy = 3;
+        panel.add(retrievePasswordButton, gbc);
+        gbc.gridx = 1;
+        gbc.gridy = 3;
+        panel.add(recoverPasswordButton, gbc);
+        gbc.gridx = 0;
+        gbc.gridy = 4;
+        panel.add(quitButton, gbc);
 
         // 设置窗口大小为背景图片的大小
         setSize(backgroundImageIcon.getIconWidth(), backgroundImageIcon.getIconHeight());

@@ -14,7 +14,7 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.util.ArrayList;
 
-public class ModulePage extends JFrame {
+public class GradesPage extends JFrame {
 
     private JTextField nameTextField;
     private JTextField codeTextField;
@@ -26,10 +26,10 @@ public class ModulePage extends JFrame {
     private TableRowSorter<DefaultTableModel> sorter;
 
     public static void main(String[] args) {
-        new ModulePage();
+        new GradesPage();
     }
 
-    public ModulePage(){
+    public GradesPage(){
        initializeUIComponents();
     }
 

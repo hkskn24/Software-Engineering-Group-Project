@@ -1,27 +1,19 @@
 package main.java.Pages;
 
+import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.*;
-import javax.swing.*;
 import java.util.ArrayList;
 import java.util.List;
 
 public class LogInPage extends JFrame implements ActionListener {
-    private JTextField usernameField;
-    private JPasswordField passwordField;
+    private final JTextField usernameField;
+    private final JPasswordField passwordField;
 
     public LogInPage() {
-        super("学生信息管理系统");
-
-        // 设置字体
-        Font labelFont = new Font("宋体", Font.BOLD, 20);
-        Font buttonFont = new Font("宋体", Font.BOLD, 20);
-
-        // 设置按钮颜色和文字颜色
-        Color buttonColor = new Color(255, 182, 193);
-        Color buttonTextColor = Color.WHITE;
+        super("LumosLearning");
 
         JPanel panel = new JPanel(new GridBagLayout()) {
             @Override
@@ -32,14 +24,15 @@ public class LogInPage extends JFrame implements ActionListener {
         panel.setOpaque(false);
 
         // 设置背景图片
-        ImageIcon backgroundImageIcon = new ImageIcon("src/main/resources/login.JPG");
+        ImageIcon backgroundImageIcon = new ImageIcon("src/main/resources/login3.JPG");
         JLabel backgroundImage = new JLabel(backgroundImageIcon);
         backgroundImage.setLayout(new GridLayout(0, 2, 4, 5));
 
-        GridBagConstraints gbc = new GridBagConstraints();
-        gbc.fill = GridBagConstraints.HORIZONTAL;
-        gbc.insets = new Insets(4, 5, 4, 5);
+        // 设置字体
+        Font labelFont = new Font("Verdana", Font.BOLD, 30);
+        Font buttonFont = new Font("Helvetica", Font.BOLD, 25);
 
+        // 设置文本
         JLabel usernameLabel = new JLabel("Username:");
         JLabel passwordLabel = new JLabel("Password:");
         usernameLabel.setFont(labelFont);
@@ -47,13 +40,20 @@ public class LogInPage extends JFrame implements ActionListener {
         usernameLabel.setForeground(Color.WHITE); // 设置文本颜色为白色
         passwordLabel.setForeground(Color.WHITE); // 设置文本颜色为白色
 
+        // 设置文本框
         usernameField = new JTextField(10);
         passwordField = new JPasswordField(10);
+
+        // 设置按钮
         JButton loginButton = new JButton("Log in");
         JButton registerButton = new JButton("Sign up");
         JButton retrievePasswordButton = new JButton("Forgotten");
         JButton recoverPasswordButton = new JButton("Change");
         JButton quitButton = new JButton("Exit");
+
+        // 设置按钮颜色和文字颜色
+        Color buttonColor = Color.BLACK;
+        Color buttonTextColor = Color.WHITE;
 
         // 设置按钮样式
         JButton[] buttons = {loginButton, registerButton, retrievePasswordButton, recoverPasswordButton, quitButton};
@@ -61,11 +61,17 @@ public class LogInPage extends JFrame implements ActionListener {
             button.setFont(buttonFont);
             button.setBackground(buttonColor);
             button.setForeground(buttonTextColor);
-            button.setPreferredSize(new Dimension(200, 30)); // 增加按钮宽度以显示完整文本
+            button.setPreferredSize(new Dimension(200, 50)); // 增加按钮宽度以显示完整文本
         }
 
+        // 按钮事件监听
+        loginButton.addActionListener(this);
+        registerButton.addActionListener(new RegisterActionListener());
+        retrievePasswordButton.addActionListener(new RetrievePasswordActionListener());
+        recoverPasswordButton.addActionListener(new RecoverPasswordActionListener());
         quitButton.addActionListener(ae -> System.exit(0));
 
+        // 在平面中加入
         panel.add(usernameLabel);
         panel.add(usernameField);
         panel.add(passwordLabel);
@@ -77,13 +83,20 @@ public class LogInPage extends JFrame implements ActionListener {
         panel.add(quitButton);
         panel.add(new JLabel());
 
-        loginButton.addActionListener(this);
-        registerButton.addActionListener(new RegisterActionListener());
-        retrievePasswordButton.addActionListener(new RetrievePasswordActionListener());
-        recoverPasswordButton.addActionListener(new RecoverPasswordActionListener());
-
+        // 在背景上放置平面
         backgroundImage.add(panel);
         add(backgroundImage);
+
+        // 设置窗口大小为背景图片的大小
+        setSize(backgroundImageIcon.getIconWidth(), backgroundImageIcon.getIconHeight());
+        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        setLocationRelativeTo(null);
+        setVisible(true);
+
+        // 美化平面
+        GridBagConstraints gbc = new GridBagConstraints();
+        gbc.fill = GridBagConstraints.HORIZONTAL;
+        gbc.insets = new Insets(4, 5, 4, 5);
 
         gbc.gridx = 0;
         gbc.gridy = 0;
@@ -114,12 +127,10 @@ public class LogInPage extends JFrame implements ActionListener {
         gbc.gridx = 0;
         gbc.gridy = 4;
         panel.add(quitButton, gbc);
+    }
 
-        // 设置窗口大小为背景图片的大小
-        setSize(backgroundImageIcon.getIconWidth(), backgroundImageIcon.getIconHeight());
-        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        setLocationRelativeTo(null);
-        setVisible(true);
+    public static void main(String[] args) {
+        new LogInPage();
     }
 
     public void actionPerformed(ActionEvent e) {
@@ -127,11 +138,11 @@ public class LogInPage extends JFrame implements ActionListener {
         String password = new String(passwordField.getPassword());
 
         if (!username.matches("[a-zA-Z\u4e00-\u9fa5]{1,10}")) {
-            JOptionPane.showMessageDialog(this,"用户名格式有误，请输入汉字或者英文字符。");
+            JOptionPane.showMessageDialog(this, "用户名格式有误，请输入汉字或者英文字符。");
             return;
         }
         if (!password.matches("[a-zA-Z0-9]{6,10}")) {
-            JOptionPane.showMessageDialog(this,"密码格式有误，请输入6-10位数字或英文字符。");
+            JOptionPane.showMessageDialog(this, "密码格式有误，请输入6-10位数字或英文字符。");
             return;
         }
 
@@ -184,18 +195,18 @@ public class LogInPage extends JFrame implements ActionListener {
                 String username = usernameField.getText().trim();
                 String password = new String(passwordField.getPassword()).trim();
                 String phone = phoneField.getText().trim();
-                try{
+                try {
                     BufferedReader reader = new BufferedReader(new FileReader("students.txt"));
                     String line1;
                     while ((line1 = reader.readLine()) != null) {
                         String[] sparts = line1.split(" ");
-                        if (sparts[0].equals(username)||sparts[2].equals(phone)) {
+                        if (sparts[0].equals(username) || sparts[2].equals(phone)) {
                             JOptionPane.showMessageDialog(registerWindow, "用户名或手机号码已存在，请重新输入。");
                             return;
                         }
                         reader.close();
                     }
-                }catch (IOException ignored) {
+                } catch (IOException ignored) {
                 }
 
                 if (!username.matches("[a-zA-Z\u4e00-\u9fa5]{1,10}")) {
@@ -259,7 +270,7 @@ public class LogInPage extends JFrame implements ActionListener {
                 reader.close();
 
                 if (found) {
-                    JOptionPane.showMessageDialog(null, "你的用户名是: " + username +"\n"+ "你的密码是: " + password);
+                    JOptionPane.showMessageDialog(null, "你的用户名是: " + username + "\n" + "你的密码是: " + password);
                 } else {
                     JOptionPane.showMessageDialog(null, "没有与此电话号码对应的账号。");
                 }
@@ -285,30 +296,28 @@ public class LogInPage extends JFrame implements ActionListener {
                 BufferedReader reader = new BufferedReader(new FileReader("students.txt"));
                 String line3;
                 List<String> list = new ArrayList<>();
-                while((line3 = reader.readLine()) != null){
+                while ((line3 = reader.readLine()) != null) {
                     list.add(line3);
                 }
                 reader.close();
-                for(String pw : list) {
+                for (String pw : list) {
                     //for (String line : new String(java.nio.file.Files.readAllBytes(java.nio.file.Paths.get("students.txt"))).split("\\r?\\n")) {
                     String[] dpart = pw.split(" ");
                     if (phone.equals(dpart[2])) {
                         username = dpart[0];
-                        String newpassword = JOptionPane.showInputDialog(username+"，你好！请输入新密码:");
+                        String newpassword = JOptionPane.showInputDialog(username + "，你好！请输入新密码:");
                         if (!newpassword.matches("[a-zA-Z0-9]{6,10}")) {
                             JOptionPane.showMessageDialog(null, "修改密码失败！\n密码格式有误，请输入6-10位数字或英文字符。");
                             return;
-                        }
-                        else{
+                        } else {
                             list.remove(pw);
                             password = newpassword;
-                            FileWriter fout = new FileWriter("students.txt",false);
+                            FileWriter fout = new FileWriter("students.txt", false);
                             fout.write("");
                             fout.close();
                             break;
                         }
-                    }
-                    else {
+                    } else {
                         JOptionPane.showMessageDialog(null, "没有与此电话号码对应的账号。");
                     }
                 }
@@ -319,7 +328,7 @@ public class LogInPage extends JFrame implements ActionListener {
                     writer.close();
                 }
                 BufferedWriter writer = new BufferedWriter(new FileWriter("students.txt", true));
-                writer.write(username+" "+ password +" "+phone);
+                writer.write(username + " " + password + " " + phone);
                 writer.newLine();
                 writer.close();
                 JOptionPane.showMessageDialog(null, "修改密码成功！");
@@ -327,9 +336,5 @@ public class LogInPage extends JFrame implements ActionListener {
                 JOptionPane.showMessageDialog(null, "读取文件时发生错误: " + ex.getMessage());
             }
         }
-    }
-
-    public static void main(String[] args) {
-        new LogInPage();
     }
 }

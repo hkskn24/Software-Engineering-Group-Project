@@ -11,11 +11,12 @@ import java.util.List;
 public class LogInPage extends JFrame implements ActionListener {
     private final JTextField usernameField;
     private final JPasswordField passwordField;
+    private final JPanel panel;
 
     public LogInPage() {
         super("LumosLearning");
 
-        JPanel panel = new JPanel(new GridBagLayout()) {
+        panel = new JPanel(new GridBagLayout()) {
             @Override
             public void setOpaque(boolean isOpaque) {
                 super.setOpaque(false);
@@ -24,7 +25,7 @@ public class LogInPage extends JFrame implements ActionListener {
         panel.setOpaque(false);
 
         // 设置背景图片
-        ImageIcon backgroundImageIcon = new ImageIcon("src/main/resources/login3.JPG");
+        ImageIcon backgroundImageIcon = new ImageIcon("src/main/resources/login10.JPG");
         JLabel backgroundImage = new JLabel(backgroundImageIcon);
         backgroundImage.setLayout(new GridLayout(0, 2, 4, 5));
 
@@ -82,16 +83,19 @@ public class LogInPage extends JFrame implements ActionListener {
         panel.add(recoverPasswordButton);
         panel.add(quitButton);
         panel.add(new JLabel());
+        setSize(1200,800);
 
         // 在背景上放置平面
         backgroundImage.add(panel);
         add(backgroundImage);
+        backgroundImage.setSize(panel.getSize());
 
         // 设置窗口大小为背景图片的大小
-        setSize(backgroundImageIcon.getIconWidth(), backgroundImageIcon.getIconHeight());
+//        setSize(backgroundImageIcon.getIconWidth(), backgroundImageIcon.getIconHeight());
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setLocationRelativeTo(null);
         setVisible(true);
+//        setResizable(false);
 
         // 美化平面
         GridBagConstraints gbc = new GridBagConstraints();
@@ -172,24 +176,24 @@ public class LogInPage extends JFrame implements ActionListener {
 
     private class RegisterActionListener implements ActionListener {
         public void actionPerformed(ActionEvent e) {
-            JFrame registerWindow = new JFrame("账号注册");
-            JPanel panel = new JPanel(new GridLayout(4, 1, 5, 5));
-            JLabel usernameLabel = new JLabel("姓名:");
-            JLabel passwordLabel = new JLabel("密码:");
-            JLabel phoneLabel = new JLabel("电话号码:");
+            JPanel registerPanel = new JPanel();
+            JFrame registerWindow = new JFrame("Sign up");
+            JLabel usernameLabel = new JLabel("Username:");
+            JLabel passwordLabel = new JLabel("Password:");
+            JLabel phoneLabel = new JLabel("Phone number:");
             JTextField usernameField = new JTextField(10);
             JPasswordField passwordField = new JPasswordField(10);
             JTextField phoneField = new JTextField(10);
-            JButton registerButton = new JButton("注册");
+            JButton registerButton = new JButton("Sign up");
 
-            panel.add(usernameLabel);
-            panel.add(usernameField);
-            panel.add(passwordLabel);
-            panel.add(passwordField);
-            panel.add(phoneLabel);
-            panel.add(phoneField);
-            panel.add(new JLabel());
-            panel.add(registerButton);
+            registerPanel.add(usernameLabel);
+            registerPanel.add(usernameField);
+            registerPanel.add(passwordLabel);
+            registerPanel.add(passwordField);
+            registerPanel.add(phoneLabel);
+            registerPanel.add(phoneField);
+            registerPanel.add(new JLabel());
+            registerPanel.add(registerButton);
 
             registerButton.addActionListener(e1 -> {
                 String username = usernameField.getText().trim();
@@ -234,7 +238,7 @@ public class LogInPage extends JFrame implements ActionListener {
                 registerWindow.dispose();
             });
 
-            registerWindow.add(panel);
+            registerWindow.add(registerPanel);
             registerWindow.pack();
             registerWindow.setLocationRelativeTo(null);
             registerWindow.setVisible(true);

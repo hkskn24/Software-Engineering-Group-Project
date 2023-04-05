@@ -11,12 +11,11 @@ import java.util.List;
 public class LogInPage extends JFrame implements ActionListener {
     private final JTextField usernameField;
     private final JPasswordField passwordField;
-    private final JPanel panel;
 
     public LogInPage() {
         super("LumosLearning");
 
-        panel = new JPanel(new GridBagLayout()) {
+        JPanel panel = new JPanel(new GridBagLayout()) {
             @Override
             public void setOpaque(boolean isOpaque) {
                 super.setOpaque(false);
@@ -90,7 +89,7 @@ public class LogInPage extends JFrame implements ActionListener {
         add(backgroundImage);
         backgroundImage.setSize(panel.getSize());
 
-        // 设置窗口大小为背景图片的大小
+        // 设置背景图片大小为窗口大小
 //        setSize(backgroundImageIcon.getIconWidth(), backgroundImageIcon.getIconHeight());
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setLocationRelativeTo(null);
@@ -174,7 +173,7 @@ public class LogInPage extends JFrame implements ActionListener {
         }
     }
 
-    private class RegisterActionListener implements ActionListener {
+    private static class RegisterActionListener implements ActionListener {
         public void actionPerformed(ActionEvent e) {
             JPanel registerPanel = new JPanel();
             JFrame registerWindow = new JFrame("Sign up");
@@ -245,7 +244,7 @@ public class LogInPage extends JFrame implements ActionListener {
         }
     }
 
-    private class RetrievePasswordActionListener implements ActionListener {
+    private static class RetrievePasswordActionListener implements ActionListener {
         public void actionPerformed(ActionEvent e) {
             String phone = JOptionPane.showInputDialog("请输入电话号码:");
 
@@ -284,7 +283,7 @@ public class LogInPage extends JFrame implements ActionListener {
         }
     }
 
-    private class RecoverPasswordActionListener implements ActionListener {
+    private static class RecoverPasswordActionListener implements ActionListener {
         public void actionPerformed(ActionEvent e) {
             String phone = JOptionPane.showInputDialog("请输入电话号码:");
 

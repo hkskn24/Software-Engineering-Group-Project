@@ -116,15 +116,7 @@ public class Module {
 
     @Override
     public String toString() {
-        return "Module{" +
-                "name='" + name + '\'' +
-                ", code='" + code + '\'' +
-                ", credits=" + credits +
-                ", hours=" + hours +
-                ", semester=" + semester +
-                ", type='" + type + '\'' +
-                ", grades=" + grades +
-                '}';
+        return getName();
     }
 }
 

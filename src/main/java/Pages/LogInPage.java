@@ -13,7 +13,7 @@ public class LogInPage extends JFrame implements ActionListener {
     private final JPasswordField passwordField;
 
     public LogInPage() {
-        super("LumosLearning");
+        super("LOG IN TO YOUR ACCOUNT");
 
         JPanel panel = new JPanel(new GridBagLayout()) {
             @Override
@@ -42,14 +42,14 @@ public class LogInPage extends JFrame implements ActionListener {
         passwordLabel.setForeground(Color.WHITE); // 设置文本颜色为白色
 
         // 设置文本框
-        usernameField = new JTextField(10);
-        passwordField = new JPasswordField(10);
+        usernameField = new JTextField();
+        passwordField = new JPasswordField();
 
         // 设置按钮
         JButton loginButton = new JButton("Log in");
         JButton registerButton = new JButton("Sign up");
-        JButton retrievePasswordButton = new JButton("Forgotten");
-        JButton recoverPasswordButton = new JButton("Change");
+        JButton retrievePasswordButton = new JButton("Forgot PWD");
+        JButton recoverPasswordButton = new JButton("Change PWD");
         JButton quitButton = new JButton("Exit");
 
         // 设置按钮颜色和文字颜色
@@ -83,7 +83,7 @@ public class LogInPage extends JFrame implements ActionListener {
         panel.add(recoverPasswordButton);
         panel.add(quitButton);
         panel.add(new JLabel());
-        setSize(1200,800);
+        setSize(1094,729);
 
         // 在背景上放置平面
         backgroundImage.add(panel);

@@ -30,7 +30,7 @@ public class GradePage extends JFrame {
     }
 
     public GradePage(){
-        setTitle("Module Information");
+        setTitle("TransfiguringGrades");
         getContentPane().setBackground(new Color(250, 250, 250));
         setBounds(450, 250, 1500, 900);
         setResizable(true);
@@ -46,7 +46,6 @@ public class GradePage extends JFrame {
 
         setupCombinedPanel(actionPanel, filterPanel);
     }
-
 
     private JTable setupTable() {
         // get data from Data class

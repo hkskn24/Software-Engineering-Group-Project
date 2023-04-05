@@ -8,6 +8,11 @@ public class Module {
     private int semester;
     private String type;
     private int grades;
+    private String lecturer;
+    private String summary;
+    private String aims;
+    private String syllabus;
+    private String readingList;
 
     public String getName() {
         return name;
@@ -65,7 +70,47 @@ public class Module {
         this.grades = grades;
     }
 
-    public static String[] getAllAttributes() {
+    public String getLecturer() {
+        return lecturer;
+    }
+
+    public void setLecturer(String lecturer) {
+        this.lecturer = lecturer;
+    }
+
+    public String getSummary() {
+        return summary;
+    }
+
+    public void setSummary(String summary) {
+        this.summary = summary;
+    }
+
+    public String getAims() {
+        return aims;
+    }
+
+    public void setAims(String aims) {
+        this.aims = aims;
+    }
+
+    public String getSyllabus() {
+        return syllabus;
+    }
+
+    public void setSyllabus(String syllabus) {
+        this.syllabus = syllabus;
+    }
+
+    public String getReadingList() {
+        return readingList;
+    }
+
+    public void setReadingList(String readingList) {
+        this.readingList = readingList;
+    }
+
+    public static String[] getGradesAttributes() {
         return new String[]{"name", "code", "credits", "hours", "semester", "type", "grades"};
     }
 

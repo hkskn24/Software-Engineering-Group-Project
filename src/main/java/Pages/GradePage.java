@@ -30,11 +30,11 @@ public class GradePage extends JFrame {
     }
 
     public GradePage(){
-       initializeUIComponents();
-    }
-
-    private void initializeUIComponents() {
-        setupFrame();
+        setTitle("Module Information");
+        getContentPane().setBackground(new Color(250, 250, 250));
+        setBounds(450, 250, 1500, 900);
+        setResizable(true);
+        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
         JTable table = setupTable();
 
@@ -47,13 +47,6 @@ public class GradePage extends JFrame {
         setupCombinedPanel(actionPanel, filterPanel);
     }
 
-    private void setupFrame() {
-        setTitle("Module Information");
-        getContentPane().setBackground(new Color(250, 250, 250));
-        setBounds(450, 250, 1500, 900);
-        setResizable(true);
-        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-    }
 
     private JTable setupTable() {
         // get data from Data class
@@ -76,7 +69,7 @@ public class GradePage extends JFrame {
 
     private DefaultTableModel createTableModel(ArrayList<Module> modules) {
         String[] columnNames = {"Name","Code","Credit","Hours","Semester","Type","Grades"};   //列名
-        String[][] tableValues = new String[modules.size()][Module.getAllAttributes().length];
+        String[][] tableValues = new String[modules.size()][Module.getGradesAttributes().length];
         for (int i = 0; i < modules.size(); i++) {
             Module module = modules.get(i);
             tableValues[i] = new String[] {module.getName(), module.getCode(),

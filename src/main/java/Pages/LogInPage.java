@@ -30,8 +30,8 @@ public class LogInPage extends JFrame implements ActionListener {
         backgroundImage.setLayout(new GridLayout(0, 2, 4, 5));
 
         // 设置字体
-        Font labelFont = new Font("Verdana", Font.BOLD, 30);
-        Font buttonFont = new Font("Helvetica", Font.BOLD, 25);
+        Font labelFont = new Font("Monotype Corsiva", Font.BOLD, 50);
+        Font buttonFont = new Font("Segoe Script", Font.BOLD, 25);
 
         // 设置文本
         JLabel usernameLabel = new JLabel("Username:");

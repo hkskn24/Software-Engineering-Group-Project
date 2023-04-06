@@ -19,7 +19,8 @@ public class ModulePage extends JFrame{
         setupModulePage();
 
         setTitle("Module Page");
-        setBounds(500,300,1094,729);
+        setSize(1094, 729);
+        setLocationRelativeTo(null);
         setResizable(true);
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 
@@ -44,6 +45,8 @@ public class ModulePage extends JFrame{
 
         contentPanel.add(searchPanel, BorderLayout.NORTH);
         contentPanel.add(scrollPane, BorderLayout.CENTER);
+        addBackButton(contentPanel);
+
         setContentPane(contentPanel);
         setVisible(true);
     }
@@ -91,6 +94,20 @@ public class ModulePage extends JFrame{
         ArrayList<Module> modules = Data.getInstance().modules;
         List<Module> result = ModuleController.searchMoules(modules, term);
         updateModuleList(result);
+    }
+
+    private void addBackButton(JPanel contentPanel) {
+        JPanel bottomPanel = new JPanel(new BorderLayout());
+
+        JButton backButton = new JButton("Back");
+        backButton.setFont(new Font("Arial", Font.PLAIN, 14));
+        backButton.addActionListener(e -> {
+            new HomePage().setVisible(true);
+            dispose();
+        });
+
+        bottomPanel.add(backButton, BorderLayout.EAST);
+        contentPanel.add(bottomPanel, BorderLayout.SOUTH);
     }
 
     public static void main(String[] args) {

@@ -18,13 +18,14 @@ public class GradePage extends JFrame {
         setTitle("TransfiguringGrades");
         getContentPane().setBackground(new Color(250, 250, 250));
         setBounds(500,300,1094,729);
+        setLocationRelativeTo(null);
         setResizable(true);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
         JTable table = setupTable();
 
         // filter
-        JPanel filterPanel = setupFilterPanel(table, sorter);
+        JPanel filterPanel = setupFilterPanel(sorter);
 
         // sort
         JPanel sortPanel = setupSortPanel(table);
@@ -69,7 +70,7 @@ public class GradePage extends JFrame {
         return new DefaultTableModel(tableValues, columnNames);
     }
 
-    private JPanel setupFilterPanel(JTable table, TableRowSorter<DefaultTableModel> sorter) {
+    private JPanel setupFilterPanel(TableRowSorter<DefaultTableModel> sorter) {
         JPanel filterPanel = new JPanel();
 
         String[] semesterOptions = {"All", "1", "2", "3", "4", "5", "6", "7", "8"};
@@ -101,8 +102,8 @@ public class GradePage extends JFrame {
 
         JButton sortButton = new JButton("Sort");
         sortButton.addActionListener(e -> {
-            String slectedSortBy = (String) sortComboBox.getSelectedItem();
-            int columnIndex = slectedSortBy.equals("Grades")?6:4;
+            String selectedSortBy = (String) sortComboBox.getSelectedItem();
+            int columnIndex = "Grades".equals(selectedSortBy)?6:4;
             ModuleController.sortTable(table, columnIndex, ascendingBox.isSelected());
         });
         sortPanel.add(sortButton);
@@ -121,7 +122,6 @@ public class GradePage extends JFrame {
         gbc.weighty = 0.0;
         gbc.fill = GridBagConstraints.HORIZONTAL;
         gbc.anchor = GridBagConstraints.NORTH;
-
         combinedPanel.add(filterPanel, gbc);
 
         gbc.gridy = 1;
@@ -129,6 +129,25 @@ public class GradePage extends JFrame {
 
         combinedPanel.add(sortPanel, gbc);
 
+        addBackButton(combinedPanel, gbc);
+
         combinedPanel.setBorder(new EmptyBorder(10, 10, 10, 10));
+    }
+
+    private void addBackButton (JPanel contentPanel, GridBagConstraints gbc) {
+        JPanel bottomPanel = new JPanel(new BorderLayout());
+
+        JButton backButton = new JButton("Back");
+        backButton.addActionListener(e -> {
+            new HomePage().setVisible(true);
+            dispose();
+        });
+
+        bottomPanel.add(backButton, BorderLayout.EAST);
+
+        gbc.gridy = 2;
+        gbc.weighty = 1.0;
+        gbc.anchor = GridBagConstraints.SOUTH;
+        contentPanel.add(bottomPanel, gbc);
     }
 }

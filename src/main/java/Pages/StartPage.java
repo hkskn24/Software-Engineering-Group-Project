@@ -11,6 +11,7 @@ public class StartPage extends JFrame {
     public StartPage() {
         setTitle("WELCOME TO LUMOSLEARNING");
         setBounds(500,300,1094,729);
+        setLocationRelativeTo(null);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
         // Set the background image

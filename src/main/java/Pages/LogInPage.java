@@ -129,6 +129,8 @@ public class LogInPage extends JFrame implements ActionListener {
         gbc.gridx = 0;
         gbc.gridy = 4;
         panel.add(quitButton, gbc);
+
+        setLocationRelativeTo(null);
     }
 
     public static void main(String[] args) {

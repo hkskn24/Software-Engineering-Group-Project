@@ -69,7 +69,7 @@ public class LogInPage extends JFrame implements ActionListener {
         registerButton.addActionListener(new RegisterActionListener());
         retrievePasswordButton.addActionListener(new RetrievePasswordActionListener());
         recoverPasswordButton.addActionListener(new RecoverPasswordActionListener());
-        quitButton.addActionListener(ae -> System.exit(0));
+        quitButton.addActionListener(new quitActionListener());
 
         // 在平面中加入
         panel.add(usernameLabel);
@@ -346,6 +346,18 @@ public class LogInPage extends JFrame implements ActionListener {
             } catch (IOException ex) {
                 JOptionPane.showMessageDialog(null, "读取文件时发生错误: " + ex.getMessage());
             }
+        }
+    }
+
+    private class quitActionListener implements ActionListener{
+        public void actionPerformed(ActionEvent e){
+            SwingUtilities.invokeLater(new Runnable() {
+                @Override
+                public void run() {
+                    new StartPage().setVisible(true);
+                }
+            });
+            dispose();
         }
     }
 }

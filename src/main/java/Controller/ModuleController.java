@@ -40,14 +40,16 @@ public class ModuleController {
 
     public static void sortTable(JTable table, int columnIndex, boolean ascending) {
         TableRowSorter<DefaultTableModel> sorter = (TableRowSorter<DefaultTableModel>) table.getRowSorter();
-        sorter.setSortKeys(List.of(new RowSorter.SortKey(columnIndex, ascending ? SortOrder.ASCENDING : SortOrder.DESCENDING)));
+        List<RowSorter.SortKey> sortKeys = new ArrayList<>();
+        sortKeys.add(new RowSorter.SortKey(columnIndex, ascending ? SortOrder.ASCENDING : SortOrder.DESCENDING));
+        sorter.setSortKeys(sortKeys);
     }
 
     public static List<Module> searchMoules(List<Module> modules, String term) {
         List<Module> result = new ArrayList<>();
         for (Module module : modules) {
             if (module.getCode().toLowerCase().contains(term.toLowerCase()) ||
-            module.getName().toLowerCase().contains(term.toLowerCase())) {
+                    module.getName().toLowerCase().contains(term.toLowerCase())) {
                 result.add(module);
             }
         }

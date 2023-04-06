@@ -9,13 +9,13 @@ import javax.imageio.ImageIO;
 public class StartPage extends JFrame {
 
     public StartPage() {
-        setTitle("Welcome to LumosLearning");
-        setSize(1094, 729);
+        setTitle("WELCOME TO LUMOSLEARNING");
+        setBounds(500,300,1094,729);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
         // Set the background image
         try {
-            JLabel backgroundImage = new JLabel(new ImageIcon(ImageIO.read(new File("src/main/resources/login7.JPG"))));
+            JLabel backgroundImage = new JLabel(new ImageIcon(ImageIO.read(new File("src/main/resources/startpage.JPG"))));
             backgroundImage.setLayout(new GridBagLayout());
             setContentPane(backgroundImage);
         } catch (IOException e) {
@@ -44,9 +44,6 @@ public class StartPage extends JFrame {
         });
         gbc.gridy = 1;
         getContentPane().add(startButton, gbc);
-
-        pack();
-        setLocationRelativeTo(null);
     }
 
     public static void main(String[] args) {

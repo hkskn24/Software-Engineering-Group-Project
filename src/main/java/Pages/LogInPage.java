@@ -24,10 +24,9 @@ public class LogInPage extends JFrame implements ActionListener {
         panel.setOpaque(false);
 
         // 设置背景图片
-        ImageIcon backgroundImageIcon = new ImageIcon("src/main/resources/login10.JPG");
+        ImageIcon backgroundImageIcon = new ImageIcon("src/main/resources/login.JPG");
         JLabel backgroundImage = new JLabel(backgroundImageIcon);
         backgroundImage.setLayout(new GridLayout(0, 2, 4, 5));
-
 
         // 设置字体
         Font labelFont = new Font("Monotype Corsiva", Font.BOLD, 50);
@@ -83,7 +82,7 @@ public class LogInPage extends JFrame implements ActionListener {
         panel.add(recoverPasswordButton);
         panel.add(quitButton);
         panel.add(new JLabel());
-        setSize(1094,729);
+        setBounds(500,300,1094,729);
 
         // 在背景上放置平面
         backgroundImage.add(panel);
@@ -93,7 +92,6 @@ public class LogInPage extends JFrame implements ActionListener {
         // 设置背景图片大小为窗口大小
 //        setSize(backgroundImageIcon.getIconWidth(), backgroundImageIcon.getIconHeight());
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        setLocationRelativeTo(null);
         setVisible(true);
 //        setResizable(false);
 
@@ -165,7 +163,14 @@ public class LogInPage extends JFrame implements ActionListener {
             reader.close();
 
             if (loggedIn) {
-                JOptionPane.showMessageDialog(this, "登录成功！");
+//                JOptionPane.showMessageDialog(this, "登录成功！");
+                SwingUtilities.invokeLater(new Runnable() {
+                    @Override
+                    public void run() {
+                        new HomePage().setVisible(true);
+                    }
+                });
+                dispose();
             } else {
                 JOptionPane.showMessageDialog(this, "用户名或密码错误！");
             }

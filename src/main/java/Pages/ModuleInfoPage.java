@@ -10,7 +10,7 @@ import java.awt.*;
 public class ModuleInfoPage extends JFrame {
     public ModuleInfoPage(Module module) {
         setTitle(module.getName());
-        setBounds(100, 100, 800, 600);
+        setBounds(500,300,1094,729);
         setResizable(true);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 

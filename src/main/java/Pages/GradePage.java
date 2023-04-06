@@ -1,8 +1,8 @@
 package main.java.Pages;
 
+import main.java.Controller.GradeController;
 import main.java.Data;
 import main.java.Entity.Module;
-import main.java.Controller.*;
 
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
@@ -25,14 +25,10 @@ public class GradePage extends JFrame {
     private JTextField gradeTextField;
     private TableRowSorter<DefaultTableModel> sorter;
 
-    public static void main(String[] args) {
-        new GradePage();
-    }
-
-    public GradePage(){
+    public GradePage() {
         setTitle("TransfiguringGrades");
         getContentPane().setBackground(new Color(250, 250, 250));
-        setBounds(450, 250, 1500, 900);
+        setBounds(500,300,1094,729);
         setResizable(true);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
@@ -45,6 +41,10 @@ public class GradePage extends JFrame {
         JPanel filterPanel = setupFilterPanel(table, sorter);
 
         setupCombinedPanel(actionPanel, filterPanel);
+    }
+
+    public static void main(String[] args) {
+        new GradePage();
     }
 
     private JTable setupTable() {
@@ -67,11 +67,11 @@ public class GradePage extends JFrame {
     }
 
     private DefaultTableModel createTableModel(ArrayList<Module> modules) {
-        String[] columnNames = {"Name","Code","Credit","Hours","Semester","Type","Grades"};   //列名
+        String[] columnNames = {"Name", "Code", "Credit", "Hours", "Semester", "Type", "Grades"};   //列名
         String[][] tableValues = new String[modules.size()][Module.getGradesAttributes().length];
         for (int i = 0; i < modules.size(); i++) {
             Module module = modules.get(i);
-            tableValues[i] = new String[] {module.getName(), module.getCode(),
+            tableValues[i] = new String[]{module.getName(), module.getCode(),
                     String.valueOf(module.getCredits()), String.valueOf(module.getHours()),
                     String.valueOf(module.getSemester()), module.getType(), String.valueOf(module.getGrades())
             };

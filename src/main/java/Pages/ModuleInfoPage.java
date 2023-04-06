@@ -12,12 +12,13 @@ public class ModuleInfoPage extends JFrame {
         setTitle(module.getName());
         setBounds(500,300,1094,729);
         setResizable(true);
-        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 
         JPanel infoPanel = new JPanel(new GridBagLayout());
         setupInfoPanel(infoPanel, module);
-
         add(infoPanel);
+
+        addBackButton(infoPanel);
 
         // 添加滚动条
         JScrollPane scrollPane = new JScrollPane(infoPanel);
@@ -27,7 +28,22 @@ public class ModuleInfoPage extends JFrame {
         setVisible(true);
     }
 
-        private void setupInfoPanel(JPanel infoPanel, Module module) {
+    private void addBackButton(JPanel infoPanel) {
+        GridBagConstraints gbc = new GridBagConstraints();
+        gbc.insets = new Insets(5, 5, 5, 5);
+        gbc.gridx = 1;
+        gbc.gridy = 11;
+        gbc.anchor = GridBagConstraints.EAST;
+
+        JButton backButton = new JButton("Back");
+        backButton.setFont(new Font("Arial", Font.PLAIN, 14));
+        backButton.addActionListener(e -> {
+            dispose();
+        });
+        infoPanel.add(backButton, gbc);
+    }
+
+    private void setupInfoPanel(JPanel infoPanel, Module module) {
         GridBagConstraints gbc = new GridBagConstraints();
         gbc.fill = GridBagConstraints.HORIZONTAL;
         gbc.weightx = 1;

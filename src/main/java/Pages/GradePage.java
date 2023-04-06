@@ -9,20 +9,9 @@ import javax.swing.border.EmptyBorder;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableRowSorter;
 import java.awt.*;
-import java.awt.event.ActionListener;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
 import java.util.ArrayList;
 
 public class GradePage extends JFrame {
-
-    private JTextField nameTextField;
-    private JTextField codeTextField;
-    private JTextField creditsTextField;
-    private JTextField hoursTextField;
-    private JTextField semesterTextField;
-    private JTextField typeTextField;
-    private JTextField gradeTextField;
     private TableRowSorter<DefaultTableModel> sorter;
 
     public GradePage() {
@@ -34,13 +23,13 @@ public class GradePage extends JFrame {
 
         JTable table = setupTable();
 
-        // update and delete
-        JPanel actionPanel = setupActionPanel(table);
-
         // filter
         JPanel filterPanel = setupFilterPanel(table, sorter);
 
-        setupCombinedPanel(actionPanel, filterPanel);
+        // sort
+        JPanel sortPanel = setupSortPanel(table);
+
+        setupCombinedPanel(filterPanel, sortPanel);
     }
 
     public static void main(String[] args) {
@@ -57,7 +46,7 @@ public class GradePage extends JFrame {
         sorter = new TableRowSorter<>(tableModel);
         table.setRowSorter(sorter);
 
-        setupTableBehavior(table, tableModel);
+        //setupTableBehavior(table, tableModel);
 
         JScrollPane scrollPane = new JScrollPane(table);
         getContentPane().add(scrollPane, BorderLayout.CENTER);
@@ -80,120 +69,6 @@ public class GradePage extends JFrame {
         return new DefaultTableModel(tableValues, columnNames);
     }
 
-    private void setupTableBehavior(JTable table, DefaultTableModel tableModel) {
-        table.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
-        table.addMouseListener(new MouseAdapter() {
-            public void mouseClicked(MouseEvent e) {
-                int selectedRow = table.getSelectedRow();
-                Object name = tableModel.getValueAt(selectedRow, 0);
-                Object code = tableModel.getValueAt(selectedRow, 1);
-                Object credits = tableModel.getValueAt(selectedRow, 2);
-                Object hours = tableModel.getValueAt(selectedRow, 3);
-                Object semester = tableModel.getValueAt(selectedRow, 4);
-                Object type = tableModel.getValueAt(selectedRow, 5);
-                Object grades = tableModel.getValueAt(selectedRow, 6);
-
-                nameTextField.setText(name.toString());
-                codeTextField.setText(code.toString());
-                creditsTextField.setText(credits.toString());
-                hoursTextField.setText(hours.toString());
-                semesterTextField.setText(semester.toString());
-                typeTextField.setText(type.toString());
-                gradeTextField.setText(grades.toString());
-            }
-        });
-    }
-
-    private JPanel setupActionPanel(JTable table) {
-        JPanel panel = new JPanel();
-
-        setupTextFields(panel);
-
-        setupActionButtons(panel, table);
-
-        return panel;
-    }
-
-    private void setupTextFields(JPanel panel) {
-        panel.add(new JLabel("name: "));
-        nameTextField = new JTextField("name");
-        panel.add(nameTextField);
-
-        panel.add(new JLabel("code: "));
-        codeTextField = new JTextField("code");
-        panel.add(codeTextField);
-
-        panel.add(new JLabel("credit: "));
-        creditsTextField = new JTextField("credit");
-        panel.add(creditsTextField);
-
-        panel.add(new JLabel("hours: "));
-        hoursTextField = new JTextField("hours");
-        panel.add(hoursTextField);
-
-        panel.add(new JLabel("semester: "));
-        semesterTextField = new JTextField("semester");
-        panel.add(semesterTextField);
-
-        panel.add(new JLabel("type: "));
-        typeTextField = new JTextField("type");
-        panel.add(typeTextField);
-
-        panel.add(new JLabel("grade: "));
-        gradeTextField = new JTextField("grade");
-        panel.add(gradeTextField);
-    }
-
-    private void setupActionButtons(JPanel panel, JTable table) {
-        JButton addButton = new JButton("Add");
-        addButton.addActionListener(createAddButtonListener(table));
-        panel.add(addButton);
-
-        JButton updateButton = new JButton("Update");
-        addButton.addActionListener(createUpdateButtonListener(table));
-        panel.add(updateButton);
-
-        JButton deleteButton = new JButton("Delete");
-        deleteButton.addActionListener(createDeleteButtonListener(table));
-        panel.add(deleteButton);
-    }
-
-    private ActionListener createAddButtonListener(JTable table) {
-        return e -> {
-            DefaultTableModel tableModel = (DefaultTableModel) table.getModel();
-            String[] rowValues = {nameTextField.getText(), codeTextField.getText(), codeTextField.getText(),
-                    hoursTextField.getText(), semesterTextField.getText(), typeTextField.getText(),
-            };
-            tableModel.addRow(rowValues);
-        };
-    }
-
-    private ActionListener createUpdateButtonListener(JTable table) {
-        return e -> {
-            int selectedRow = table.getSelectedRow();
-            if (selectedRow != -1) {
-                DefaultTableModel tableModel = (DefaultTableModel) table.getModel();
-                tableModel.setValueAt(nameTextField.getText(), selectedRow, 0);
-                tableModel.setValueAt(codeTextField.getText(), selectedRow, 1);
-                tableModel.setValueAt(creditsTextField.getText(), selectedRow, 2);
-                tableModel.setValueAt(hoursTextField.getText(), selectedRow, 3);
-                tableModel.setValueAt(semesterTextField.getText(), selectedRow, 4);
-                tableModel.setValueAt(typeTextField.getText(), selectedRow, 5);
-                tableModel.setValueAt(gradeTextField.getText(), selectedRow, 6);
-            }
-        };
-    }
-
-    private ActionListener createDeleteButtonListener(JTable table) {
-        return e -> {
-            int selectedRow = table.getSelectedRow();
-            if (selectedRow != -1) {
-                DefaultTableModel tableModel = (DefaultTableModel) table.getModel();
-                tableModel.removeRow(selectedRow);
-            }
-        };
-    }
-
     private JPanel setupFilterPanel(JTable table, TableRowSorter<DefaultTableModel> sorter) {
         JPanel filterPanel = new JPanel();
 
@@ -202,14 +77,40 @@ public class GradePage extends JFrame {
         filterPanel.add(new JLabel("Filter by semester: "));
         filterPanel.add(semesterComboBox);
 
+        String[] typeOptions = {"All", "Elective", "Compulsory"};
+        JComboBox<String> typeComboBox = new JComboBox<>(typeOptions);
+        filterPanel.add(new JLabel("Filter by type: "));
+        filterPanel.add(typeComboBox);
+
         JButton filterButton = new JButton("Filter");
-        filterButton.addActionListener(GradeController.createFilterActionListener(table, sorter, semesterComboBox));
+        filterButton.addActionListener(GradeController.createFilterActionListener(sorter, semesterComboBox, typeComboBox));
         filterPanel.add(filterButton);
 
         return filterPanel;
     }
 
-    private void setupCombinedPanel(JPanel actionPanel, JPanel filterPanel) {
+    private JPanel setupSortPanel(JTable table) {
+        JPanel sortPanel = new JPanel();
+
+        String[] sortByOptions = {"Grades", "Semester"};
+        JComboBox<String> sortComboBox = new JComboBox<>(sortByOptions);
+        sortPanel.add(sortComboBox);
+
+        JCheckBox ascendingBox = new JCheckBox("Ascending");
+        sortPanel.add(ascendingBox);
+
+        JButton sortButton = new JButton("Sort");
+        sortButton.addActionListener(e -> {
+            String slectedSortBy = (String) sortComboBox.getSelectedItem();
+            int columnIndex = slectedSortBy.equals("Grades")?6:4;
+            GradeController.sortTable(table, columnIndex, ascendingBox.isSelected());
+        });
+        sortPanel.add(sortButton);
+
+        return sortPanel;
+    }
+
+    private void setupCombinedPanel(JPanel filterPanel, JPanel sortPanel) {
         JPanel combinedPanel = new JPanel(new GridBagLayout());
         getContentPane().add(combinedPanel, BorderLayout.SOUTH);
 
@@ -226,7 +127,7 @@ public class GradePage extends JFrame {
         gbc.gridy = 1;
         gbc.weighty = 0;
 
-        combinedPanel.add(actionPanel, gbc);
+        combinedPanel.add(sortPanel, gbc);
 
         combinedPanel.setBorder(new EmptyBorder(10, 10, 10, 10));
     }

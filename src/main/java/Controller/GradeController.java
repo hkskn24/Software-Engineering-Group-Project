@@ -3,25 +3,39 @@ package main.java.Controller;
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableRowSorter;
-import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.Arrays;
+import java.util.List;
 
 public class GradeController {
-    public static ActionListener createFilterActionListener(JTable table, TableRowSorter<DefaultTableModel> sorter, JComboBox<String> semesterComboBox) {
-        return new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                String selectedSemester = (String) semesterComboBox.getSelectedItem();
-                filterBySemester(table, sorter, selectedSemester);
-            }
+    public static ActionListener createFilterActionListener(TableRowSorter<DefaultTableModel> sorter, JComboBox<String> semesterComboBox, JComboBox<String> typeComboBox) {
+        return e -> {
+            String selectedSemester = (String) semesterComboBox.getSelectedItem();
+            String selectedType = (String) typeComboBox.getSelectedItem();
+            List<RowFilter<Object, Object>> filters = Arrays.asList(filterBySemester(selectedSemester), filterByType(selectedType));
+            RowFilter<DefaultTableModel, Object> combinedFilter = RowFilter.andFilter(filters);
+            sorter.setRowFilter(combinedFilter);
         };
     }
 
-    public static void filterBySemester(JTable table, TableRowSorter<DefaultTableModel> sorter, String semester) {
-        if (semester.equals("All")) {
-            sorter.setRowFilter(null);
+    public static RowFilter<Object, Object> filterBySemester(String semester) {
+        if (semester == null || semester.equals("All")) {
+            return RowFilter.regexFilter(".*");
         } else {
-            sorter.setRowFilter(RowFilter.regexFilter("^" + semester + "$", 4));
+            return RowFilter.regexFilter("^" + semester + "$", 4);
         }
+    }
+
+    public static RowFilter<Object, Object> filterByType(String type) {
+        if (type == null || type.equals("All")) {
+            return RowFilter.regexFilter(".*");
+        } else {
+            return RowFilter.regexFilter("^" + type + "$", 5);
+        }
+    }
+
+    public static void sortTable(JTable table, int columnIndex, boolean ascending) {
+        TableRowSorter<DefaultTableModel> sorter = (TableRowSorter<DefaultTableModel>) table.getRowSorter();
+        sorter.setSortKeys(List.of(new RowSorter.SortKey(columnIndex, ascending ? SortOrder.ASCENDING : SortOrder.DESCENDING)));
     }
 }

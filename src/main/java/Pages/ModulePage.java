@@ -17,7 +17,7 @@ public class ModulePage extends JFrame{
         setTitle("Module Page");
         setBounds(500,300,1094,729);
         setResizable(true);
-        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 
 
         moduleList.addMouseListener(new MouseAdapter() {

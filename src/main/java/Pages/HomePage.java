@@ -13,6 +13,8 @@ public class HomePage extends JFrame {
         setTitle("HomePage");
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setBounds(500,300,1094,729);
+        setLocationRelativeTo(null);
+
 
         // Set the background image
         try {

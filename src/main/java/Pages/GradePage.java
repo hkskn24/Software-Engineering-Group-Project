@@ -1,6 +1,6 @@
 package main.java.Pages;
 
-import main.java.Controller.ModuleController;
+import main.java.Controller.AchievementController;
 import main.java.Data;
 import main.java.Entity.Module;
 
@@ -84,7 +84,7 @@ public class GradePage extends JFrame {
         filterPanel.add(typeComboBox);
 
         JButton filterButton = new JButton("Filter");
-        filterButton.addActionListener(ModuleController.createFilterActionListener(sorter, semesterComboBox, typeComboBox));
+        filterButton.addActionListener(AchievementController.createFilterActionListener(sorter, semesterComboBox, typeComboBox));
         filterPanel.add(filterButton);
 
         return filterPanel;
@@ -104,7 +104,7 @@ public class GradePage extends JFrame {
         sortButton.addActionListener(e -> {
             String selectedSortBy = (String) sortComboBox.getSelectedItem();
             int columnIndex = "Grades".equals(selectedSortBy)?6:4;
-            ModuleController.sortTable(table, columnIndex, ascendingBox.isSelected());
+            AchievementController.sortTable(table, columnIndex, ascendingBox.isSelected());
         });
         sortPanel.add(sortButton);
 

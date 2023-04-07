@@ -1,5 +1,6 @@
 package main.java.Pages;
 
+import main.java.Controller.AchievementController;
 import main.java.Controller.ModuleController;
 import main.java.Entity.Module;
 import main.java.Data;

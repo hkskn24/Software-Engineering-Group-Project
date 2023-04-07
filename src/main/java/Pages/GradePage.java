@@ -1,6 +1,7 @@
 package main.java.Pages;
 
 import main.java.Controller.AchievementController;
+import main.java.Controller.ModuleController;
 import main.java.Data;
 import main.java.Entity.Module;
 
@@ -100,7 +101,7 @@ public class GradePage extends JFrame {
         filterPanel.add(typeComboBox);
 
         JButton filterButton = new JButton("Filter");
-        filterButton.addActionListener(AchievementController.createFilterActionListener(sorter, semesterComboBox, typeComboBox));
+        filterButton.addActionListener(ModuleController.createFilterActionListener(sorter, semesterComboBox, typeComboBox));
         filterPanel.add(filterButton);
 
         return filterPanel;

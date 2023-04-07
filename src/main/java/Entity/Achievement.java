@@ -1,6 +1,32 @@
 package main.java.Entity;
 
 public class Achievement {
-    protected String name;
-    protected int semester;
+    private String name;
+    private int semester;
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public int getSemester() {
+        return semester;
+    }
+
+    public void setSemester(int semester) {
+        this.semester = semester;
+    }
+
+    public String getType() {
+        return type;
+    }
+
+    public void setType(String type) {
+        this.type = type;
+    }
+
+    private String type;
 }

@@ -40,6 +40,11 @@ public class HomePage extends JFrame {
             dispose();
         });
 
+        btnAchievement.addActionListener(e -> {
+            new AchievementPage().setVisible(true);
+            dispose();
+        });
+
 //        btnAchievement.addActionListener(new ActionListener() {
 //            @Override
 //            public void actionPerformed(ActionEvent e) {

@@ -3,11 +3,13 @@ package main.java.Pages;
 import main.java.Data;
 import main.java.Entity.Module;
 
+import javax.swing.*;
+import java.awt.*;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 import java.text.DecimalFormat;
 import java.util.ArrayList;
 
-import java.awt.*;
-import javax.swing.*;
 
 public class GPAPage extends JFrame {
     double totalHours = 0.0;
@@ -16,11 +18,11 @@ public class GPAPage extends JFrame {
     JTextArea textArea = new JTextArea();
     JPanel panel = new JPanel();
 
-    public GPAPage(){
+    public GPAPage() {
         super("GPA Page");
-        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        setPreferredSize(new Dimension(600, 400));
-        setResizable(false);
+        setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+        setBounds(500, 300, 1094, 729);
+//        setResizable(false);
 
         panel.setLayout(new BorderLayout());
         textArea.setEditable(false);
@@ -30,12 +32,32 @@ public class GPAPage extends JFrame {
 
         add(panel);
 
-        pack();
+//        pack();
         setLocationRelativeTo(null);
         setVisible(true);
 
+        addWindowListener(new WindowAdapter() {
+            @Override
+            public void windowClosing(WindowEvent e) {
+                super.windowClosing(e);
+                SwingUtilities.invokeLater(() -> {
+                    GradePage gradePage = new GradePage();
+                    gradePage.setVisible(true);
+                });
+            }
+        });
+
     }
-        public void averageGPA(){
+
+    public static void main(String[] args) {
+        GPAPage p = new GPAPage();
+        p.averageGPA();
+        p.totalGPA();
+        p.postGPA();
+        p.perGPA();
+    }
+
+    public void averageGPA() {
         int totalCredits = 0;
         double averageGPA = 0;
         DecimalFormat df = new DecimalFormat("#.00");
@@ -43,29 +65,30 @@ public class GPAPage extends JFrame {
         for (int i = 0; i < modules.size(); i++) {
             Module module = modules.get(i);
             totalCredits = totalCredits + module.getCredits();
-            averageGPA += (Integer.valueOf(module.getGrades())/10.0-5)*Integer.valueOf(module.getCredits());
+            averageGPA += (Integer.valueOf(module.getGrades()) / 10.0 - 5) * Integer.valueOf(module.getCredits());
         }
         //计算平均绩点
         double agpa = averageGPA / totalCredits;
-        textArea.append("Average GPA: "+df.format(agpa) + "\n");
-        textArea.append("Total credits: "+dw.format(totalCredits) + "\n");
+        textArea.append("Average GPA: " + df.format(agpa) + "\n");
+        textArea.append("Total credits: " + dw.format(totalCredits) + "\n");
     }
+
     public void totalGPA() {
-            int totalCredits = 0;
-            DecimalFormat df = new DecimalFormat("#.00");
-            for (int i = 0; i < modules.size(); i++) {
-                Module module = modules.get(i);
-                totalCredits += Integer.valueOf(module.getCredits());
-                totalHours += Integer.valueOf(module.getHours());
-                totalQualityPoints += Integer.valueOf(module.getGrades())*Integer.valueOf(module.getCredits()); 
-            }
-            //计算总GPA
-            double gpa = totalQualityPoints / totalCredits;
-            textArea.append("GPA: "+df.format(gpa)+"\n");
+        int totalCredits = 0;
+        DecimalFormat df = new DecimalFormat("#.00");
+        for (int i = 0; i < modules.size(); i++) {
+            Module module = modules.get(i);
+            totalCredits += Integer.valueOf(module.getCredits());
+            totalHours += Integer.valueOf(module.getHours());
+            totalQualityPoints += Integer.valueOf(module.getGrades()) * Integer.valueOf(module.getCredits());
+        }
+        //计算总GPA
+        double gpa = totalQualityPoints / totalCredits;
+        textArea.append("GPA: " + df.format(gpa) + "\n");
     }
 
     public void perGPA() {
-        int maxSemester=0;
+        int maxSemester = 0;
         DefaultListModel<String> listModel = new DefaultListModel<String>();
         DecimalFormat df = new DecimalFormat("#.00");
         for (Module module : modules) {
@@ -90,7 +113,7 @@ public class GPAPage extends JFrame {
 
             //计算每学期GPA
             double gpa = totalGradePoints / totalCredits;
-            listModel.addElement( "Semester "+ semester + " : " + df.format(gpa));
+            listModel.addElement("Semester " + semester + " : " + df.format(gpa));
         }
         JList<String> list = new JList<String>(listModel);
         list.setFont(new Font("Courier New", Font.PLAIN, 18));
@@ -102,7 +125,7 @@ public class GPAPage extends JFrame {
         panel.repaint();
     }
 
-    public void postGPA(){
+    public void postGPA() {
         int totalCredits = 0;
         int totalHours = 0;
         int totalQualityPoints = 0;
@@ -121,15 +144,7 @@ public class GPAPage extends JFrame {
         //计算总GPA
         double gpa = totalQualityPoints / totalCredits;
         double agpa = totalGradePoints / totalCredits;
-        textArea.append("The Postgraduate GPA is: "+df.format(gpa)+"\n");
-        textArea.append("The average Postgraduate GPA is: "+df.format(agpa));
-    }
-
-    public static void main(String[] args) {
-        GPAPage p = new GPAPage();
-        p.averageGPA();
-        p.totalGPA();
-        p.postGPA();
-        p.perGPA();
+        textArea.append("The Postgraduate GPA is: " + df.format(gpa) + "\n");
+        textArea.append("The average Postgraduate GPA is: " + df.format(agpa));
     }
 }

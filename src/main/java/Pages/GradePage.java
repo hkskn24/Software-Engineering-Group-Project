@@ -9,7 +9,12 @@ import javax.swing.border.EmptyBorder;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableRowSorter;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 import java.util.ArrayList;
+
 
 public class GradePage extends JFrame {
     private TableRowSorter<DefaultTableModel> sorter;
@@ -17,10 +22,9 @@ public class GradePage extends JFrame {
     public GradePage() {
         setTitle("TransfiguringGrades");
         getContentPane().setBackground(new Color(250, 250, 250));
-        setBounds(500,300,1094,729);
+        setBounds(500, 300, 1094, 729);
         setLocationRelativeTo(null);
         setResizable(true);
-        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
         JTable table = setupTable();
 
@@ -31,6 +35,18 @@ public class GradePage extends JFrame {
         JPanel sortPanel = setupSortPanel(table);
 
         setupCombinedPanel(filterPanel, sortPanel);
+
+        addWindowListener(new WindowAdapter() {
+            @Override
+            public void windowClosing(WindowEvent e) {
+                super.windowClosing(e);
+                if (Frame.getFrames().length == 1) {
+                    System.exit(0);
+                }
+            }
+        });
+
+        setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
     }
 
     public static void main(String[] args) {
@@ -103,7 +119,7 @@ public class GradePage extends JFrame {
         JButton sortButton = new JButton("Sort");
         sortButton.addActionListener(e -> {
             String selectedSortBy = (String) sortComboBox.getSelectedItem();
-            int columnIndex = "Grades".equals(selectedSortBy)?6:4;
+            int columnIndex = "Grades".equals(selectedSortBy) ? 6 : 4;
             AchievementController.sortTable(table, columnIndex, ascendingBox.isSelected());
         });
         sortPanel.add(sortButton);
@@ -134,8 +150,11 @@ public class GradePage extends JFrame {
         combinedPanel.setBorder(new EmptyBorder(10, 10, 10, 10));
     }
 
-    private void addBackButton (JPanel contentPanel, GridBagConstraints gbc) {
+    private void addBackButton(JPanel contentPanel, GridBagConstraints gbc) {
         JPanel bottomPanel = new JPanel(new BorderLayout());
+
+        JButton GPAButton = new JButton("view GPA");
+        GPAButton.addActionListener(new GPAActionListener());
 
         JButton backButton = new JButton("Back");
         backButton.addActionListener(e -> {
@@ -143,11 +162,26 @@ public class GradePage extends JFrame {
             dispose();
         });
 
+        bottomPanel.add(GPAButton, BorderLayout.WEST);
         bottomPanel.add(backButton, BorderLayout.EAST);
 
         gbc.gridy = 2;
         gbc.weighty = 1.0;
         gbc.anchor = GridBagConstraints.SOUTH;
         contentPanel.add(bottomPanel, gbc);
+    }
+
+    private class GPAActionListener implements ActionListener {
+        public void actionPerformed(ActionEvent e) {
+            SwingUtilities.invokeLater(() -> {
+                GPAPage p = new GPAPage();
+                p.averageGPA();
+                p.totalGPA();
+                p.postGPA();
+                p.perGPA();
+                setVisible(true);
+                dispose();
+            });
+        }
     }
 }

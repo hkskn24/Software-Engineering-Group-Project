@@ -11,6 +11,7 @@ public class ModuleInfoPage extends JFrame {
     public ModuleInfoPage(Module module) {
         setTitle(module.getName());
         setBounds(500,300,1094,729);
+        setLocationRelativeTo(null);
         setResizable(true);
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 

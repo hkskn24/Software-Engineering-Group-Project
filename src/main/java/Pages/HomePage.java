@@ -15,7 +15,6 @@ public class HomePage extends JFrame {
         setBounds(500,300,1094,729);
         setLocationRelativeTo(null);
 
-
         // Set the background image
         try {
             JLabel backgroundImage = new JLabel(new ImageIcon(ImageIO.read(new File("src/main/resources/homepage.JPG"))));

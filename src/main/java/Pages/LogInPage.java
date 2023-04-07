@@ -69,7 +69,7 @@ public class LogInPage extends JFrame implements ActionListener {
         registerButton.addActionListener(new RegisterActionListener());
         retrievePasswordButton.addActionListener(new RetrievePasswordActionListener());
         recoverPasswordButton.addActionListener(new RecoverPasswordActionListener());
-        quitButton.addActionListener(ae -> System.exit(0));
+        quitButton.addActionListener(new quitActionListener());
 
         // 在平面中加入
         panel.add(usernameLabel);
@@ -311,7 +311,8 @@ public class LogInPage extends JFrame implements ActionListener {
                     list.add(line3);
                 }
                 reader.close();
-                for (String pw : list) {
+                for(int i = 0; i < list.size(); i++) {
+                String pw = list.get(i); 
                     //for (String line : new String(java.nio.file.Files.readAllBytes(java.nio.file.Paths.get("students.txt"))).split("\\r?\\n")) {
                     String[] dpart = pw.split(" ");
                     if (phone.equals(dpart[2])) {
@@ -328,8 +329,10 @@ public class LogInPage extends JFrame implements ActionListener {
                             fout.close();
                             break;
                         }
-                    } else {
+                    } 
+                    if(!phone.equals(dpart[2])&&i==list.size()-1){
                         JOptionPane.showMessageDialog(null, "没有与此电话号码对应的账号。");
+                        return;
                     }
                 }
                 for (String pw : list) {
@@ -346,6 +349,18 @@ public class LogInPage extends JFrame implements ActionListener {
             } catch (IOException ex) {
                 JOptionPane.showMessageDialog(null, "读取文件时发生错误: " + ex.getMessage());
             }
+        }
+    }
+
+    private class quitActionListener implements ActionListener{
+        public void actionPerformed(ActionEvent e){
+            SwingUtilities.invokeLater(new Runnable() {
+                @Override
+                public void run() {
+                    new StartPage().setVisible(true);
+                }
+            });
+            dispose();
         }
     }
 }

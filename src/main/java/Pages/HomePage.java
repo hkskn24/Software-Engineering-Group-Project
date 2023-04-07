@@ -13,7 +13,6 @@ public class HomePage extends JFrame {
         setTitle("HomePage");
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setBounds(500,300,1094,729);
-        setLocationRelativeTo(null);
 
         // Set the background image
         try {
@@ -28,6 +27,7 @@ public class HomePage extends JFrame {
         JButton btnModulePage = new JButton("ModulePage");
         JButton btnGradePage = new JButton("GradePage");
         JButton btnAchievement = new JButton("Achievement");
+        JButton btnBack = new JButton("Back");
 
         // 为按钮添加事件监听器
         btnModulePage.addActionListener(e -> {
@@ -53,10 +53,40 @@ public class HomePage extends JFrame {
 //            }
 //        });
 
+        btnBack.addActionListener(e -> {
+            new LogInPage().setVisible(true);
+            dispose();
+        });
+
+        // 设置按钮颜色和文字颜色
+        Color btnModulePageColor = new Color(96,33,46);
+        Color btnGradePageColor = new Color(179,122,54);
+        Color btnAchievementColor = new Color(25,60,79);
+        Color btnBackColor = new Color(34,68,49);
+        Color buttonTextColor = Color.WHITE;
+        Font buttonFont = new Font("Segoe Script", Font.BOLD, 25);
+
+        btnModulePage.setFont(buttonFont);
+        btnModulePage.setBackground(btnModulePageColor);
+        btnModulePage.setForeground(buttonTextColor);
+
+        btnGradePage.setFont(buttonFont);
+        btnGradePage.setBackground(btnGradePageColor);
+        btnGradePage.setForeground(buttonTextColor);
+
+        btnAchievement.setFont(buttonFont);
+        btnAchievement.setBackground(btnAchievementColor);
+        btnAchievement.setForeground(buttonTextColor);
+
+        btnBack.setFont(buttonFont);
+        btnBack.setBackground(btnBackColor);
+        btnBack.setForeground(buttonTextColor);
+
         // 将按钮添加到窗口
         add(btnModulePage);
         add(btnGradePage);
         add(btnAchievement);
+        add(btnBack);
     }
 
     public static void main(String[] args) {

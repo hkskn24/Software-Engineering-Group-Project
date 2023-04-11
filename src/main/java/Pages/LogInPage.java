@@ -7,11 +7,13 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.ItemEvent;
 import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
 
 public class LogInPage extends JFrame implements ActionListener {
+    private static int userType; //student:0 lecturer:1
     private final JTextField usernameField;
     private final JPasswordField passwordField;
 
@@ -52,8 +54,8 @@ public class LogInPage extends JFrame implements ActionListener {
         // 设置文本框
         usernameField = new JTextField();
         passwordField = new JPasswordField();
-        usernameField.setPreferredSize(new Dimension (180,35));
-        passwordField.setPreferredSize(new Dimension (180,35));
+        usernameField.setPreferredSize(new Dimension(180, 35));
+        passwordField.setPreferredSize(new Dimension(180, 35));
 
         // 设置按钮
         JButton loginButton = new JButton("Log in");
@@ -61,6 +63,14 @@ public class LogInPage extends JFrame implements ActionListener {
         JButton retrievePasswordButton = new JButton("Forgot PWD");
         JButton recoverPasswordButton = new JButton("Change PWD");
         JButton quitButton = new JButton("Exit");
+
+        // set student or lecturer
+        JCheckBox studentCheckbox = new JCheckBox("Student");
+        JCheckBox lecturerCheckbox = new JCheckBox("Lecturer");
+
+        ButtonGroup group = new ButtonGroup();
+        group.add(studentCheckbox);
+        group.add(lecturerCheckbox);
 
 
         // 设置按钮颜色和文字颜色
@@ -93,6 +103,18 @@ public class LogInPage extends JFrame implements ActionListener {
         recoverPasswordButton.addActionListener(new RecoverPasswordActionListener());
         quitButton.addActionListener(new quitActionListener());
 
+        studentCheckbox.addItemListener(e -> {
+            if (e.getStateChange() == ItemEvent.SELECTED) {
+                userType = 0;
+            }
+        });
+
+        lecturerCheckbox.addItemListener(e -> {
+            if (e.getStateChange() == ItemEvent.SELECTED) {
+                userType = 1;
+            }
+        });
+
         // 在平面中加入
         panel.add(usernameLabel);
         panel.add(usernameField);
@@ -102,8 +124,10 @@ public class LogInPage extends JFrame implements ActionListener {
         panel.add(registerButton);
         panel.add(retrievePasswordButton);
         panel.add(recoverPasswordButton);
+        panel.add(studentCheckbox);
+        panel.add(lecturerCheckbox);
         panel.add(new JLabel());
-        setBounds(500,300,1094,729);
+        setBounds(500, 300, 1094, 729);
         setLocationRelativeTo(null);
         setResizable(false);
 
@@ -113,7 +137,6 @@ public class LogInPage extends JFrame implements ActionListener {
         add(backgroundImage);
 
         // 设置背景图片大小为窗口大小
-//        setSize(backgroundImageIcon.getIconWidth(), backgroundImageIcon.getIconHeight());
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setVisible(true);
 //        setResizable(false);
@@ -139,15 +162,21 @@ public class LogInPage extends JFrame implements ActionListener {
         panel.add(passwordField, gbc);
         gbc.gridx = 0;
         gbc.gridy = 2;
-        panel.add(loginButton, gbc);
+        panel.add(studentCheckbox, gbc);
         gbc.gridx = 1;
         gbc.gridy = 2;
-        panel.add(registerButton, gbc);
+        panel.add(lecturerCheckbox, gbc);
         gbc.gridx = 0;
         gbc.gridy = 3;
-        panel.add(retrievePasswordButton, gbc);
+        panel.add(loginButton, gbc);
         gbc.gridx = 1;
         gbc.gridy = 3;
+        panel.add(registerButton, gbc);
+        gbc.gridx = 0;
+        gbc.gridy = 4;
+        panel.add(retrievePasswordButton, gbc);
+        gbc.gridx = 1;
+        gbc.gridy = 4;
         panel.add(recoverPasswordButton, gbc);
 
         setLocationRelativeTo(null);
@@ -174,27 +203,41 @@ public class LogInPage extends JFrame implements ActionListener {
 
         try {
             boolean loggedIn = false;
-            BufferedReader reader = new BufferedReader(new FileReader("students.txt"));
-            String line;
-            while ((line = reader.readLine()) != null) {
-                //for (String line : new String(java.nio.file.Files.readAllBytes(java.nio.file.Paths.get("students.txt"))).split("\\r?\\n")) {
-                String[] parts = line.split(" ");
-                if (parts[0].equals(username) && parts[1].equals(password)) {
-                    loggedIn = true;
-                    break;
-                }
-            }
-            reader.close();
 
-            if (loggedIn) {
+            if (userType == 0) {
+                BufferedReader reader = new BufferedReader(new FileReader("students.txt"));
+                String line;
+                while ((line = reader.readLine()) != null) {
+                    //for (String line : new String(java.nio.file.Files.readAllBytes(java.nio.file.Paths.get("students.txt"))).split("\\r?\\n")) {
+                    String[] parts = line.split(" ");
+                    if (parts[0].equals(username) && parts[1].equals(password)) {
+                        loggedIn = true;
+                        break;
+                    }
+                }
+                reader.close();
+            } else if (userType == 1) {
+                BufferedReader reader = new BufferedReader(new FileReader("lecturers.txt"));
+                String line;
+                while ((line = reader.readLine()) != null) {
+                    String[] parts = line.split(" ");
+                    if (parts[0].equals(username) && parts[1].equals(password)) {
+                        loggedIn = true;
+                        break;
+                    }
+                }
+                reader.close();
+            }
+            if (loggedIn && userType==0) {
 //                JOptionPane.showMessageDialog(this, "登录成功！");
                 Config.setUsername(username);
-                SwingUtilities.invokeLater(new Runnable() {
-                    @Override
-                    public void run() {
-                        new HomePage().setVisible(true);
-                    }
-                });
+                SwingUtilities.invokeLater(() -> new HomePage().setVisible(true));
+                dispose();
+            }
+            else if (loggedIn && userType==1) {
+//                JOptionPane.showMessageDialog(this, "登录成功！");
+                Config.setUsername(username);
+                SwingUtilities.invokeLater(() -> new Lec_HomePage().setVisible(true));
                 dispose();
             } else {
                 JOptionPane.showMessageDialog(this, "用户名或密码错误！");
@@ -229,18 +272,34 @@ public class LogInPage extends JFrame implements ActionListener {
                 String username = usernameField.getText().trim();
                 String password = new String(passwordField.getPassword()).trim();
                 String phone = phoneField.getText().trim();
-                try {
-                    BufferedReader reader = new BufferedReader(new FileReader("students.txt"));
-                    String line1;
-                    while ((line1 = reader.readLine()) != null) {
-                        String[] sparts = line1.split(" ");
-                        if (sparts[0].equals(username) || sparts[2].equals(phone)) {
-                            JOptionPane.showMessageDialog(registerWindow, "用户名或手机号码已存在，请重新输入。");
-                            return;
+                if (userType == 0) {
+                    try {
+                        BufferedReader reader = new BufferedReader(new FileReader("students.txt"));
+                        String line1;
+                        while ((line1 = reader.readLine()) != null) {
+                            String[] sparts = line1.split(" ");
+                            if (sparts[0].equals(username) || sparts[2].equals(phone)) {
+                                JOptionPane.showMessageDialog(registerWindow, "用户名或手机号码已存在，请重新输入。");
+                                return;
+                            }
+                            reader.close();
                         }
-                        reader.close();
+                    } catch (IOException ignored) {
                     }
-                } catch (IOException ignored) {
+                } else if (userType == 1) {
+                    try {
+                        BufferedReader reader = new BufferedReader(new FileReader("lecturers.txt"));
+                        String line1;
+                        while ((line1 = reader.readLine()) != null) {
+                            String[] sparts = line1.split(" ");
+                            if (sparts[0].equals(username) || sparts[2].equals(phone)) {
+                                JOptionPane.showMessageDialog(registerWindow, "用户名或手机号码已存在，请重新输入。");
+                                return;
+                            }
+                            reader.close();
+                        }
+                    } catch (IOException ignored) {
+                    }
                 }
 
                 if (!username.matches("[a-zA-Z\u4e00-\u9fa5]{1,10}")) {
@@ -256,45 +315,70 @@ public class LogInPage extends JFrame implements ActionListener {
                     return;
                 }
 
-                File studentFolder = new File("src/main/resources/students/" + username);
-                if (!studentFolder.exists()) {
-                    studentFolder.mkdir();
-                }
-
-                // create empty json files
-                File moduleFile = new File("src/main/resources/students/" + username + "/module.json");
-                File achievementFile = new File("src/main/resources/students/" + username + "/achievement.json");
-
-                if (!moduleFile.exists()) {
-                    FileWriter moduleWriter;
-                    try {
-                        moduleWriter = new FileWriter(moduleFile);
-                        moduleWriter.write("[]");
-                        moduleWriter.close();                    } catch (IOException ex) {
-                        throw new RuntimeException(ex);
+                // student
+                if (userType == 0) {
+                    File studentFolder = new File("src/main/resources/students/" + username);
+                    if (!studentFolder.exists()) {
+                        studentFolder.mkdir();
                     }
-                }
 
-                if (!achievementFile.exists()) {
-                    FileWriter achievementWriter;
+                    // create empty json files
+                    File moduleFile = new File("src/main/resources/students/" + username + "/module.json");
+                    File achievementFile = new File("src/main/resources/students/" + username + "/achievement.json");
+
+                    if (!moduleFile.exists()) {
+                        FileWriter moduleWriter;
+                        try {
+                            moduleWriter = new FileWriter(moduleFile);
+                            moduleWriter.write("[]");
+                            moduleWriter.close();
+                        } catch (IOException ex) {
+                            throw new RuntimeException(ex);
+                        }
+                    }
+
+                    if (!achievementFile.exists()) {
+                        FileWriter achievementWriter;
+                        try {
+                            achievementWriter = new FileWriter(achievementFile);
+                            achievementWriter.write("[]");
+                            achievementWriter.close();
+                        } catch (IOException ex) {
+                            throw new RuntimeException(ex);
+                        }
+                    }
                     try {
-                        achievementWriter = new FileWriter(achievementFile);
-                        achievementWriter.write("[]");
-                        achievementWriter.close();
+                        BufferedWriter writer = new BufferedWriter(new FileWriter("students.txt", true));
+                        writer.write(username + " " + password + " " + phone);
+                        writer.newLine();
+                        JOptionPane.showMessageDialog(registerWindow, "注册成功！");
+                        writer.close();
                     } catch (IOException ex) {
-                        throw new RuntimeException(ex);
+                        JOptionPane.showMessageDialog(registerWindow, "读取文件时发生错误: " + ex.getMessage());
                     }
                 }
-                try {
-                    BufferedWriter writer = new BufferedWriter(new FileWriter("students.txt", true));
-                    writer.write(username + " " + password + " " + phone);
-                    writer.newLine();
-                    JOptionPane.showMessageDialog(registerWindow, "注册成功！");
-                    writer.close();
-                } catch (IOException ex) {
-                    JOptionPane.showMessageDialog(registerWindow, "读取文件时发生错误: " + ex.getMessage());
-                }
 
+                // lecturer
+                else {
+                    File lecturerFolder = new File("src/main/resources/lecturers/" + username);
+                    if (!lecturerFolder.exists()) {
+                        lecturerFolder.mkdir();
+                    }
+
+                    // create empty json files
+                    File moduleFile = new File("src/main/resources/lecturers/" + username + "/module.json");
+
+                    if (!moduleFile.exists()) {
+                        FileWriter moduleWriter;
+                        try {
+                            moduleWriter = new FileWriter(moduleFile);
+                            moduleWriter.write("[]");
+                            moduleWriter.close();
+                        } catch (IOException ex) {
+                            throw new RuntimeException(ex);
+                        }
+                    }
+                }
                 registerWindow.dispose();
             });
 
@@ -319,19 +403,36 @@ public class LogInPage extends JFrame implements ActionListener {
                 boolean found = false;
                 String password = "";
                 String username = "";
-                BufferedReader reader = new BufferedReader(new FileReader("students.txt"));
-                String line2;
-                while ((line2 = reader.readLine()) != null) {
-                    //for (String line : new String(java.nio.file.Files.readAllBytes(java.nio.file.Paths.get("students.txt"))).split("\\r?\\n")) {
-                    String[] reparts = line2.split(" ");
-                    if (reparts[2].equals(phone)) {
-                        found = true;
-                        password = reparts[1];
-                        username = reparts[0];
-                        break;
+                if (userType == 0) {
+                    BufferedReader reader = new BufferedReader(new FileReader("students.txt"));
+                    String line2;
+                    while ((line2 = reader.readLine()) != null) {
+                        //for (String line : new String(java.nio.file.Files.readAllBytes(java.nio.file.Paths.get("students.txt"))).split("\\r?\\n")) {
+                        String[] reparts = line2.split(" ");
+                        if (reparts[2].equals(phone)) {
+                            found = true;
+                            password = reparts[1];
+                            username = reparts[0];
+                            break;
+                        }
                     }
+                    reader.close();
+                } else if (userType == 1) {
+                    BufferedReader reader = new BufferedReader(new FileReader("lecturers.txt"));
+                    String line2;
+                    while ((line2 = reader.readLine()) != null) {
+                        //for (String line : new String(java.nio.file.Files.readAllBytes(java.nio.file.Paths.get("students.txt"))).split("\\r?\\n")) {
+                        String[] reparts = line2.split(" ");
+                        if (reparts[2].equals(phone)) {
+                            found = true;
+                            password = reparts[1];
+                            username = reparts[0];
+                            break;
+                        }
+                    }
+                    reader.close();
                 }
-                reader.close();
+
 
                 if (found) {
                     JOptionPane.showMessageDialog(null, "你的用户名是: " + username + "\n" + "你的密码是: " + password);
@@ -353,66 +454,113 @@ public class LogInPage extends JFrame implements ActionListener {
                 JOptionPane.showMessageDialog(tip, "电话号码格式有误，请输入11位数字。");
                 return;
             }
+            if (userType == 0) {
+                try {
+                    String username = "";
+                    String password = "";
 
-            try {
-                String username = "";
-                String password = "";
-                BufferedReader reader = new BufferedReader(new FileReader("students.txt"));
-                String line3;
-                List<String> list = new ArrayList<>();
-                while ((line3 = reader.readLine()) != null) {
-                    list.add(line3);
-                }
-                reader.close();
-                for(int i = 0; i < list.size(); i++) {
-                String pw = list.get(i); 
-                    //for (String line : new String(java.nio.file.Files.readAllBytes(java.nio.file.Paths.get("students.txt"))).split("\\r?\\n")) {
-                    String[] dpart = pw.split(" ");
-                    if (phone.equals(dpart[2])) {
-                        username = dpart[0];
-                        String newpassword = JOptionPane.showInputDialog(username + "，你好！请输入新密码:");
-                        if (!newpassword.matches("[a-zA-Z0-9]{6,10}")) {
-                            JOptionPane.showMessageDialog(null, "修改密码失败！\n密码格式有误，请输入6-10位数字或英文字符。");
-                            return;
-                        } else {
-                            list.remove(pw);
-                            password = newpassword;
-                            FileWriter fout = new FileWriter("students.txt", false);
-                            fout.write("");
-                            fout.close();
-                            break;
-                        }
-                    } 
-                    if(!phone.equals(dpart[2])&&i==list.size()-1){
-                        JOptionPane.showMessageDialog(null, "没有与此电话号码对应的账号。");
-                        return;
+                    BufferedReader reader = new BufferedReader(new FileReader("students.txt"));
+                    String line3;
+                    List<String> list = new ArrayList<>();
+                    while ((line3 = reader.readLine()) != null) {
+                        list.add(line3);
                     }
-                }
-                for (String pw : list) {
+                    reader.close();
+                    for (int i = 0; i < list.size(); i++) {
+                        String pw = list.get(i);
+                        //for (String line : new String(java.nio.file.Files.readAllBytes(java.nio.file.Paths.get("students.txt"))).split("\\r?\\n")) {
+                        String[] dpart = pw.split(" ");
+                        if (phone.equals(dpart[2])) {
+                            username = dpart[0];
+                            String newpassword = JOptionPane.showInputDialog(username + "，你好！请输入新密码:");
+                            if (!newpassword.matches("[a-zA-Z0-9]{6,10}")) {
+                                JOptionPane.showMessageDialog(null, "修改密码失败！\n密码格式有误，请输入6-10位数字或英文字符。");
+                                return;
+                            } else {
+                                list.remove(pw);
+                                password = newpassword;
+                                FileWriter fout = new FileWriter("students.txt", false);
+                                fout.write("");
+                                fout.close();
+                                break;
+                            }
+                        }
+                        if (!phone.equals(dpart[2]) && i == list.size() - 1) {
+                            JOptionPane.showMessageDialog(null, "没有与此电话号码对应的账号。");
+                            return;
+                        }
+                    }
+                    for (String pw : list) {
+                        BufferedWriter writer = new BufferedWriter(new FileWriter("students.txt", true));
+                        writer.write(pw);
+                        writer.newLine();
+                        writer.close();
+                    }
                     BufferedWriter writer = new BufferedWriter(new FileWriter("students.txt", true));
-                    writer.write(pw);
+                    writer.write(username + " " + password + " " + phone);
                     writer.newLine();
                     writer.close();
+                    JOptionPane.showMessageDialog(null, "修改密码成功！");
+                } catch (IOException ex) {
+                    JOptionPane.showMessageDialog(null, "读取文件时发生错误: " + ex.getMessage());
                 }
-                BufferedWriter writer = new BufferedWriter(new FileWriter("students.txt", true));
-                writer.write(username + " " + password + " " + phone);
-                writer.newLine();
-                writer.close();
-                JOptionPane.showMessageDialog(null, "修改密码成功！");
-            } catch (IOException ex) {
-                JOptionPane.showMessageDialog(null, "读取文件时发生错误: " + ex.getMessage());
+            } else if (userType == 1) {
+                try {
+                    String username = "";
+                    String password = "";
+
+                    BufferedReader reader = new BufferedReader(new FileReader("lecturers.txt"));
+                    String line3;
+                    List<String> list = new ArrayList<>();
+                    while ((line3 = reader.readLine()) != null) {
+                        list.add(line3);
+                    }
+                    reader.close();
+                    for (int i = 0; i < list.size(); i++) {
+                        String pw = list.get(i);
+                        //for (String line : new String(java.nio.file.Files.readAllBytes(java.nio.file.Paths.get("students.txt"))).split("\\r?\\n")) {
+                        String[] dpart = pw.split(" ");
+                        if (phone.equals(dpart[2])) {
+                            username = dpart[0];
+                            String newpassword = JOptionPane.showInputDialog(username + "，你好！请输入新密码:");
+                            if (!newpassword.matches("[a-zA-Z0-9]{6,10}")) {
+                                JOptionPane.showMessageDialog(null, "修改密码失败！\n密码格式有误，请输入6-10位数字或英文字符。");
+                                return;
+                            } else {
+                                list.remove(pw);
+                                password = newpassword;
+                                FileWriter fout = new FileWriter("lecturers.txt", false);
+                                fout.write("");
+                                fout.close();
+                                break;
+                            }
+                        }
+                        if (!phone.equals(dpart[2]) && i == list.size() - 1) {
+                            JOptionPane.showMessageDialog(null, "没有与此电话号码对应的账号。");
+                            return;
+                        }
+                    }
+                    for (String pw : list) {
+                        BufferedWriter writer = new BufferedWriter(new FileWriter("lecturers.txt", true));
+                        writer.write(pw);
+                        writer.newLine();
+                        writer.close();
+                    }
+                    BufferedWriter writer = new BufferedWriter(new FileWriter("lecturers.txt", true));
+                    writer.write(username + " " + password + " " + phone);
+                    writer.newLine();
+                    writer.close();
+                    JOptionPane.showMessageDialog(null, "修改密码成功！");
+                } catch (IOException ex) {
+                    JOptionPane.showMessageDialog(null, "读取文件时发生错误: " + ex.getMessage());
+                }
             }
         }
     }
 
-    private class quitActionListener implements ActionListener{
-        public void actionPerformed(ActionEvent e){
-            SwingUtilities.invokeLater(new Runnable() {
-                @Override
-                public void run() {
-                    new StartPage().setVisible(true);
-                }
-            });
+    private class quitActionListener implements ActionListener {
+        public void actionPerformed(ActionEvent e) {
+            SwingUtilities.invokeLater(() -> new StartPage().setVisible(true));
             dispose();
         }
     }

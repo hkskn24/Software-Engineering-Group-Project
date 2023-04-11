@@ -1,9 +1,8 @@
 package main.java.Pages;
 
-import main.java.Controller.AchievementController;
 import main.java.Controller.ModuleController;
-import main.java.Entity.Module;
 import main.java.Data;
+import main.java.Entity.Module;
 
 import javax.swing.*;
 import java.awt.*;
@@ -12,7 +11,7 @@ import java.awt.event.MouseEvent;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ModulePage extends JFrame{
+public class ModulePage extends JFrame {
     private JList<Module> moduleList;
     private JTextField searchTextField;
 
@@ -50,6 +49,10 @@ public class ModulePage extends JFrame{
 
         setContentPane(contentPanel);
         setVisible(true);
+    }
+
+    public static void main(String[] args) {
+        new ModulePage();
     }
 
     private void setupModulePage() {
@@ -109,10 +112,6 @@ public class ModulePage extends JFrame{
 
         bottomPanel.add(backButton, BorderLayout.EAST);
         contentPanel.add(bottomPanel, BorderLayout.SOUTH);
-    }
-
-    public static void main(String[] args) {
-        new ModulePage();
     }
 }
 

@@ -28,7 +28,7 @@ public class HomePage extends JFrame {
         JButton btnModulePage = new JButton("ModulePage");
         JButton btnGradePage = new JButton("GradePage");
         JButton btnAchievement = new JButton("Achievement");
-        JButton btnBack = new JButton("Back");
+        JButton btnBack = new JButton("Log out");
 
         // 为按钮添加事件监听器
         btnModulePage.addActionListener(e -> {
@@ -45,14 +45,6 @@ public class HomePage extends JFrame {
             new AchievementPage().setVisible(true);
             dispose();
         });
-
-//        btnAchievement.addActionListener(new ActionListener() {
-//            @Override
-//            public void actionPerformed(ActionEvent e) {
-//                new Achievement().setVisible(true);
-//                dispose();
-//            }
-//        });
 
         btnBack.addActionListener(e -> {
             new LogInPage().setVisible(true);

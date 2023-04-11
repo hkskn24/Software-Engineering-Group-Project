@@ -1,5 +1,7 @@
 package main.java.Pages;
 
+import com.formdev.flatlaf.FlatDarculaLaf;
+
 import javax.swing.*;
 import java.awt.*;
 import java.io.File;
@@ -10,13 +12,17 @@ public class StartPage extends JFrame {
 
     public StartPage() {
         setTitle("WELCOME TO LUMOSLEARNING");
-        setBounds(500,300,1094,729);
+        setBounds(500,300,900,599);
         setLocationRelativeTo(null);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        setResizable(false);
 
         // Set the background image
         try {
-            JLabel backgroundImage = new JLabel(new ImageIcon(ImageIO.read(new File("src/main/resources/startpage.JPG"))));
+            JLabel backgroundImage = new JLabel();
+            ImageIcon ii = new ImageIcon(ImageIO.read(new File("src/main/resources/startpage.jpg")));
+            ii.setImage(ii.getImage().getScaledInstance(900,600,Image.SCALE_DEFAULT));
+            backgroundImage.setIcon(ii);
             backgroundImage.setLayout(new GridBagLayout());
             setContentPane(backgroundImage);
         } catch (IOException e) {
@@ -26,7 +32,17 @@ public class StartPage extends JFrame {
         GridBagConstraints gbc = new GridBagConstraints();
 
         JLabel label = new JLabel("Welcome to LumosLearning");
-        label.setFont(new Font("Monotype Corsiva", Font.BOLD, 80));
+        try {
+            InputStream inputStream = new BufferedInputStream(
+                    new FileInputStream("src/main/resources/ParryHotter-1.ttf"));
+
+            Font font = Font.createFont(Font.TRUETYPE_FONT, inputStream);
+
+            label.setFont(font.deriveFont(Font.BOLD, 60f));
+
+        } catch (FontFormatException | IOException e) {
+            e.printStackTrace();
+        }
         label.setForeground(Color.WHITE);
         gbc.gridx = 0;
         gbc.gridy = 0;
@@ -38,7 +54,17 @@ public class StartPage extends JFrame {
         Color startButtonTextColor = Color.WHITE;
         startButton.setBackground(startButtoncolor);
         startButton.setForeground(startButtonTextColor);
-        startButton.setFont(new Font("Arial", Font.BOLD, 35));
+        try {
+            InputStream inputStream = new BufferedInputStream(
+                    new FileInputStream("src/main/resources/HARRYP-1.ttf"));
+
+            Font font = Font.createFont(Font.TRUETYPE_FONT, inputStream);
+
+            startButton.setFont(font.deriveFont(Font.BOLD, 27f));
+
+        } catch (FontFormatException | IOException e) {
+            e.printStackTrace();
+        }
         startButton.addActionListener(e -> {
             new LogInPage().setVisible(true);
             dispose();
@@ -48,6 +74,8 @@ public class StartPage extends JFrame {
     }
 
     public static void main(String[] args) {
+        System.setProperty("sun.java2d.uiScale", "1.0");
+        FlatDarculaLaf.install();
         new StartPage().setVisible(true);
     }
 }

@@ -253,6 +253,36 @@ public class LogInPage extends JFrame implements ActionListener {
                     JOptionPane.showMessageDialog(registerWindow, "电话号码格式有误，请输入11位数字。");
                     return;
                 }
+
+                File studentFolder = new File("src/main/resources/students/" + username);
+                if (!studentFolder.exists()) {
+                    studentFolder.mkdir();
+                }
+
+                // create empty json files
+                File moduleFile = new File("src/main/resources/students/" + username + "/module.json");
+                File achievementFile = new File("src/main/resources/students/" + username + "/achievement.json");
+
+                if (!moduleFile.exists()) {
+                    FileWriter moduleWriter;
+                    try {
+                        moduleWriter = new FileWriter(moduleFile);
+                        moduleWriter.write("[]");
+                        moduleWriter.close();                    } catch (IOException ex) {
+                        throw new RuntimeException(ex);
+                    }
+                }
+
+                if (!achievementFile.exists()) {
+                    FileWriter achievementWriter;
+                    try {
+                        achievementWriter = new FileWriter(achievementFile);
+                        achievementWriter.write("[]");
+                        achievementWriter.close();
+                    } catch (IOException ex) {
+                        throw new RuntimeException(ex);
+                    }
+                }
                 try {
                     BufferedWriter writer = new BufferedWriter(new FileWriter("students.txt", true));
                     writer.write(username + " " + password + " " + phone);

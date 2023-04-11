@@ -1,6 +1,7 @@
 package main.java.Pages;
 
 import com.formdev.flatlaf.FlatDarculaLaf;
+import main.java.Config;
 
 import javax.swing.*;
 import java.awt.*;
@@ -187,6 +188,7 @@ public class LogInPage extends JFrame implements ActionListener {
 
             if (loggedIn) {
 //                JOptionPane.showMessageDialog(this, "登录成功！");
+                Config.setUsername(username);
                 SwingUtilities.invokeLater(new Runnable() {
                     @Override
                     public void run() {

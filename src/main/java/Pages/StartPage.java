@@ -6,6 +6,9 @@ import javax.swing.*;
 import java.awt.*;
 import java.io.File;
 import java.io.IOException;
+import java.io.InputStream;
+import java.io.BufferedInputStream;
+import java.io.FileInputStream;
 import javax.imageio.ImageIO;
 
 public class StartPage extends JFrame {

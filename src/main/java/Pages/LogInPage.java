@@ -1,6 +1,6 @@
 package main.java.Pages;
 
-import main.java.Config;
+import com.formdev.flatlaf.FlatDarculaLaf;
 
 import javax.swing.*;
 import java.awt.*;
@@ -30,21 +30,29 @@ public class LogInPage extends JFrame implements ActionListener {
         JLabel backgroundImage = new JLabel(backgroundImageIcon);
         backgroundImage.setLayout(new GridLayout(0, 2, 4, 5));
 
-        // 设置字体
-        Font labelFont = new Font("Monotype Corsiva", Font.BOLD, 50);
-        Font buttonFont = new Font("Segoe Script", Font.BOLD, 25);
-
         // 设置文本
-        JLabel usernameLabel = new JLabel("Username:");
-        JLabel passwordLabel = new JLabel("Password:");
-        usernameLabel.setFont(labelFont);
-        passwordLabel.setFont(labelFont);
+        JLabel usernameLabel = new JLabel(" Username");
+        JLabel passwordLabel = new JLabel(" Password");
+        try {
+            InputStream inputStream = new BufferedInputStream(
+                    new FileInputStream("src/main/resources/HARRYP-1.ttf"));
+
+            Font font = Font.createFont(Font.TRUETYPE_FONT, inputStream);
+
+            usernameLabel.setFont(font.deriveFont(Font.PLAIN, 60f));
+            passwordLabel.setFont(font.deriveFont(Font.PLAIN, 60f));
+
+        } catch (FontFormatException | IOException e) {
+            e.printStackTrace();
+        }
         usernameLabel.setForeground(Color.WHITE); // 设置文本颜色为白色
         passwordLabel.setForeground(Color.WHITE); // 设置文本颜色为白色
 
         // 设置文本框
         usernameField = new JTextField();
         passwordField = new JPasswordField();
+        usernameField.setPreferredSize(new Dimension (180,35));
+        passwordField.setPreferredSize(new Dimension (180,35));
 
         // 设置按钮
         JButton loginButton = new JButton("Log in");
@@ -53,14 +61,25 @@ public class LogInPage extends JFrame implements ActionListener {
         JButton recoverPasswordButton = new JButton("Change PWD");
         JButton quitButton = new JButton("Exit");
 
+
         // 设置按钮颜色和文字颜色
         Color buttonColor = Color.BLACK;
         Color buttonTextColor = Color.WHITE;
 
         // 设置按钮样式
-        JButton[] buttons = {loginButton, registerButton, retrievePasswordButton, recoverPasswordButton, quitButton};
+        JButton[] buttons = {loginButton, registerButton, retrievePasswordButton, recoverPasswordButton};
         for (JButton button : buttons) {
-            button.setFont(buttonFont);
+            try {
+                InputStream inputStream = new BufferedInputStream(
+                        new FileInputStream("src/main/resources/HARRYP-1.ttf"));
+
+                Font font = Font.createFont(Font.TRUETYPE_FONT, inputStream);
+
+                button.setFont(font.deriveFont(Font.BOLD, 27f));
+
+            } catch (FontFormatException | IOException e) {
+                e.printStackTrace();
+            }
             button.setBackground(buttonColor);
             button.setForeground(buttonTextColor);
             button.setPreferredSize(new Dimension(200, 50)); // 增加按钮宽度以显示完整文本
@@ -82,15 +101,14 @@ public class LogInPage extends JFrame implements ActionListener {
         panel.add(registerButton);
         panel.add(retrievePasswordButton);
         panel.add(recoverPasswordButton);
-        panel.add(quitButton);
         panel.add(new JLabel());
         setBounds(500,300,1094,729);
         setLocationRelativeTo(null);
 
         // 在背景上放置平面
         backgroundImage.add(panel);
-        add(backgroundImage);
         backgroundImage.setSize(panel.getSize());
+        add(backgroundImage);
 
         // 设置背景图片大小为窗口大小
 //        setSize(backgroundImageIcon.getIconWidth(), backgroundImageIcon.getIconHeight());
@@ -105,8 +123,8 @@ public class LogInPage extends JFrame implements ActionListener {
 
         gbc.gridx = 0;
         gbc.gridy = 0;
-        gbc.weightx = 0.5;
-        gbc.weighty = 0.5;
+        gbc.weightx = 0;
+        gbc.weighty = 0;
         panel.add(usernameLabel, gbc);
         gbc.gridx = 1;
         gbc.gridy = 0;
@@ -129,14 +147,13 @@ public class LogInPage extends JFrame implements ActionListener {
         gbc.gridx = 1;
         gbc.gridy = 3;
         panel.add(recoverPasswordButton, gbc);
-        gbc.gridx = 0;
-        gbc.gridy = 4;
-        panel.add(quitButton, gbc);
 
         setLocationRelativeTo(null);
     }
 
     public static void main(String[] args) {
+        System.setProperty("sun.java2d.uiScale", "1.0");
+        FlatDarculaLaf.install();
         new LogInPage();
     }
 
@@ -148,7 +165,7 @@ public class LogInPage extends JFrame implements ActionListener {
             JOptionPane.showMessageDialog(this, "用户名格式有误，请输入汉字或者英文字符。");
             return;
         }
-        if (!password.matches("[a-zA-Z\\d]{6,10}")) {
+        if (!password.matches("[a-zA-Z0-9]{6,10}")) {
             JOptionPane.showMessageDialog(this, "密码格式有误，请输入6-10位数字或英文字符。");
             return;
         }
@@ -169,8 +186,12 @@ public class LogInPage extends JFrame implements ActionListener {
 
             if (loggedIn) {
 //                JOptionPane.showMessageDialog(this, "登录成功！");
-                Config.setUsername(username);
-                SwingUtilities.invokeLater(() -> new HomePage().setVisible(true));
+                SwingUtilities.invokeLater(new Runnable() {
+                    @Override
+                    public void run() {
+                        new HomePage().setVisible(true);
+                    }
+                });
                 dispose();
             } else {
                 JOptionPane.showMessageDialog(this, "用户名或密码错误！");
@@ -223,43 +244,13 @@ public class LogInPage extends JFrame implements ActionListener {
                     JOptionPane.showMessageDialog(registerWindow, "用户名格式有误，请输入汉字或者英文字符。");
                     return;
                 }
-                if (!password.matches("[a-zA-Z\\d]{6,10}")) {
+                if (!password.matches("[a-zA-Z0-9]{6,10}")) {
                     JOptionPane.showMessageDialog(registerWindow, "密码格式有误，请输入6-10位数字或英文字符。");
                     return;
                 }
                 if (!phone.matches("\\d{11}")) {
                     JOptionPane.showMessageDialog(registerWindow, "电话号码格式有误，请输入11位数字。");
                     return;
-                }
-
-                File studentFolder = new File("src/main/resources/students/" + username);
-                if (!studentFolder.exists()) {
-                    studentFolder.mkdir();
-                }
-
-                // create empty json files
-                File moduleFile = new File("src/main/resources/students/" + username + "/module.json");
-                File achievementFile = new File("src/main/resources/students/" + username + "/achievement.json");
-
-                if (!moduleFile.exists()) {
-                    FileWriter moduleWriter;
-                    try {
-                        moduleWriter = new FileWriter(moduleFile);
-                        moduleWriter.write("[]");
-                        moduleWriter.close();                    } catch (IOException ex) {
-                        throw new RuntimeException(ex);
-                    }
-                }
-
-                if (!achievementFile.exists()) {
-                    FileWriter achievementWriter;
-                    try {
-                        achievementWriter = new FileWriter(achievementFile);
-                        achievementWriter.write("[]");
-                        achievementWriter.close();
-                    } catch (IOException ex) {
-                        throw new RuntimeException(ex);
-                    }
                 }
                 try {
                     BufferedWriter writer = new BufferedWriter(new FileWriter("students.txt", true));
@@ -347,7 +338,7 @@ public class LogInPage extends JFrame implements ActionListener {
                     if (phone.equals(dpart[2])) {
                         username = dpart[0];
                         String newpassword = JOptionPane.showInputDialog(username + "，你好！请输入新密码:");
-                        if (!newpassword.matches("[a-zA-Z\\d]{6,10}")) {
+                        if (!newpassword.matches("[a-zA-Z0-9]{6,10}")) {
                             JOptionPane.showMessageDialog(null, "修改密码失败！\n密码格式有误，请输入6-10位数字或英文字符。");
                             return;
                         } else {
@@ -383,7 +374,12 @@ public class LogInPage extends JFrame implements ActionListener {
 
     private class quitActionListener implements ActionListener{
         public void actionPerformed(ActionEvent e){
-            SwingUtilities.invokeLater(() -> new StartPage().setVisible(true));
+            SwingUtilities.invokeLater(new Runnable() {
+                @Override
+                public void run() {
+                    new StartPage().setVisible(true);
+                }
+            });
             dispose();
         }
     }

@@ -1,5 +1,7 @@
 package main.java.Pages;
 
+import main.java.Config;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -146,7 +148,7 @@ public class LogInPage extends JFrame implements ActionListener {
             JOptionPane.showMessageDialog(this, "用户名格式有误，请输入汉字或者英文字符。");
             return;
         }
-        if (!password.matches("[a-zA-Z0-9]{6,10}")) {
+        if (!password.matches("[a-zA-Z\\d]{6,10}")) {
             JOptionPane.showMessageDialog(this, "密码格式有误，请输入6-10位数字或英文字符。");
             return;
         }
@@ -167,12 +169,8 @@ public class LogInPage extends JFrame implements ActionListener {
 
             if (loggedIn) {
 //                JOptionPane.showMessageDialog(this, "登录成功！");
-                SwingUtilities.invokeLater(new Runnable() {
-                    @Override
-                    public void run() {
-                        new HomePage().setVisible(true);
-                    }
-                });
+                Config.setUsername(username);
+                SwingUtilities.invokeLater(() -> new HomePage().setVisible(true));
                 dispose();
             } else {
                 JOptionPane.showMessageDialog(this, "用户名或密码错误！");
@@ -225,13 +223,43 @@ public class LogInPage extends JFrame implements ActionListener {
                     JOptionPane.showMessageDialog(registerWindow, "用户名格式有误，请输入汉字或者英文字符。");
                     return;
                 }
-                if (!password.matches("[a-zA-Z0-9]{6,10}")) {
+                if (!password.matches("[a-zA-Z\\d]{6,10}")) {
                     JOptionPane.showMessageDialog(registerWindow, "密码格式有误，请输入6-10位数字或英文字符。");
                     return;
                 }
                 if (!phone.matches("\\d{11}")) {
                     JOptionPane.showMessageDialog(registerWindow, "电话号码格式有误，请输入11位数字。");
                     return;
+                }
+
+                File studentFolder = new File("src/main/resources/students/" + username);
+                if (!studentFolder.exists()) {
+                    studentFolder.mkdir();
+                }
+
+                // create empty json files
+                File moduleFile = new File("src/main/resources/students/" + username + "/module.json");
+                File achievementFile = new File("src/main/resources/students/" + username + "/achievement.json");
+
+                if (!moduleFile.exists()) {
+                    FileWriter moduleWriter;
+                    try {
+                        moduleWriter = new FileWriter(moduleFile);
+                        moduleWriter.write("[]");
+                        moduleWriter.close();                    } catch (IOException ex) {
+                        throw new RuntimeException(ex);
+                    }
+                }
+
+                if (!achievementFile.exists()) {
+                    FileWriter achievementWriter;
+                    try {
+                        achievementWriter = new FileWriter(achievementFile);
+                        achievementWriter.write("[]");
+                        achievementWriter.close();
+                    } catch (IOException ex) {
+                        throw new RuntimeException(ex);
+                    }
                 }
                 try {
                     BufferedWriter writer = new BufferedWriter(new FileWriter("students.txt", true));
@@ -319,7 +347,7 @@ public class LogInPage extends JFrame implements ActionListener {
                     if (phone.equals(dpart[2])) {
                         username = dpart[0];
                         String newpassword = JOptionPane.showInputDialog(username + "，你好！请输入新密码:");
-                        if (!newpassword.matches("[a-zA-Z0-9]{6,10}")) {
+                        if (!newpassword.matches("[a-zA-Z\\d]{6,10}")) {
                             JOptionPane.showMessageDialog(null, "修改密码失败！\n密码格式有误，请输入6-10位数字或英文字符。");
                             return;
                         } else {
@@ -355,12 +383,7 @@ public class LogInPage extends JFrame implements ActionListener {
 
     private class quitActionListener implements ActionListener{
         public void actionPerformed(ActionEvent e){
-            SwingUtilities.invokeLater(new Runnable() {
-                @Override
-                public void run() {
-                    new StartPage().setVisible(true);
-                }
-            });
+            SwingUtilities.invokeLater(() -> new StartPage().setVisible(true));
             dispose();
         }
     }

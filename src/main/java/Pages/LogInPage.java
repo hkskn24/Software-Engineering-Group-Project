@@ -3,6 +3,7 @@ package main.java.Pages;
 import com.formdev.flatlaf.FlatDarculaLaf;
 import main.java.Config;
 
+import javax.sound.sampled.Line;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -164,11 +165,11 @@ public class LogInPage extends JFrame implements ActionListener {
         String password = new String(passwordField.getPassword());
 
         if (!username.matches("[a-zA-Z\u4e00-\u9fa5]{1,10}")) {
-            JOptionPane.showMessageDialog(this, "用户名格式有误，请输入汉字或者英文字符。");
+            JOptionPane.showMessageDialog(this, "The username format is incorrect, please enter Chinese characters or English characters.");
             return;
         }
         if (!password.matches("[a-zA-Z0-9]{6,10}")) {
-            JOptionPane.showMessageDialog(this, "密码格式有误，请输入6-10位数字或英文字符。");
+            JOptionPane.showMessageDialog(this, "The password format is incorrect, please enter 6-10 digits or English characters.");
             return;
         }
 
@@ -197,10 +198,10 @@ public class LogInPage extends JFrame implements ActionListener {
                 });
                 dispose();
             } else {
-                JOptionPane.showMessageDialog(this, "用户名或密码错误！");
+                JOptionPane.showMessageDialog(this, "Wrong username or password!");
             }
         } catch (IOException ex) {
-            JOptionPane.showMessageDialog(this, "读取文件时发生错误: " + ex.getMessage());
+            JOptionPane.showMessageDialog(this, "An error occurred while reading the file: " + ex.getMessage());
         }
     }
 
@@ -210,7 +211,7 @@ public class LogInPage extends JFrame implements ActionListener {
             JFrame registerWindow = new JFrame("Sign up");
             JLabel usernameLabel = new JLabel("Username:");
             JLabel passwordLabel = new JLabel("Password:");
-            JLabel phoneLabel = new JLabel("Phone number:");
+            JLabel phoneLabel = new JLabel("Student number:");
             JTextField usernameField = new JTextField(10);
             JPasswordField passwordField = new JPasswordField(10);
             JTextField phoneField = new JTextField(10);
@@ -235,7 +236,7 @@ public class LogInPage extends JFrame implements ActionListener {
                     while ((line1 = reader.readLine()) != null) {
                         String[] sparts = line1.split(" ");
                         if (sparts[0].equals(username) || sparts[2].equals(phone)) {
-                            JOptionPane.showMessageDialog(registerWindow, "用户名或手机号码已存在，请重新输入。");
+                            JOptionPane.showMessageDialog(registerWindow, "The username or student number already exists, please re-enter it.");
                             return;
                         }
                         reader.close();
@@ -244,15 +245,15 @@ public class LogInPage extends JFrame implements ActionListener {
                 }
 
                 if (!username.matches("[a-zA-Z\u4e00-\u9fa5]{1,10}")) {
-                    JOptionPane.showMessageDialog(registerWindow, "用户名格式有误，请输入汉字或者英文字符。");
+                    JOptionPane.showMessageDialog(registerWindow, "The username format is incorrect, please enter Chinese characters or English characters.");
                     return;
                 }
                 if (!password.matches("[a-zA-Z0-9]{6,10}")) {
-                    JOptionPane.showMessageDialog(registerWindow, "密码格式有误，请输入6-10位数字或英文字符。");
+                    JOptionPane.showMessageDialog(registerWindow, "The password format is incorrect, please enter 6-10 digits or English characters.");
                     return;
                 }
-                if (!phone.matches("\\d{11}")) {
-                    JOptionPane.showMessageDialog(registerWindow, "电话号码格式有误，请输入11位数字。");
+                if (!phone.matches("\\d{10}")) {
+                    JOptionPane.showMessageDialog(registerWindow, "The student number format is incorrect, please enter 10 digits.");
                     return;
                 }
 
@@ -289,10 +290,10 @@ public class LogInPage extends JFrame implements ActionListener {
                     BufferedWriter writer = new BufferedWriter(new FileWriter("students.txt", true));
                     writer.write(username + " " + password + " " + phone);
                     writer.newLine();
-                    JOptionPane.showMessageDialog(registerWindow, "注册成功！");
+                    JOptionPane.showMessageDialog(registerWindow, "Registration successful!");
                     writer.close();
                 } catch (IOException ex) {
-                    JOptionPane.showMessageDialog(registerWindow, "读取文件时发生错误: " + ex.getMessage());
+                    JOptionPane.showMessageDialog(registerWindow, "An error occurred while reading the file: " + ex.getMessage());
                 }
 
                 registerWindow.dispose();
@@ -307,11 +308,11 @@ public class LogInPage extends JFrame implements ActionListener {
 
     private static class RetrievePasswordActionListener implements ActionListener {
         public void actionPerformed(ActionEvent e) {
-            String phone = JOptionPane.showInputDialog("请输入电话号码:");
+            String phone = JOptionPane.showInputDialog("Please enter a student number:");
 
-            if (!phone.matches("\\d{11}")) {
+            if (!phone.matches("\\d{10}")) {
                 JFrame tip = new JFrame();
-                JOptionPane.showMessageDialog(tip, "电话号码格式有误，请输入11位数字。");
+                JOptionPane.showMessageDialog(tip, "The student number format is incorrect, please enter 10 digits.");
                 return;
             }
 
@@ -334,23 +335,23 @@ public class LogInPage extends JFrame implements ActionListener {
                 reader.close();
 
                 if (found) {
-                    JOptionPane.showMessageDialog(null, "你的用户名是: " + username + "\n" + "你的密码是: " + password);
+                    JOptionPane.showMessageDialog(null, "Your username is: " + username + "\n" + "Your password is: " + password);
                 } else {
-                    JOptionPane.showMessageDialog(null, "没有与此电话号码对应的账号。");
+                    JOptionPane.showMessageDialog(null, "There is no account number corresponding to this student number.");
                 }
             } catch (IOException ex) {
-                JOptionPane.showMessageDialog(null, "读取文件时发生错误: " + ex.getMessage());
+                JOptionPane.showMessageDialog(null, "An error occurred while reading the file: " + ex.getMessage());
             }
         }
     }
 
     private static class RecoverPasswordActionListener implements ActionListener {
         public void actionPerformed(ActionEvent e) {
-            String phone = JOptionPane.showInputDialog("请输入电话号码:");
+            String phone = JOptionPane.showInputDialog("Please enter a student number:");
 
-            if (!phone.matches("\\d{11}")) {
+            if (!phone.matches("\\d{10}")) {
                 JFrame tip = new JFrame();
-                JOptionPane.showMessageDialog(tip, "电话号码格式有误，请输入11位数字。");
+                JOptionPane.showMessageDialog(tip, "The student number format is incorrect, please enter 10 digits.");
                 return;
             }
 
@@ -370,9 +371,10 @@ public class LogInPage extends JFrame implements ActionListener {
                     String[] dpart = pw.split(" ");
                     if (phone.equals(dpart[2])) {
                         username = dpart[0];
-                        String newpassword = JOptionPane.showInputDialog(username + "，你好！请输入新密码:");
+                        String newpassword = JOptionPane.showInputDialog(username + ",hello! Please enter a new password:");
                         if (!newpassword.matches("[a-zA-Z0-9]{6,10}")) {
-                            JOptionPane.showMessageDialog(null, "修改密码失败！\n密码格式有误，请输入6-10位数字或英文字符。");
+                            JOptionPane.showMessageDialog(null, "Failed to change password!\n" +
+                                    "The password format is incorrect, please enter 6-10 digits or English characters.");
                             return;
                         } else {
                             list.remove(pw);
@@ -384,7 +386,7 @@ public class LogInPage extends JFrame implements ActionListener {
                         }
                     } 
                     if(!phone.equals(dpart[2])&&i==list.size()-1){
-                        JOptionPane.showMessageDialog(null, "没有与此电话号码对应的账号。");
+                        JOptionPane.showMessageDialog(null, "There is no account number corresponding to this student number.");
                         return;
                     }
                 }
@@ -398,9 +400,9 @@ public class LogInPage extends JFrame implements ActionListener {
                 writer.write(username + " " + password + " " + phone);
                 writer.newLine();
                 writer.close();
-                JOptionPane.showMessageDialog(null, "修改密码成功！");
+                JOptionPane.showMessageDialog(null, "Change password successfully!");
             } catch (IOException ex) {
-                JOptionPane.showMessageDialog(null, "读取文件时发生错误: " + ex.getMessage());
+                JOptionPane.showMessageDialog(null, "An error occurred while reading the file: " + ex.getMessage());
             }
         }
     }

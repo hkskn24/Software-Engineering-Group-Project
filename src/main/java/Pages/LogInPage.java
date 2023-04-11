@@ -104,6 +104,7 @@ public class LogInPage extends JFrame implements ActionListener {
         panel.add(new JLabel());
         setBounds(500,300,1094,729);
         setLocationRelativeTo(null);
+        setResizable(false);
 
         // 在背景上放置平面
         backgroundImage.add(panel);

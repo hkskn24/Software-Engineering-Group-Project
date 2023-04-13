@@ -13,7 +13,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class LogInPage extends JFrame implements ActionListener {
-    private static int userType; //student:0 lecturer:1
+    private static int userType; //students:0 lecturers:1
     private final JTextField usernameField;
     private final JPasswordField passwordField;
 
@@ -29,7 +29,7 @@ public class LogInPage extends JFrame implements ActionListener {
         panel.setOpaque(false);
 
         // 设置背景图片
-        ImageIcon backgroundImageIcon = new ImageIcon("src/main/resources/login.JPG");
+        ImageIcon backgroundImageIcon = new ImageIcon("src/main/resources/images/login.JPG");
         JLabel backgroundImage = new JLabel(backgroundImageIcon);
         backgroundImage.setLayout(new GridLayout(0, 2, 4, 5));
 
@@ -38,7 +38,7 @@ public class LogInPage extends JFrame implements ActionListener {
         JLabel passwordLabel = new JLabel(" Password");
         try {
             InputStream inputStream = new BufferedInputStream(
-                    new FileInputStream("src/main/resources/HARRYP-1.ttf"));
+                    new FileInputStream("src/main/resources/fonts/HARRYP-1.ttf"));
 
             Font font = Font.createFont(Font.TRUETYPE_FONT, inputStream);
 
@@ -64,7 +64,7 @@ public class LogInPage extends JFrame implements ActionListener {
         JButton recoverPasswordButton = new JButton("Change PWD");
         JButton quitButton = new JButton("Exit");
 
-        // set student or lecturer
+        // set students or lecturers
         JCheckBox studentCheckbox = new JCheckBox("Student");
         JCheckBox lecturerCheckbox = new JCheckBox("Lecturer");
 
@@ -82,7 +82,7 @@ public class LogInPage extends JFrame implements ActionListener {
         for (JButton button : buttons) {
             try {
                 InputStream inputStream = new BufferedInputStream(
-                        new FileInputStream("src/main/resources/HARRYP-1.ttf"));
+                        new FileInputStream("src/main/resources/fonts/HARRYP-1.ttf"));
 
                 Font font = Font.createFont(Font.TRUETYPE_FONT, inputStream);
 
@@ -279,7 +279,7 @@ public class LogInPage extends JFrame implements ActionListener {
                         while ((line1 = reader.readLine()) != null) {
                             String[] sparts = line1.split(" ");
                             if (sparts[0].equals(username) || sparts[2].equals(id)) {
-                                JOptionPane.showMessageDialog(registerWindow, "The username or student id already exists, please try again.");
+                                JOptionPane.showMessageDialog(registerWindow, "The username or students id already exists, please try again.");
                                 return;
                             }
                             reader.close();
@@ -293,7 +293,7 @@ public class LogInPage extends JFrame implements ActionListener {
                         while ((line1 = reader.readLine()) != null) {
                             String[] sparts = line1.split(" ");
                             if (sparts[0].equals(username) || sparts[2].equals(id)) {
-                                JOptionPane.showMessageDialog(registerWindow, "The username or student id already exists, please try again.");
+                                JOptionPane.showMessageDialog(registerWindow, "The username or students id already exists, please try again.");
                                 return;
                             }
                             reader.close();
@@ -311,22 +311,22 @@ public class LogInPage extends JFrame implements ActionListener {
                     return;
                 }
                 if (!id.matches("\\d{10}")) {
-                    JOptionPane.showMessageDialog(registerWindow, "Please ensure that your student ID is a 10-digit number.");
+                    JOptionPane.showMessageDialog(registerWindow, "Please ensure that your students ID is a 10-digit number.");
                     return;
                 }
 
-                // student
+                // students
                 if (userType == 0) {
-                    File studentFolder = new File("src/main/resources/students/" + username);
+                    File studentFolder = new File("src/main/resources/data/students/" + username);
                     if (!studentFolder.exists()) {
                         if (!studentFolder.mkdir()){
-                            System.out.println("Failed to create student folder.");
+                            System.out.println("Failed to create students folder.");
                         }
                     }
 
                     // create empty json files
-                    File moduleFile = new File("src/main/resources/students/" + username + "/module.json");
-                    File achievementFile = new File("src/main/resources/students/" + username + "/achievement.json");
+                    File moduleFile = new File("src/main/resources/data/students/" + username + "/module.json");
+                    File achievementFile = new File("src/main/resources/data/students/" + username + "/achievement.json");
 
                     if (!moduleFile.exists()) {
                         FileWriter moduleWriter;
@@ -360,17 +360,17 @@ public class LogInPage extends JFrame implements ActionListener {
                     }
                 }
 
-                // lecturer
+                // lecturers
                 else {
-                    File lecturerFolder = new File("src/main/resources/lecturers/" + username);
+                    File lecturerFolder = new File("src/main/resources/data/lecturers/" + username);
                     if (!lecturerFolder.exists()) {
                         if (!lecturerFolder.mkdir()){
-                            System.out.println("Failed to create student folder.");
+                            System.out.println("Failed to create students folder.");
                         }
                     }
 
                     // create empty json files
-                    File moduleFile = new File("src/main/resources/lecturers/" + username + "/module.json");
+                    File moduleFile = new File("src/main/resources/data/lecturers/" + username + "/module.json");
 
                     if (!moduleFile.exists()) {
                         FileWriter moduleWriter;
@@ -395,11 +395,11 @@ public class LogInPage extends JFrame implements ActionListener {
 
     private static class RetrievePasswordActionListener implements ActionListener {
         public void actionPerformed(ActionEvent e) {
-            String id = JOptionPane.showInputDialog("Please enter your student ID:");
+            String id = JOptionPane.showInputDialog("Please enter your students ID:");
 
             if (!id.matches("\\d{10}")) {
                 JFrame tip = new JFrame();
-                JOptionPane.showMessageDialog(tip, "Please ensure that your student ID is a 10-digit number.");
+                JOptionPane.showMessageDialog(tip, "Please ensure that your students ID is a 10-digit number.");
                 return;
             }
 
@@ -441,7 +441,7 @@ public class LogInPage extends JFrame implements ActionListener {
                 if (found) {
                     JOptionPane.showMessageDialog(null, "Your username is: " + username + "\n" + "Your password is: " + password);
                 } else {
-                    JOptionPane.showMessageDialog(null, "There is no account associated with this student id.");
+                    JOptionPane.showMessageDialog(null, "There is no account associated with this students id.");
                 }
             } catch (IOException ex) {
                 JOptionPane.showMessageDialog(null, "Failed to read the file: " + ex.getMessage());
@@ -451,11 +451,11 @@ public class LogInPage extends JFrame implements ActionListener {
 
     private static class RecoverPasswordActionListener implements ActionListener {
         public void actionPerformed(ActionEvent e) {
-            String id = JOptionPane.showInputDialog("Please enter your student ID:");
+            String id = JOptionPane.showInputDialog("Please enter your students ID:");
 
             if (!id.matches("\\d{10}")) {
                 JFrame tip = new JFrame();
-                JOptionPane.showMessageDialog(tip, "Please ensure that your student ID is a 10-digit number.");
+                JOptionPane.showMessageDialog(tip, "Please ensure that your students ID is a 10-digit number.");
                 return;
             }
             if (userType == 0) {
@@ -490,7 +490,7 @@ public class LogInPage extends JFrame implements ActionListener {
                             }
                         }
                         else if (i == list.size() - 1) {
-                            JOptionPane.showMessageDialog(null, "There is no account associated with this student id.");
+                            JOptionPane.showMessageDialog(null, "There is no account associated with this students id.");
                             return;
                         }
                     }
@@ -540,7 +540,7 @@ public class LogInPage extends JFrame implements ActionListener {
                             }
                         }
                         else if (i == list.size() - 1) {
-                            JOptionPane.showMessageDialog(null, "There is no account associated with this student id.");
+                            JOptionPane.showMessageDialog(null, "There is no account associated with this students id.");
                             return;
                         }
                     }

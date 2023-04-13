@@ -22,7 +22,7 @@ public class Lec_Data {
         String username = Config.getUsername();
         String jsonStr = null;
         try {
-            jsonStr = new String(Files.readAllBytes(Paths.get("src/main/resources/lecturers/" + username + "/module.json")));
+            jsonStr = new String(Files.readAllBytes(Paths.get("src/main/resources/data/lecturers/" + username + "/module.json")));
         } catch (IOException e) {
             e.printStackTrace();
         }

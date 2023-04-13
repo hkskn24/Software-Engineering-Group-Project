@@ -26,7 +26,7 @@ public class Data {
         String username = Config.getUsername();
         String jsonStr = null;
         try {
-            jsonStr = new String(Files.readAllBytes(Paths.get("src/main/resources/students/" + username + "/module.json")));
+            jsonStr = new String(Files.readAllBytes(Paths.get("src/main/resources/data/students/" + username + "/module.json")));
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -37,7 +37,7 @@ public class Data {
         String username = Config.getUsername();
         String jsonStr = null;
         try {
-            jsonStr = new String(Files.readAllBytes(Paths.get("src/main/resources/students/" + username + "/achievement.json")));
+            jsonStr = new String(Files.readAllBytes(Paths.get("src/main/resources/data/students/" + username + "/achievement.json")));
         } catch (IOException e) {
             e.printStackTrace();
         }

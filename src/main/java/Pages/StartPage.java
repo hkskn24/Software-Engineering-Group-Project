@@ -23,7 +23,7 @@ public class StartPage extends JFrame {
         // Set the background image
         try {
             JLabel backgroundImage = new JLabel();
-            ImageIcon ii = new ImageIcon(ImageIO.read(new File("src/main/resources/startpage.jpg")));
+            ImageIcon ii = new ImageIcon(ImageIO.read(new File("src/main/resources/images/startpage.jpg")));
             ii.setImage(ii.getImage().getScaledInstance(900,600,Image.SCALE_DEFAULT));
             backgroundImage.setIcon(ii);
             backgroundImage.setLayout(new GridBagLayout());
@@ -37,7 +37,7 @@ public class StartPage extends JFrame {
         JLabel label = new JLabel("Welcome to LumosLearning");
         try {
             InputStream inputStream = new BufferedInputStream(
-                    new FileInputStream("src/main/resources/ParryHotter-1.ttf"));
+                    new FileInputStream("src/main/resources/fonts/ParryHotter-1.ttf"));
 
             Font font = Font.createFont(Font.TRUETYPE_FONT, inputStream);
 
@@ -59,7 +59,7 @@ public class StartPage extends JFrame {
         startButton.setForeground(startButtonTextColor);
         try {
             InputStream inputStream = new BufferedInputStream(
-                    new FileInputStream("src/main/resources/HARRYP-1.ttf"));
+                    new FileInputStream("src/main/resources/fonts/HARRYP-1.ttf"));
 
             Font font = Font.createFont(Font.TRUETYPE_FONT, inputStream);
 

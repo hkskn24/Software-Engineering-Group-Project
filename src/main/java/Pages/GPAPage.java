@@ -1,6 +1,6 @@
 package main.java.Pages;
 
-import main.java.Data;
+import main.java.Data.ModuleData;
 import main.java.Entity.Module;
 
 import javax.swing.*;
@@ -14,7 +14,7 @@ import java.util.ArrayList;
 public class GPAPage extends JFrame {
     double totalHours = 0.0;
     double totalQualityPoints = 0;
-    ArrayList<Module> modules = Data.getInstance().modules;
+    ArrayList<Module> modules = ModuleData.getInstance().modules;
     JTextArea textArea = new JTextArea();
     JPanel panel = new JPanel();
 

@@ -1,11 +1,11 @@
 package main.java.Entity;
 
-import main.java.Data;
+import main.java.Data.ModuleData;
 
 public class Assessment {
     private String name;
     private String moduleName;
-    private Data date;
+    private ModuleData date;
     private String type;
     private int duration;   // (minutes)
 }

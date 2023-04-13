@@ -325,8 +325,8 @@ public class LogInPage extends JFrame implements ActionListener {
                     }
 
                     // create empty json files
-                    File moduleFile = new File("src/main/resources/data/students/" + username + "/module.json");
-                    File achievementFile = new File("src/main/resources/data/students/" + username + "/achievement.json");
+                    File moduleFile = new File("src/main/resources/data/students/" + username + "/modules.json");
+                    File achievementFile = new File("src/main/resources/data/students/" + username + "/achievements.json");
 
                     if (!moduleFile.exists()) {
                         FileWriter moduleWriter;
@@ -370,7 +370,7 @@ public class LogInPage extends JFrame implements ActionListener {
                     }
 
                     // create empty json files
-                    File moduleFile = new File("src/main/resources/data/lecturers/" + username + "/module.json");
+                    File moduleFile = new File("src/main/resources/data/lecturers/" + username + "/modules.json");
 
                     if (!moduleFile.exists()) {
                         FileWriter moduleWriter;

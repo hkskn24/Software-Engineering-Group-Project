@@ -1,7 +1,7 @@
 package main.java.Pages;
 
 import main.java.Controller.ModuleController;
-import main.java.Data;
+import main.java.Data.ModuleData;
 import main.java.Entity.Module;
 
 import javax.swing.*;
@@ -56,7 +56,7 @@ public class ModulePage extends JFrame {
     }
 
     private void setupModulePage() {
-        ArrayList<Module> modules = Data.getInstance().modules;
+        ArrayList<Module> modules = ModuleData.getInstance().modules;
         updateModuleList(modules);
     }
 
@@ -95,7 +95,7 @@ public class ModulePage extends JFrame {
 
     private void searchModules() {
         String term = searchTextField.getText().trim();
-        ArrayList<Module> modules = Data.getInstance().modules;
+        ArrayList<Module> modules = ModuleData.getInstance().modules;
         List<Module> result = ModuleController.searchMoules(modules, term);
         updateModuleList(result);
     }

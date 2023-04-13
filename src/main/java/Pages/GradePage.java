@@ -2,7 +2,7 @@ package main.java.Pages;
 
 import main.java.Controller.AchievementController;
 import main.java.Controller.ModuleController;
-import main.java.Data;
+import main.java.Data.ModuleData;
 import main.java.Entity.Module;
 
 import javax.swing.*;
@@ -55,8 +55,8 @@ public class GradePage extends JFrame {
     }
 
     private JTable setupTable() {
-        // get data from Data class
-        ArrayList<Module> modules = Data.getInstance().modules;
+        // get data from ModuleData class
+        ArrayList<Module> modules = ModuleData.getInstance().modules;
 
         // create table
         DefaultTableModel tableModel = createTableModel(modules);
@@ -80,7 +80,7 @@ public class GradePage extends JFrame {
             Module module = modules.get(i);
             tableValues[i] = new String[]{module.getName(), module.getCode(),
                     String.valueOf(module.getCredits()), String.valueOf(module.getHours()),
-                    String.valueOf(module.getSemester()), module.getType(), String.valueOf(module.getGrades())
+                    String.valueOf(module.getSemester()), module.getType(), "-"
             };
         }
 

@@ -1,9 +1,8 @@
 package main.java.Pages;
 
 import main.java.Controller.AchievementController;
-import main.java.Data;
+import main.java.Data.AchievementData;
 import main.java.Entity.Achievement;
-
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 import javax.swing.table.DefaultTableModel;
@@ -12,7 +11,6 @@ import java.awt.*;
 import java.util.ArrayList;
 
 public class AchievementPage extends JFrame{
-    private JTable table;
     private DefaultTableModel tableModel;
     private TableRowSorter<DefaultTableModel> sorter;
 
@@ -27,7 +25,7 @@ public class AchievementPage extends JFrame{
 
         String[] columNames = {"Name", "Type", "Semester"};
         tableModel = new DefaultTableModel(columNames, 0);
-        table = new JTable(tableModel);
+        JTable table = new JTable(tableModel);
 
         sorter = new TableRowSorter<>(tableModel);
         table.setRowSorter(sorter);
@@ -51,7 +49,7 @@ public class AchievementPage extends JFrame{
     }
 
     private void setupAchievement() {
-        ArrayList<Achievement> achievements = Data.getInstance().achievements;
+        ArrayList<Achievement> achievements = AchievementData.getInstance().achievements;
         for (Achievement achievement : achievements) {
             addAchievement(achievement);
         }

@@ -1,6 +1,6 @@
 package main.java.Controller;
 
-import main.java.Data;
+import main.java.Data.ModuleData;
 import main.java.Entity.Module;
 
 import java.text.DecimalFormat;
@@ -15,7 +15,7 @@ public class GPAcalculater {
     double totalHours = 0.0;
     double totalQualityPoints = 0;
 
-    ArrayList<Module> modules = Data.getInstance().modules;
+    ArrayList<Module> modules = ModuleData.getInstance().modules;
 
         public void averageGPA(){
         int totalCredits = 0;

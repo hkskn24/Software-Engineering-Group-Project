@@ -6,13 +6,21 @@ public class Module {
     private int credits;
     private int hours;
     private int semester;
-    private String type;
     private int grades;
+    private String type;
     private String lecturer;
     private String summary;
     private String aims;
     private String syllabus;
     private String readingList;
+    private String status;
+
+
+    public void setGrades(int grades) {
+        this.grades = grades;
+    }
+
+
 
     public String getName() {
         return name;
@@ -62,23 +70,17 @@ public class Module {
         this.type = type;
     }
 
-    public int getGrades() {
-        return grades;
-    }
-
-    public void setGrades(int grades) {
-        this.grades = grades;
+    public void setLecturer(String lecturer) {
+        this.lecturer = lecturer;
     }
 
     public String getLecturer() {
         return lecturer;
     }
 
-    public void setLecturer(String lecturer) {
-        this.lecturer = lecturer;
-    }
-
-    public String getSummary() {
+    public int getGrades() {
+        return grades;
+    }public String getSummary() {
         return summary;
     }
 
@@ -108,6 +110,14 @@ public class Module {
 
     public void setReadingList(String readingList) {
         this.readingList = readingList;
+    }
+
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
     }
 
     public static String[] getGradesAttributes() {

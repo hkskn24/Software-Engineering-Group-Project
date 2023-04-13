@@ -17,7 +17,7 @@ public class HomePage extends JFrame {
 
         // Set the background image
         try {
-            JLabel backgroundImage = new JLabel(new ImageIcon(ImageIO.read(new File("src/main/resources/homepage.JPG"))));
+            JLabel backgroundImage = new JLabel(new ImageIcon(ImageIO.read(new File("src/main/resources/images/homepage.JPG"))));
             backgroundImage.setLayout(new GridBagLayout());
             setContentPane(backgroundImage);
         } catch (IOException e) {

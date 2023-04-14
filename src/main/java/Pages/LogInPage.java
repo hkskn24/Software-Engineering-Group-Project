@@ -213,6 +213,7 @@ public class LogInPage extends JFrame implements ActionListener {
                     //for (String line : new String(java.nio.file.Files.readAllBytes(java.nio.file.Paths.get("students.txt"))).split("\\r?\\n")) {
                     String[] parts = line.split(" ");
                     if (parts[0].equals(username) && parts[1].equals(password)) {
+                        Config.setUserType("students");
                         loggedIn = true;
                         break;
                     }
@@ -224,6 +225,7 @@ public class LogInPage extends JFrame implements ActionListener {
                 while ((line = reader.readLine()) != null) {
                     String[] parts = line.split(" ");
                     if (parts[0].equals(username) && parts[1].equals(password)) {
+                        Config.setUserType("lecturers");
                         loggedIn = true;
                         break;
                     }

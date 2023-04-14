@@ -39,6 +39,7 @@ public class Lec_HomePage extends JFrame {
         });
 
         btnLec_StudentPage.addActionListener(e -> {
+            new JoinPage();
 //            new Lec_StudentPage().setVisible(true);
             dispose();
         });

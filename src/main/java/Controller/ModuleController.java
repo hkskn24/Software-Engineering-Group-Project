@@ -3,6 +3,7 @@ package main.java.Controller;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.reflect.TypeToken;
+import main.java.Data.ModuleData;
 import main.java.Entity.Module;
 
 import javax.swing.*;
@@ -134,5 +135,10 @@ public class ModuleController {
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
+    }
+
+    public static List<Module> searchAllModules(String term) {
+        ModuleData moduleData = ModuleData.getInstance();
+        return moduleData.searchFromAllModules(term);
     }
 }

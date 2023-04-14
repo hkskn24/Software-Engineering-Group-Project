@@ -33,7 +33,8 @@ public class Lec_HomePage extends JFrame {
 
         // 为按钮添加事件监听器
         btnLec_ModulePage.addActionListener(e -> {
-            new Lec_ModulePage().setVisible(true);
+            new AddModulePage();
+            //new Lec_ModulePage().setVisible(true);
             dispose();
         });
 

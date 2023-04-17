@@ -64,7 +64,6 @@ public class ModuleController {
         String path = "src/main/resources/data";
 
         Path modulesPath = Paths.get(path, "modules", code);
-        Path infoPath = Paths.get(path, "modules", code, "info.json");
         Path gradesPath = Paths.get(path, "modules", code, "grades.json");
         Path indexPath = Paths.get(path, "modules", "index.json");
         Path lecturerPath = Paths.get(path, "lecturers", username, "modules.json");
@@ -83,7 +82,6 @@ public class ModuleController {
     }
 
     public static void joinModule(Module module) {
-        String code = module.getCode();
         String username = Config.getUsername();
         Path lecturerPath = Paths.get("src/main/resources/data/lecturers", username, "modules.json");
         ModuleData moduleData = ModuleData.getInstance();

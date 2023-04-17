@@ -71,7 +71,7 @@ public class ModuleController {
 
         ModuleData moduleData = ModuleData.getInstance();
         moduleData.createModuleFolder(modulesPath);
-        moduleData.writeModuleInfo(module, infoPath);
+        moduleData.saveModuleInfo(module);
         moduleData.initializeGradesJson(gradesPath);
         moduleData.addModuleToIndex(module, indexPath);
         moduleData.addModuleToUser(module, username, lecturerPath);
@@ -87,7 +87,14 @@ public class ModuleController {
         String username = Config.getUsername();
         Path lecturerPath = Paths.get("src/main/resources/data/lecturers", username, "modules.json");
         ModuleData moduleData = ModuleData.getInstance();
+
+        // add module to lecturer's index
         moduleData.addModuleToUser(module, username, lecturerPath);
+
+        // add lecturer to module info
+        module.setLecturer(module.getLecturer() + ", " + username);
+        ModuleData.getInstance().saveModuleInfo(module);
+
         ModuleData.getInstance().updateModules();
     }
 }

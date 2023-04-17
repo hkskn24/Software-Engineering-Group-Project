@@ -91,7 +91,11 @@ public class ModuleData {
         }
     }
 
-    public void writeModuleInfo(Module module, Path infoPath) {
+    public void saveModuleInfo(Module module) {
+        String code = module.getCode();
+        String path = "src/main/resources/data/modules";
+        Path infoPath = Paths.get(path, code, "info.json");
+
         Gson gson = new GsonBuilder().setPrettyPrinting().create();
         try (FileWriter writer = new FileWriter(infoPath.toString())){
             gson.toJson(module, writer);

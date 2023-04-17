@@ -45,6 +45,7 @@ public class Lec_HomePage extends JFrame {
         });
 
         btnOngoingcourses.addActionListener(e -> {
+            new OngoingModulePage();
 //            new OngoingCoursesPage().setVisible(true);
             dispose();
         });

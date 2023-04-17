@@ -155,8 +155,23 @@ public class ModuleData {
         }
     }
 
+    public List<Module> getOngoingModules() {
+        List<Module> ongoingModules = new ArrayList<>();
+        for (Module module : modules) {
+            if (module.getStatus().equalsIgnoreCase("ongoing")) {
+                ongoingModules.add(module);
+            }
+        }
+        return ongoingModules;
+    }
+
     public void updateModules() {
         getUserModules();
+    }
+
+    public void updateModuleStatus(Module module) {
+        module.setStatus("completed");
+        saveModuleInfo(module);
     }
 
     public static ModuleData getInstance() {

@@ -77,7 +77,6 @@ public class StartPage extends JFrame {
     }
 
     public static void main(String[] args) {
-        System.setProperty("sun.java2d.uiScale", "1.0");
         FlatDarculaLaf.install();
         new StartPage().setVisible(true);
     }

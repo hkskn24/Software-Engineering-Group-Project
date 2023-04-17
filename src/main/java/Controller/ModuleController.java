@@ -1,8 +1,6 @@
 package main.java.Controller;
 
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
-import com.google.gson.reflect.TypeToken;
+import main.java.Config;
 import main.java.Data.ModuleData;
 import main.java.Entity.Module;
 
@@ -10,15 +8,11 @@ import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableRowSorter;
 import java.awt.event.ActionListener;
-import java.io.FileReader;
-import java.io.FileWriter;
-import java.io.IOException;
-import java.io.Reader;
-import java.lang.reflect.Type;
-import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 public class ModuleController {
     public static ActionListener createFilterActionListener(TableRowSorter<DefaultTableModel> sorter, JComboBox<String> semesterComboBox, JComboBox<String> typeComboBox) {
@@ -75,70 +69,25 @@ public class ModuleController {
         Path indexPath = Paths.get(path, "modules", "index.json");
         Path lecturerPath = Paths.get(path, "lecturers", username, "modules.json");
 
-        // create the module folder directory
-        try {
-            Files.createDirectories(modulesPath);
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
-
-        // write module information into info.json
-        Gson gson = new GsonBuilder().setPrettyPrinting().create();
-        System.out.println(infoPath);
-        try (FileWriter writer = new FileWriter(infoPath.toString())){
-            gson.toJson(module, writer);
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
-
-        // initial grades.json
-        try (FileWriter writer = new FileWriter(gradesPath.toString())){
-            gson.toJson(new ArrayList<>(), writer);
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
-
-        // add module to index
-        Type indexType = new TypeToken<List<Map<String, String>>>(){}.getType();
-        List<Map<String, String>> index;
-        try (Reader reader = new FileReader(indexPath.toString())){
-            index = gson.fromJson(reader, indexType);
-            if (index == null) {
-                index = new ArrayList<>();
-            }
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
-
-        Map<String, String> newIndex = new LinkedHashMap<>();
-        newIndex.put("name", module.getName());
-        newIndex.put("code", module.getCode());
-        index.add(newIndex);
-
-        try (FileWriter writer = new FileWriter(indexPath.toString())){
-            gson.toJson(index, writer);
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
-
-        // add module to lecturer's modules.json
-        Type listType = new TypeToken<List<String>>(){}.getType();
-        List<String> list;
-        try (Reader reader = new FileReader(lecturerPath.toString())){
-            list = gson.fromJson(reader, listType);
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
-        list.add(code);
-        try (FileWriter writer = new FileWriter(lecturerPath.toString())){
-            gson.toJson(list, writer);
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
+        ModuleData moduleData = ModuleData.getInstance();
+        moduleData.createModuleFolder(modulesPath);
+        moduleData.writeModuleInfo(module, infoPath);
+        moduleData.initializeGradesJson(gradesPath);
+        moduleData.addModuleToIndex(module, indexPath);
+        moduleData.addModuleToUser(module, username, lecturerPath);
     }
 
     public static List<Module> searchAllModules(String term) {
         ModuleData moduleData = ModuleData.getInstance();
         return moduleData.searchFromAllModules(term);
+    }
+
+    public static void joinModule(Module module) {
+        String code = module.getCode();
+        String username = Config.getUsername();
+        Path lecturerPath = Paths.get("src/main/resources/data/lecturers", username, "modules.json");
+        ModuleData moduleData = ModuleData.getInstance();
+        moduleData.addModuleToUser(module, username, lecturerPath);
+        ModuleData.getInstance().updateModules();
     }
 }

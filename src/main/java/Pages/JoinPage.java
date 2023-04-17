@@ -1,6 +1,7 @@
 package main.java.Pages;
 
 import main.java.Controller.ModuleController;
+import main.java.Data.ModuleData;
 import main.java.Entity.Module;
 import javax.swing.*;
 import java.awt.*;
@@ -24,6 +25,9 @@ public class JoinPage extends JFrame {
 
         moduleList = new JList<>();
         contentPanel.add(new JScrollPane(moduleList), BorderLayout.CENTER);
+
+        JPanel buttonPanel = setupButtonPanel();
+        contentPanel.add(buttonPanel, BorderLayout.SOUTH);
 
         setContentPane(contentPanel);
         setVisible(true);
@@ -60,6 +64,36 @@ public class JoinPage extends JFrame {
         searchPanel.add(clearButton);
 
         return searchPanel;
+    }
+
+    private JPanel setupButtonPanel() {
+        JPanel buttonPanel = new JPanel(new FlowLayout(FlowLayout.RIGHT));
+
+        JButton joinButton = new JButton("Join");
+        joinButton.addActionListener(e -> joinSelectedModule());
+        buttonPanel.add(joinButton);
+
+        JButton backButton = new JButton("Back");
+        backButton.addActionListener(e -> {
+            this.dispose();
+            new Lec_HomePage().setVisible(true);
+        });
+        buttonPanel.add(backButton);
+
+        return buttonPanel;
+    }
+
+    private void joinSelectedModule() {
+        Module selectedModule = moduleList.getSelectedValue();
+        if (selectedModule != null) {
+            if (ModuleData.getInstance().modules.contains(selectedModule)) {
+                JOptionPane.showMessageDialog(this, "You have already joined this module.", "Module Already Joined", JOptionPane.INFORMATION_MESSAGE);
+            } else {
+                System.out.println(ModuleData.getInstance().modules);
+                ModuleController.joinModule(selectedModule);
+                JOptionPane.showMessageDialog(this, "Successfully joined this module.", "Module Joined", JOptionPane.INFORMATION_MESSAGE);
+            }
+        }
     }
 
     private void searchModules() {

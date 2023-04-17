@@ -1,5 +1,7 @@
 package main.java.Entity;
 
+import java.util.Objects;
+
 public class Module {
     private String name;
     private String code;
@@ -127,6 +129,19 @@ public class Module {
     @Override
     public String toString() {
         return getName();
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(code, name, semester, type);
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) return true;
+        if (obj == null || getClass() != obj.getClass()) return false;
+        Module module = (Module) obj;
+        return Objects.equals(code, module.code) && Objects.equals(name, module.name) && Objects.equals(semester, module.semester) && Objects.equals(type, module.type);
     }
 }
 

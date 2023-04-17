@@ -1,15 +1,21 @@
 package main.java.Data;
 
-import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Paths;
 import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 import com.google.gson.reflect.TypeToken;
 import main.java.Config;
 import main.java.Entity.Module;
+
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.Reader;
 import java.lang.reflect.Type;
-import com.google.gson.reflect.TypeToken;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.ArrayList;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -75,6 +81,78 @@ public class ModuleData {
     private <T> T readJsonToList(String filePath, Type type) {
         String jsonStr = readFileToString(filePath);
         return new Gson().fromJson(jsonStr, type);
+    }
+
+    public void createModuleFolder(Path modulePath) {
+        try {
+            Files.createDirectories(modulePath);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    public void writeModuleInfo(Module module, Path infoPath) {
+        Gson gson = new GsonBuilder().setPrettyPrinting().create();
+        try (FileWriter writer = new FileWriter(infoPath.toString())){
+            gson.toJson(module, writer);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    public void initializeGradesJson(Path gradesPath) {
+        Gson gson = new GsonBuilder().setPrettyPrinting().create();
+        try (FileWriter writer = new FileWriter(gradesPath.toString())) {
+            gson.toJson(new ArrayList<>(), writer);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    public void addModuleToIndex(Module module, Path indexPath) {
+        Gson gson = new GsonBuilder().setPrettyPrinting().create();
+        Type indexType = new TypeToken<List<Map<String, String>>>(){}.getType();
+        List<Map<String, String>> index;
+        try (Reader reader = new FileReader(indexPath.toString())) {
+            index = gson.fromJson(reader, indexType);
+            if (index == null) {
+                index = new ArrayList<>();
+            }
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+
+        Map<String, String> newIndex = new LinkedHashMap<>();
+        newIndex.put("name", module.getName());
+        newIndex.put("code", module.getCode());
+        index.add(newIndex);
+
+        try (FileWriter writer = new FileWriter(indexPath.toString())) {
+            gson.toJson(index, writer);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    public void addModuleToUser(Module module, String username, Path userPath) {
+        Gson gson = new GsonBuilder().setPrettyPrinting().create();
+        Type listType = new TypeToken<List<String>>(){}.getType();
+        List<String> list;
+        try (Reader reader = new FileReader(userPath.toString())) {
+            list = gson.fromJson(reader, listType);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+        list.add(module.getCode());
+        try (FileWriter writer = new FileWriter(userPath.toString())) {
+            gson.toJson(list, writer);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    public void updateModules() {
+        getUserModules();
     }
 
     public static ModuleData getInstance() {

@@ -98,27 +98,8 @@ public class RegisterActionListener implements ActionListener {
                 File moduleFile = new File("src/main/resources/data/students/" + username + "/modules.json");
                 File achievementFile = new File("src/main/resources/data/students/" + username + "/achievements.json");
 
-                if (!moduleFile.exists()) {
-                    FileWriter moduleWriter;
-                    try {
-                        moduleWriter = new FileWriter(moduleFile);
-                        moduleWriter.write("[]");
-                        moduleWriter.close();
-                    } catch (IOException ex) {
-                        throw new RuntimeException(ex);
-                    }
-                }
-
-                if (!achievementFile.exists()) {
-                    FileWriter achievementWriter;
-                    try {
-                        achievementWriter = new FileWriter(achievementFile);
-                        achievementWriter.write("[]");
-                        achievementWriter.close();
-                    } catch (IOException ex) {
-                        throw new RuntimeException(ex);
-                    }
-                }
+                addFile(moduleFile);
+                addFile(achievementFile);
                 try {
                     BufferedWriter writer = new BufferedWriter(new FileWriter("students.txt", true));
                     writer.write(username + " " + password + " " + id);
@@ -141,17 +122,10 @@ public class RegisterActionListener implements ActionListener {
 
                 // create empty json files
                 File moduleFile = new File("src/main/resources/data/lecturers/" + username + "/modules.json");
+                File informationFile = new File("src/main/resources/data/lecturers/" + username + "/information.json");
 
-                if (!moduleFile.exists()) {
-                    FileWriter moduleWriter;
-                    try {
-                        moduleWriter = new FileWriter(moduleFile);
-                        moduleWriter.write("[]");
-                        moduleWriter.close();
-                    } catch (IOException ex) {
-                        throw new RuntimeException(ex);
-                    }
-                }
+                addFile(moduleFile);
+                addFile(informationFile);
                 try {
                     BufferedWriter writer = new BufferedWriter(new FileWriter("lecturers.txt", true));
                     writer.write(username + " " + password + " " + id);
@@ -169,5 +143,18 @@ public class RegisterActionListener implements ActionListener {
         registerWindow.pack();
         registerWindow.setLocationRelativeTo(null);
         registerWindow.setVisible(true);
+    }
+
+    private void addFile(File file) {
+        if (!file.exists()) {
+            FileWriter fileWriter;
+            try {
+                fileWriter = new FileWriter(file);
+                fileWriter.write("[]");
+                fileWriter.close();
+            } catch (IOException ex) {
+                throw new RuntimeException(ex);
+            }
+        }
     }
 }

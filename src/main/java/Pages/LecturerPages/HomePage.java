@@ -29,29 +29,32 @@ public class HomePage extends JFrame {
         JButton btnLec_StudentPage = new JButton("Join Module");
         JButton btnOngoingcourses = new JButton("View ongoing courses");
         JButton btnCompletedcourses = new JButton("View completed courses");
+        JButton btnInformation = new JButton("View information");
         JButton btnBack = new JButton("Log out");
 
         // 为按钮添加事件监听器
         btnLec_ModulePage.addActionListener(e -> {
             new AddModulePage();
-            //new ModulePage().setVisible(true);
             dispose();
         });
 
         btnLec_StudentPage.addActionListener(e -> {
             new JoinPage();
-//            new Lec_StudentPage().setVisible(true);
             dispose();
         });
 
         btnOngoingcourses.addActionListener(e -> {
             new OngoingModulePage();
-//            new OngoingCoursesPage().setVisible(true);
             dispose();
         });
 
         btnCompletedcourses.addActionListener(e -> {
 //            new CompletedCoursesPage().setVisible(true);
+            dispose();
+        });
+
+        btnInformation.addActionListener(e -> {
+            new InformationPage().setVisible(true);
             dispose();
         });
 
@@ -84,6 +87,10 @@ public class HomePage extends JFrame {
         btnCompletedcourses.setBackground(btnCompletedcoursesColor);
         btnCompletedcourses.setForeground(buttonTextColor);
 
+        btnInformation.setFont(buttonFont);
+        btnInformation.setBackground(Color.BLACK);
+        btnInformation.setForeground(buttonTextColor);
+
         btnBack.setFont(buttonFont);
         btnBack.setBackground(Color.BLACK);
         btnBack.setForeground(buttonTextColor);
@@ -102,6 +109,8 @@ public class HomePage extends JFrame {
         buttonPanel.add(btnOngoingcourses);
         buttonPanel.add(Box.createRigidArea(new Dimension(0, 10))); // 添加间距
         buttonPanel.add(btnCompletedcourses);
+        buttonPanel.add(Box.createRigidArea(new Dimension(0, 10))); // 添加间距
+        buttonPanel.add(btnInformation);
         buttonPanel.add(Box.createRigidArea(new Dimension(0, 10))); // 添加间距
         buttonPanel.add(btnBack);
 

@@ -1,5 +1,7 @@
 package main.java.Pages.LecturerPages;
 
+import main.java.Config;
+import main.java.Entity.Module;
 import main.java.Pages.LogInPage;
 
 import javax.imageio.ImageIO;
@@ -24,7 +26,7 @@ public class HomePage extends JFrame {
             e.printStackTrace();
         }
 
-        // 创建三个按钮
+        // set up five buttons
         JButton btnLec_ModulePage = new JButton("Add Module");
         JButton btnLec_StudentPage = new JButton("Join Module");
         JButton btnOngoingcourses = new JButton("View ongoing courses");
@@ -32,7 +34,7 @@ public class HomePage extends JFrame {
         JButton btnInformation = new JButton("View information");
         JButton btnBack = new JButton("Log out");
 
-        // 为按钮添加事件监听器
+        // add ActionListener for buttons
         btnLec_ModulePage.addActionListener(e -> {
             new AddModulePage();
             dispose();
@@ -54,7 +56,8 @@ public class HomePage extends JFrame {
         });
 
         btnInformation.addActionListener(e -> {
-            new InformationPage().setVisible(true);
+            Module currentModule = new Module();
+            new InformationPage(currentModule).setVisible(true);
             dispose();
         });
 
@@ -101,7 +104,7 @@ public class HomePage extends JFrame {
         buttonPanel.setOpaque(false); // 设置面板为透明
 
         // 将按钮添加到面板
-        buttonPanel.add(Box.createRigidArea(new Dimension(0, 200))); // 添加间距
+        buttonPanel.add(Box.createRigidArea(new Dimension(0, 150))); // 添加间距
         buttonPanel.add(btnLec_ModulePage);
         buttonPanel.add(Box.createRigidArea(new Dimension(0, 10))); // 添加间距
         buttonPanel.add(btnLec_StudentPage);

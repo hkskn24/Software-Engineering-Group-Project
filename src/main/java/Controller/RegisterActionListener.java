@@ -81,7 +81,7 @@ public class RegisterActionListener implements ActionListener {
                 return;
             }
             if (!id.matches("\\d{10}")) {
-                JOptionPane.showMessageDialog(registerWindow, "Please ensure that your student ID is a 10-digit number.");
+                JOptionPane.showMessageDialog(registerWindow, "Please ensure that your ID is a 10-digit number.");
                 return;
             }
 
@@ -151,6 +151,15 @@ public class RegisterActionListener implements ActionListener {
                     } catch (IOException ex) {
                         throw new RuntimeException(ex);
                     }
+                }
+                try {
+                    BufferedWriter writer = new BufferedWriter(new FileWriter("lecturers.txt", true));
+                    writer.write(username + " " + password + " " + id);
+                    writer.newLine();
+                    JOptionPane.showMessageDialog(registerWindow, "Registration successful!");
+                    writer.close();
+                } catch (IOException ex) {
+                    JOptionPane.showMessageDialog(registerWindow, "Failed to read the file: " + ex.getMessage());
                 }
             }
             registerWindow.dispose();

@@ -1,4 +1,4 @@
-package main.java.Pages;
+package main.java.Pages.StudentsPages;
 
 import main.java.Controller.ModuleController;
 import main.java.Data.ModuleData;
@@ -106,8 +106,8 @@ public class ModulePage extends JFrame {
         JButton backButton = new JButton("Back");
         backButton.setFont(new Font("Arial", Font.PLAIN, 14));
         backButton.addActionListener(e -> {
-            new HomePage().setVisible(true);
             dispose();
+            new HomePage().setVisible(true);
         });
 
         bottomPanel.add(backButton, BorderLayout.EAST);

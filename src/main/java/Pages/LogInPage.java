@@ -5,6 +5,7 @@ import main.java.Config;
 import main.java.Controller.RecoverPasswordActionListener;
 import main.java.Controller.RegisterActionListener;
 import main.java.Controller.RetrievePasswordActionListener;
+import main.java.Pages.LecturerPages.HomePage;
 
 import javax.swing.*;
 import java.awt.*;
@@ -233,11 +234,11 @@ public class LogInPage extends JFrame implements ActionListener {
             }
             if (loggedIn && userType == 0) {
                 Config.setUsername(username);
-                SwingUtilities.invokeLater(() -> new HomePage().setVisible(true));
+                SwingUtilities.invokeLater(() -> new main.java.Pages.StudentsPages.HomePage().setVisible(true));
                 dispose();
             } else if (loggedIn && userType == 1) {
                 Config.setUsername(username);
-                SwingUtilities.invokeLater(() -> new Lec_HomePage().setVisible(true));
+                SwingUtilities.invokeLater(() -> new HomePage().setVisible(true));
                 dispose();
             } else {
                 JOptionPane.showMessageDialog(this, "Incorrect username or password!");

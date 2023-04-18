@@ -1,4 +1,4 @@
-package main.java.Pages;
+package main.java.Pages.LecturerPages;
 
 import main.java.Config;
 import main.java.Controller.ModuleController;

@@ -1,4 +1,4 @@
-package main.java.Pages;
+package main.java.Pages.StudentsPages;
 
 import main.java.Controller.AchievementController;
 import main.java.Controller.ModuleController;
@@ -174,6 +174,7 @@ public class GradePage extends JFrame {
 
     private class GPAActionListener implements ActionListener {
         public void actionPerformed(ActionEvent e) {
+            dispose();
             SwingUtilities.invokeLater(() -> {
                 GPAPage p = new GPAPage();
                 p.averageGPA();
@@ -181,7 +182,7 @@ public class GradePage extends JFrame {
                 p.postGPA();
                 p.perGPA();
                 setVisible(true);
-                dispose();
+//                dispose();
             });
         }
     }

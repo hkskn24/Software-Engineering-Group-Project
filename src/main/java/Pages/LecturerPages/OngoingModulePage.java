@@ -1,4 +1,4 @@
-package main.java.Pages;
+package main.java.Pages.LecturerPages;
 
 import main.java.Data.ModuleData;
 import main.java.Entity.Module;
@@ -34,7 +34,7 @@ public class OngoingModulePage extends MyPage {
         JButton backButton = new JButton("Back");
         backButton.addActionListener(e -> {
             this.dispose();
-            new Lec_HomePage().setVisible(true);
+            new HomePage().setVisible(true);
         });
         buttonPanel.add(backButton);
 

@@ -1,10 +1,12 @@
-package main.java.Pages;
+package main.java.Pages.LecturerPages;
 
 import main.java.Controller.ModuleController;
 import main.java.Data.ModuleData;
 import main.java.Entity.Module;
+
 import javax.swing.*;
 import java.awt.*;
+import java.util.Collections;
 import java.util.List;
 
 public class JoinPage extends JFrame {
@@ -31,6 +33,10 @@ public class JoinPage extends JFrame {
 
         setContentPane(contentPanel);
         setVisible(true);
+    }
+
+    public static void main(String[] args) {
+        new JoinPage();
     }
 
     private void updateSearchResult(List<Module> modules) {
@@ -76,7 +82,7 @@ public class JoinPage extends JFrame {
         JButton backButton = new JButton("Back");
         backButton.addActionListener(e -> {
             this.dispose();
-            new Lec_HomePage().setVisible(true);
+            new HomePage().setVisible(true);
         });
         buttonPanel.add(backButton);
 
@@ -102,12 +108,8 @@ public class JoinPage extends JFrame {
             List<Module> result = ModuleController.searchAllModules(term);
             updateSearchResult(result);
         } else {
-            updateSearchResult(List.of());
+            updateSearchResult(Collections.emptyList());
         }
-    }
-
-    public static void main(String[] args) {
-        new JoinPage();
     }
 }
 

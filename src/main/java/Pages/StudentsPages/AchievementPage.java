@@ -1,8 +1,9 @@
-package main.java.Pages;
+package main.java.Pages.StudentsPages;
 
 import main.java.Controller.AchievementController;
 import main.java.Data.AchievementData;
 import main.java.Entity.Achievement;
+
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 import javax.swing.table.DefaultTableModel;

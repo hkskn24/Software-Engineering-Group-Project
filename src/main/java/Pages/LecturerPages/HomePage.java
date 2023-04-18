@@ -1,6 +1,6 @@
-package main.java.Pages;
+package main.java.Pages.LecturerPages;
 
-import main.java.Entity.Achievement;
+import main.java.Pages.LogInPage;
 
 import javax.imageio.ImageIO;
 import javax.swing.*;
@@ -8,8 +8,8 @@ import java.awt.*;
 import java.io.File;
 import java.io.IOException;
 
-public class Lec_HomePage extends JFrame {
-    public Lec_HomePage() {
+public class HomePage extends JFrame {
+    public HomePage() {
         setTitle("HomePage");
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setBounds(500, 300, 1094, 729);
@@ -34,7 +34,7 @@ public class Lec_HomePage extends JFrame {
         // 为按钮添加事件监听器
         btnLec_ModulePage.addActionListener(e -> {
             new AddModulePage();
-            //new Lec_ModulePage().setVisible(true);
+            //new ModulePage().setVisible(true);
             dispose();
         });
 
@@ -113,7 +113,7 @@ public class Lec_HomePage extends JFrame {
     }
 
     public static void main(String[] args) {
-        SwingUtilities.invokeLater(() -> new Lec_HomePage().setVisible(true));
+        SwingUtilities.invokeLater(() -> new HomePage().setVisible(true));
     }
 }
 

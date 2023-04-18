@@ -1,7 +1,8 @@
-package main.java.Pages;
+package main.java.Pages.StudentsPages;
 
 import com.formdev.flatlaf.FlatDarculaLaf;
 import main.java.Controller.DateTimePanel;
+import main.java.Pages.LogInPage;
 
 import javax.imageio.ImageIO;
 import javax.swing.*;
@@ -15,15 +16,15 @@ public class HomePage extends JFrame {
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setBounds(500,300,1094,729);
         setLocationRelativeTo(null);
-        // Set the background image
 
+        // Set the background image
         try {
             JLabel backgroundImage = new JLabel(new ImageIcon(ImageIO.read(new File("src/main/resources/images/homepage.JPG"))));
             backgroundImage.setLayout(new GridBagLayout());
             JButton btnModulePage = new JButton("ModulePage");
             JButton btnGradePage = new JButton("GradePage");
             JButton btnAchievement = new JButton("Achievement");
-            JButton btnBack = new JButton("Back");
+            JButton btnBack = new JButton("Log out");
 
             // 为按钮添加事件监听器
             btnModulePage.addActionListener(e -> {
@@ -40,14 +41,6 @@ public class HomePage extends JFrame {
                 new AchievementPage().setVisible(true);
                 dispose();
             });
-
-//        btnAchievement.addActionListener(new ActionListener() {
-//            @Override
-//            public void actionPerformed(ActionEvent e) {
-//                new Achievement().setVisible(true);
-//                dispose();
-//            }
-//        });
 
             btnBack.addActionListener(e -> {
                 new LogInPage().setVisible(true);

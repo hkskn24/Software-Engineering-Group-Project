@@ -1,4 +1,4 @@
-package main.java.Pages;
+package main.java.Pages.LecturerPages;
 
 import main.java.Entity.Module;
 import main.java.Lec_Data;
@@ -10,7 +10,7 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.util.ArrayList;
 
-public class Lec_ModulePage extends JFrame {
+public class ModulePage extends JFrame {
     private final JTextField aTextField;
     private final JTextField bTextField;
     private final JTextField cTextField;
@@ -18,8 +18,8 @@ public class Lec_ModulePage extends JFrame {
     private final JTextField eTextField;
     private final JTextField fTextField;
 
-    public Lec_ModulePage() {
-        setTitle("Lec_ModulePage");  //a frame
+    public ModulePage() {
+        setTitle("ModulePage");  //a frame
         setBounds(500, 300, 1094, 729);
         setLocationRelativeTo(null);
         setResizable(true);  //bigger or smaller
@@ -129,6 +129,6 @@ public class Lec_ModulePage extends JFrame {
     }
 
     public static void main(String[] args) {
-        new Lec_ModulePage();
+        new ModulePage();
     }
 }

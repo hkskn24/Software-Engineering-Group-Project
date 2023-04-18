@@ -1,4 +1,4 @@
-package main.java.Pages;
+package main.java.Pages.StudentsPages;
 
 import main.java.Entity.Module;
 

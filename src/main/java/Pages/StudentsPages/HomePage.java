@@ -14,7 +14,7 @@ public class HomePage extends JFrame {
     public HomePage() {
         setTitle("HomePage");
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        setBounds(500,300,1094,729);
+        setBounds(500, 300, 1094, 729);
         setLocationRelativeTo(null);
 
         // Set the background image
@@ -48,10 +48,10 @@ public class HomePage extends JFrame {
             });
 
             // 设置按钮颜色和文字颜色
-            Color btnModulePageColor = new Color(96,33,46);
-            Color btnGradePageColor = new Color(179,122,54);
-            Color btnAchievementColor = new Color(25,60,79);
-            Color btnBackColor = new Color(34,68,49);
+            Color btnModulePageColor = new Color(96, 33, 46);
+            Color btnGradePageColor = new Color(179, 122, 54);
+            Color btnAchievementColor = new Color(25, 60, 79);
+            Color btnBackColor = new Color(34, 68, 49);
             Color buttonTextColor = Color.WHITE;
             Font buttonFont = new Font("Segoe Script", Font.BOLD, 25);
 

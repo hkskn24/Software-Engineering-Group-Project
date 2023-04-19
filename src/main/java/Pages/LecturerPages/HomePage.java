@@ -1,7 +1,5 @@
 package main.java.Pages.LecturerPages;
 
-import main.java.Config;
-import main.java.Entity.Module;
 import main.java.Pages.LogInPage;
 
 import javax.imageio.ImageIO;
@@ -13,7 +11,7 @@ import java.io.IOException;
 public class HomePage extends JFrame {
     public HomePage() {
         setTitle("HomePage");
-        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         setBounds(500, 300, 1094, 729);
         setLocationRelativeTo(null);
 
@@ -56,8 +54,7 @@ public class HomePage extends JFrame {
         });
 
         btnInformation.addActionListener(e -> {
-            Module currentModule = new Module();
-            new InformationPage(currentModule).setVisible(true);
+            new InformationPage().setVisible(true);
             dispose();
         });
 

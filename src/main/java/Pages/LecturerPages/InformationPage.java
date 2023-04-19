@@ -1,10 +1,15 @@
 package main.java.Pages.LecturerPages;
 
-import main.java.Entity.Module;
+import com.google.gson.Gson;
+import com.google.gson.JsonArray;
+import com.google.gson.JsonObject;
+import main.java.Config;
 
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 import java.awt.*;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 import java.io.FileWriter;
 import java.io.IOException;
 
@@ -12,19 +17,19 @@ import java.io.IOException;
 public class InformationPage extends JFrame {
     private JTextField emailTextField;
 
-    public InformationPage(Module module) {
+    public InformationPage() {
         setTitle("Information Page");
         setBounds(500, 300, 1094, 729);
         setLocationRelativeTo(null);
         setResizable(true);
-        setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+        setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
 
         JPanel infoPanel = new JPanel(new GridBagLayout());
-        setupInfoPanel(infoPanel, module);
+        setupInfoPanel(infoPanel);
         add(infoPanel);
 
         addBackButton(infoPanel);
-        addUpdateButton(infoPanel, module);
+        addUpdateButton(infoPanel);
 
         // 添加滚动条
         JScrollPane scrollPane = new JScrollPane(infoPanel);
@@ -32,6 +37,15 @@ public class InformationPage extends JFrame {
         scrollPane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED);
         setContentPane(scrollPane);
         setVisible(true);
+
+        addWindowListener(new WindowAdapter() {
+            @Override
+            public void windowClosing(WindowEvent e) {
+                new HomePage().setVisible(true);
+                dispose();
+            }
+        });
+
     }
 
     private void addBackButton(JPanel infoPanel) {
@@ -43,12 +57,15 @@ public class InformationPage extends JFrame {
 
         JButton backButton = new JButton("Back");
         backButton.setFont(new Font("Arial", Font.PLAIN, 14));
-        backButton.addActionListener(e -> dispose());
+        backButton.addActionListener(e -> {
+            new HomePage().setVisible(true);
+            dispose();
+        });
         infoPanel.add(backButton, gbc);
         setLocationRelativeTo(null);
     }
 
-    private void addUpdateButton(JPanel infoPanel, Module currentUserData) {
+    private void addUpdateButton(JPanel infoPanel) {
         GridBagConstraints gbc = new GridBagConstraints();
         gbc.insets = new Insets(5, 5, 5, 5);
         gbc.gridx = 2;
@@ -58,52 +75,58 @@ public class InformationPage extends JFrame {
         JButton updateButton = new JButton("Update");
         updateButton.setFont(new Font("Arial", Font.PLAIN, 14));
         updateButton.addActionListener(e -> {
-            currentUserData.setEmail(emailTextField.getText());
+            Config.setUserEmail(emailTextField.getText());
             // 更新json文件
-            updateJsonFile(currentUserData);
+            updateJsonFile();
         });
         infoPanel.add(updateButton, gbc);
         setLocationRelativeTo(null);
     }
 
-    private void updateJsonFile(Module module) {
+    private void updateJsonFile() {
         // 这里替换为您的json文件路径
-        String jsonFilePath = "src/main/resources/data/lecturers/"+module.getName()+"/information.json";
+        String jsonFilePath = "src/main/resources/data/lecturers/" + Config.getUsername() + "/information.json";
         try (FileWriter fileWriter = new FileWriter(jsonFilePath)) {
-            // 使用您喜欢的json库将Module对象序列化为json字符串
-            String jsonString = serializeModuleToJson(module);
+            // 创建一个JsonObject并添加用户信息
+            JsonObject userInfo = new JsonObject();
+            userInfo.addProperty("username", Config.getUsername());
+            userInfo.addProperty("id", Config.getUserId());
+            userInfo.addProperty("email", Config.getUserEmail());
+
+            // 创建一个JsonArray并将userInfo添加到数组
+            JsonArray jsonArray = new JsonArray();
+            jsonArray.add(userInfo);
+
+            // 使用Gson库将JsonArray对象序列化为json字符串
+            Gson gson = new Gson();
+            String jsonString = gson.toJson(jsonArray);
             fileWriter.write(jsonString);
         } catch (IOException e) {
             e.printStackTrace();
         }
     }
 
-    private String serializeModuleToJson(Module module) {
-        // 使用您喜欢的json库将Module对象序列化为json字符串
-        // 这里需要您根据您的项目使用的json库来实现具体的序列化代码
-        return "";
-    }
 
-    private void setupInfoPanel(JPanel infoPanel, Module module) {
+    private void setupInfoPanel(JPanel infoPanel) {
         GridBagConstraints gbc = new GridBagConstraints();
         gbc.fill = GridBagConstraints.HORIZONTAL;
         gbc.weightx = 1;
         gbc.insets = new Insets(5, 5, 5, 5);
 
         // get Name
-        addInfoSection(infoPanel, gbc, "Name", module.getName().trim(), 1);
+        addInfoSection(infoPanel, "Name", gbc, Config.getUsername().trim(), 1);
 
         // get Id
-        addInfoSection(infoPanel, gbc, "Id", String.valueOf(module.getId()), 3);
+        addInfoSection(infoPanel, "Id", gbc, String.valueOf(Config.getUserId()), 3);
 
         // set Email
-        addEditableInfoSection(infoPanel, gbc, "Email", module.getEmail(), 5);
+        addEditableInfoSection(infoPanel, gbc, Config.getUserEmail());
 
         infoPanel.setBorder(new EmptyBorder(10, 10, 10, 10));
     }
 
-    private void addInfoSection(JPanel panel, GridBagConstraints gbc, String title, String content, int rowIndex) {
-        JLabel sectionTitle = new JLabel(title);
+    private void addInfoSection(JPanel panel, String text, GridBagConstraints gbc, String content, int rowIndex) {
+        JLabel sectionTitle = new JLabel(text);
         sectionTitle.setFont(new Font("Arial", Font.BOLD, 14));
         gbc.gridx = 0;
         gbc.gridy = rowIndex;
@@ -122,9 +145,10 @@ public class InformationPage extends JFrame {
         panel.add(sectionContent, gbc);
     }
 
-    private void addEditableInfoSection(JPanel panel, GridBagConstraints gbc, String title, String content, int rowIndex) {
-        JLabel sectionTitle = new JLabel(title);
+    private void addEditableInfoSection(JPanel panel, GridBagConstraints gbc, String content) {
+        JLabel sectionTitle = new JLabel("Email");
         sectionTitle.setFont(new Font("Arial", Font.BOLD, 14));
+        int rowIndex = 5;
         gbc.gridx = 0;
         gbc.gridy = rowIndex;
         gbc.anchor = GridBagConstraints.NORTHWEST;

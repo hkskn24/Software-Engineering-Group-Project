@@ -1,7 +1,6 @@
 package main.java.Pages.LecturerPages;
 
 import javax.swing.*;
-import java.awt.*;
 
 public class MyPage extends JFrame {
     public MyPage() {

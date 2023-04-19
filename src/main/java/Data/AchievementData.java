@@ -4,6 +4,7 @@ import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import main.java.Config;
 import main.java.Entity.Achievement;
+
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
@@ -17,6 +18,14 @@ public class AchievementData {
         getAchievements();
     }
 
+    public static AchievementData getInstance() {
+        if (instance == null) {
+            instance = new AchievementData();
+        }
+
+        return instance;
+    }
+
     private void getAchievements() {
         String username = Config.getUsername();
         String jsonStr;
@@ -25,14 +34,7 @@ public class AchievementData {
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
-        achievements = new Gson().fromJson(jsonStr, new TypeToken<ArrayList<Achievement>>(){}.getType());
-    }
-
-    public static AchievementData getInstance() {
-        if (instance == null) {
-            instance = new AchievementData();
-        }
-
-        return instance;
+        achievements = new Gson().fromJson(jsonStr, new TypeToken<ArrayList<Achievement>>() {
+        }.getType());
     }
 }

@@ -1,5 +1,10 @@
 package main.java.Controller;
 
+import com.google.gson.Gson;
+import com.google.gson.JsonArray;
+import com.google.gson.JsonObject;
+import main.java.Config;
+
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -28,10 +33,9 @@ public class RegisterActionListener implements ActionListener {
         registerPanel.add(usernameField);
         registerPanel.add(passwordLabel);
         registerPanel.add(passwordField);
-        if(userType == 0){
+        if (userType == 0) {
             registerPanel.add(studentidLabel);
-        }
-        else if (userType == 1){
+        } else if (userType == 1) {
             registerPanel.add(lectureridLabel);
         }
         registerPanel.add(idField);
@@ -52,6 +56,7 @@ public class RegisterActionListener implements ActionListener {
                             JOptionPane.showMessageDialog(registerWindow, "The username or student id already exists, please try again.");
                             return;
                         }
+                        Config.setUserId((id));
                         reader.close();
                     }
                 } catch (IOException ignored) {
@@ -66,6 +71,7 @@ public class RegisterActionListener implements ActionListener {
                             JOptionPane.showMessageDialog(registerWindow, "The username or id already exists, please try again.");
                             return;
                         }
+                        Config.setUserId(id);
                         reader.close();
                     }
                 } catch (IOException ignored) {
@@ -89,7 +95,7 @@ public class RegisterActionListener implements ActionListener {
             if (userType == 0) {
                 File studentFolder = new File("src/main/resources/data/students/" + username);
                 if (!studentFolder.exists()) {
-                    if (!studentFolder.mkdir()){
+                    if (!studentFolder.mkdir()) {
                         System.out.println("Failed to create student folder.");
                     }
                 }
@@ -115,7 +121,7 @@ public class RegisterActionListener implements ActionListener {
             else {
                 File lecturerFolder = new File("src/main/resources/data/lecturers/" + username);
                 if (!lecturerFolder.exists()) {
-                    if (!lecturerFolder.mkdir()){
+                    if (!lecturerFolder.mkdir()) {
                         System.out.println("Failed to create lecturer folder.");
                     }
                 }
@@ -134,6 +140,26 @@ public class RegisterActionListener implements ActionListener {
                     writer.close();
                 } catch (IOException ex) {
                     JOptionPane.showMessageDialog(registerWindow, "Failed to read the file: " + ex.getMessage());
+                }
+
+                String jsonFilePath = "src/main/resources/data/lecturers/" + username + "/information.json";
+                try (FileWriter fileWriter = new FileWriter(jsonFilePath)) {
+                    // 创建一个JsonObject并添加用户信息
+                    JsonObject userInfo = new JsonObject();
+                    userInfo.addProperty("username", username);
+                    userInfo.addProperty("id", id);
+                    userInfo.addProperty("email", " ");
+
+                    // 创建一个JsonArray并将userInfo添加到数组
+                    JsonArray jsonArray = new JsonArray();
+                    jsonArray.add(userInfo);
+
+                    // 使用Gson库将JsonArray对象序列化为json字符串
+                    Gson gson = new Gson();
+                    String jsonString = gson.toJson(jsonArray);
+                    fileWriter.write(jsonString);
+                } catch (IOException ex) {
+                    ex.printStackTrace();
                 }
             }
             registerWindow.dispose();

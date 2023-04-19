@@ -7,7 +7,7 @@ import java.util.Date;
 import java.util.Locale;
 
 public class DateTimePanel extends JPanel {
-    private JLabel dateTimeLabel;
+    private final JLabel dateTimeLabel;
 
     public DateTimePanel() {
         // set the layout of the panel

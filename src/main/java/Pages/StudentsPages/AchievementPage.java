@@ -11,15 +11,15 @@ import javax.swing.table.TableRowSorter;
 import java.awt.*;
 import java.util.ArrayList;
 
-public class AchievementPage extends JFrame{
-    private DefaultTableModel tableModel;
-    private TableRowSorter<DefaultTableModel> sorter;
+public class AchievementPage extends JFrame {
+    private final DefaultTableModel tableModel;
+    private final TableRowSorter<DefaultTableModel> sorter;
 
     public AchievementPage() {
         setTitle("Achievement");
         setLayout(new BorderLayout());
         getContentPane().setBackground(new Color(250, 250, 250));
-        setBounds(500,300,1094,729);
+        setBounds(500, 300, 1094, 729);
         setLocationRelativeTo(null);
         setResizable(true);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -47,6 +47,10 @@ public class AchievementPage extends JFrame{
         setupCombinedPanel(filterPanel, sortPanel);
 
         setVisible(true);
+    }
+
+    public static void main(String[] args) {
+        AchievementPage achievementPage = new AchievementPage();
     }
 
     private void setupAchievement() {
@@ -124,7 +128,7 @@ public class AchievementPage extends JFrame{
         combinedPanel.setBorder(new EmptyBorder(10, 10, 10, 10));
     }
 
-    private void addBackButton (JPanel contentPanel, GridBagConstraints gbc) {
+    private void addBackButton(JPanel contentPanel, GridBagConstraints gbc) {
         JPanel bottomPanel = new JPanel(new BorderLayout());
 
         JButton backButton = new JButton("Back");
@@ -139,9 +143,5 @@ public class AchievementPage extends JFrame{
         gbc.weighty = 1.0;
         gbc.anchor = GridBagConstraints.SOUTH;
         contentPanel.add(bottomPanel, gbc);
-    }
-
-    public static void main(String[] args) {
-        AchievementPage achievementPage = new AchievementPage();
     }
 }

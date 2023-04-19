@@ -19,12 +19,9 @@ public class Module {
     private String email;
     private int id;
 
-
-    public void setGrades(int grades) {
-        this.grades = grades;
+    public static String[] getGradesAttributes() {
+        return new String[]{"name", "code", "credits", "hours", "semester", "type", "grades"};
     }
-
-
 
     public String getName() {
         return name;
@@ -74,17 +71,23 @@ public class Module {
         this.type = type;
     }
 
-    public void setLecturer(String lecturer) {
-        this.lecturer = lecturer;
-    }
-
     public String getLecturer() {
         return lecturer;
     }
 
+    public void setLecturer(String lecturer) {
+        this.lecturer = lecturer;
+    }
+
     public int getGrades() {
         return grades;
-    }public String getSummary() {
+    }
+
+    public void setGrades(int grades) {
+        this.grades = grades;
+    }
+
+    public String getSummary() {
         return summary;
     }
 
@@ -138,10 +141,6 @@ public class Module {
 
     public void setId(int id) {
         this.id = id;
-    }
-
-    public static String[] getGradesAttributes() {
-        return new String[]{"name", "code", "credits", "hours", "semester", "type", "grades"};
     }
 
     @Override

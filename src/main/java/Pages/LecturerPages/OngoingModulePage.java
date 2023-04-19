@@ -7,7 +7,7 @@ import javax.swing.*;
 import java.awt.*;
 
 public class OngoingModulePage extends MyPage {
-    private JList<Module> ongoingModuleList;
+    private final JList<Module> ongoingModuleList;
 
     public OngoingModulePage() {
         setTitle("Ongoing Modules");

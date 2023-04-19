@@ -13,6 +13,7 @@ public class RecoverPasswordActionListener implements ActionListener {
     public RecoverPasswordActionListener(int num) {
         this.userType = num;
     }
+
     public void actionPerformed(ActionEvent e) {
         String id = JOptionPane.showInputDialog("Please enter your ID:");
 
@@ -51,8 +52,7 @@ public class RecoverPasswordActionListener implements ActionListener {
                             fout.close();
                             break;
                         }
-                    }
-                    else if (i == list.size() - 1) {
+                    } else if (i == list.size() - 1) {
                         JOptionPane.showMessageDialog(null, "There is no account associated with this ID.");
                         return;
                     }
@@ -101,8 +101,7 @@ public class RecoverPasswordActionListener implements ActionListener {
                             fout.close();
                             break;
                         }
-                    }
-                    else if (i == list.size() - 1) {
+                    } else if (i == list.size() - 1) {
                         JOptionPane.showMessageDialog(null, "There is no account associated with this ID.");
                         return;
                     }

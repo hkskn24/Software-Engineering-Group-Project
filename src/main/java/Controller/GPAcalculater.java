@@ -17,7 +17,15 @@ public class GPAcalculater {
 
     ArrayList<Module> modules = ModuleData.getInstance().modules;
 
-        public void averageGPA(){
+    public static void main(String[] args) {
+        GPAcalculater p = new GPAcalculater();
+        p.averageGPA();
+        p.totalGPA();
+        p.perGPA();
+        p.postGPA();
+    }
+
+    public void averageGPA() {
         int totalCredits = 0;
         double averageGPA = 0;
         DecimalFormat df = new DecimalFormat("#.00");
@@ -25,29 +33,30 @@ public class GPAcalculater {
         for (int i = 0; i < modules.size(); i++) {
             Module module = modules.get(i);
             totalCredits = totalCredits + module.getCredits();
-            averageGPA += (Integer.valueOf(module.getGrades())/10-5)*Integer.valueOf(module.getCredits());
+            averageGPA += (Integer.valueOf(module.getGrades()) / 10 - 5) * Integer.valueOf(module.getCredits());
         }
         //计算平均绩点
         double agpa = averageGPA / totalCredits;
-        System.out.println("Average GPA: "+df.format(agpa));
-        System.out.println("Total credits: "+dw.format(totalCredits));
+        System.out.println("Average GPA: " + df.format(agpa));
+        System.out.println("Total credits: " + dw.format(totalCredits));
     }
+
     public void totalGPA() {
-            int totalCredits = 0;
-            DecimalFormat df = new DecimalFormat("#.00");
-            for (int i = 0; i < modules.size(); i++) {
-                Module module = modules.get(i);
-                totalCredits += Integer.valueOf(module.getCredits());
-                totalHours += Integer.valueOf(module.getHours());
-                totalQualityPoints += Integer.valueOf(module.getGrades())*Integer.valueOf(module.getCredits()); 
-            }
-            //计算总GPA
-            double gpa = totalQualityPoints / totalCredits;
-            System.out.println("GPA: "+df.format(gpa));
+        int totalCredits = 0;
+        DecimalFormat df = new DecimalFormat("#.00");
+        for (int i = 0; i < modules.size(); i++) {
+            Module module = modules.get(i);
+            totalCredits += Integer.valueOf(module.getCredits());
+            totalHours += Integer.valueOf(module.getHours());
+            totalQualityPoints += Integer.valueOf(module.getGrades()) * Integer.valueOf(module.getCredits());
+        }
+        //计算总GPA
+        double gpa = totalQualityPoints / totalCredits;
+        System.out.println("GPA: " + df.format(gpa));
     }
 
     public void perGPA() {
-        int maxSemester=0;
+        int maxSemester = 0;
         DecimalFormat df = new DecimalFormat("#.00");
         for (Module module : modules) {
             int semester = module.getSemester();
@@ -75,7 +84,7 @@ public class GPAcalculater {
         }
     }
 
-    public void postGPA(){
+    public void postGPA() {
         int totalCredits = 0;
         int totalHours = 0;
         int totalQualityPoints = 0;
@@ -94,15 +103,7 @@ public class GPAcalculater {
         //计算总GPA
         double gpa = totalQualityPoints / totalCredits;
         double agpa = totalGradePoints / totalCredits;
-        System.out.println("The Postgraduate GPA is: "+df.format(gpa));
-        System.out.println("The average Postgraduate GPA is: "+df.format(agpa));
-    }
-
-    public static void main(String[] args) {
-        GPAcalculater p = new GPAcalculater();
-        p.averageGPA();
-        p.totalGPA();
-        p.perGPA();
-        p.postGPA();
+        System.out.println("The Postgraduate GPA is: " + df.format(gpa));
+        System.out.println("The average Postgraduate GPA is: " + df.format(agpa));
     }
 }

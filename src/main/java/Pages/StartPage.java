@@ -2,20 +2,16 @@ package main.java.Pages;
 
 import com.formdev.flatlaf.FlatDarculaLaf;
 
+import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.*;
-import java.io.File;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.BufferedInputStream;
-import java.io.FileInputStream;
-import javax.imageio.ImageIO;
+import java.io.*;
 
 public class StartPage extends JFrame {
 
     public StartPage() {
         setTitle("WELCOME TO LUMOSLEARNING");
-        setBounds(500,300,900,599);
+        setBounds(500, 300, 900, 599);
         setLocationRelativeTo(null);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setResizable(false);
@@ -24,7 +20,7 @@ public class StartPage extends JFrame {
         try {
             JLabel backgroundImage = new JLabel();
             ImageIcon ii = new ImageIcon(ImageIO.read(new File("src/main/resources/images/startpage.jpg")));
-            ii.setImage(ii.getImage().getScaledInstance(900,600,Image.SCALE_DEFAULT));
+            ii.setImage(ii.getImage().getScaledInstance(900, 600, Image.SCALE_DEFAULT));
             backgroundImage.setIcon(ii);
             backgroundImage.setLayout(new GridBagLayout());
             setContentPane(backgroundImage);

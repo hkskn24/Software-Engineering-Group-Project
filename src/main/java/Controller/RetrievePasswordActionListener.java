@@ -13,6 +13,7 @@ public class RetrievePasswordActionListener implements ActionListener {
     public RetrievePasswordActionListener(int num) {
         this.userType = num;
     }
+
     public void actionPerformed(ActionEvent e) {
         String id = JOptionPane.showInputDialog("Please enter your ID:");
 

@@ -1,7 +1,5 @@
 package main.java.Controller;
 
-import main.java.Entity.Achievement;
-
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableRowSorter;

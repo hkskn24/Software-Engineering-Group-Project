@@ -2,7 +2,6 @@ package main.java.Pages.StudentsPages;
 
 import main.java.Entity.Module;
 
-
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 import java.awt.*;
@@ -10,7 +9,7 @@ import java.awt.*;
 public class ModuleInfoPage extends JFrame {
     public ModuleInfoPage(Module module) {
         setTitle(module.getName());
-        setBounds(500,300,1094,729);
+        setBounds(500, 300, 1094, 729);
         setLocationRelativeTo(null);
         setResizable(true);
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
@@ -67,7 +66,7 @@ public class ModuleInfoPage extends JFrame {
         addInfoSection(infoPanel, gbc, "Aims", module.getAims(), 5);
 
         // set syllabus
-        addInfoSection(infoPanel, gbc, "Syllabus", module.getSyllabus(),7);
+        addInfoSection(infoPanel, gbc, "Syllabus", module.getSyllabus(), 7);
 
         //set Reading List
         addInfoSection(infoPanel, gbc, "Reading List", module.getReadingList(), 9);

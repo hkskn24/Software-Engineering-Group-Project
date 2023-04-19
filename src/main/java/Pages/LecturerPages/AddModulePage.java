@@ -11,8 +11,19 @@ import java.awt.event.ActionListener;
 
 
 public class AddModulePage extends JFrame {
-    private JTextField nameField, codeField, creditsField, hoursField, semesterField, gradesField, typeField, lecturerField, summaryField, aimsField, syllabusField, readingListField;
-    private JButton submitButton;
+    private final JTextField nameField;
+    private final JTextField codeField;
+    private final JTextField creditsField;
+    private final JTextField hoursField;
+    private final JTextField semesterField;
+    private final JTextField gradesField;
+    private final JTextField typeField;
+    private final JTextField lecturerField;
+    private final JTextField summaryField;
+    private final JTextField aimsField;
+    private final JTextField syllabusField;
+    private final JTextField readingListField;
+    private final JButton submitButton;
 
     public AddModulePage() {
 

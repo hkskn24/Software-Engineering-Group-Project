@@ -28,10 +28,19 @@ public class ModuleData {
         getUserModules();
     }
 
+    public static ModuleData getInstance() {
+        if (instance == null) {
+            instance = new ModuleData();
+        }
+
+        return instance;
+    }
+
     private void getUserModules() {
         String username = Config.getUsername();
         String userType = Config.getUserType();
-        List<String> moduleCodes = readJsonToList("src/main/resources/data/" + userType + "/" + username + "/modules.json", new TypeToken<ArrayList<String>>(){}.getType());
+        List<String> moduleCodes = readJsonToList("src/main/resources/data/" + userType + "/" + username + "/modules.json", new TypeToken<ArrayList<String>>() {
+        }.getType());
         modules = new ArrayList<>();
 
         if (moduleCodes != null) {
@@ -49,7 +58,8 @@ public class ModuleData {
     public List<Module> searchFromAllModules(String term) {
         List<Module> result = new ArrayList<>();
         String jsonStr = readFileToString("src/main/resources/data/modules/index.json");
-        ArrayList<Map<String, String>> nameToCode = new Gson().fromJson(jsonStr, new TypeToken<ArrayList<Map<String, String>>>(){}.getType());
+        ArrayList<Map<String, String>> nameToCode = new Gson().fromJson(jsonStr, new TypeToken<ArrayList<Map<String, String>>>() {
+        }.getType());
 
         if (nameToCode != null) {
             for (Map<String, String> entry : nameToCode) {
@@ -97,7 +107,7 @@ public class ModuleData {
         Path infoPath = Paths.get(path, code, "info.json");
 
         Gson gson = new GsonBuilder().setPrettyPrinting().create();
-        try (FileWriter writer = new FileWriter(infoPath.toString())){
+        try (FileWriter writer = new FileWriter(infoPath.toString())) {
             gson.toJson(module, writer);
         } catch (IOException e) {
             throw new RuntimeException(e);
@@ -115,7 +125,8 @@ public class ModuleData {
 
     public void addModuleToIndex(Module module, Path indexPath) {
         Gson gson = new GsonBuilder().setPrettyPrinting().create();
-        Type indexType = new TypeToken<List<Map<String, String>>>(){}.getType();
+        Type indexType = new TypeToken<List<Map<String, String>>>() {
+        }.getType();
         List<Map<String, String>> index;
         try (Reader reader = new FileReader(indexPath.toString())) {
             index = gson.fromJson(reader, indexType);
@@ -140,7 +151,8 @@ public class ModuleData {
 
     public void addModuleToUser(Module module, String username, Path userPath) {
         Gson gson = new GsonBuilder().setPrettyPrinting().create();
-        Type listType = new TypeToken<List<String>>(){}.getType();
+        Type listType = new TypeToken<List<String>>() {
+        }.getType();
         List<String> list;
         try (Reader reader = new FileReader(userPath.toString())) {
             list = gson.fromJson(reader, listType);
@@ -172,13 +184,5 @@ public class ModuleData {
     public void updateModuleStatus(Module module) {
         module.setStatus("completed");
         saveModuleInfo(module);
-    }
-
-    public static ModuleData getInstance() {
-        if (instance == null) {
-            instance = new ModuleData();
-        }
-
-        return instance;
     }
 }

@@ -3,6 +3,7 @@ package main.java.Entity;
 public class Achievement {
     private String name;
     private int semester;
+    private String type;
 
     public String getName() {
         return name;
@@ -27,6 +28,4 @@ public class Achievement {
     public void setType(String type) {
         this.type = type;
     }
-
-    private String type;
 }

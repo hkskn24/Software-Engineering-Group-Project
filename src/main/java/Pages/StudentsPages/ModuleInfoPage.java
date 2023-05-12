@@ -42,7 +42,7 @@ public class ModuleInfoPage extends JFrame {
         setLocationRelativeTo(null);
     }
 
-    private void setupInfoPanel(JPanel infoPanel, Module module) {
+    protected void setupInfoPanel(JPanel infoPanel, Module module) {
         GridBagConstraints gbc = new GridBagConstraints();
         gbc.fill = GridBagConstraints.HORIZONTAL;
         gbc.weightx = 1;

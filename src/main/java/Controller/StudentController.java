@@ -55,6 +55,16 @@ public class StudentController {
         }
     }
 
+    public int getGradesByCode(String name, String code) {
+        List<Student> students = getStudentList(code);
+        for (Student student : students) {
+            if (student.getName().equals(name)) {
+                return student.getGrades();
+            }
+        }
+        return -1;
+    }
+
     public boolean updateGrades(String code, String ID, int grades) {
         return StudentData.getInstance().updateGrades(code, ID, grades);
     }

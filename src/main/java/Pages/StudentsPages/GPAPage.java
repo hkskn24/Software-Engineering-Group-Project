@@ -1,5 +1,7 @@
 package main.java.Pages.StudentsPages;
 
+import main.java.Config;
+import main.java.Controller.StudentController;
 import main.java.Data.ModuleData;
 import main.java.Entity.Module;
 
@@ -12,6 +14,7 @@ import java.util.ArrayList;
 
 
 public class GPAPage extends JFrame {
+    private StudentController studentController;
     double totalHours = 0.0;
     double totalQualityPoints = 0;
     ArrayList<Module> modules = ModuleData.getInstance().modules;
@@ -20,6 +23,7 @@ public class GPAPage extends JFrame {
 
     public GPAPage() {
         super("GPA Page");
+        studentController = new StudentController();
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         setBounds(500, 300, 1094, 729);
 //        setResizable(false);
@@ -62,10 +66,9 @@ public class GPAPage extends JFrame {
         double averageGPA = 0;
         DecimalFormat df = new DecimalFormat("#.00");
         DecimalFormat dw = new DecimalFormat("#.0");
-        for (int i = 0; i < modules.size(); i++) {
-            Module module = modules.get(i);
+        for (Module module : modules) {
             totalCredits = totalCredits + module.getCredits();
-            averageGPA += (Integer.valueOf(module.getGrades()) / 10.0 - 5) * Integer.valueOf(module.getCredits());
+            averageGPA += (studentController.getGradesByCode(Config.getUsername(), module.getCode()) / 10.0 - 5) * module.getCredits();
         }
         //计算平均绩点
         double agpa = averageGPA / totalCredits;
@@ -76,11 +79,10 @@ public class GPAPage extends JFrame {
     public void totalGPA() {
         int totalCredits = 0;
         DecimalFormat df = new DecimalFormat("#.00");
-        for (int i = 0; i < modules.size(); i++) {
-            Module module = modules.get(i);
-            totalCredits += Integer.valueOf(module.getCredits());
-            totalHours += Integer.valueOf(module.getHours());
-            totalQualityPoints += Integer.valueOf(module.getGrades()) * Integer.valueOf(module.getCredits());
+        for (Module module : modules) {
+            totalCredits += module.getCredits();
+            totalHours += module.getHours();
+            totalQualityPoints += studentController.getGradesByCode(Config.getUsername(), module.getCode()) * module.getCredits();
         }
         //计算总GPA
         double gpa = totalQualityPoints / totalCredits;
@@ -89,7 +91,7 @@ public class GPAPage extends JFrame {
 
     public void perGPA() {
         int maxSemester = 0;
-        DefaultListModel<String> listModel = new DefaultListModel<String>();
+        DefaultListModel<String> listModel = new DefaultListModel<>();
         DecimalFormat df = new DecimalFormat("#.00");
         for (Module module : modules) {
             int semester = module.getSemester();
@@ -105,7 +107,7 @@ public class GPAPage extends JFrame {
             for (Module module : modules) {
                 if (module.getSemester() == semester) {
                     int credits = Integer.parseInt(String.valueOf(module.getCredits()));
-                    int grade = Integer.parseInt(String.valueOf(module.getGrades()));
+                    int grade = Integer.parseInt(String.valueOf(studentController.getGradesByCode(Config.getUsername(), module.getCode())));
                     totalCredits += credits;
                     totalGradePoints += (grade / 10.0 - 5) * credits;
                 }
@@ -115,7 +117,7 @@ public class GPAPage extends JFrame {
             double gpa = totalGradePoints / totalCredits;
             listModel.addElement("Semester " + semester + " : " + df.format(gpa));
         }
-        JList<String> list = new JList<String>(listModel);
+        JList<String> list = new JList<>(listModel);
         list.setFont(new Font("Courier New", Font.PLAIN, 18));
         JScrollPane listPane = new JScrollPane(list);
         listPane.setPreferredSize(new Dimension(100, 200));
@@ -131,14 +133,13 @@ public class GPAPage extends JFrame {
         int totalQualityPoints = 0;
         double totalGradePoints = 0;
         DecimalFormat df = new DecimalFormat("#.00");
-        for (int i = 0; i < modules.size(); i++) {
-            Module module = modules.get(i);
+        for (Module module : modules) {
             // Exclude courses with type "elective" or "minor"
             if (!module.getType().equalsIgnoreCase("elective") && !module.getType().equalsIgnoreCase("minor")) {
-                totalCredits += Integer.valueOf(module.getCredits());
-                totalHours += Integer.valueOf(module.getHours());
-                totalQualityPoints += Integer.valueOf(module.getGrades()) * Integer.valueOf(module.getCredits());
-                totalGradePoints += (Integer.valueOf(module.getGrades()) / 10.0 - 5) * Integer.valueOf(module.getCredits());
+                totalCredits += module.getCredits();
+                totalHours += module.getHours();
+                totalQualityPoints += studentController.getGradesByCode(Config.getUsername(), module.getCode()) * module.getCredits();
+                totalGradePoints += (studentController.getGradesByCode(Config.getUsername(), module.getCode()) / 10.0 - 5) * module.getCredits();
             }
         }
         //计算总GPA

@@ -1,7 +1,9 @@
 package main.java.Pages.StudentsPages;
 
+import main.java.Config;
 import main.java.Controller.AchievementController;
 import main.java.Controller.ModuleController;
+import main.java.Controller.StudentController;
 import main.java.Data.ModuleData;
 import main.java.Entity.Module;
 
@@ -19,8 +21,12 @@ import java.util.ArrayList;
 
 public class GradePage extends JFrame {
     private TableRowSorter<DefaultTableModel> sorter;
+    private StudentController studentController;
 
     public GradePage() {
+        ModuleData.getInstance().updateModules();
+
+        studentController = new StudentController();
         setTitle("TransfiguringGrades");
         getContentPane().setBackground(new Color(250, 250, 250));
         setBounds(500, 300, 1094, 729);
@@ -78,9 +84,12 @@ public class GradePage extends JFrame {
         String[][] tableValues = new String[modules.size()][Module.getGradesAttributes().length];
         for (int i = 0; i < modules.size(); i++) {
             Module module = modules.get(i);
+            int grades = studentController.getGradesByCode(Config.getUsername(), module.getCode());
+            String gradesStr = grades == -1 ? "-" : String.valueOf(grades);
             tableValues[i] = new String[]{module.getName(), module.getCode(),
                     String.valueOf(module.getCredits()), String.valueOf(module.getHours()),
-                    String.valueOf(module.getSemester()), module.getType(), "-"
+                    String.valueOf(module.getSemester()), module.getType(),
+                    gradesStr
             };
         }
 

@@ -17,9 +17,9 @@ import java.util.stream.Collectors;
 
 public class StudentData extends Data{
     private static StudentData instance = null;
+    public List<Student> students;
 
     private StudentData() {
-
     }
 
     public static StudentData getInstance() {
@@ -35,7 +35,7 @@ public class StudentData extends Data{
         String jsonStr = readFileToString(path);
 
         try {
-            List<Student> students = new Gson().fromJson(jsonStr, new TypeToken<List<Student>>(){}.getType());
+            students = new Gson().fromJson(jsonStr, new TypeToken<List<Student>>(){}.getType());
             if (students == null) {
                 return new ArrayList<>();
             }
@@ -110,6 +110,7 @@ public class StudentData extends Data{
         }
         String path = "src/main/resources/data/modules/" + code + "/grades.json";
         saveJsonToFile(path, students);
+        students = getStudentList(code);
 
         return isSuccess;
     }

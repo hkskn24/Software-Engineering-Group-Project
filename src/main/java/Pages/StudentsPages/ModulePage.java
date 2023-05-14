@@ -16,6 +16,8 @@ public class ModulePage extends JFrame {
     private JTextField searchTextField;
 
     public ModulePage() {
+        ModuleData.getInstance().updateModules();
+
         setupModulePage();
 
         setTitle("Module Page");

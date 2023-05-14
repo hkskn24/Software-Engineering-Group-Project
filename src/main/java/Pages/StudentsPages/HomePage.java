@@ -24,6 +24,7 @@ public class HomePage extends JFrame {
             JButton btnModulePage = new JButton("ModulePage");
             JButton btnGradePage = new JButton("GradePage");
             JButton btnAchievement = new JButton("Achievement");
+            JButton btnAssessment = new JButton("Assessment");
             JButton btnBack = new JButton("Log out");
 
             // 为按钮添加事件监听器
@@ -41,6 +42,11 @@ public class HomePage extends JFrame {
                 new AchievementPage().setVisible(true);
                 dispose();
             });
+            
+            btnAssessment.addActionListener(e -> {
+                new AssessmentPage().setVisible(true);
+                dispose();
+            });
 
             btnBack.addActionListener(e -> {
                 new LogInPage().setVisible(true);
@@ -51,6 +57,7 @@ public class HomePage extends JFrame {
             Color btnModulePageColor = new Color(96, 33, 46);
             Color btnGradePageColor = new Color(179, 122, 54);
             Color btnAchievementColor = new Color(25, 60, 79);
+            Color btnAssessmentColor = new Color(58, 40, 79, 189);
             Color btnBackColor = new Color(34, 68, 49);
             Color buttonTextColor = Color.WHITE;
             Font buttonFont = new Font("Segoe Script", Font.BOLD, 25);
@@ -66,6 +73,10 @@ public class HomePage extends JFrame {
             btnAchievement.setFont(buttonFont);
             btnAchievement.setBackground(btnAchievementColor);
             btnAchievement.setForeground(buttonTextColor);
+            
+            btnAssessment.setFont(buttonFont);
+            btnAssessment.setBackground(btnAssessmentColor);
+            btnAssessment.setForeground(buttonTextColor);
 
             btnBack.setFont(buttonFont);
             btnBack.setBackground(btnBackColor);
@@ -79,6 +90,7 @@ public class HomePage extends JFrame {
             panel.add(btnModulePage);
             panel.add(btnGradePage);
             panel.add(btnAchievement);
+            panel.add(btnAssessment);
             panel.add(btnBack);
             panel.setOpaque(false);
             DTpanel.setOpaque(false);

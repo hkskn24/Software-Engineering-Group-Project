@@ -90,4 +90,11 @@ public class StudentData extends Data{
         String path = "src/main/resources/data/modules/" + code + "/grades.json";
         saveJsonToFile(path, students);
     }
+
+    public void removeModuleFromStudent(String studentName, String code) {
+        String path = "src/main/resources/data/students/" + studentName + "/modules.json";
+        List<String> modules = readJsonToList(path, new TypeToken<List<String>>(){}.getType());
+        modules.remove(code);
+        saveJsonToFile(path, modules);
+    }
 }

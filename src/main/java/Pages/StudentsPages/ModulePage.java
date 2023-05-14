@@ -56,6 +56,7 @@ public class ModulePage extends JFrame {
     }
 
     private void setupModulePage() {
+        ModuleData.getInstance().updateModules();
         ArrayList<Module> modules = ModuleData.getInstance().modules;
         updateModuleList(modules);
     }

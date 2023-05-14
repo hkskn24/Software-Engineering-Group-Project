@@ -17,6 +17,8 @@ public class OngoingModulePage extends MyPage {
         setTitle("Ongoing Modules");
         setLayout(new BorderLayout());
 
+        ModuleData.getInstance().updateModules();
+
         ongoingModuleList = new JList<>();
         updateList();
         add(new JScrollPane(ongoingModuleList), BorderLayout.CENTER);

@@ -36,9 +36,11 @@ public class StudentController {
     public boolean deleteStudent(String code, String ID) {
         List<Student> students = StudentData.getInstance().getStudentList(code);
         boolean isFound = false;
-
+        String studentName = null;
+        
         for (Student s : students) {
             if (s.getID().equals(ID)) {
+                studentName = s.getName();
                 isFound = true;
                 break;
             }
@@ -46,6 +48,7 @@ public class StudentController {
 
         if (isFound) {
             StudentData.getInstance().deleteStudent(code, ID);
+            StudentData.getInstance().removeModuleFromStudent(studentName, code);
             return true;
         } else {
             return false;

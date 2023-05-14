@@ -41,8 +41,11 @@ public class StudentListPage extends MyPage {
 
         JButton deleteButton = new JButton("Delete Student");
         deleteButton.addActionListener(e -> {
-            String ID = studentList.getSelectedValue();
-            if (ID != null && !ID.isEmpty()) {
+            String selectedValue = studentList.getSelectedValue();
+            if (selectedValue != null && !selectedValue.isEmpty()) {
+                String[] parts = selectedValue.split(" ");
+                String ID = parts[1];
+
                 boolean result = studentController.deleteStudent(code, ID);
                 if (result) {
                     updateStudentList();
@@ -72,7 +75,7 @@ public class StudentListPage extends MyPage {
 
         JButton addButton = new JButton("Add Student");
         addButton.addActionListener(e -> {
-            String ID = addButton.getText().trim();
+            String ID = addField.getText().trim();
             if (!ID.isEmpty()) {
                 int result = studentController.addStudent(code, ID);
                 switch (result) {
@@ -81,6 +84,7 @@ public class StudentListPage extends MyPage {
                     case 2 -> JOptionPane.showMessageDialog(null, "Student added successfully.");
                 }
                 addField.setText("");
+                updateStudentList();
             }
         });
 

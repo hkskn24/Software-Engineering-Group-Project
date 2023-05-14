@@ -49,7 +49,7 @@ public class HomePage extends JFrame {
         });
 
         btnCompletedcourses.addActionListener(e -> {
-//            new CompletedCoursesPage().setVisible(true);
+            new CompletedModulePage();
             dispose();
         });
 

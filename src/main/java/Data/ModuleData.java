@@ -177,6 +177,17 @@ public class ModuleData {
         return ongoingModules;
     }
 
+    public List<Module> getCompletedModules() {
+        List<Module> completedModules = new ArrayList<>();
+        for (Module module : modules) {
+            if (module.getStatus().equalsIgnoreCase("completed")) {
+                completedModules.add(module);
+            }
+        }
+        return completedModules;
+    }
+
+
     public void updateModules() {
         getUserModules();
     }

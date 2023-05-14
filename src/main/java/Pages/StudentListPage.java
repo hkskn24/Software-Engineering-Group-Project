@@ -8,7 +8,6 @@ import main.java.Pages.LecturerPages.MyPage;
 import javax.swing.*;
 import java.awt.*;
 import java.util.List;
-import java.util.Map;
 
 public class StudentListPage extends MyPage {
     private StudentController studentController;

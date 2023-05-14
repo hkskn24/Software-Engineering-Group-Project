@@ -1,4 +1,5 @@
 package main.java.Pages.StudentsPages;
+
 import com.formdev.flatlaf.FlatDarculaLaf;
 
 import main.java.Data.ModuleData;
@@ -6,9 +7,13 @@ import main.java.Entity.Assessment;
 
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableRowSorter;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+import java.util.Comparator;
 import java.util.List;
 
 public class AssessmentPage extends JFrame {
@@ -38,6 +43,22 @@ public class AssessmentPage extends JFrame {
         add(buttonPanel, BorderLayout.SOUTH);
 
         Assessments();
+
+        // Enable sorting on column click
+        TableRowSorter<DefaultTableModel> sorter = new TableRowSorter<>((DefaultTableModel) table.getModel());
+        table.setRowSorter(sorter);
+        table.getTableHeader().addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                int column = table.getTableHeader().columnAtPoint(e.getPoint());
+                sorter.setComparator(column, new Comparator<Object>() {
+                    @Override
+                    public int compare(Object o1, Object o2) {
+                        return String.valueOf(o1).compareTo(String.valueOf(o2));
+                    }
+                });
+            }
+        });
 
         setVisible(true);
     }
@@ -69,4 +90,3 @@ public class AssessmentPage extends JFrame {
         SwingUtilities.invokeLater(() -> new AssessmentPage());
     }
 }
-

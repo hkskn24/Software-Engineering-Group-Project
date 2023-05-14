@@ -25,7 +25,7 @@ public class Student {
         return grades;
     }
 
-    public void setGrades(Integer grades) {
+    public void setGrades(int grades) {
         this.grades = grades;
     }
 }

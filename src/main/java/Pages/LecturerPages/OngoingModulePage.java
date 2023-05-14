@@ -2,9 +2,13 @@ package main.java.Pages.LecturerPages;
 
 import main.java.Data.ModuleData;
 import main.java.Entity.Module;
+import main.java.Pages.Lec_ModuleInfoPage;
+import main.java.Pages.StudentsPages.ModuleInfoPage;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 
 public class OngoingModulePage extends MyPage {
     private final JList<Module> ongoingModuleList;
@@ -19,6 +23,17 @@ public class OngoingModulePage extends MyPage {
 
         JPanel buttonPanel = setupButtonPanel();
         add(buttonPanel, BorderLayout.SOUTH);
+
+        ongoingModuleList.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                if (e.getClickCount() == 2) {
+                    int selectedIndex = ongoingModuleList.getSelectedIndex();
+                    Module selectedModule = ongoingModuleList.getModel().getElementAt(selectedIndex);
+                    new Lec_ModuleInfoPage(selectedModule);
+                }
+            }
+        });
     }
 
     private JPanel setupButtonPanel() {

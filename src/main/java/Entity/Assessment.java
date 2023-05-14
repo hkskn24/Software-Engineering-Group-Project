@@ -24,6 +24,14 @@ public class Assessment {
     public String getType() {
         return type;
     }
+    
+    public String getCode() {
+        return code;
+    }
+
+    public int getDuration() {
+        return duration;
+    }
 
     public void setType(String type) {
         this.type = type;

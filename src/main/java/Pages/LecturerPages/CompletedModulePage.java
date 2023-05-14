@@ -40,13 +40,20 @@ public class CompletedModulePage extends MyPage{
     private JPanel setupButtonPanel() {
         JPanel buttonPanel = new JPanel(new FlowLayout());
 
-        JButton addButton = new JButton("Assign Grades");
-        buttonPanel.add(addButton);
+        JButton assignGrades = new JButton("Assign Grades");
+        assignGrades.addActionListener(e -> {
+            Module selectedModule = completedModuleList.getSelectedValue();
+            if (selectedModule != null) {
+                new AssignGradesPage(selectedModule);
+                this.dispose();
+            }
+        });
+        buttonPanel.add(assignGrades);
 
         JButton backButton = new JButton("Back");
         backButton.addActionListener(e -> {
-            this.dispose();
             new HomePage().setVisible(true);
+            this.dispose();
         });
         buttonPanel.add(backButton);
 

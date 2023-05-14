@@ -54,4 +54,8 @@ public class StudentController {
             return false;
         }
     }
+
+    public boolean updateGrades(String code, String ID, int grades) {
+        return StudentData.getInstance().updateGrades(code, ID, grades);
+    }
 }

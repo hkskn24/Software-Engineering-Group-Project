@@ -97,4 +97,20 @@ public class StudentData extends Data{
         modules.remove(code);
         saveJsonToFile(path, modules);
     }
+
+    public boolean updateGrades(String code, String ID, int grades) {
+        List<Student> students = getStudentList(code);
+        boolean isSuccess = true;
+        for (Student s : students) {
+            if (s.getID().equals(ID)) {
+                s.setGrades(grades);
+                isSuccess &= (grades == s.getGrades());
+                break;
+            }
+        }
+        String path = "src/main/resources/data/modules/" + code + "/grades.json";
+        saveJsonToFile(path, students);
+
+        return isSuccess;
+    }
 }

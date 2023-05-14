@@ -22,7 +22,7 @@ public class ModuleData extends Data {
     private static ModuleData instance = null;
     public ArrayList<Module> modules;
 
-    private ModuleData() {
+    public ModuleData() {
         getUserModules();
     }
 
@@ -184,7 +184,7 @@ public class ModuleData extends Data {
         saveAssessments(assessments);
     }
 
-    private List<Assessment> loadAssessments() {
+    public List<Assessment> loadAssessments() {
         String filePath = "src/main/resources/data/assessments.json";
         Type type = new TypeToken<List<Assessment>>() {}.getType();
         return readJsonToList(filePath, type);

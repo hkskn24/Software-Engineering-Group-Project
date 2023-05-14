@@ -46,6 +46,12 @@ public class OngoingModulePage extends MyPage {
         buttonPanel.add(endModuleButton);
 
         JButton addButton = new JButton("Add Assessment");
+        addButton.addActionListener(e -> {
+            Module selectedModule = ongoingModuleList.getSelectedValue();
+            if (selectedModule != null) {
+                new AddAssessmentPage(selectedModule);
+            }
+        });
         buttonPanel.add(addButton);
 
         JButton backButton = new JButton("Back");

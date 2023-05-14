@@ -4,6 +4,7 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.reflect.TypeToken;
 import main.java.Config;
+import main.java.Entity.Assessment;
 import main.java.Entity.Module;
 
 import java.io.FileReader;
@@ -14,13 +15,10 @@ import java.lang.reflect.Type;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.util.ArrayList;
-import java.util.LinkedHashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 
-public class ModuleData {
+public class ModuleData extends Data {
     private static ModuleData instance = null;
     public ArrayList<Module> modules;
 
@@ -74,23 +72,6 @@ public class ModuleData {
         }
 
         return result;
-    }
-
-    private String readFileToString(String filePath) {
-        String file = null;
-
-        try {
-            file = new String(Files.readAllBytes(Paths.get(filePath)));
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-
-        return file;
-    }
-
-    private <T> T readJsonToList(String filePath, Type type) {
-        String jsonStr = readFileToString(filePath);
-        return new Gson().fromJson(jsonStr, type);
     }
 
     public void createModuleFolder(Path modulePath) {
@@ -195,5 +176,22 @@ public class ModuleData {
     public void updateModuleStatus(Module module) {
         module.setStatus("completed");
         saveModuleInfo(module);
+    }
+
+    public void addAssessment(Assessment assessment) {
+        List<Assessment> assessments = loadAssessments();
+        assessments.add(assessment);
+        saveAssessments(assessments);
+    }
+
+    private List<Assessment> loadAssessments() {
+        String filePath = "src/main/resources/data/assessments.json";
+        Type type = new TypeToken<List<Assessment>>() {}.getType();
+        return readJsonToList(filePath, type);
+    }
+
+    private void saveAssessments(List<Assessment> assessments) {
+        String filePath = "src/main/resources/data/assessments.json";
+        saveJsonToFile(filePath, assessments);
     }
 }

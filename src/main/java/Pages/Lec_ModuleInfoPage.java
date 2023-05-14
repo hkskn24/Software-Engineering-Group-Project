@@ -25,7 +25,11 @@ public class Lec_ModuleInfoPage extends ModuleInfoPage {
         gbc.anchor = GridBagConstraints.WEST;
 
         JButton viewStudentsButton = new JButton("View Students");
-        viewStudentsButton.addActionListener(e -> new StudentListPage(module));
+        viewStudentsButton.addActionListener(e -> {
+            new StudentListPage(module);
+            dispose();
+        });
+
         infoPanel.add(viewStudentsButton, gbc);
     }
 }

@@ -24,6 +24,7 @@ public class LogInPageTest {
 
     @Test
     public void testExistedUsernameAndPassword() {
+        //测试有效登陆
         logInPage.usernameField.setText("aoi");
         logInPage.passwordField.setText("111111");
         logInPage.userType = 0;
@@ -35,7 +36,8 @@ public class LogInPageTest {
     }
 
     @Test
-    public void testExistedUsername() {
+    public void testnotexistedUsername() {
+        //测试不存在用户
         logInPage.usernameField.setText("pumpkin");
         logInPage.passwordField.setText("111111");
         Assertions.assertTrue(logInPage.isVisible());
@@ -43,6 +45,7 @@ public class LogInPageTest {
 
     @Test
     public void testWrongPassword() {
+        //测试密码错误
         logInPage.usernameField.setText("aoi");
         logInPage.passwordField.setText("666666");
         logInPage.actionPerformed(null);
@@ -67,6 +70,7 @@ public class LogInPageTest {
 
     @Test
     public void testInvalidPassword() {
+        //测试密码格式无效
         logInPage.usernameField.setText("aoi");
         logInPage.passwordField.setText("InvalidPassword");
         logInPage.actionPerformed(null);
@@ -91,6 +95,7 @@ public class LogInPageTest {
 
     @Test
     public void testInvalidUsername() {
+        //测试用户名格式无效
         logInPage.usernameField.setText("aoi123");
         logInPage.passwordField.setText("111111");
         logInPage.actionPerformed(null);

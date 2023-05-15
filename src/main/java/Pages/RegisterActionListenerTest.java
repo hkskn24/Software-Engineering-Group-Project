@@ -80,4 +80,23 @@ public class RegisterActionListenerTest {
         assertFalse(registerWindow.isVisible());
         assertTrue(registerWindow.getContentPane().getComponents()[0].isEnabled());
     }
+    
+    @Test
+    public void testActionPerformed_ValidInput() {
+        // 输入有效的用户名、密码和学号
+        usernameField.setText("pumpkin");
+        passwordField.setText("666666");
+        idField.setText("2020213333");
+        
+        JPanel registerPanel = new JPanel();
+        JFrame registerWindow = new JFrame("Sign up");
+        registerWindow.add(registerPanel);
+
+        JButton registerButton = new JButton("Sign up");
+
+        registerActionListener.actionPerformed(null);
+
+        assertFalse(registerWindow.isVisible());
+        assertTrue(registerWindow.getContentPane().getComponents()[0].isEnabled());
+    }
 }

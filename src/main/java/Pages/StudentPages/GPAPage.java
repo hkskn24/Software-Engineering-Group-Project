@@ -73,11 +73,15 @@ public class GPAPage extends JFrame {
         }
         //计算平均绩点
         double agpa = 0;
-        if (totalCredits != 0) {
-            agpa = averageGPA / totalCredits;
+        if (totalCredits == 0) {
+            textArea.append("Total credits: No Record" + "\n");
+            textArea.append("Average GPA: No Record"  + "\n");
         }
-        textArea.append("Average GPA: " + df.format(agpa) + "\n");
-        textArea.append("Total credits: " + dw.format(totalCredits) + "\n");
+        else {
+                agpa = averageGPA / totalCredits;
+                textArea.append("Average GPA: " + df.format(agpa) + "\n");
+                textArea.append("Total credits: " + dw.format(totalCredits) + "\n");
+        }
     }
 
     public void totalGPA() {
@@ -91,10 +95,13 @@ public class GPAPage extends JFrame {
         }
         //计算总GPA
         double gpa = 0;
-        if (totalCredits != 0) {
-            gpa = totalQualityPoints / totalCredits;
+        if (totalCredits == 0) {
+            textArea.append("Average grade: No Record" + "\n");
         }
-        textArea.append("Average grade: " + df.format(gpa) + "\n");
+        else {
+            gpa = totalQualityPoints / totalCredits;
+            textArea.append("Average grade: " + df.format(gpa) + "\n");
+        }
     }
 
     public void perGPA() {
@@ -112,6 +119,7 @@ public class GPAPage extends JFrame {
         for (int semester = maxSemester; semester > 0; semester--) {
             int totalCredits = 0;
             double totalGradePoints = 0;
+            boolean hasRecords = false;
 
             for (Module module : modules) {
                 if (studentController.getGradesByCode(Config.getUsername(), module.getCode()) == -1) continue;
@@ -119,17 +127,20 @@ public class GPAPage extends JFrame {
                     int credits = Integer.parseInt(String.valueOf(module.getCredits()));
                     int grade = Integer.parseInt(String.valueOf(studentController.getGradesByCode(Config.getUsername(), module.getCode())));
                     totalCredits += credits;
-                    totalGradePoints += gradeToGPA(grade)* credits;
+                    totalGradePoints += gradeToGPA(grade) * credits;
+                    hasRecords = true;
                 }
             }
 
-            //计算每学期GPA
-            double gpa = 0;
-            if (totalCredits != 0) {
-                gpa = totalGradePoints / totalCredits;
+            // 计算每学期GPA
+            if (hasRecords) {
+                double gpa = totalGradePoints / totalCredits;
+                listModel.addElement("Semester " + semester + " : " + df.format(gpa));
+            } else {
+                listModel.addElement("Semester " + semester + " : No Record");
             }
-            listModel.addElement("Semester " + semester + " : " + df.format(gpa));
         }
+
         JList<String> list = new JList<>(listModel);
         list.setFont(new Font("Courier New", Font.PLAIN, 18));
         JScrollPane listPane = new JScrollPane(list);
@@ -139,6 +150,7 @@ public class GPAPage extends JFrame {
         panel.revalidate();
         panel.repaint();
     }
+
 
     public void postGPA() {
         int totalCredits = 0;
@@ -158,12 +170,16 @@ public class GPAPage extends JFrame {
         double gpa = 0;
         double agpa = 0;
 
-        if (totalCredits != 0) {
+        if (totalCredits == 0) {
+            textArea.append("The Postgraduate GPA is: No Record " + "\n");
+            textArea.append("The average Postgraduate GPA is: No Record ");
+        }
+        else {
             gpa = totalQualityPoints / totalCredits;
             agpa = totalGradePoints / totalCredits;
+            textArea.append("The Postgraduate GPA is: " + df.format(gpa) + "\n");
+            textArea.append("The average Postgraduate GPA is: " + df.format(agpa));
         }
-        textArea.append("The Postgraduate GPA is: " + df.format(gpa) + "\n");
-        textArea.append("The average Postgraduate GPA is: " + df.format(agpa));
     }
 
     public double gradeToGPA(int grade) {

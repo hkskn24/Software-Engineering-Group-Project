@@ -119,7 +119,6 @@ public class GPAPage extends JFrame {
         for (int semester = maxSemester; semester > 0; semester--) {
             int totalCredits = 0;
             double totalGradePoints = 0;
-            boolean hasRecords = false;
 
             for (Module module : modules) {
                 if (studentController.getGradesByCode(Config.getUsername(), module.getCode()) == -1) continue;
@@ -128,16 +127,16 @@ public class GPAPage extends JFrame {
                     int grade = Integer.parseInt(String.valueOf(studentController.getGradesByCode(Config.getUsername(), module.getCode())));
                     totalCredits += credits;
                     totalGradePoints += gradeToGPA(grade) * credits;
-                    hasRecords = true;
                 }
             }
 
-            // 计算每学期GPA
-            if (hasRecords) {
-                double gpa = totalGradePoints / totalCredits;
-                listModel.addElement("Semester " + semester + " : " + df.format(gpa));
-            } else {
+            // 计算每学期 GPA
+            double gpa = 0;
+            if (totalCredits == 0 || totalGradePoints == 0) {
                 listModel.addElement("Semester " + semester + " : No Record");
+            } else {
+                gpa = totalGradePoints / totalCredits;
+                listModel.addElement("Semester " + semester + " : " + df.format(gpa));
             }
         }
 
@@ -150,7 +149,6 @@ public class GPAPage extends JFrame {
         panel.revalidate();
         panel.repaint();
     }
-
 
     public void postGPA() {
         int totalCredits = 0;

@@ -106,7 +106,6 @@ public class JoinPage extends JFrame {
             if (ModuleData.getInstance().modules.contains(selectedModule)) {
                 JOptionPane.showMessageDialog(this, "You have already joined this module.", "Module Already Joined", JOptionPane.INFORMATION_MESSAGE);
             } else {
-                System.out.println(ModuleData.getInstance().modules);
                 ModuleController.joinModule(selectedModule);
                 JOptionPane.showMessageDialog(this, "Successfully joined this module.", "Module Joined", JOptionPane.INFORMATION_MESSAGE);
             }

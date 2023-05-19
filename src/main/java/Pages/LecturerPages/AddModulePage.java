@@ -13,7 +13,7 @@ import java.awt.event.WindowEvent;
 
 
 public class AddModulePage extends JFrame {
-    private final JTextField nameField, codeField, creditsField, hoursField, gradesField,semesterField, typeField, lecturerField;
+    private final JTextField nameField, codeField, creditsField, hoursField,semesterField, typeField, lecturerField;
     private final JTextArea summaryField, aimsField, syllabusField, readingListField;
     private final JButton submitButton;
     private final JButton backButton;
@@ -45,7 +45,6 @@ public class AddModulePage extends JFrame {
         codeField = createLabeledTextField(contentPanel1, "Code:",10);
         creditsField = createLabeledTextField(contentPanel1, "Credits:",10);
         hoursField = createLabeledTextField(contentPanel1, "Hours:",10);
-        gradesField = createLabeledTextField(contentPanel1, "Grade:",10);
         semesterField = createLabeledTextField(contentPanel1, "Semester:",10);
         typeField = createLabeledTextField(contentPanel1, "Type:",10);
         lecturerField = createLabeledTextField(contentPanel1, "Lecturer:",10);
@@ -146,22 +145,54 @@ public class AddModulePage extends JFrame {
             public void actionPerformed(ActionEvent e) {
                 Module module = new Module();
 
-                module.setName(nameField.getText().trim());
-                module.setCode(codeField.getText().trim());
-                module.setCredits(Integer.parseInt(creditsField.getText().trim()));
-                module.setHours(Integer.parseInt(hoursField.getText().trim()));
-                module.setSemester(Integer.parseInt(semesterField.getText().trim()));
-                module.setType(typeField.getText().trim());
-              module.setGrades(Integer.parseInt(gradesField.getText().trim()));
-                module.setLecturer(lecturerField.getText().trim());
-                module.setSummary(summaryField.getText().trim());
-                module.setAims(aimsField.getText().trim());
-                module.setSyllabus(syllabusField.getText().trim());
-                module.setReadingList(readingListField.getText().trim());
+
+                String name = nameField.getText().trim();
+                String code = codeField.getText().trim();
+                String credits = creditsField.getText().trim();
+                String hours = hoursField.getText().trim();
+                String semester = semesterField.getText().trim();
+                String type = typeField.getText().trim();
+                String lecturer = lecturerField.getText().trim();
+                String summary = summaryField.getText().trim();
+                String aims = aimsField.getText().trim();
+                String syllabus = syllabusField.getText().trim();
+                String readingList = readingListField.getText().trim();
+
+                if (name.isEmpty() || code.isEmpty() || credits.isEmpty() || hours.isEmpty() || semester.isEmpty() || type.isEmpty() ||
+                        lecturer.isEmpty() || summary.isEmpty() || aims.isEmpty() || syllabus.isEmpty() || readingList.isEmpty()) {
+                    JOptionPane.showMessageDialog(null, "Please fill in all fields!");
+                    return;
+                }
+
+                int creditsInt, hoursInt, semesterInt;
+                try {
+                    creditsInt = Integer.parseInt(credits);
+                    hoursInt = Integer.parseInt(hours);
+                    semesterInt = Integer.parseInt(semester);
+                } catch (NumberFormatException ex) {
+                    JOptionPane.showMessageDialog(null, "Credits, hours and semester must be integers!");
+                    return;
+                }
+
+                module.setName(name);
+                module.setCode(code);
+                module.setCredits(creditsInt);
+                module.setHours(hoursInt);
+                module.setSemester(semesterInt);
+                module.setType(type);
+                module.setLecturer(lecturer);
+                module.setSummary(summary);
+                module.setAims(aims);
+                module.setSyllabus(syllabus);
+                module.setReadingList(readingList);
                 module.setStatus("ongoing");
 
                 ModuleController.addModule(module, Config.getUsername());
 
+                JOptionPane.showMessageDialog(null, "Module added successfully!");
+
+                AddModulePage.this.dispose();
+                new HomePage().setVisible(true);
             }
         });
     }

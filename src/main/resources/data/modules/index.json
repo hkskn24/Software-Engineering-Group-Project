@@ -1,34 +1,38 @@
 [
   {
-    "name": "Linear Algebra",
-    "code": "3412110079"
-  },
-  {
-    "name": "Intermediate English Reading and Writing",
-    "code": "3312111130"
-  },
-  {
-    "name": "1",
+    "name": "ca",
     "code": "1"
   },
   {
-    "name": "2",
+    "name": "cb",
     "code": "2"
   },
   {
-    "name": "3",
+    "name": "cc",
     "code": "3"
   },
   {
-    "name": "try",
-    "code": "1111"
+    "name": "cd",
+    "code": "4"
   },
   {
-    "name": "try",
-    "code": "1111"
+    "name": "ce",
+    "code": "5"
   },
   {
-    "name": "Linear",
-    "code": "111111"
+    "name": "cz",
+    "code": "11"
+  },
+  {
+    "name": "q",
+    "code": "q"
+  },
+  {
+    "name": "w",
+    "code": "w"
+  },
+  {
+    "name": "Q",
+    "code": "1"
   }
 ]

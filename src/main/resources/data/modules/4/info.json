@@ -1,0 +1,16 @@
+{
+  "name": "cd",
+  "code": "4",
+  "credits": 4,
+  "hours": 4,
+  "semester": 4,
+  "grades": 4,
+  "type": "Elective",
+  "lecturer": "la, lb",
+  "summary": "4",
+  "aims": "4",
+  "syllabus": "4",
+  "readingList": "4",
+  "status": "completed",
+  "id": 0
+}

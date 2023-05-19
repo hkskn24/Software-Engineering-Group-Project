@@ -1,0 +1,16 @@
+{
+  "name": "ce",
+  "code": "5",
+  "credits": 5,
+  "hours": 5,
+  "semester": 5,
+  "grades": 5,
+  "type": "Compulsory",
+  "lecturer": "lb, lc",
+  "summary": "1",
+  "aims": "1",
+  "syllabus": "1",
+  "readingList": "1",
+  "status": "ongoing",
+  "id": 0
+}

@@ -94,7 +94,7 @@ public class GPAPage extends JFrame {
         if (totalCredits != 0) {
             gpa = totalQualityPoints / totalCredits;
         }
-        textArea.append("GPA: " + df.format(gpa) + "\n");
+        textArea.append("Average grade: " + df.format(gpa) + "\n");
     }
 
     public void perGPA() {

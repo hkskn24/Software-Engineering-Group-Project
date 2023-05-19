@@ -183,16 +183,15 @@ public class GradePage extends JFrame {
 
     private class GPAActionListener implements ActionListener {
         public void actionPerformed(ActionEvent e) {
-            dispose();
             SwingUtilities.invokeLater(() -> {
                 GPAPage p = new GPAPage();
                 p.averageGPA();
                 p.totalGPA();
                 p.postGPA();
                 p.perGPA();
-                setVisible(true);
-//                dispose();
+                p.setVisible(true);
             });
+            GradePage.this.dispose();
         }
     }
 }

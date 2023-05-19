@@ -1,15 +1,16 @@
 {
-  "name": "1",
+  "name": "ca",
   "code": "1",
-  "credits": 11,
+  "credits": 1,
   "hours": 1,
   "semester": 1,
   "grades": 1,
-  "type": "11",
-  "lecturer": "1, gyy",
-  "summary": "1",
-  "aims": "11",
-  "syllabus": "1",
-  "readingList": "1",
-  "status": "ongoing"
+  "type": "Elective",
+  "lecturer": "la, lb, lc",
+  "summary": "s",
+  "aims": "a",
+  "syllabus": "s",
+  "readingList": "r",
+  "status": "ongoing",
+  "id": 0
 }

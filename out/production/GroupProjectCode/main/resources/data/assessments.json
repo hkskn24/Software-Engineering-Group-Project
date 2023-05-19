@@ -1,8 +1,22 @@
 [
   {
-    "name": "test",
+    "name": "test1",
     "code": "1",
-    "moduleName": "1",
+    "moduleName": "ca",
+    "type": "test",
+    "duration": 10
+  },
+  {
+    "name": "test2",
+    "code": "1",
+    "moduleName": "ca",
+    "type": "test",
+    "duration": 15
+  },
+  {
+    "name": "testforca",
+    "code": "1",
+    "moduleName": "ca",
     "type": "test",
     "duration": 10
   }

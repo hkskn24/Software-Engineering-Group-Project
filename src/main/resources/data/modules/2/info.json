@@ -1,15 +1,16 @@
 {
-  "name": "2",
+  "name": "cb",
   "code": "2",
-  "credits": 11,
-  "hours": 1,
-  "semester": 1,
-  "grades": 1,
-  "type": "11",
-  "lecturer": "1",
-  "summary": "1",
-  "aims": "11",
-  "syllabus": "1",
-  "readingList": "1",
-  "status": "completed"
+  "credits": 2,
+  "hours": 2,
+  "semester": 2,
+  "grades": 2,
+  "type": "Elective",
+  "lecturer": "la",
+  "summary": "2",
+  "aims": "2",
+  "syllabus": "2",
+  "readingList": "2",
+  "status": "ongoing",
+  "id": 0
 }

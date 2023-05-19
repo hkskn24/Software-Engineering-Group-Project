@@ -1,8 +1,5 @@
 package main.java.Controller;
 
-import com.google.gson.Gson;
-import com.google.gson.JsonArray;
-import com.google.gson.JsonObject;
 import main.java.Config;
 
 import javax.swing.*;

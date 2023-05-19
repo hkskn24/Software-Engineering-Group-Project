@@ -1,16 +1,12 @@
 package main.java.Pages.LecturerPages;
 
-import main.java.Controller.DateTimePanel;
 import main.java.Pages.LogInPage;
 
-import javax.swing.Icon;
 import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-import java.awt.image.BufferedImage;
-import java.io.File;
 import java.io.IOException;
 
 public class HomePage extends JFrame {

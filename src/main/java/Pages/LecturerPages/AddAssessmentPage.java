@@ -4,22 +4,16 @@ package main.java.Pages.LecturerPages;
 import main.java.Data.ModuleData;
 import main.java.Entity.Assessment;
 import main.java.Entity.Module;
-import main.java.Pages.StudentsPages.HomePage;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.awt.event.WindowAdapter;
-import java.awt.event.WindowEvent;
 
 public class AddAssessmentPage extends JFrame {
-    private JTextField nameTextField;
-    private JTextField moduleNameTextField;
-    private JTextField codeTextField;
-    private JTextField dateTextField;
-    private JTextField typeTextField;
-    private JTextField durationTextField;
+    private final JTextField nameTextField;
+    private final JTextField moduleNameTextField;
+    private final JTextField codeTextField;
+    private final JTextField typeTextField;
+    private final JTextField durationTextField;
 
     public AddAssessmentPage(Module module) {
         setTitle("Add Assessment");
@@ -27,15 +21,6 @@ public class AddAssessmentPage extends JFrame {
         setBounds(500, 300, 1094, 729);
         setLocationRelativeTo(null);
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-
-        // Add a window listener
-        addWindowListener(new WindowAdapter() {
-            @Override
-            public void windowClosing(WindowEvent e) {
-                main.java.Pages.LecturerPages.HomePage homePage = new main.java.Pages.LecturerPages.HomePage();
-                homePage.setVisible(true);
-            }
-        });
 
         JPanel contentPanel = new JPanel(new GridLayout(6, 2));
 
@@ -57,7 +42,7 @@ public class AddAssessmentPage extends JFrame {
         contentPanel.add(codeTextField);
 
         JLabel dateLabel = new JLabel("Date:");
-        dateTextField = new JTextField();
+        JTextField dateTextField = new JTextField();
         contentPanel.add(dateLabel);
         contentPanel.add(dateTextField);
 
@@ -72,28 +57,24 @@ public class AddAssessmentPage extends JFrame {
         contentPanel.add(durationTextField);
 
         JButton submitButton = new JButton("Submit");
-        submitButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                String name = nameTextField.getText().trim();
-                String moduleName = moduleNameTextField.getText().trim();
-                String code = codeTextField.getText().trim();
-                String date = dateTextField.getText().trim();
-                String type = typeTextField.getText().trim();
-                int duration = Integer.parseInt(durationTextField.getText().trim());
+        submitButton.addActionListener(e -> {
+            String name = nameTextField.getText().trim();
+            String moduleName = moduleNameTextField.getText().trim();
+            String code = codeTextField.getText().trim();
+            String type = typeTextField.getText().trim();
+            int duration = Integer.parseInt(durationTextField.getText().trim());
 
-                Assessment assessment = new Assessment();
-                assessment.setName(name);
-                assessment.setModuleName(moduleName);
-                assessment.setCode(code);
-                assessment.setType(type);
-                assessment.setDuration(duration);
+            Assessment assessment = new Assessment();
+            assessment.setName(name);
+            assessment.setModuleName(moduleName);
+            assessment.setCode(code);
+            assessment.setType(type);
+            assessment.setDuration(duration);
 
-                ModuleData.getInstance().addAssessment(assessment);
+            ModuleData.getInstance().addAssessment(assessment);
 
-                JOptionPane.showMessageDialog(AddAssessmentPage.this, "Assessment added successfully.", "Success", JOptionPane.INFORMATION_MESSAGE);
-                dispose();
-            }
+            JOptionPane.showMessageDialog(AddAssessmentPage.this, "Assessment added successfully.", "Success", JOptionPane.INFORMATION_MESSAGE);
+            dispose();
         });
 
         add(contentPanel, BorderLayout.CENTER);

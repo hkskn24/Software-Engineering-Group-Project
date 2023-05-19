@@ -1,19 +1,18 @@
-package main.java.Pages;
+package main.java.Pages.LecturerPages;
 
 import main.java.Controller.StudentController;
 import main.java.Entity.Module;
 import main.java.Entity.Student;
-import main.java.Pages.LecturerPages.MyPage;
 
 import javax.swing.*;
 import java.awt.*;
 import java.util.List;
 
 public class StudentListPage extends MyPage {
-    private StudentController studentController;
-    private String code;
-    private JList<String> studentList;
-    private DefaultListModel<String> listModel;
+    private final StudentController studentController;
+    private final String code;
+    private final JList<String> studentList;
+    private final DefaultListModel<String> listModel;
 
     public StudentListPage(Module module) {
         this.studentController = new StudentController();
@@ -34,10 +33,9 @@ public class StudentListPage extends MyPage {
     }
 
     private JPanel setupControlPanel(Module module) {
-        JPanel controlPanel = new JPanel();
-        controlPanel.setLayout(new BoxLayout(controlPanel, BoxLayout.Y_AXIS));
+        JPanel controlPanel = new JPanel(new FlowLayout(FlowLayout.RIGHT));
 
-        controlPanel.add(setupAddPanel());
+        controlPanel.add(setupAddPanel(), FlowLayout.LEFT);
 
         JButton deleteButton = new JButton("Delete Student");
         deleteButton.addActionListener(e -> {
@@ -62,7 +60,7 @@ public class StudentListPage extends MyPage {
         JButton backButton = new JButton("Back");
         backButton.addActionListener(e -> {
             dispose();
-            new Lec_ModuleInfoPage(module);
+            new ModuleInfoPage(module);
         });
         controlPanel.add(backButton);
         return controlPanel;

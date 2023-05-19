@@ -1,4 +1,4 @@
-package main.java.Pages.StudentsPages;
+package main.java.Pages.StudentPages;
 
 import com.formdev.flatlaf.FlatDarculaLaf;
 import main.java.Controller.DateTimePanel;
@@ -9,7 +9,6 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-import java.io.File;
 import java.io.IOException;
 
 public class HomePage extends JFrame {

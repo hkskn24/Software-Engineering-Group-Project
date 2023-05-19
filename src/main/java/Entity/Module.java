@@ -15,7 +15,6 @@ public class Module {
     private String syllabus;
     private String readingList;
     private String status;
-    private String email;
     private int id;
 
     public static String[] getGradesAttributes() {
@@ -116,14 +115,6 @@ public class Module {
 
     public void setStatus(String status) {
         this.status = status;
-    }
-
-    public String getEmail() {
-        return email;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
     }
 
     public int getId() {

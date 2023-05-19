@@ -1,4 +1,4 @@
-package main.java.Pages.StudentsPages;
+package main.java.Pages.StudentPages;
 
 import main.java.Controller.AchievementController;
 import main.java.Data.AchievementData;
@@ -58,10 +58,6 @@ public class AchievementPage extends JFrame {
         setupCombinedPanel(filterPanel, sortPanel);
 
         setVisible(true);
-    }
-
-    public static void main(String[] args) {
-        AchievementPage achievementPage = new AchievementPage();
     }
 
     private void setupAchievement() {

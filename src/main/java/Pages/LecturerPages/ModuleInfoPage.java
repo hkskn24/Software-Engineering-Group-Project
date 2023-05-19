@@ -1,13 +1,12 @@
-package main.java.Pages;
+package main.java.Pages.LecturerPages;
 
 import main.java.Entity.Module;
-import main.java.Pages.StudentsPages.ModuleInfoPage;
 
 import javax.swing.*;
 import java.awt.*;
 
-public class Lec_ModuleInfoPage extends ModuleInfoPage {
-    public Lec_ModuleInfoPage(Module module) {
+public class ModuleInfoPage extends main.java.Pages.StudentPages.ModuleInfoPage {
+    public ModuleInfoPage(Module module) {
         super(module);
     }
 

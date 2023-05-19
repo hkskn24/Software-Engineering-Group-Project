@@ -19,5 +19,12 @@
     "moduleName": "ca",
     "type": "test",
     "duration": 10
+  },
+  {
+    "name": "hh",
+    "code": "11111",
+    "moduleName": "lz",
+    "type": "e",
+    "duration": 20
   }
 ]

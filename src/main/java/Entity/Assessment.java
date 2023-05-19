@@ -1,11 +1,8 @@
 package main.java.Entity;
 
-import main.java.Data.ModuleData;
-
 public class Assessment {
     private String name;
     private String code;
-    private String moduleName;
     private String type;
     private int duration;   // (minutes)
 
@@ -18,7 +15,6 @@ public class Assessment {
     }
 
     public void setModuleName(String moduleName) {
-        this.moduleName = moduleName;
     }
 
     public String getType() {

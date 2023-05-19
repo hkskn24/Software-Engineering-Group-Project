@@ -1,8 +1,8 @@
 package main.java.Pages.LecturerPages;
 
 import main.java.Controller.StudentController;
-import main.java.Entity.Student;
 import main.java.Entity.Module;
+import main.java.Entity.Student;
 
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
@@ -12,9 +12,8 @@ import java.util.List;
 
 public class AssignGradesPage extends MyPage {
     private JTable table;
-    private StudentController studentController;
-    private String code;
-    private JPanel panel;
+    private final StudentController studentController;
+    private final String code;
 
     public AssignGradesPage(Module module) {
         this.studentController = new StudentController();
@@ -22,19 +21,19 @@ public class AssignGradesPage extends MyPage {
 
         code = module.getCode();
 
-        panel = new JPanel(new BorderLayout());
+        JPanel panel = new JPanel(new BorderLayout());
         setContentPane(panel);
 
-        panel.add(setupControlPanel(module, panel), BorderLayout.SOUTH);
+        panel.add(setupControlPanel(panel), BorderLayout.SOUTH);
     }
 
-    private JPanel setupControlPanel(Module module, JPanel panel) {
-        JPanel buttonPanel = new JPanel();
+    private JPanel setupControlPanel(JPanel panel) {
+        JPanel buttonPanel = new JPanel(new FlowLayout(FlowLayout.RIGHT));
         String[] columnNames = {"ID", "Name", "Grades"};
         DefaultTableModel model = new DefaultTableModel(columnNames, 0);
         table = new JTable(model) {
             public boolean isCellEditable(int row, int column) {
-                return  column == 2;
+                return column == 2;
             }
         };
 
@@ -50,9 +49,7 @@ public class AssignGradesPage extends MyPage {
         panel.add(new JScrollPane(table), BorderLayout.CENTER);
 
         JButton submitButton = new JButton("Submit");
-        submitButton.addActionListener(e -> {
-            submitGrades();
-        });
+        submitButton.addActionListener(e -> submitGrades());
         buttonPanel.add(submitButton);
 
         JButton backButton = new JButton("Back");

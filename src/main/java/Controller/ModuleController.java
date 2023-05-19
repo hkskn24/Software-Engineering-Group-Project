@@ -41,13 +41,6 @@ public class ModuleController {
         }
     }
 
-    public static void sortTable(JTable table, int columnIndex, boolean ascending) {
-        TableRowSorter<DefaultTableModel> sorter = (TableRowSorter<DefaultTableModel>) table.getRowSorter();
-        List<RowSorter.SortKey> sortKeys = new ArrayList<>();
-        sortKeys.add(new RowSorter.SortKey(columnIndex, ascending ? SortOrder.ASCENDING : SortOrder.DESCENDING));
-        sorter.setSortKeys(sortKeys);
-    }
-
     public static List<Module> searchMoules(List<Module> modules, String term) {
         List<Module> result = new ArrayList<>();
         for (Module module : modules) {
@@ -73,7 +66,7 @@ public class ModuleController {
         moduleData.saveModuleInfo(module);
         moduleData.initializeGradesJson(gradesPath);
         moduleData.addModuleToIndex(module, indexPath);
-        moduleData.addModuleToUser(module, username, lecturerPath);
+        moduleData.addModuleToUser(module, lecturerPath);
     }
 
     public static List<Module> searchAllModules(String term) {
@@ -87,7 +80,7 @@ public class ModuleController {
         ModuleData moduleData = ModuleData.getInstance();
 
         // add module to lecturer's index
-        moduleData.addModuleToUser(module, username, lecturerPath);
+        moduleData.addModuleToUser(module, lecturerPath);
 
         // add lecturer to module info
         module.setLecturer(module.getLecturer() + ", " + username);

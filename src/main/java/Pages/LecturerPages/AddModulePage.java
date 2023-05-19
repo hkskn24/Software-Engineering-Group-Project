@@ -6,8 +6,6 @@ import main.java.Entity.Module;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 
@@ -16,7 +14,6 @@ public class AddModulePage extends JFrame {
     private final JTextField nameField, codeField, creditsField, hoursField,semesterField, typeField, lecturerField;
     private final JTextArea summaryField, aimsField, syllabusField, readingListField;
     private final JButton submitButton;
-    private final JButton backButton;
 
     public AddModulePage() {
 
@@ -41,13 +38,13 @@ public class AddModulePage extends JFrame {
         JPanel contentPanel1 = new JPanel(new GridLayout(2, 7));
         contentPanel1.setPreferredSize(new Dimension(400, 150));
         contentPanel1.setBorder(BorderFactory.createEmptyBorder(5, 20, 20, 20));
-        nameField = createLabeledTextField(contentPanel1, "Name:",10);
-        codeField = createLabeledTextField(contentPanel1, "Code:",10);
-        creditsField = createLabeledTextField(contentPanel1, "Credits:",10);
-        hoursField = createLabeledTextField(contentPanel1, "Hours:",10);
-        semesterField = createLabeledTextField(contentPanel1, "Semester:",10);
-        typeField = createLabeledTextField(contentPanel1, "Type:",10);
-        lecturerField = createLabeledTextField(contentPanel1, "Lecturer:",10);
+        nameField = createLabeledTextField(contentPanel1, "Name:");
+        codeField = createLabeledTextField(contentPanel1, "Code:");
+        creditsField = createLabeledTextField(contentPanel1, "Credits:");
+        hoursField = createLabeledTextField(contentPanel1, "Hours:");
+        semesterField = createLabeledTextField(contentPanel1, "Semester:");
+        typeField = createLabeledTextField(contentPanel1, "Type:");
+        lecturerField = createLabeledTextField(contentPanel1, "Lecturer:");
 
         JPanel contentPanel2 = new JPanel(new GridLayout(2, 4));
         contentPanel2.setBorder(BorderFactory.createEmptyBorder(10, 20, 20, 20));
@@ -65,8 +62,8 @@ public class AddModulePage extends JFrame {
         contentPane.add(contentPanel1, BorderLayout.NORTH);
         contentPane.add(contentPanel2, BorderLayout.CENTER);
 
-        backButton = new JButton("Back");
-        JPanel buttonPanel = new JPanel(new FlowLayout(FlowLayout.CENTER));
+        JButton backButton = new JButton("Back");
+        JPanel buttonPanel = new JPanel(new FlowLayout(FlowLayout.RIGHT));
         buttonPanel.setBorder(BorderFactory.createEmptyBorder(10, 0, 20, 0));
         buttonPanel.add(submitButton);
         buttonPanel.add(backButton);
@@ -76,19 +73,16 @@ public class AddModulePage extends JFrame {
 
         setVisible(true);
 
-        backButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                dispose();
-                new HomePage().setVisible(true);
-            }
+        backButton.addActionListener(e -> {
+            dispose();
+            new HomePage().setVisible(true);
         });
     }
 
-    private JTextField createLabeledTextField(JPanel panel, String text ,int columns) {
+    private JTextField createLabeledTextField(JPanel panel, String text) {
         JPanel subPanel = new JPanel(new FlowLayout(FlowLayout.LEFT));
         JLabel label = new JLabel(text);
-        JTextField textField = new JTextField(columns);
+        JTextField textField = new JTextField(10);
 
         subPanel.add(label);
         subPanel.add(textField);
@@ -130,70 +124,59 @@ public class AddModulePage extends JFrame {
 
         return textArea;
     }
-    private JButton createBackButton() {
-        JButton backButton = new JButton("Back");
-        backButton.addActionListener(e -> {
-            dispose();
-            new HomePage().setVisible(true);
-        });
-        return backButton;
-    }
 
     private void addActionListener() {
-        submitButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                Module module = new Module();
+        submitButton.addActionListener(e -> {
+            Module module = new Module();
 
 
-                String name = nameField.getText().trim();
-                String code = codeField.getText().trim();
-                String credits = creditsField.getText().trim();
-                String hours = hoursField.getText().trim();
-                String semester = semesterField.getText().trim();
-                String type = typeField.getText().trim();
-                String lecturer = lecturerField.getText().trim();
-                String summary = summaryField.getText().trim();
-                String aims = aimsField.getText().trim();
-                String syllabus = syllabusField.getText().trim();
-                String readingList = readingListField.getText().trim();
+            String name = nameField.getText().trim();
+            String code = codeField.getText().trim();
+            String credits = creditsField.getText().trim();
+            String hours = hoursField.getText().trim();
+            String semester = semesterField.getText().trim();
+            String type = typeField.getText().trim();
+            String lecturer = lecturerField.getText().trim();
+            String summary = summaryField.getText().trim();
+            String aims = aimsField.getText().trim();
+            String syllabus = syllabusField.getText().trim();
+            String readingList = readingListField.getText().trim();
 
-                if (name.isEmpty() || code.isEmpty() || credits.isEmpty() || hours.isEmpty() || semester.isEmpty() || type.isEmpty() ||
-                        lecturer.isEmpty() || summary.isEmpty() || aims.isEmpty() || syllabus.isEmpty() || readingList.isEmpty()) {
-                    JOptionPane.showMessageDialog(null, "Please fill in all fields!");
-                    return;
-                }
-
-                int creditsInt, hoursInt, semesterInt;
-                try {
-                    creditsInt = Integer.parseInt(credits);
-                    hoursInt = Integer.parseInt(hours);
-                    semesterInt = Integer.parseInt(semester);
-                } catch (NumberFormatException ex) {
-                    JOptionPane.showMessageDialog(null, "Credits, hours and semester must be integers!");
-                    return;
-                }
-
-                module.setName(name);
-                module.setCode(code);
-                module.setCredits(creditsInt);
-                module.setHours(hoursInt);
-                module.setSemester(semesterInt);
-                module.setType(type);
-                module.setLecturer(lecturer);
-                module.setSummary(summary);
-                module.setAims(aims);
-                module.setSyllabus(syllabus);
-                module.setReadingList(readingList);
-                module.setStatus("ongoing");
-
-                ModuleController.addModule(module, Config.getUsername());
-
-                JOptionPane.showMessageDialog(null, "Module added successfully!");
-
-                AddModulePage.this.dispose();
-                new HomePage().setVisible(true);
+            if (name.isEmpty() || code.isEmpty() || credits.isEmpty() || hours.isEmpty() || semester.isEmpty() || type.isEmpty() ||
+                    lecturer.isEmpty() || summary.isEmpty() || aims.isEmpty() || syllabus.isEmpty() || readingList.isEmpty()) {
+                JOptionPane.showMessageDialog(null, "Please fill in all fields!");
+                return;
             }
+
+            int creditsInt, hoursInt, semesterInt;
+            try {
+                creditsInt = Integer.parseInt(credits);
+                hoursInt = Integer.parseInt(hours);
+                semesterInt = Integer.parseInt(semester);
+            } catch (NumberFormatException ex) {
+                JOptionPane.showMessageDialog(null, "Credits, hours and semester must be integers!");
+                return;
+            }
+
+            module.setName(name);
+            module.setCode(code);
+            module.setCredits(creditsInt);
+            module.setHours(hoursInt);
+            module.setSemester(semesterInt);
+            module.setType(type);
+            module.setLecturer(lecturer);
+            module.setSummary(summary);
+            module.setAims(aims);
+            module.setSyllabus(syllabus);
+            module.setReadingList(readingList);
+            module.setStatus("ongoing");
+
+            ModuleController.addModule(module, Config.getUsername());
+
+            JOptionPane.showMessageDialog(null, "Module added successfully!");
+
+            AddModulePage.this.dispose();
+            new HomePage().setVisible(true);
         });
     }
 }

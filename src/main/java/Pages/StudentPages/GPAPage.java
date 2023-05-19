@@ -1,4 +1,4 @@
-package main.java.Pages.StudentsPages;
+package main.java.Pages.StudentPages;
 
 import main.java.Config;
 import main.java.Controller.StudentController;
@@ -14,12 +14,12 @@ import java.util.ArrayList;
 
 
 public class GPAPage extends JFrame {
-    private StudentController studentController;
+    final ArrayList<Module> modules = ModuleData.getInstance().modules;
     double totalHours = 0.0;
     double totalQualityPoints = 0;
-    ArrayList<Module> modules = ModuleData.getInstance().modules;
-    JTextArea textArea = new JTextArea();
-    JPanel panel = new JPanel();
+    final JTextArea textArea = new JTextArea();
+    final JPanel panel = new JPanel();
+    private final StudentController studentController;
 
     public GPAPage() {
         super("GPA Page");
@@ -142,7 +142,6 @@ public class GPAPage extends JFrame {
 
     public void postGPA() {
         int totalCredits = 0;
-        int totalHours = 0;
         int totalQualityPoints = 0;
         double totalGradePoints = 0;
         DecimalFormat df = new DecimalFormat("#.00");
@@ -151,7 +150,6 @@ public class GPAPage extends JFrame {
             // Exclude courses with type "elective" or "minor"
             if (!module.getType().equalsIgnoreCase("elective") && !module.getType().equalsIgnoreCase("minor")) {
                 totalCredits += module.getCredits();
-                totalHours += module.getHours();
                 totalQualityPoints += studentController.getGradesByCode(Config.getUsername(), module.getCode()) * module.getCredits();
                 totalGradePoints += gradeToGPA(studentController.getGradesByCode(Config.getUsername(), module.getCode())) * module.getCredits();
             }

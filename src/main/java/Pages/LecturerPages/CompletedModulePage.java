@@ -2,7 +2,6 @@ package main.java.Pages.LecturerPages;
 
 import main.java.Data.ModuleData;
 import main.java.Entity.Module;
-import main.java.Pages.Lec_ModuleInfoPage;
 
 import javax.swing.*;
 import java.awt.*;
@@ -42,14 +41,14 @@ public class CompletedModulePage extends MyPage{
                 if (e.getClickCount() == 2) {
                     int selectedIndex = completedModuleList.getSelectedIndex();
                     Module selectedModule = completedModuleList.getModel().getElementAt(selectedIndex);
-                    new Lec_ModuleInfoPage(selectedModule);
+                    new ModuleInfoPage(selectedModule);
                 }
             }
         });
     }
 
     private JPanel setupButtonPanel() {
-        JPanel buttonPanel = new JPanel(new FlowLayout());
+        JPanel buttonPanel = new JPanel(new FlowLayout(FlowLayout.RIGHT));
 
         JButton assignGrades = new JButton("Assign Grades");
         assignGrades.addActionListener(e -> {

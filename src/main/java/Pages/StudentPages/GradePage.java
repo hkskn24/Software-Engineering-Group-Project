@@ -1,4 +1,4 @@
-package main.java.Pages.StudentsPages;
+package main.java.Pages.StudentPages;
 
 import main.java.Config;
 import main.java.Controller.AchievementController;
@@ -21,7 +21,7 @@ import java.util.ArrayList;
 
 public class GradePage extends JFrame {
     private TableRowSorter<DefaultTableModel> sorter;
-    private StudentController studentController;
+    private final StudentController studentController;
 
     public GradePage() {
         ModuleData.getInstance().updateModules();
@@ -33,15 +33,6 @@ public class GradePage extends JFrame {
         setLocationRelativeTo(null);
         setResizable(true);
 
-        // Add a window listener
-        addWindowListener(new WindowAdapter() {
-            @Override
-            public void windowClosing(WindowEvent e) {
-                HomePage homePage = new HomePage();
-                homePage.setVisible(true);
-            }
-        });
-
         JTable table = setupTable();
 
         // filter
@@ -52,13 +43,12 @@ public class GradePage extends JFrame {
 
         setupCombinedPanel(filterPanel, sortPanel);
 
+        // Add a window listener
         addWindowListener(new WindowAdapter() {
             @Override
             public void windowClosing(WindowEvent e) {
-                super.windowClosing(e);
-                if (Frame.getFrames().length == 1) {
-                    System.exit(0);
-                }
+                HomePage homePage = new HomePage();
+                homePage.setVisible(true);
             }
         });
 

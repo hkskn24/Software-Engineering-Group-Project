@@ -104,13 +104,12 @@ public class StudentData extends Data{
         for (Student s : students) {
             if (s.getID().equals(ID)) {
                 s.setGrades(grades);
-                isSuccess &= (grades == s.getGrades());
+                isSuccess = (grades == s.getGrades());
                 break;
             }
         }
         String path = "src/main/resources/data/modules/" + code + "/grades.json";
         saveJsonToFile(path, students);
-        students = getStudentList(code);
 
         return isSuccess;
     }

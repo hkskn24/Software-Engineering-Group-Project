@@ -9,6 +9,8 @@ import javax.swing.border.EmptyBorder;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableRowSorter;
 import java.awt.*;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 import java.util.ArrayList;
 
 public class AchievementPage extends JFrame {
@@ -22,7 +24,16 @@ public class AchievementPage extends JFrame {
         setBounds(500, 300, 1094, 729);
         setLocationRelativeTo(null);
         setResizable(true);
-        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+
+        // Add a window listener
+        addWindowListener(new WindowAdapter() {
+            @Override
+            public void windowClosing(WindowEvent e) {
+                HomePage homePage = new HomePage();
+                homePage.setVisible(true);
+            }
+        });
 
         String[] columNames = {"Name", "Type", "Semester"};
         tableModel = new DefaultTableModel(columNames, 0);

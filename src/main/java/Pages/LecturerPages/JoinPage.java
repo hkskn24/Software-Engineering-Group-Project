@@ -6,6 +6,8 @@ import main.java.Entity.Module;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 import java.util.Collections;
 import java.util.List;
 
@@ -19,6 +21,15 @@ public class JoinPage extends JFrame {
         setLocationRelativeTo(null);
         setResizable(true);
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+
+        // Add a window listener
+        addWindowListener(new WindowAdapter() {
+            @Override
+            public void windowClosing(WindowEvent e) {
+                main.java.Pages.LecturerPages.HomePage homePage = new main.java.Pages.LecturerPages.HomePage();
+                homePage.setVisible(true);
+            }
+        });
 
         JPanel contentPanel = new JPanel(new BorderLayout());
 

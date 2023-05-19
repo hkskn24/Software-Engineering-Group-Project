@@ -128,10 +128,8 @@ public class RegisterActionListener implements ActionListener {
 
                 // create empty json files
                 File moduleFile = new File("src/main/resources/data/lecturers/" + username + "/modules.json");
-                File informationFile = new File("src/main/resources/data/lecturers/" + username + "/information.json");
 
                 addFile(moduleFile);
-                addFile(informationFile);
                 try {
                     BufferedWriter writer = new BufferedWriter(new FileWriter("lecturers.txt", true));
                     writer.write(username + " " + password + " " + id);
@@ -140,26 +138,6 @@ public class RegisterActionListener implements ActionListener {
                     writer.close();
                 } catch (IOException ex) {
                     JOptionPane.showMessageDialog(registerWindow, "Failed to read the file: " + ex.getMessage());
-                }
-
-                String jsonFilePath = "src/main/resources/data/lecturers/" + username + "/information.json";
-                try (FileWriter fileWriter = new FileWriter(jsonFilePath)) {
-                    // 创建一个JsonObject并添加用户信息
-                    JsonObject userInfo = new JsonObject();
-                    userInfo.addProperty("username", username);
-                    userInfo.addProperty("id", id);
-                    userInfo.addProperty("email", " ");
-
-                    // 创建一个JsonArray并将userInfo添加到数组
-                    JsonArray jsonArray = new JsonArray();
-                    jsonArray.add(userInfo);
-
-                    // 使用Gson库将JsonArray对象序列化为json字符串
-                    Gson gson = new Gson();
-                    String jsonString = gson.toJson(jsonArray);
-                    fileWriter.write(jsonString);
-                } catch (IOException ex) {
-                    ex.printStackTrace();
                 }
             }
             registerWindow.dispose();

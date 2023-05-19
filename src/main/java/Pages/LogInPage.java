@@ -7,6 +7,8 @@ import main.java.Controller.RegisterActionListener;
 import main.java.Controller.RetrievePasswordActionListener;
 import main.java.Pages.LecturerPages.HomePage;
 
+
+import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -16,8 +18,8 @@ import java.io.*;
 
 public class LogInPage extends JFrame implements ActionListener {
     public static int userType; //student:0 lecturer:1
-    private final JTextField usernameField;
-    private final JPasswordField passwordField;
+    final JTextField usernameField;
+    final JPasswordField passwordField;
 
     public LogInPage() {
         super("LOG IN TO YOUR ACCOUNT");
@@ -37,14 +39,23 @@ public class LogInPage extends JFrame implements ActionListener {
 
         // set student or lecturer
         JCheckBox studentCheckbox = new JCheckBox("Student");
+        studentCheckbox.setFont(new Font("Arial", Font.ITALIC, 17));
+        studentCheckbox.setForeground(Color.BLACK);
         JCheckBox lecturerCheckbox = new JCheckBox("Lecturer");
+        lecturerCheckbox.setFont(new Font("Arial", Font.ITALIC, 17));
+        lecturerCheckbox.setForeground(Color.BLACK);
 
         ButtonGroup group = new ButtonGroup();
         group.add(studentCheckbox);
         group.add(lecturerCheckbox);
 
         // set background
-        ImageIcon backgroundImageIcon = new ImageIcon("src/main/resources/images/login.JPG");
+        ImageIcon backgroundImageIcon = null;
+        try {
+            backgroundImageIcon = new ImageIcon(ImageIO.read(getClass().getResource("../../resources/images/login2.jpg")));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
         JLabel backgroundImage = new JLabel(backgroundImageIcon);
         backgroundImage.setLayout(new GridLayout(0, 2, 4, 5));
 
@@ -70,7 +81,10 @@ public class LogInPage extends JFrame implements ActionListener {
         usernameField = new JTextField();
         passwordField = new JPasswordField();
         usernameField.setPreferredSize(new Dimension(180, 35));
+        usernameField.setFont(new Font("Arial", Font.ITALIC, 20));
         passwordField.setPreferredSize(new Dimension(180, 35));
+        passwordField.setFont(new Font("Arial", Font.ITALIC, 20));
+        passwordField.setEchoChar('*');
 
         // set button
         JButton loginButton = new JButton("Log in");

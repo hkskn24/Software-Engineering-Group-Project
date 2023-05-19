@@ -9,6 +9,8 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 
 public class OngoingModulePage extends MyPage {
     private final JList<Module> ongoingModuleList;
@@ -16,6 +18,15 @@ public class OngoingModulePage extends MyPage {
     public OngoingModulePage() {
         setTitle("Ongoing Modules");
         setLayout(new BorderLayout());
+
+        // Add a window listener
+        addWindowListener(new WindowAdapter() {
+            @Override
+            public void windowClosing(WindowEvent e) {
+                main.java.Pages.LecturerPages.HomePage homePage = new main.java.Pages.LecturerPages.HomePage();
+                homePage.setVisible(true);
+            }
+        });
 
         ModuleData.getInstance().updateModules();
 

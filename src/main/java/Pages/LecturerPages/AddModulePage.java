@@ -8,6 +8,8 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 
 
 public class AddModulePage extends JFrame {
@@ -19,10 +21,19 @@ public class AddModulePage extends JFrame {
     public AddModulePage() {
 
         setTitle("Add Module");
-        setSize(694, 729);
+        setBounds(500, 300, 1094, 729);
         setLocationRelativeTo(null);
         setResizable(true);
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+
+        // Add a window listener
+        addWindowListener(new WindowAdapter() {
+            @Override
+            public void windowClosing(WindowEvent e) {
+                main.java.Pages.LecturerPages.HomePage homePage = new main.java.Pages.LecturerPages.HomePage();
+                homePage.setVisible(true);
+            }
+        });
 
         JPanel contentPanel = new JPanel(new GridLayout(2, 1));
         contentPanel.setBorder(BorderFactory.createEmptyBorder(20, 20, 20, 20));

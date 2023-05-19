@@ -19,7 +19,7 @@ public class StartPage extends JFrame {
         // Set the background image
         try {
             JLabel backgroundImage = new JLabel();
-            ImageIcon ii = new ImageIcon(ImageIO.read(new File("src/main/resources/images/startpage.jpg")));
+            ImageIcon ii = new ImageIcon(ImageIO.read(getClass().getResource("../../resources/images/startpage.jpg")));
             ii.setImage(ii.getImage().getScaledInstance(900, 600, Image.SCALE_DEFAULT));
             backgroundImage.setIcon(ii);
             backgroundImage.setLayout(new GridBagLayout());

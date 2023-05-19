@@ -33,6 +33,15 @@ public class GradePage extends JFrame {
         setLocationRelativeTo(null);
         setResizable(true);
 
+        // Add a window listener
+        addWindowListener(new WindowAdapter() {
+            @Override
+            public void windowClosing(WindowEvent e) {
+                HomePage homePage = new HomePage();
+                homePage.setVisible(true);
+            }
+        });
+
         JTable table = setupTable();
 
         // filter

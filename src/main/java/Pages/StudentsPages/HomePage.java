@@ -7,6 +7,8 @@ import main.java.Pages.LogInPage;
 import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import java.io.File;
 import java.io.IOException;
 
@@ -19,13 +21,52 @@ public class HomePage extends JFrame {
 
         // Set the background image
         try {
-            JLabel backgroundImage = new JLabel(new ImageIcon(ImageIO.read(new File("src/main/resources/images/homepage.JPG"))));
+            JLabel backgroundImage = new JLabel(new ImageIcon(ImageIO.read(getClass().getResource("../../../resources/images/homepage.jpg"))));
             backgroundImage.setLayout(new GridBagLayout());
-            JButton btnModulePage = new JButton("ModulePage");
-            JButton btnGradePage = new JButton("GradePage");
+            // 创建按钮并设置大小
+            Dimension buttonSize = new Dimension(200, 50);
+            JButton btnModulePage = new JButton("Module");
+            btnModulePage.setPreferredSize(buttonSize);
+            JButton btnGradePage = new JButton("Grade");
+            btnGradePage.setPreferredSize(buttonSize);
             JButton btnAchievement = new JButton("Achievement");
+            btnAchievement.setPreferredSize(buttonSize);
             JButton btnAssessment = new JButton("Assessment");
+            btnAssessment.setPreferredSize(buttonSize);
             JButton btnBack = new JButton("Log out");
+            btnBack.setPreferredSize(buttonSize);
+
+            // 添加边距
+            int margin = 10;
+            btnModulePage.setBorder(BorderFactory.createEmptyBorder(margin, margin, margin, margin));
+            btnGradePage.setBorder(BorderFactory.createEmptyBorder(margin, margin, margin, margin));
+            btnAchievement.setBorder(BorderFactory.createEmptyBorder(margin, margin, margin, margin));
+            btnAssessment.setBorder(BorderFactory.createEmptyBorder(margin, margin, margin, margin));
+            btnBack.setBorder(BorderFactory.createEmptyBorder(margin, margin, margin, margin));
+
+            // 添加动态效果
+            MouseAdapter mouseAdapter = new MouseAdapter() {
+                @Override
+                public void mouseEntered(MouseEvent e) {
+                    JButton button = (JButton) e.getSource();
+                    Color originalColor = button.getBackground();
+                    button.setBackground(originalColor.darker());
+                }
+
+                @Override
+                public void mouseExited(MouseEvent e) {
+                    JButton button = (JButton) e.getSource();
+                    Color originalColor = button.getBackground();
+                    button.setBackground(originalColor.brighter());
+                }
+            };
+
+            btnModulePage.addMouseListener(mouseAdapter);
+            btnGradePage.addMouseListener(mouseAdapter);
+            btnAchievement.addMouseListener(mouseAdapter);
+            btnAssessment.addMouseListener(mouseAdapter);
+            btnBack.addMouseListener(mouseAdapter);
+
 
             // 为按钮添加事件监听器
             btnModulePage.addActionListener(e -> {
@@ -57,10 +98,10 @@ public class HomePage extends JFrame {
             Color btnModulePageColor = new Color(96, 33, 46);
             Color btnGradePageColor = new Color(179, 122, 54);
             Color btnAchievementColor = new Color(25, 60, 79);
-            Color btnAssessmentColor = new Color(58, 40, 79, 189);
-            Color btnBackColor = new Color(34, 68, 49);
+            Color btnAssessmentColor = new Color(34, 68, 49);
+            Color btnBackColor = new Color(58, 40, 79);
             Color buttonTextColor = Color.WHITE;
-            Font buttonFont = new Font("Segoe Script", Font.BOLD, 25);
+            Font buttonFont = new Font("Verdana", Font.BOLD, 23);
 
             btnModulePage.setFont(buttonFont);
             btnModulePage.setBackground(btnModulePageColor);

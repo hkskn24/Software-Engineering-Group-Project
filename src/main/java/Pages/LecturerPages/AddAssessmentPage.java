@@ -4,11 +4,14 @@ package main.java.Pages.LecturerPages;
 import main.java.Data.ModuleData;
 import main.java.Entity.Assessment;
 import main.java.Entity.Module;
+import main.java.Pages.StudentsPages.HomePage;
 
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 
 public class AddAssessmentPage extends JFrame {
     private JTextField nameTextField;
@@ -21,9 +24,18 @@ public class AddAssessmentPage extends JFrame {
     public AddAssessmentPage(Module module) {
         setTitle("Add Assessment");
         setLayout(new BorderLayout());
-        setSize(400, 300);
+        setBounds(500, 300, 1094, 729);
         setLocationRelativeTo(null);
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+
+        // Add a window listener
+        addWindowListener(new WindowAdapter() {
+            @Override
+            public void windowClosing(WindowEvent e) {
+                main.java.Pages.LecturerPages.HomePage homePage = new main.java.Pages.LecturerPages.HomePage();
+                homePage.setVisible(true);
+            }
+        });
 
         JPanel contentPanel = new JPanel(new GridLayout(6, 2));
 

@@ -8,12 +8,23 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 
 public class CompletedModulePage extends MyPage{
     private final JList<Module> completedModuleList;
 
     public CompletedModulePage() {
         ModuleData.getInstance().updateModules();
+
+        // Add a window listener
+        addWindowListener(new WindowAdapter() {
+            @Override
+            public void windowClosing(WindowEvent e) {
+                main.java.Pages.LecturerPages.HomePage homePage = new main.java.Pages.LecturerPages.HomePage();
+                homePage.setVisible(true);
+            }
+        });
 
         setTitle("Completed Modules");
         setLayout(new BorderLayout());

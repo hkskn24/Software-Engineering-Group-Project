@@ -1,10 +1,15 @@
 package main.java.Pages.LecturerPages;
 
+import main.java.Controller.DateTimePanel;
 import main.java.Pages.LogInPage;
 
+import javax.swing.Icon;
 import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 
@@ -17,112 +22,126 @@ public class HomePage extends JFrame {
 
         // Set the background image
         try {
-            JLabel backgroundImage = new JLabel(new ImageIcon(ImageIO.read(new File("src/main/resources/images/homepage.JPG"))));
+            JLabel backgroundImage = new JLabel(new ImageIcon(ImageIO.read(getClass().getResource("../../../resources/images/login.jpg"))));
             backgroundImage.setLayout(new GridBagLayout());
+
+            // 创建按钮并设置大小
+            Dimension buttonSize = new Dimension(800, 50);
+            JButton btnLec_ModulePage = new JButton("Add Module");
+            btnLec_ModulePage.setPreferredSize(buttonSize);
+            JButton btnLec_StudentPage = new JButton("Join Module");
+            btnLec_StudentPage.setPreferredSize(buttonSize);
+            JButton btnOngoingcourses = new JButton("View ongoing courses");
+            btnOngoingcourses.setPreferredSize(buttonSize);
+            JButton btnCompletedcourses = new JButton("View completed courses");
+            btnCompletedcourses.setPreferredSize(buttonSize);
+            JButton btnBack = new JButton("Log out");
+            btnBack.setPreferredSize(buttonSize);
+
+            // 添加动态效果
+            MouseAdapter mouseAdapter = new MouseAdapter() {
+                @Override
+                public void mouseEntered(MouseEvent e) {
+                    JButton button = (JButton) e.getSource();
+                    Color originalColor = button.getBackground();
+                    button.setBackground(originalColor.darker());
+                }
+
+                @Override
+                public void mouseExited(MouseEvent e) {
+                    JButton button = (JButton) e.getSource();
+                    Color originalColor = button.getBackground();
+                    button.setBackground(originalColor.brighter());
+                }
+            };
+
+            btnLec_ModulePage.addMouseListener(mouseAdapter);
+            btnLec_StudentPage.addMouseListener(mouseAdapter);
+            btnOngoingcourses.addMouseListener(mouseAdapter);
+            btnCompletedcourses.addMouseListener(mouseAdapter);
+            btnBack.addMouseListener(mouseAdapter);
+
+            // add ActionListener for buttons
+            btnLec_ModulePage.addActionListener(e -> {
+                new AddModulePage();
+                dispose();
+            });
+
+            btnLec_StudentPage.addActionListener(e -> {
+                new JoinPage();
+                dispose();
+            });
+
+            btnOngoingcourses.addActionListener(e -> {
+                new OngoingModulePage();
+                dispose();
+            });
+
+            btnCompletedcourses.addActionListener(e -> {
+                new CompletedModulePage();
+                dispose();
+            });
+
+            btnBack.addActionListener(e -> {
+                new LogInPage().setVisible(true);
+                dispose();
+            });
+
+            // 设置按钮颜色和文字颜色
+            Color btnLec_ModulePageColor = new Color(96, 33, 46);
+            Color btnLec_StudentPageColor = new Color(179, 122, 54);
+            Color btnOngoingcoursesColor = new Color(25, 60, 79);
+            Color btnCompletedcoursesColor = new Color(34, 68, 49);
+            Color btnBackColor = new Color(58, 40, 79);
+            Color buttonTextColor = Color.WHITE;
+            Font buttonFont = new Font("Verdana", Font.BOLD, 23);
+
+            btnLec_ModulePage.setFont(buttonFont);
+            btnLec_ModulePage.setBackground(btnLec_ModulePageColor);
+            btnLec_ModulePage.setForeground(buttonTextColor);
+
+            btnLec_StudentPage.setFont(buttonFont);
+            btnLec_StudentPage.setBackground(btnLec_StudentPageColor);
+            btnLec_StudentPage.setForeground(buttonTextColor);
+
+            btnOngoingcourses.setFont(buttonFont);
+            btnOngoingcourses.setBackground(btnOngoingcoursesColor);
+            btnOngoingcourses.setForeground(buttonTextColor);
+
+            btnCompletedcourses.setFont(buttonFont);
+            btnCompletedcourses.setBackground(btnCompletedcoursesColor);
+            btnCompletedcourses.setForeground(buttonTextColor);
+
+            btnBack.setFont(buttonFont);
+            btnBack.setBackground(btnBackColor);
+            btnBack.setForeground(buttonTextColor);
+
+            JPanel panel = new JPanel();
+            panel.setLayout(new GridLayout(5, 1, 0, 10));
+
+            // 将按钮添加到窗口
+            panel.add(btnLec_ModulePage);
+            panel.add(btnLec_StudentPage);
+            panel.add(btnOngoingcourses);
+            panel.add(btnCompletedcourses);
+            panel.add(btnBack);
+            panel.setOpaque(false);
+
+            add(panel);
+
+            GridBagConstraints c = new GridBagConstraints();
+            c.gridx = 0;
+            c.gridy = 1;
+            c.insets = new Insets(20, 0, 0, 0);
+            backgroundImage.add(panel, c);
+
             setContentPane(backgroundImage);
         } catch (IOException e) {
             e.printStackTrace();
         }
-
-        // set up five buttons
-        JButton btnLec_ModulePage = new JButton("Add Module");
-        JButton btnLec_StudentPage = new JButton("Join Module");
-        JButton btnOngoingcourses = new JButton("View ongoing courses");
-        JButton btnCompletedcourses = new JButton("View completed courses");
-        JButton btnInformation = new JButton("View information");
-        JButton btnBack = new JButton("Log out");
-
-        // add ActionListener for buttons
-        btnLec_ModulePage.addActionListener(e -> {
-            new AddModulePage();
-            dispose();
-        });
-
-        btnLec_StudentPage.addActionListener(e -> {
-            new JoinPage();
-            dispose();
-        });
-
-        btnOngoingcourses.addActionListener(e -> {
-            new OngoingModulePage();
-            dispose();
-        });
-
-        btnCompletedcourses.addActionListener(e -> {
-            new CompletedModulePage();
-            dispose();
-        });
-
-        btnInformation.addActionListener(e -> {
-            new InformationPage().setVisible(true);
-            dispose();
-        });
-
-        btnBack.addActionListener(e -> {
-            new LogInPage().setVisible(true);
-            dispose();
-        });
-
-        // 设置按钮颜色和文字颜色
-        Color btnLec_ModulePageColor = new Color(96, 33, 46);
-        Color btnLec_StudentPageColor = new Color(179, 122, 54);
-        Color btnOngoingcoursesColor = new Color(25, 60, 79);
-        Color btnCompletedcoursesColor = new Color(34, 68, 49);
-        Color buttonTextColor = Color.WHITE;
-        Font buttonFont = new Font("Segoe Script", Font.BOLD, 25);
-
-        btnLec_ModulePage.setFont(buttonFont);
-        btnLec_ModulePage.setBackground(btnLec_ModulePageColor);
-        btnLec_ModulePage.setForeground(buttonTextColor);
-
-        btnLec_StudentPage.setFont(buttonFont);
-        btnLec_StudentPage.setBackground(btnLec_StudentPageColor);
-        btnLec_StudentPage.setForeground(buttonTextColor);
-
-        btnOngoingcourses.setFont(buttonFont);
-        btnOngoingcourses.setBackground(btnOngoingcoursesColor);
-        btnOngoingcourses.setForeground(buttonTextColor);
-
-        btnCompletedcourses.setFont(buttonFont);
-        btnCompletedcourses.setBackground(btnCompletedcoursesColor);
-        btnCompletedcourses.setForeground(buttonTextColor);
-
-        btnInformation.setFont(buttonFont);
-        btnInformation.setBackground(Color.BLACK);
-        btnInformation.setForeground(buttonTextColor);
-
-        btnBack.setFont(buttonFont);
-        btnBack.setBackground(Color.BLACK);
-        btnBack.setForeground(buttonTextColor);
-
-        // 创建一个按钮面板并设置布局
-        JPanel buttonPanel = new JPanel();
-        buttonPanel.setLayout(new BoxLayout(buttonPanel, BoxLayout.Y_AXIS));
-        buttonPanel.setOpaque(false); // 设置面板为透明
-
-        // 将按钮添加到面板
-        buttonPanel.add(Box.createRigidArea(new Dimension(0, 150))); // 添加间距
-        buttonPanel.add(btnLec_ModulePage);
-        buttonPanel.add(Box.createRigidArea(new Dimension(0, 10))); // 添加间距
-        buttonPanel.add(btnLec_StudentPage);
-        buttonPanel.add(Box.createRigidArea(new Dimension(0, 10))); // 添加间距
-        buttonPanel.add(btnOngoingcourses);
-        buttonPanel.add(Box.createRigidArea(new Dimension(0, 10))); // 添加间距
-        buttonPanel.add(btnCompletedcourses);
-        buttonPanel.add(Box.createRigidArea(new Dimension(0, 10))); // 添加间距
-        buttonPanel.add(btnInformation);
-        buttonPanel.add(Box.createRigidArea(new Dimension(0, 10))); // 添加间距
-        buttonPanel.add(btnBack);
-
-        // 将按钮面板添加到窗口
-        GridBagConstraints gbc = new GridBagConstraints();
-        gbc.anchor = GridBagConstraints.NORTH;
-        gbc.weighty = 1.0;
-        add(buttonPanel, gbc);
     }
 
     public static void main(String[] args) {
         SwingUtilities.invokeLater(() -> new HomePage().setVisible(true));
     }
 }
-

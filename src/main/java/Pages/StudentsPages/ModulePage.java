@@ -8,6 +8,8 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -19,12 +21,20 @@ public class ModulePage extends JFrame {
         ModuleData.getInstance().updateModules();
 
         setupModulePage();
-
         setTitle("Module Page");
         setSize(1094, 729);
         setLocationRelativeTo(null);
         setResizable(true);
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+
+        // Add a window listener
+        addWindowListener(new WindowAdapter() {
+            @Override
+            public void windowClosing(WindowEvent e) {
+                HomePage homePage = new HomePage();
+                homePage.setVisible(true);
+            }
+        });
 
         JPanel contentPanel = new JPanel(new BorderLayout());
 

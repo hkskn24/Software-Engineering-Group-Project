@@ -25,7 +25,7 @@ public class GPAPage extends JFrame {
         super("GPA Page");
         studentController = new StudentController();
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-        setBounds(500, 300, 1094, 729);
+        setBounds(500, 300, 700, 600);
 //        setResizable(false);
 
         panel.setLayout(new BorderLayout());
@@ -141,13 +141,26 @@ public class GPAPage extends JFrame {
         }
 
         JList<String> list = new JList<>(listModel);
-        list.setFont(new Font("Courier New", Font.PLAIN, 18));
+        list.setCellRenderer(new AlternatingColorRenderer());
+        list.setFont(new Font("Courier New", Font.PLAIN, 20));
         JScrollPane listPane = new JScrollPane(list);
         listPane.setPreferredSize(new Dimension(100, 200));
         listPane.setBorder(BorderFactory.createTitledBorder("Per Semester GPA"));
         panel.add(listPane, BorderLayout.SOUTH);
         panel.revalidate();
         panel.repaint();
+    }
+
+    class AlternatingColorRenderer extends DefaultListCellRenderer {
+        private static final Color COLOR1 = new Color(240, 240, 240);
+        private static final Color COLOR2 = new Color(220, 220, 220);
+
+        @Override
+        public Component getListCellRendererComponent(JList<?> list, Object value, int index, boolean isSelected, boolean cellHasFocus) {
+            Component renderer = super.getListCellRendererComponent(list, value, index, isSelected, cellHasFocus);
+            renderer.setBackground(index % 2 == 0 ? COLOR1 : COLOR2);
+            return renderer;
+        }
     }
 
     public void postGPA() {

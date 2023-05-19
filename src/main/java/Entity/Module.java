@@ -8,7 +8,6 @@ public class Module {
     private int credits;
     private int hours;
     private int semester;
-    private int grades;
     private String type;
     private String lecturer;
     private String summary;
@@ -77,14 +76,6 @@ public class Module {
 
     public void setLecturer(String lecturer) {
         this.lecturer = lecturer;
-    }
-
-    public int getGrades() {
-        return grades;
-    }
-
-    public void setGrades(int grades) {
-        this.grades = grades;
     }
 
     public String getSummary() {

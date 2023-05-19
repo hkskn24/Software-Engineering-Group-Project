@@ -11,7 +11,7 @@ import java.awt.event.ActionListener;
 
 
 public class AddModulePage extends JFrame {
-    private final JTextField nameField, codeField, creditsField, hoursField, gradesField,semesterField, typeField, lecturerField;
+    private final JTextField nameField, codeField, creditsField, hoursField,semesterField, typeField, lecturerField;
     private final JTextArea summaryField, aimsField, syllabusField, readingListField;
     private final JButton submitButton;
     private final JButton backButton;
@@ -34,7 +34,6 @@ public class AddModulePage extends JFrame {
         codeField = createLabeledTextField(contentPanel1, "Code:",10);
         creditsField = createLabeledTextField(contentPanel1, "Credits:",10);
         hoursField = createLabeledTextField(contentPanel1, "Hours:",10);
-        gradesField = createLabeledTextField(contentPanel1, "Grade:",10);
         semesterField = createLabeledTextField(contentPanel1, "Semester:",10);
         typeField = createLabeledTextField(contentPanel1, "Type:",10);
         lecturerField = createLabeledTextField(contentPanel1, "Lecturer:",10);
@@ -141,7 +140,6 @@ public class AddModulePage extends JFrame {
                 module.setHours(Integer.parseInt(hoursField.getText().trim()));
                 module.setSemester(Integer.parseInt(semesterField.getText().trim()));
                 module.setType(typeField.getText().trim());
-              module.setGrades(Integer.parseInt(gradesField.getText().trim()));
                 module.setLecturer(lecturerField.getText().trim());
                 module.setSummary(summaryField.getText().trim());
                 module.setAims(aimsField.getText().trim());

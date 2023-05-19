@@ -190,7 +190,21 @@ public class ModuleData extends Data {
     public List<Assessment> loadAssessments() {
         String filePath = "src/main/resources/data/assessments.json";
         Type type = new TypeToken<List<Assessment>>() {}.getType();
-        return readJsonToList(filePath, type);
+
+        List<String> codes = new ArrayList<>();
+        for (Module module : modules) {
+            codes.add(module.getCode());
+        }
+
+        List<Assessment> assessments = readJsonToList(filePath, type);
+        List<Assessment> studentAssessments = new ArrayList<>();
+        for (Assessment assessment : assessments) {
+            if (codes.contains(assessment.getCode())) {
+                studentAssessments.add(assessment);
+            }
+        }
+
+        return studentAssessments;
     }
 
     private void saveAssessments(List<Assessment> assessments) {

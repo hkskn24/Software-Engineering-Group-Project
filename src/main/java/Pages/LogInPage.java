@@ -51,7 +51,7 @@ public class LogInPage extends JFrame implements ActionListener {
         // set background
         ImageIcon backgroundImageIcon = null;
         try {
-            backgroundImageIcon = new ImageIcon(ImageIO.read(getClass().getResource("../../resources/images/login2.jpg")));
+            backgroundImageIcon = new ImageIcon(ImageIO.read(getClass().getResource("../../resources/images/login.jpg")));
         } catch (IOException e) {
             e.printStackTrace();
         }

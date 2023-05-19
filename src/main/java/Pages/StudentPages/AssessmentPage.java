@@ -71,15 +71,18 @@ public class AssessmentPage extends JFrame {
         model.addColumn("Name");
         model.addColumn("Code");
         model.addColumn("Type");
+        model.addColumn("Date");
         model.addColumn("Duration");
 
         for (Assessment assessment : assessments) {
+
             String name = assessment.getName();
             String code = assessment.getCode();
+            String date = assessment.getDate();
             String typeValue = assessment.getType();
             int duration = assessment.getDuration();
 
-            model.addRow(new Object[]{name, code, typeValue, duration});
+            model.addRow(new Object[]{name, code, typeValue, date, duration});
         }
 
         table.setModel(model);

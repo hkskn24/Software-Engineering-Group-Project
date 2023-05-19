@@ -4,6 +4,16 @@ public class Assessment {
     private String name;
     private String code;
     private String type;
+    private String date;
+
+    public String getDate() {
+        return date;
+    }
+
+    public void setDate(String date) {
+        this.date = date;
+    }
+
     private int duration;   // (minutes)
 
     public String getName() {

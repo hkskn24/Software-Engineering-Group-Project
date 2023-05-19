@@ -2,22 +2,29 @@
   {
     "name": "test1",
     "code": "1",
-    "moduleName": "ca",
     "type": "test",
+    "date": "2023/06/21",
     "duration": 10
   },
   {
     "name": "test2",
     "code": "1",
-    "moduleName": "ca",
     "type": "test",
+    "date": "2023/06/21",
     "duration": 15
   },
   {
     "name": "testforca",
     "code": "1",
-    "moduleName": "ca",
     "type": "test",
+    "date": "2023/06/21",
     "duration": 10
+  },
+  {
+    "name": "d",
+    "code": "w",
+    "type": "d",
+    "date": "2023/05/29",
+    "duration": 12
   }
 ]

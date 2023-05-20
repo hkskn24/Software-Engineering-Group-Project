@@ -1,6 +1,5 @@
 package main.java.Pages.StudentPages;
 
-import com.formdev.flatlaf.FlatDarculaLaf;
 import main.java.Data.ModuleData;
 import main.java.Entity.Assessment;
 
@@ -10,7 +9,6 @@ import javax.swing.table.TableRowSorter;
 import java.awt.*;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.util.Comparator;
 import java.util.List;
@@ -24,16 +22,18 @@ public class AssessmentPage extends JFrame {
         setBounds(500, 300, 1094, 729);
         setLocationRelativeTo(null);
 
-        // Add a window listener
-        addWindowListener(new WindowAdapter() {
-            @Override
+        addWindowListener(new java.awt.event.WindowAdapter() {
             public void windowClosing(WindowEvent e) {
                 HomePage homePage = new HomePage();
                 homePage.setVisible(true);
             }
         });
 
-        table = new JTable();
+        table = new JTable() {
+            public boolean isCellEditable(int row, int column) {
+                return false;
+            }
+        };
         JScrollPane scrollPane = new JScrollPane(table);
         add(scrollPane, BorderLayout.CENTER);
 
@@ -49,11 +49,9 @@ public class AssessmentPage extends JFrame {
 
         Assessments();
 
-        // Enable sorting on column click
         TableRowSorter<DefaultTableModel> sorter = new TableRowSorter<>((DefaultTableModel) table.getModel());
         table.setRowSorter(sorter);
         table.getTableHeader().addMouseListener(new MouseAdapter() {
-            @Override
             public void mouseClicked(MouseEvent e) {
                 int column = table.getTableHeader().columnAtPoint(e.getPoint());
                 sorter.setComparator(column, Comparator.comparing(String::valueOf));
@@ -67,7 +65,11 @@ public class AssessmentPage extends JFrame {
         ModuleData moduleData = new ModuleData();
         List<Assessment> assessments = moduleData.loadAssessments();
 
-        DefaultTableModel model = new DefaultTableModel();
+        DefaultTableModel model = new DefaultTableModel() {
+            public boolean isCellEditable(int row, int column) {
+                return false;
+            }
+        };
         model.addColumn("Name");
         model.addColumn("Code");
         model.addColumn("Type");
@@ -75,7 +77,6 @@ public class AssessmentPage extends JFrame {
         model.addColumn("Duration");
 
         for (Assessment assessment : assessments) {
-
             String name = assessment.getName();
             String code = assessment.getCode();
             String date = assessment.getDate();
@@ -89,7 +90,6 @@ public class AssessmentPage extends JFrame {
     }
 
     public static void main(String[] args) {
-        FlatDarculaLaf.setup();
         SwingUtilities.invokeLater(AssessmentPage::new);
     }
 }

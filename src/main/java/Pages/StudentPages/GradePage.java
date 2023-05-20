@@ -21,12 +21,9 @@ import java.util.ArrayList;
 
 public class GradePage extends JFrame {
     private TableRowSorter<DefaultTableModel> sorter;
-    private final StudentController studentController;
+    private StudentController studentController;
 
     public GradePage() {
-        ModuleData.getInstance().updateModules();
-
-        studentController = new StudentController();
         setTitle("TransfiguringGrades");
         getContentPane().setBackground(new Color(250, 250, 250));
         setBounds(500, 300, 1094, 729);
@@ -64,12 +61,10 @@ public class GradePage extends JFrame {
         ArrayList<Module> modules = ModuleData.getInstance().modules;
 
         // create table
-        DefaultTableModel tableModel = createTableModel(modules);
+        UneditableTableModel tableModel = createTableModel(modules);
         JTable table = new JTable(tableModel);
         sorter = new TableRowSorter<>(tableModel);
         table.setRowSorter(sorter);
-
-        //setupTableBehavior(table, tableModel);
 
         JScrollPane scrollPane = new JScrollPane(table);
         getContentPane().add(scrollPane, BorderLayout.CENTER);
@@ -78,21 +73,22 @@ public class GradePage extends JFrame {
         return table;
     }
 
-    private DefaultTableModel createTableModel(ArrayList<Module> modules) {
+    private UneditableTableModel createTableModel(ArrayList<Module> modules) {
         String[] columnNames = {"Name", "Code", "Credit", "Hours", "Semester", "Type", "Grades"};   //列名
-        String[][] tableValues = new String[modules.size()][Module.getGradesAttributes().length];
+        Object[][] tableValues = new Object[modules.size()][Module.getGradesAttributes().length];
         for (int i = 0; i < modules.size(); i++) {
             Module module = modules.get(i);
+            studentController = new StudentController();
             int grades = studentController.getGradesByCode(Config.getUsername(), module.getCode());
             String gradesStr = grades == -1 ? "-" : String.valueOf(grades);
-            tableValues[i] = new String[]{module.getName(), module.getCode(),
+            tableValues[i] = new Object[]{module.getName(), module.getCode(),
                     String.valueOf(module.getCredits()), String.valueOf(module.getHours()),
                     String.valueOf(module.getSemester()), module.getType(),
                     gradesStr
             };
         }
 
-        return new DefaultTableModel(tableValues, columnNames);
+        return new UneditableTableModel(tableValues, columnNames);
     }
 
     private JPanel setupFilterPanel(TableRowSorter<DefaultTableModel> sorter) {
@@ -179,6 +175,18 @@ public class GradePage extends JFrame {
         gbc.anchor = GridBagConstraints.SOUTH;
         contentPanel.add(bottomPanel, gbc);
     }
+
+    private class UneditableTableModel extends DefaultTableModel {
+        public UneditableTableModel(Object[][] data, Object[] columnNames) {
+            super(data, columnNames);
+        }
+
+        @Override
+        public boolean isCellEditable(int row, int column) {
+            return false;
+        }
+    }
+
 
     private class GPAActionListener implements ActionListener {
         public void actionPerformed(ActionEvent e) {

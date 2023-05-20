@@ -8,6 +8,7 @@ import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.*;
 import java.io.*;
+import java.util.Locale;
 
 public class StartPage extends JFrame {
 
@@ -78,6 +79,9 @@ public class StartPage extends JFrame {
         FlatLightLaf.install();
 
         UIManager.put("defaultFont",  new Font("Dialog", Font.PLAIN, 18));
+
+        Locale.setDefault(Locale.ENGLISH);
+
         new StartPage().setVisible(true);
     }
 }

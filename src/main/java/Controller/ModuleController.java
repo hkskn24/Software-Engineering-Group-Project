@@ -88,4 +88,8 @@ public class ModuleController {
 
         ModuleData.getInstance().updateModules();
     }
+
+    public static boolean isCodeUnique(String code) {
+        return ModuleData.getInstance().isCodeUnique(code);
+    }
 }

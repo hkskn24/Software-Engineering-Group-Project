@@ -15,10 +15,7 @@ import java.lang.reflect.Type;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.util.ArrayList;
-import java.util.LinkedHashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 
 public class ModuleData extends Data {
@@ -54,6 +51,23 @@ public class ModuleData extends Data {
     private Module loadModuleByCode(String code) {
         String jsonStr = readFileToString("src/main/resources/data/modules/" + code + "/info.json");
         return new Gson().fromJson(jsonStr, Module.class);
+    }
+
+    public boolean isCodeUnique(String newCode) {
+        String jsonStr = readFileToString("src/main/resources/data/modules/index.json");
+        ArrayList<Map<String, String>> nameToCode = new Gson().fromJson(jsonStr, new TypeToken<ArrayList<Map<String, String>>>() {
+        }.getType());
+
+        if (nameToCode != null) {
+            for (Map<String, String> entry : nameToCode) {
+                String code = entry.get("code");
+
+                if (Objects.equals(code, newCode)) {
+                    return false;
+                }
+            }
+        }
+        return true;
     }
 
     public List<Module> searchFromAllModules(String term) {

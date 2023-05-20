@@ -1,7 +1,7 @@
 {
-  "name": "Q",
+  "name": "1",
   "code": "1",
-  "credits": 11,
+  "credits": 1,
   "hours": 1,
   "semester": 1,
   "type": "1",
@@ -10,6 +10,6 @@
   "aims": "1",
   "syllabus": "1",
   "readingList": "1",
-  "status": "completed",
+  "status": "ongoing",
   "id": 0
 }

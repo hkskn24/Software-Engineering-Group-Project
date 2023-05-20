@@ -7,9 +7,9 @@ import main.java.Entity.Module;
 
 import javax.swing.*;
 import java.awt.*;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.Date;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 
 public class AddAssessmentPage extends JFrame {
     private final JTextField nameTextField;
@@ -116,12 +116,15 @@ public class AddAssessmentPage extends JFrame {
     }
 
     private boolean isValidDate(String dateString) {
-        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd");
-        dateFormat.setLenient(false);
-        try {
-            Date date = dateFormat.parse(dateString);
-            return true;
-        } catch (ParseException e) {
+        DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern("yyyy/MM/dd");
+        if (dateString.matches("\\d{4}/\\d{2}/\\d{2}")) {
+            try {
+                LocalDate date = LocalDate.parse(dateString, dateFormatter);
+                return true;
+            } catch (DateTimeParseException e) {
+                return false;
+            }
+        } else {
             return false;
         }
     }

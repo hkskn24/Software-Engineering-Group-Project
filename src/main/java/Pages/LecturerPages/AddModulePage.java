@@ -142,6 +142,11 @@ public class AddModulePage extends JFrame {
             String syllabus = syllabusField.getText().trim();
             String readingList = readingListField.getText().trim();
 
+            if (!ModuleController.isCodeUnique(code)) {
+                JOptionPane.showMessageDialog(null, "Module code already exists. Please enter a unique module code.");
+                return;
+            }
+
             if (name.isEmpty() || code.isEmpty() || credits.isEmpty() || hours.isEmpty() || semester.isEmpty() || type.isEmpty() ||
                     lecturer.isEmpty() || summary.isEmpty() || aims.isEmpty() || syllabus.isEmpty() || readingList.isEmpty()) {
                 JOptionPane.showMessageDialog(null, "Please fill in all fields!");

@@ -36,7 +36,12 @@ public class AchievementPage extends JFrame {
         });
 
         String[] columNames = {"Name", "Type", "Semester"};
-        tableModel = new DefaultTableModel(columNames, 0);
+        tableModel = new DefaultTableModel(columNames, 0) {
+            @Override
+            public boolean isCellEditable(int row, int column) {
+                return false;
+            }
+        };
         JTable table = new JTable(tableModel);
 
         sorter = new TableRowSorter<>(tableModel);
@@ -98,10 +103,8 @@ public class AchievementPage extends JFrame {
 
         JLabel sortLabel = new JLabel("Sort by Semester");
         sortPanel.add(sortLabel);
-
         JCheckBox ascendingBox = new JCheckBox("Ascending");
         sortPanel.add(ascendingBox);
-
         JButton sortButton = new JButton("Sort");
         sortButton.addActionListener(e -> {
             int columnIndex = 2;
@@ -150,5 +153,9 @@ public class AchievementPage extends JFrame {
         gbc.weighty = 1.0;
         gbc.anchor = GridBagConstraints.SOUTH;
         contentPanel.add(bottomPanel, gbc);
+    }
+
+    public static void main(String[] args) {
+        SwingUtilities.invokeLater(AchievementPage::new);
     }
 }

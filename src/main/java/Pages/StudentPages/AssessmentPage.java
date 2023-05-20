@@ -69,6 +69,7 @@ public class AssessmentPage extends JFrame {
 
         DefaultTableModel model = new DefaultTableModel();
         model.addColumn("Name");
+        model.addColumn("Module");
         model.addColumn("Code");
         model.addColumn("Type");
         model.addColumn("Date");
@@ -77,12 +78,13 @@ public class AssessmentPage extends JFrame {
         for (Assessment assessment : assessments) {
 
             String name = assessment.getName();
+            String moduleName = assessment.getModuleName();
             String code = assessment.getCode();
             String date = assessment.getDate();
             String typeValue = assessment.getType();
             int duration = assessment.getDuration();
 
-            model.addRow(new Object[]{name, code, typeValue, date, duration});
+            model.addRow(new Object[]{name, moduleName, code, typeValue, date, duration});
         }
 
         table.setModel(model);

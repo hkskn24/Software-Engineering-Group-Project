@@ -117,7 +117,6 @@ public class ModulePage extends JFrame {
         JPanel bottomPanel = new JPanel(new BorderLayout());
 
         JButton backButton = new JButton("Back");
-        backButton.setFont(new Font("Arial", Font.PLAIN, 14));
         backButton.addActionListener(e -> {
             dispose();
             new HomePage().setVisible(true);

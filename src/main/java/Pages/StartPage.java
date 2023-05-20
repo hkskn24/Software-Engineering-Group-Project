@@ -1,6 +1,8 @@
 package main.java.Pages;
 
 import com.formdev.flatlaf.FlatDarculaLaf;
+import com.formdev.flatlaf.FlatIntelliJLaf;
+import com.formdev.flatlaf.FlatLightLaf;
 
 import javax.imageio.ImageIO;
 import javax.swing.*;
@@ -73,7 +75,9 @@ public class StartPage extends JFrame {
     }
 
     public static void main(String[] args) {
-        FlatDarculaLaf.install();
+        FlatLightLaf.install();
+
+        UIManager.put("defaultFont",  new Font("Dialog", Font.PLAIN, 18));
         new StartPage().setVisible(true);
     }
 }

@@ -3,6 +3,7 @@ package main.java.Entity;
 public class Assessment {
     private String name;
     private String code;
+    private String moduleName;
     private String type;
     private String date;
 
@@ -24,7 +25,12 @@ public class Assessment {
         this.name = name;
     }
 
+    public String getModuleName() {
+        return moduleName;
+    }
+
     public void setModuleName(String moduleName) {
+        this.moduleName = moduleName;
     }
 
     public String getType() {

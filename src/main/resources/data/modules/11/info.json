@@ -1,0 +1,16 @@
+{
+  "name": "cz",
+  "code": "11",
+  "credits": 1,
+  "hours": 1,
+  "semester": 1,
+  "grades": 1,
+  "type": "Elective",
+  "lecturer": "la",
+  "summary": "1",
+  "aims": "1",
+  "syllabus": "1",
+  "readingList": "1",
+  "status": "completed",
+  "id": 0
+}

@@ -33,7 +33,7 @@ public class ModuleInfoPage extends MyPage {
         gbc.anchor = GridBagConstraints.EAST;
 
         JButton backButton = new JButton("Back");
-        backButton.setFont(new Font("Arial", Font.PLAIN, 14));
+        backButton.setFont(new Font("Arial", Font.PLAIN, 18));
         backButton.addActionListener(e -> dispose());
         infoPanel.add(backButton, gbc);
         setLocationRelativeTo(null);

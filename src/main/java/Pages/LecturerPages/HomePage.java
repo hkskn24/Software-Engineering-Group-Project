@@ -15,7 +15,7 @@ public class HomePage extends MyPage {
 
         // Set the background image
         try {
-            JLabel backgroundImage = new JLabel(new ImageIcon(ImageIO.read(getClass().getResource("../../../resources/images/login.jpg"))));
+            JLabel backgroundImage = new JLabel(new ImageIcon(ImageIO.read(getClass().getResource("../../../resources/images/lhomepage.jpg"))));
             backgroundImage.setLayout(new GridBagLayout());
 
             // 创建按钮并设置大小

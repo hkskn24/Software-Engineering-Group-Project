@@ -1,6 +1,6 @@
-# Student Management System
+# Student Information Management System
 
-The Student Management System is an application designed to manage student and teacher information. It provides a range of functionalities including user registration, login, and password reset, display of personal information, teacher contact page, and specific features for students and teachers.
+The Student Information Management System is an application designed to manage student and teacher information. It provides a range of functionalities including user registration, login, and password reset, display of personal information, teacher contact page, and specific features for students and teachers.
 
 ## Features
 

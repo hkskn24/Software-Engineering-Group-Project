@@ -16,7 +16,7 @@ Students and teachers can view and update their personal information within the 
 
 Students can communicate with teachers through the teacher contact page. This feature provides an easy way for students to ask questions, seek guidance, or consult with their teachers.
 
-### *Student Functionality
+### *Student Functionality*
 
 Students have the following specific functionalities within the Student Management System:
 
@@ -40,7 +40,7 @@ Students can view the awards and honors they have received. This may include aca
 
 The system offers assessment reminders to help students stay informed about upcoming exams, assignment deadlines, or other important academic events. This assists students in managing their study time and preparation effectively.
 
-### *Teacher Functionality
+### *Teacher Functionality*
 
 Teachers have the following specific functionalities within the Student Management System:
 

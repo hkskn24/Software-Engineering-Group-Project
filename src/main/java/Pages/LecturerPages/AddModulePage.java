@@ -78,7 +78,7 @@ public class AddModulePage extends MyPage {
     private JTextField createLabeledTextField(JPanel panel, String text) {
         JPanel subPanel = new JPanel(new FlowLayout(FlowLayout.LEFT));
         JLabel label = new JLabel(text);
-        JTextField textField = new JTextField(10);
+        JTextField textField = new JTextField(9);
 
         subPanel.add(label);
         subPanel.add(textField);

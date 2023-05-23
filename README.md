@@ -58,4 +58,37 @@ Teachers can add assessments such as exams, quizzes, or assignments to the syste
 
 ## Usage
 
-Please refer to the system documentation for detailed instructions on how to install, configure, and use the Student Management System.
+- Please run the exe program and then there will display the start page with a login button.
+- Then you are in the login page and you can do:
+
+| button | function |
+| :-------------: | :----------: |
+| Log in | Log in your account |
+| Sign up | Create a new account with ticking the box student or lecturer |
+| Forgot PWD | If you forget your password, you can get your password by ID |
+| Change PWD | If you forget your password, you can change your password by ID |
+
+***Warning: Account and password have strict fault tolerance, please make sure your account number is 6-10 digits Chinese or English characters, and the password is 6-10 English characters or numbers.***
+
+### Student function
+
+| button | function |
+| :-------------: | :----------: |
+| Module | Showing all the courses, if clicking then will show more details. |
+| Grade | Showing all grades with detailed information and there is GPA page in it. |
+| Achievement | Showing all achievements with different semesters and types. |
+| Assessment | Showing all assessments with detailed information. There's a sorting function.|
+| Log out | Return to the login page. |
+
+### Lecturer function
+
+| button | function |
+| :-------------: | :----------: |
+| Add Module | Adding a new module with detailed information. |
+| Join Module | Joining in a module so that you can operate more. |
+| View ongoing courses | Viewing ongoing courses, you can end module or add a assessment. |
+| View completed coureses | View completed coureses, you can assign grades. |
+| Log out | Return to the login page. |
+
+***Warning: Only instructors have access to register grades, add courses, and assessment information. Students can only view relevant information.***
+

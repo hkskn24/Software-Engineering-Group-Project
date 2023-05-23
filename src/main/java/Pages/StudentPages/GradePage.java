@@ -6,6 +6,7 @@ import main.java.Controller.ModuleController;
 import main.java.Controller.StudentController;
 import main.java.Data.ModuleData;
 import main.java.Entity.Module;
+import main.java.Pages.LecturerPages.MyPage;
 
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
@@ -19,16 +20,13 @@ import java.awt.event.WindowEvent;
 import java.util.ArrayList;
 
 
-public class GradePage extends JFrame {
+public class GradePage extends MyPage {
     private TableRowSorter<DefaultTableModel> sorter;
     private StudentController studentController;
 
     public GradePage() {
         setTitle("TransfiguringGrades");
         getContentPane().setBackground(new Color(250, 250, 250));
-        setBounds(500, 300, 1094, 729);
-        setLocationRelativeTo(null);
-        setResizable(true);
 
         JTable table = setupTable();
 

@@ -9,12 +9,9 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.io.IOException;
 
-public class HomePage extends JFrame {
+public class HomePage extends MyPage {
     public HomePage() {
         setTitle("HomePage");
-        setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-        setBounds(500, 300, 1094, 729);
-        setLocationRelativeTo(null);
 
         // Set the background image
         try {
@@ -135,9 +132,5 @@ public class HomePage extends JFrame {
         } catch (IOException e) {
             e.printStackTrace();
         }
-    }
-
-    public static void main(String[] args) {
-        SwingUtilities.invokeLater(() -> new HomePage().setVisible(true));
     }
 }

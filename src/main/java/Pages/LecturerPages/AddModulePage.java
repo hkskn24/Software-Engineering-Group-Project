@@ -10,7 +10,7 @@ import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 
 
-public class AddModulePage extends JFrame {
+public class AddModulePage extends MyPage {
     private final JTextField nameField, codeField, creditsField, hoursField,semesterField, typeField, lecturerField;
     private final JTextArea summaryField, aimsField, syllabusField, readingListField;
     private final JButton submitButton;
@@ -18,10 +18,6 @@ public class AddModulePage extends JFrame {
     public AddModulePage() {
 
         setTitle("Add Module");
-        setBounds(500, 300, 1094, 729);
-        setLocationRelativeTo(null);
-        setResizable(true);
-        setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 
         // Add a window listener
         addWindowListener(new WindowAdapter() {

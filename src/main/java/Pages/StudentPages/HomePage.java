@@ -2,6 +2,7 @@ package main.java.Pages.StudentPages;
 
 import com.formdev.flatlaf.FlatDarculaLaf;
 import main.java.Controller.DateTimePanel;
+import main.java.Pages.LecturerPages.MyPage;
 import main.java.Pages.LogInPage;
 
 import javax.imageio.ImageIO;
@@ -11,13 +12,9 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.io.IOException;
 
-public class HomePage extends JFrame {
+public class HomePage extends MyPage {
     public HomePage() {
         setTitle("HomePage");
-        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        setBounds(500, 300, 1094, 729);
-        setLocationRelativeTo(null);
-
         // Set the background image
         try {
             JLabel backgroundImage = new JLabel(new ImageIcon(ImageIO.read(getClass().getResource("../../../resources/images/homepage.jpg"))));

@@ -2,6 +2,7 @@ package main.java.Pages.StudentPages;
 
 import main.java.Data.ModuleData;
 import main.java.Entity.Assessment;
+import main.java.Pages.LecturerPages.MyPage;
 
 import javax.swing.*;
 import javax.swing.table.DefaultTableCellRenderer;
@@ -20,14 +21,11 @@ import java.time.format.DateTimeFormatter;
 import java.time.temporal.ChronoUnit;
 
 
-public class AssessmentPage extends JFrame {
+public class AssessmentPage extends MyPage {
     private final JTable table;
 
     public AssessmentPage() {
         setTitle("Student Assessments");
-        setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-        setBounds(500, 300, 1094, 729);
-        setLocationRelativeTo(null);
 
         addWindowListener(new java.awt.event.WindowAdapter() {
             public void windowClosing(WindowEvent e) {

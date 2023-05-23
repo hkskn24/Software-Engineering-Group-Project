@@ -1,18 +1,15 @@
 package main.java.Pages.StudentPages;
 
 import main.java.Entity.Module;
+import main.java.Pages.LecturerPages.MyPage;
 
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 import java.awt.*;
 
-public class ModuleInfoPage extends JFrame {
+public class ModuleInfoPage extends MyPage {
     public ModuleInfoPage(Module module) {
         setTitle(module.getName());
-        setBounds(500, 300, 1094, 729);
-        setLocationRelativeTo(null);
-        setResizable(true);
-        setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 
         JPanel infoPanel = new JPanel(new GridBagLayout());
         setupInfoPanel(infoPanel, module);

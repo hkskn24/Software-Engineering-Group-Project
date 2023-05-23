@@ -46,10 +46,6 @@ public class JoinPage extends JFrame {
         setVisible(true);
     }
 
-    public static void main(String[] args) {
-        new JoinPage();
-    }
-
     private void updateSearchResult(List<Module> modules) {
         DefaultListModel<Module> moduleListModel = new DefaultListModel<>();
         for (Module module : modules) {

@@ -3,6 +3,7 @@ package main.java.Pages.StudentPages;
 import main.java.Controller.ModuleController;
 import main.java.Data.ModuleData;
 import main.java.Entity.Module;
+import main.java.Pages.LecturerPages.MyPage;
 
 import javax.swing.*;
 import java.awt.*;
@@ -13,7 +14,7 @@ import java.awt.event.WindowEvent;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ModulePage extends JFrame {
+public class ModulePage extends MyPage {
     private JList<Module> moduleList;
     private JTextField searchTextField;
 
@@ -22,10 +23,6 @@ public class ModulePage extends JFrame {
 
         setupModulePage();
         setTitle("Module Page");
-        setSize(1094, 729);
-        setLocationRelativeTo(null);
-        setResizable(true);
-        setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 
         // Add a window listener
         addWindowListener(new WindowAdapter() {

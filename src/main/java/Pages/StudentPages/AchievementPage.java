@@ -3,6 +3,7 @@ package main.java.Pages.StudentPages;
 import main.java.Controller.AchievementController;
 import main.java.Data.AchievementData;
 import main.java.Entity.Achievement;
+import main.java.Pages.LecturerPages.MyPage;
 
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
@@ -13,7 +14,7 @@ import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.util.ArrayList;
 
-public class AchievementPage extends JFrame {
+public class AchievementPage extends MyPage {
     private final DefaultTableModel tableModel;
     private final TableRowSorter<DefaultTableModel> sorter;
 
@@ -21,10 +22,6 @@ public class AchievementPage extends JFrame {
         setTitle("Achievement");
         setLayout(new BorderLayout());
         getContentPane().setBackground(new Color(250, 250, 250));
-        setBounds(500, 300, 1094, 729);
-        setLocationRelativeTo(null);
-        setResizable(true);
-        setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 
         // Add a window listener
         addWindowListener(new WindowAdapter() {

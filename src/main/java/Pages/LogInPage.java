@@ -6,6 +6,7 @@ import main.java.Controller.RecoverPasswordActionListener;
 import main.java.Controller.RegisterActionListener;
 import main.java.Controller.RetrievePasswordActionListener;
 import main.java.Pages.LecturerPages.HomePage;
+import main.java.Pages.LecturerPages.MyPage;
 
 import javax.imageio.ImageIO;
 import javax.swing.*;
@@ -15,18 +16,13 @@ import java.awt.event.ActionListener;
 import java.awt.event.ItemEvent;
 import java.io.*;
 
-public class LogInPage extends JFrame implements ActionListener {
+public class LogInPage extends MyPage implements ActionListener {
     public static int userType; //student:0 lecturer:1
     final JTextField usernameField;
     final JPasswordField passwordField;
 
     public LogInPage() {
-        super("LOG IN TO YOUR ACCOUNT");
-        setBounds(500, 300, 1094, 729);
-        setLocationRelativeTo(null);
-        setResizable(false);
-        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        setVisible(true);
+        setTitle("LOG IN TO YOUR ACCOUNT");
 
         JPanel panel = new JPanel(new GridBagLayout()) {
             @Override

@@ -6,7 +6,6 @@ import main.java.Controller.RecoverPasswordActionListener;
 import main.java.Controller.RegisterActionListener;
 import main.java.Controller.RetrievePasswordActionListener;
 import main.java.Pages.LecturerPages.HomePage;
-import main.java.Pages.LecturerPages.MyPage;
 
 import javax.imageio.ImageIO;
 import javax.swing.*;
@@ -23,6 +22,7 @@ public class LogInPage extends MyPage implements ActionListener {
 
     public LogInPage() {
         setTitle("LOG IN TO YOUR ACCOUNT");
+        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
         JPanel panel = new JPanel(new GridBagLayout()) {
             @Override

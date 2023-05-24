@@ -2,6 +2,7 @@ package main.java.Pages.LecturerPages;
 
 import main.java.Data.ModuleData;
 import main.java.Entity.Module;
+import main.java.Pages.MyPage;
 
 import javax.swing.*;
 import java.awt.*;
@@ -10,7 +11,7 @@ import java.awt.event.MouseEvent;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 
-public class CompletedModulePage extends MyPage{
+public class CompletedModulePage extends MyPage {
     private final JList<Module> completedModuleList;
 
     public CompletedModulePage() {

@@ -2,7 +2,7 @@ package main.java.Pages.StudentPages;
 
 import com.formdev.flatlaf.FlatDarculaLaf;
 import main.java.Controller.DateTimePanel;
-import main.java.Pages.LecturerPages.MyPage;
+import main.java.Pages.MyPage;
 import main.java.Pages.LogInPage;
 
 import javax.imageio.ImageIO;

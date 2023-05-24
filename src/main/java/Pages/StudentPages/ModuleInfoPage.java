@@ -1,7 +1,7 @@
 package main.java.Pages.StudentPages;
 
 import main.java.Entity.Module;
-import main.java.Pages.LecturerPages.MyPage;
+import main.java.Pages.MyPage;
 
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;

@@ -1,6 +1,7 @@
 package main.java.Pages.LecturerPages;
 
 import main.java.Pages.LogInPage;
+import main.java.Pages.MyPage;
 
 import javax.imageio.ImageIO;
 import javax.swing.*;

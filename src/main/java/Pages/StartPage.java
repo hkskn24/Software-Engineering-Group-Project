@@ -1,7 +1,6 @@
 package main.java.Pages;
 
 import com.formdev.flatlaf.*;
-import main.java.Pages.LecturerPages.MyPage;
 
 import javax.imageio.ImageIO;
 import javax.swing.*;
@@ -71,7 +70,7 @@ public class StartPage extends MyPage {
     }
 
     public static void main(String[] args) {
-        FlatDarkLaf.install();
+        FlatLightLaf.install();
 
         UIManager.put("defaultFont",  new Font("Dialog", Font.PLAIN, 18));
 

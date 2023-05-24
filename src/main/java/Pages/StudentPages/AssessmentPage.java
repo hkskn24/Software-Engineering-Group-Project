@@ -2,7 +2,7 @@ package main.java.Pages.StudentPages;
 
 import main.java.Data.ModuleData;
 import main.java.Entity.Assessment;
-import main.java.Pages.LecturerPages.MyPage;
+import main.java.Pages.MyPage;
 
 import javax.swing.*;
 import javax.swing.table.DefaultTableCellRenderer;
@@ -13,7 +13,6 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.WindowEvent;
 import java.util.Comparator;
-import java.util.Date;
 import java.util.List;
 
 import java.time.LocalDate;
@@ -67,10 +66,10 @@ public class AssessmentPage extends MyPage {
 
         table.setDefaultRenderer(Object.class, new DefaultTableCellRenderer() {
             private final DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy/MM/dd");
-            private final Color color3Days = new Color(85, 114, 241); // Dark blue for 3 days
-            private final Color color7Days = new Color(124, 146, 244); // Medium blue for 7 days
-            private final Color color10Days = new Color(161, 177, 247); // Light blue for 10 days
-            private final Color colorMoreThan10Days = new Color(218, 224, 252); // Very light blue for more than 10 days
+            private final Color color3Days = new Color(85, 114, 241, 75); // Dark blue for 3 days
+            private final Color color7Days = new Color(124, 146, 244, 75); // Medium blue for 7 days
+            private final Color color10Days = new Color(161, 177, 247, 75); // Light blue for 10 days
+            private final Color colorMoreThan10Days = new Color(218, 224, 252, 75); // Very light blue for more than 10 days
 
             @Override
             public Component getTableCellRendererComponent(JTable table, Object value, boolean isSelected, boolean hasFocus, int row, int column) {

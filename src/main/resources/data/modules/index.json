@@ -1,50 +1,30 @@
 [
   {
-    "name": "ca",
-    "code": "1"
+    "name": "Intermediate English Reading and Writing",
+    "code": "3312111130"
   },
   {
-    "name": "cb",
-    "code": "2"
+    "name": "Personal Development Plan 3",
+    "code": "EBC5001"
   },
   {
-    "name": "cc",
-    "code": "3"
+    "name": "Audiovisual English Movie Appreciation",
+    "code": "3312111140"
   },
   {
-    "name": "cd",
-    "code": "4"
+    "name": "Linear Algebra",
+    "code": "3412110079"
   },
   {
-    "name": "ce",
-    "code": "5"
+    "name": "Advanced Mathematics 1",
+    "code": "3412110019"
   },
   {
-    "name": "cz",
-    "code": "11"
+    "name": "Physics D",
+    "code": "3412120019"
   },
   {
-    "name": "q",
-    "code": "q"
-  },
-  {
-    "name": "w",
-    "code": "w"
-  },
-  {
-    "name": "Q",
-    "code": "1"
-  },
-  {
-    "name": "lz",
-    "code": "11111"
-  },
-  {
-    "name": "1",
-    "code": "1"
-  },
-  {
-    "name": "1",
-    "code": "1"
+    "name": "Engineering Mathematics",
+    "code": "3412110129"
   }
 ]

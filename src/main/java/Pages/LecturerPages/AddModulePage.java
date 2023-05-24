@@ -3,6 +3,7 @@ package main.java.Pages.LecturerPages;
 import main.java.Config;
 import main.java.Controller.ModuleController;
 import main.java.Entity.Module;
+import main.java.Pages.MyPage;
 
 import javax.swing.*;
 import java.awt.*;

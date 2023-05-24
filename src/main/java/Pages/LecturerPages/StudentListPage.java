@@ -3,6 +3,7 @@ package main.java.Pages.LecturerPages;
 import main.java.Controller.StudentController;
 import main.java.Entity.Module;
 import main.java.Entity.Student;
+import main.java.Pages.MyPage;
 
 import javax.swing.*;
 import java.awt.*;

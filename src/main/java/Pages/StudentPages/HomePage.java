@@ -10,6 +10,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.awt.event.WindowEvent;
 import java.io.IOException;
 
 public class HomePage extends MyPage {
@@ -31,6 +32,13 @@ public class HomePage extends MyPage {
             btnAssessment.setPreferredSize(buttonSize);
             JButton btnBack = new JButton("Log out");
             btnBack.setPreferredSize(buttonSize);
+
+            addWindowListener(new java.awt.event.WindowAdapter() {
+                public void windowClosing(WindowEvent e) {
+                    LogInPage logInPage = new LogInPage();
+                    logInPage.setVisible(true);
+                }
+            });
 
             // 添加边距
             int margin = 10;

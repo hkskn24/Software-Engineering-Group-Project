@@ -181,4 +181,49 @@ public class AddModulePage extends MyPage {
             new HomePage().setVisible(true);
         });
     }
+    
+    //TDD用
+    public JTextField getNameField() {
+        return nameField;
+    }
+
+    public JTextField getCodeField() {
+        return codeField;
+    }
+
+    public JTextField getCreditsField() {
+        return creditsField;
+    }
+
+    public JTextField getHoursField() {
+        return hoursField;
+    }
+
+    public JTextField getSemesterField() {
+        return semesterField;
+    }
+
+    public JTextField getTypeField() {
+        return typeField;
+    }
+
+    public JTextField getLecturerField() {
+        return lecturerField;
+    }
+
+    public JTextArea getSummaryField() {
+        return summaryField;
+    }
+
+    public JTextArea getAimsField() {
+        return aimsField;
+    }
+
+    public JTextArea getSyllabusField() {
+        return syllabusField;
+    }
+
+    public JTextArea getReadingListField() {
+        return readingListField;
+    }
 }

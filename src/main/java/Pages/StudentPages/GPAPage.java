@@ -19,7 +19,7 @@ public class GPAPage extends JFrame {
     double totalQualityPoints = 0;
     final JTextArea textArea = new JTextArea();
     final JPanel panel = new JPanel();
-    private final StudentController studentController;
+    final StudentController studentController;
 
     public GPAPage() {
         super("GPA Page");

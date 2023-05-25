@@ -48,7 +48,7 @@ public class CompletedModulePage extends MyPage {
         });
     }
 
-    private JPanel setupButtonPanel() {
+    protected JPanel setupButtonPanel() {
         JPanel buttonPanel = new JPanel(new FlowLayout(FlowLayout.RIGHT));
 
         JButton assignGrades = new JButton("Assign Grades");

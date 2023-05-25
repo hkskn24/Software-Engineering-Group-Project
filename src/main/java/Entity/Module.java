@@ -16,6 +16,7 @@ public class Module {
     private String readingList;
     private String status;
     private int id;
+    private int grades;
 
     public static String[] getGradesAttributes() {
         return new String[]{"name", "code", "credits", "hours", "semester", "type", "grades"};
@@ -123,6 +124,15 @@ public class Module {
 
     public void setId(int id) {
         this.id = id;
+    }
+    
+    //TDD用
+    public void setGrades(int grades) {
+        this.grades = grades;
+    }
+
+    public int getGrades() {
+        return grades;
     }
 
     @Override

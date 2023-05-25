@@ -1,4 +1,4 @@
-package main.java.Controller;
+package main.java.Pages;
 
 import javax.swing.*;
 import java.awt.*;

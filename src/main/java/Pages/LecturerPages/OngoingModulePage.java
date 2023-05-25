@@ -48,7 +48,7 @@ public class OngoingModulePage extends MyPage {
         });
     }
 
-    private JPanel setupButtonPanel() {
+    protected JPanel setupButtonPanel() {
         JPanel buttonPanel = new JPanel(new FlowLayout(FlowLayout.RIGHT));
 
         JButton endModuleButton = new JButton("End Module");

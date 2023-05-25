@@ -79,7 +79,7 @@ public class JoinPage extends JFrame {
         return searchPanel;
     }
 
-    private JPanel setupButtonPanel() {
+    protected JPanel setupButtonPanel() {
         JPanel buttonPanel = new JPanel(new FlowLayout(FlowLayout.RIGHT));
 
         JButton joinButton = new JButton("Join");

@@ -135,4 +135,9 @@ public class AssessmentPage extends MyPage {
     public static void main(String[] args) {
         SwingUtilities.invokeLater(AssessmentPage::new);
     }
+    
+    //TDD用
+    public JTable getTable() {
+        return table;
+    }
 }

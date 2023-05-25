@@ -59,7 +59,7 @@ public class JoinPage extends JFrame {
         }
     }
 
-    private JPanel setupSearchPanel() {
+    protected JPanel setupSearchPanel() {
         JPanel searchPanel = new JPanel(new FlowLayout(FlowLayout.LEFT));
         searchTextField = new JTextField(20);
 

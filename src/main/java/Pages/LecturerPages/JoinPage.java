@@ -18,7 +18,13 @@ import java.util.List;
  * @version : v4.0
  */
 public class JoinPage extends JFrame {
+    /**
+     * list for modules after searching
+     */
     private JList<Module> moduleList;
+    /**
+     * search text field
+     */
     private JTextField searchTextField;
 
     /**

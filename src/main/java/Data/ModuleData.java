@@ -26,6 +26,9 @@ import java.util.*;
  */
 public class ModuleData extends Data {
     private static ModuleData instance = null;
+    /**
+     * module list
+     */
     public ArrayList<Module> modules;
 
     /**
@@ -95,7 +98,7 @@ public class ModuleData extends Data {
 
     /**
      * @param term search term
-     * @return {@link List}<{@link Module}>
+     * @return module list
      */
     public List<Module> searchFromAllModules(String term) {
         List<Module> result = new ArrayList<>();
@@ -210,7 +213,7 @@ public class ModuleData extends Data {
     }
 
     /**
-     * @return {@link List}<{@link Module}>
+     * @return module list
      */
     public List<Module> getOngoingModules() {
         List<Module> ongoingModules = new ArrayList<>();
@@ -223,7 +226,7 @@ public class ModuleData extends Data {
     }
 
     /**
-     * @return {@link List}<{@link Module}>
+     * @return module list
      */
     public List<Module> getCompletedModules() {
         List<Module> completedModules = new ArrayList<>();
@@ -261,7 +264,7 @@ public class ModuleData extends Data {
     }
 
     /**
-     * @return {@link List}<{@link Assessment}>
+     * @return assessment list
      */
     public List<Assessment> loadAssessments() {
         String filePath = "src/main/resources/data/assessments.json";

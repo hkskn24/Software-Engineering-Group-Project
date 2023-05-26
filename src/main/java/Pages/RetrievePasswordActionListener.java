@@ -1,4 +1,4 @@
-package main.java.Controller;
+package main.java.Pages;
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;
@@ -14,6 +14,9 @@ import java.io.IOException;
  * @version : v4.0
  */
 public class RetrievePasswordActionListener implements ActionListener {
+    /**
+     * user type
+     */
     public final int userType;
 
     /**

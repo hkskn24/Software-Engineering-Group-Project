@@ -17,6 +17,9 @@ import java.util.ArrayList;
  * @version : v4.3
  */
 public class AchievementData {
+    /**
+     * achievement lst
+     */
     private static AchievementData instance = null;
     public ArrayList<Achievement> achievements;
 

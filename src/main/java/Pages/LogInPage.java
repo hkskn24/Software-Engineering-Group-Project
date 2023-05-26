@@ -2,9 +2,6 @@ package main.java.Pages;
 
 import com.formdev.flatlaf.FlatDarculaLaf;
 import main.java.Config;
-import main.java.Controller.RecoverPasswordActionListener;
-import main.java.Controller.RegisterActionListener;
-import main.java.Controller.RetrievePasswordActionListener;
 import main.java.Pages.LecturerPages.HomePage;
 
 import javax.imageio.ImageIO;
@@ -22,8 +19,17 @@ import java.io.*;
  * @version : v4.3
  */
 public class LogInPage extends MyPage implements ActionListener {
+    /**
+     * user type
+     */
     public static int userType; //student:0 lecturer:1
+    /**
+     * text filed for username
+     */
     final JTextField usernameField;
+    /**
+     * text field for password
+     */
     final JPasswordField passwordField;
 
     /**

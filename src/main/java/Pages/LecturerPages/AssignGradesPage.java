@@ -18,8 +18,17 @@ import java.util.List;
  * @version : v4.3
  */
 public class AssignGradesPage extends MyPage {
+    /**
+     * table to show students and for assigning grades
+     */
     private JTable table;
+    /**
+     * controller for operation about students
+     */
     private final StudentController studentController;
+    /**
+     * module code
+     */
     private final String code;
 
     /**

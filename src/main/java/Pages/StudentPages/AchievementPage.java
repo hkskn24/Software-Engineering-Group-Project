@@ -21,7 +21,13 @@ import java.util.ArrayList;
  * @version : v4.0
  */
 public class AchievementPage extends MyPage {
+    /**
+     * table module of achievement table
+     */
     private final DefaultTableModel tableModel;
+    /**
+     * sorter for achievement
+     */
     private final TableRowSorter<DefaultTableModel> sorter;
 
     /**

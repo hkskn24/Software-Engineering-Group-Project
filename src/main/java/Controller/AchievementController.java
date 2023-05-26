@@ -38,7 +38,7 @@ public class AchievementController {
      * Filter the achievements by semester
      *
      * @param semester semesters
-     * @return {@link RowFilter}<{@link Object}, {@link Object}>
+     * @return RowFilter
      */
     public static RowFilter<Object, Object> filterBySemester(String semester) {
         if (semester == null || semester.equals("All")) {
@@ -52,7 +52,7 @@ public class AchievementController {
      * Filter the achievements by type
      *
      * @param type types
-     * @return {@link RowFilter}<{@link Object}, {@link Object}>
+     * @return RowFilter
      */
     public static RowFilter<Object, Object> filterByType(String type) {
         if (type == null || type.equals("All")) {

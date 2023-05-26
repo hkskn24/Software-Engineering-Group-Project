@@ -13,6 +13,9 @@ import java.util.Locale;
  * @version : v4.1
  */
 public class DateTimePanel extends JPanel {
+    /**
+     * panel to show date and time
+     */
     private final JLabel dateTimeLabel;
 
     /**

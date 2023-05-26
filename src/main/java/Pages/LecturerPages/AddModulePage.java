@@ -18,8 +18,17 @@ import java.awt.event.WindowEvent;
  * @version : v4.0
  */
 public class AddModulePage extends MyPage {
+    /**
+     * text field to enter information
+     */
     private final JTextField nameField, codeField, creditsField, hoursField,semesterField, typeField, lecturerField;
+    /**
+     * text area to enter information
+     */
     private final JTextArea summaryField, aimsField, syllabusField, readingListField;
+    /**
+     * button to submit information
+     */
     private final JButton submitButton;
 
     /**

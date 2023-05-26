@@ -8,7 +8,7 @@ import javax.swing.border.EmptyBorder;
 import java.awt.*;
 
 /**
- * [一句话描述该类的功能]
+ * Page to show module information
  *
  * @author : Yunxin Wang
  * @version : v4.1

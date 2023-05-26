@@ -1,4 +1,4 @@
-package main.java.Controller;
+package main.java.Pages;
 
 import main.java.Config;
 
@@ -14,6 +14,9 @@ import java.io.*;
  * @version : v4.0
  */
 public class RegisterActionListener implements ActionListener {
+    /**
+     * user type
+     */
     public final int userType;
 
     /**

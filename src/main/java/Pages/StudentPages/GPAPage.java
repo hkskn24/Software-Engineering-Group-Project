@@ -20,10 +20,16 @@ import java.util.ArrayList;
  * @version : v4.0
  */
 public class GPAPage extends JFrame {
+    /**
+     * modules of the user
+     */
     final ArrayList<Module> modules = ModuleData.getInstance().modules;
     double totalHours = 0.0;
     double totalQualityPoints = 0;
     final JTextArea textArea = new JTextArea();
+    /**
+     * panel to show GPA
+     */
     final JPanel panel = new JPanel();
     final StudentController studentController;
 

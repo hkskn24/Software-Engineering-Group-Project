@@ -18,10 +18,25 @@ import java.time.format.DateTimeParseException;
  * @version : v4.2
  */
 public class AddAssessmentPage extends JFrame {
+    /**
+     * text field for assessment name
+     */
     private final JTextField nameTextField;
+    /**
+     * text field for assessment module name
+     */
     private final JTextField moduleNameTextField;
+    /**
+     * text field for assessment module code
+     */
     private final JTextField codeTextField;
+    /**
+     * text field for assessment type
+     */
     private final JTextField typeTextField;
+    /**
+     * text field for assessment duration
+     */
     private final JTextField durationTextField;
 
     /**

@@ -43,7 +43,7 @@ public class ModuleController {
      * Filter the modules by semester
      *
      * @param semester semesters
-     * @return {@link RowFilter}<{@link Object}, {@link Object}>
+     * @return RowFilter
      */
     public static RowFilter<Object, Object> filterBySemester(String semester) {
         if (semester == null || semester.equals("All")) {
@@ -57,7 +57,7 @@ public class ModuleController {
      * Filter the achievements by type
      *
      * @param type types
-     * @return {@link RowFilter}<{@link Object}, {@link Object}>
+     * @return RowFilter
      */
     public static RowFilter<Object, Object> filterByType(String type) {
         if (type == null || type.equals("All")) {
@@ -72,7 +72,7 @@ public class ModuleController {
      *
      * @param modules user's modules
      * @param term    search term
-     * @return {@link List}<{@link Module}>
+     * @return module list
      */
     public static List<Module> searchMoules(List<Module> modules, String term) {
         List<Module> result = new ArrayList<>();
@@ -112,7 +112,7 @@ public class ModuleController {
      * Search module by name from all modules
      *
      * @param term search term
-     * @return {@link List}<{@link Module}>
+     * @return module list
      */
     public static List<Module> searchAllModules(String term) {
         ModuleData moduleData = ModuleData.getInstance();

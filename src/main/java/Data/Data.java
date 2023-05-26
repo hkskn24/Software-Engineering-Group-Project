@@ -36,7 +36,7 @@ public class Data {
     /**
      * @param filePath the path of the file
      * @param type type of the object
-     * @return {@link T}
+     * @return Json list
      */
     protected  <T> T readJsonToList(String filePath, Type type) {
         String jsonStr = readFileToString(filePath);

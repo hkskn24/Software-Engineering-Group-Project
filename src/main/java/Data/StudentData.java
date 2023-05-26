@@ -23,6 +23,9 @@ import java.util.stream.Collectors;
  */
 public class StudentData extends Data{
     private static StudentData instance = null;
+    /**
+     * student list
+     */
     public List<Student> students;
 
     /**
@@ -44,7 +47,7 @@ public class StudentData extends Data{
 
     /**
      * @param code module code
-     * @return {@link List}<{@link Student}>
+     * @return list of students
      */
     public List<Student> getStudentList(String code) {
         String path = "src/main/resources/data/modules/" + code + "/grades.json";
@@ -64,7 +67,7 @@ public class StudentData extends Data{
 
     /**
      * @param ID student id
-     * @return {@link Map}<{@link String}, {@link String}>
+     * @return map of student name and id
      */
     public Map<String, String> findStudent(String ID) {
         Path path = Paths.get("students.txt");

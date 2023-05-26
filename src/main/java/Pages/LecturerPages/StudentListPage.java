@@ -16,9 +16,21 @@ import java.util.List;
  * @version : v4.0
  */
 public class StudentListPage extends MyPage {
+    /**
+     * controller for operations about students
+     */
     private final StudentController studentController;
+    /**
+     * module code
+     */
     private final String code;
+    /**
+     * list of students
+     */
     private final JList<String> studentList;
+    /**
+     * list model of student list
+     */
     private final DefaultListModel<String> listModel;
 
     /**

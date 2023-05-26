@@ -27,6 +27,9 @@ import java.time.temporal.ChronoUnit;
  * @version : v4.3
  */
 public class AssessmentPage extends MyPage {
+    /**
+     * table of assessments
+     */
     private final JTable table;
 
     /**

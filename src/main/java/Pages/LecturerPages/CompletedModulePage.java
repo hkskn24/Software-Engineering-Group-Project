@@ -18,6 +18,9 @@ import java.awt.event.WindowEvent;
  * @version : v4.0
  */
 public class CompletedModulePage extends MyPage {
+    /**
+     * list of completed modules
+     */
     private final JList<Module> completedModuleList;
 
     /**

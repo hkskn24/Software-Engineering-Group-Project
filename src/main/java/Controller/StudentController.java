@@ -7,15 +7,15 @@ import java.util.List;
 import java.util.Map;
 
 /**
- * Controller about the students
+ * Controller of operations about students
  *
  * @author : Yunxin Wang
- * @version : v4.3
+ * @version : v4.0
  */
 public class StudentController {
     /**
      * @param code module code
-     * @return {@link List}<{@link Student}>
+     * @return list of students
      */
     public List<Student> getStudentList(String code) {
         return StudentData.getInstance().getStudentList(code);

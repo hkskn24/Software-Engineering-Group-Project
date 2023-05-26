@@ -1,4 +1,4 @@
-package main.java.Controller;
+package main.java.Pages;
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;
@@ -14,6 +14,9 @@ import java.util.List;
  * @version : v4.0
  */
 public class RecoverPasswordActionListener implements ActionListener {
+    /**
+     * user type
+     */
     public final int userType;
 
     /**

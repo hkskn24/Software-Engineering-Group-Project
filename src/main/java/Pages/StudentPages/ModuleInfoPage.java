@@ -7,7 +7,16 @@ import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 import java.awt.*;
 
+/**
+ * [一句话描述该类的功能]
+ *
+ * @author : Yunxin Wang
+ * @version : v4.1
+ */
 public class ModuleInfoPage extends MyPage {
+    /**
+     * @param module selected module
+     */
     public ModuleInfoPage(Module module) {
         setTitle(module.getName());
 
@@ -25,6 +34,9 @@ public class ModuleInfoPage extends MyPage {
         setVisible(true);
     }
 
+    /**
+     * @param infoPanel information panel
+     */
     private void addBackButton(JPanel infoPanel) {
         GridBagConstraints gbc = new GridBagConstraints();
         gbc.insets = new Insets(5, 5, 5, 5);
@@ -39,6 +51,10 @@ public class ModuleInfoPage extends MyPage {
         setLocationRelativeTo(null);
     }
 
+    /**
+     * @param infoPanel information panel
+     * @param module selected module
+     */
     protected void setupInfoPanel(JPanel infoPanel, Module module) {
         GridBagConstraints gbc = new GridBagConstraints();
         gbc.fill = GridBagConstraints.HORIZONTAL;
@@ -71,6 +87,13 @@ public class ModuleInfoPage extends MyPage {
         infoPanel.setBorder(new EmptyBorder(10, 10, 10, 10));
     }
 
+    /**
+     * @param panel information panel
+     * @param gbc GridBagConstraints
+     * @param title page title
+     * @param content page content
+     * @param rowIndex index
+     */
     private void addInfoSection(JPanel panel, GridBagConstraints gbc, String title, String content, int rowIndex) {
         JLabel sectionTitle = new JLabel(title);
         sectionTitle.setFont(new Font("Arial", Font.BOLD, 14));

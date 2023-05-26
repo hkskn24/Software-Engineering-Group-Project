@@ -18,14 +18,26 @@ import java.nio.file.Paths;
 import java.util.*;
 
 
+/**
+ * Operations about the achievement data
+ *
+ * @author : Yunxin Wang
+ * @version : v4.3
+ */
 public class ModuleData extends Data {
     private static ModuleData instance = null;
     public ArrayList<Module> modules;
 
+    /**
+     * Get module data
+     */
     public ModuleData() {
         getUserModules();
     }
 
+    /**
+     * @return {@link ModuleData}
+     */
     public static ModuleData getInstance() {
         if (instance == null) {
             instance = new ModuleData();
@@ -34,6 +46,9 @@ public class ModuleData extends Data {
         return instance;
     }
 
+    /**
+     * Get the module the user joined
+     */
     private void getUserModules() {
         String username = Config.getUsername();
         String userType = Config.getUserType();
@@ -48,11 +63,19 @@ public class ModuleData extends Data {
         }
     }
 
+    /**
+     * @param code module code
+     * @return {@link Module}
+     */
     private Module loadModuleByCode(String code) {
         String jsonStr = readFileToString("src/main/resources/data/modules/" + code + "/info.json");
         return new Gson().fromJson(jsonStr, Module.class);
     }
 
+    /**
+     * @param newCode new module code
+     * @return boolean
+     */
     public boolean isCodeUnique(String newCode) {
         String jsonStr = readFileToString("src/main/resources/data/modules/index.json");
         ArrayList<Map<String, String>> nameToCode = new Gson().fromJson(jsonStr, new TypeToken<ArrayList<Map<String, String>>>() {
@@ -70,6 +93,10 @@ public class ModuleData extends Data {
         return true;
     }
 
+    /**
+     * @param term search term
+     * @return {@link List}<{@link Module}>
+     */
     public List<Module> searchFromAllModules(String term) {
         List<Module> result = new ArrayList<>();
         String jsonStr = readFileToString("src/main/resources/data/modules/index.json");
@@ -91,6 +118,9 @@ public class ModuleData extends Data {
         return result;
     }
 
+    /**
+     * @param modulePath module file path
+     */
     public void createModuleFolder(Path modulePath) {
         try {
             Files.createDirectories(modulePath);
@@ -99,6 +129,9 @@ public class ModuleData extends Data {
         }
     }
 
+    /**
+     * @param module module object
+     */
     public void saveModuleInfo(Module module) {
         String code = module.getCode();
         String path = "src/main/resources/data/modules";
@@ -112,6 +145,9 @@ public class ModuleData extends Data {
         }
     }
 
+    /**
+     * @param gradesPath grades file path
+     */
     public void initializeGradesJson(Path gradesPath) {
         Gson gson = new GsonBuilder().setPrettyPrinting().create();
         try (FileWriter writer = new FileWriter(gradesPath.toString())) {
@@ -121,6 +157,10 @@ public class ModuleData extends Data {
         }
     }
 
+    /**
+     * @param module new module
+     * @param indexPath index file path
+     */
     public void addModuleToIndex(Module module, Path indexPath) {
         Gson gson = new GsonBuilder().setPrettyPrinting().create();
         Type indexType = new TypeToken<List<Map<String, String>>>() {
@@ -147,6 +187,10 @@ public class ModuleData extends Data {
         }
     }
 
+    /**
+     * @param module new module
+     * @param userPath user file path
+     */
     public void addModuleToUser(Module module, Path userPath) {
         Gson gson = new GsonBuilder().setPrettyPrinting().create();
         Type listType = new TypeToken<List<String>>() {
@@ -165,6 +209,9 @@ public class ModuleData extends Data {
         }
     }
 
+    /**
+     * @return {@link List}<{@link Module}>
+     */
     public List<Module> getOngoingModules() {
         List<Module> ongoingModules = new ArrayList<>();
         for (Module module : modules) {
@@ -175,6 +222,9 @@ public class ModuleData extends Data {
         return ongoingModules;
     }
 
+    /**
+     * @return {@link List}<{@link Module}>
+     */
     public List<Module> getCompletedModules() {
         List<Module> completedModules = new ArrayList<>();
         for (Module module : modules) {
@@ -186,21 +236,33 @@ public class ModuleData extends Data {
     }
 
 
+    /**
+     *
+     */
     public void updateModules() {
         getUserModules();
     }
 
+    /**
+     * @param module module
+     */
     public void updateModuleStatus(Module module) {
         module.setStatus("completed");
         saveModuleInfo(module);
     }
 
+    /**
+     * @param assessment new assessment
+     */
     public void addAssessment(Assessment assessment) {
         List<Assessment> assessments = loadAssessments();
         assessments.add(assessment);
         saveAssessments(assessments);
     }
 
+    /**
+     * @return {@link List}<{@link Assessment}>
+     */
     public List<Assessment> loadAssessments() {
         String filePath = "src/main/resources/data/assessments.json";
         Type type = new TypeToken<List<Assessment>>() {}.getType();
@@ -221,6 +283,9 @@ public class ModuleData extends Data {
         return studentAssessments;
     }
 
+    /**
+     * @param assessments assessments list
+     */
     private void saveAssessments(List<Assessment> assessments) {
         String filePath = "src/main/resources/data/assessments.json";
         saveJsonToFile(filePath, assessments);

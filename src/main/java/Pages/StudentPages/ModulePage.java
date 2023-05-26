@@ -14,10 +14,19 @@ import java.awt.event.WindowEvent;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Page shows the modules user joined with search panel and information
+ *
+ * @author : Yunxin Wang
+ * @version : v4.0
+ */
 public class ModulePage extends MyPage {
     private JList<Module> moduleList;
     private JTextField searchTextField;
 
+    /**
+     * set up the page
+     */
     public ModulePage() {
         ModuleData.getInstance().updateModules();
 
@@ -60,16 +69,25 @@ public class ModulePage extends MyPage {
         setVisible(true);
     }
 
+    /**
+     * @param args args
+     */
     public static void main(String[] args) {
         new ModulePage();
     }
 
+    /**
+     *
+     */
     private void setupModulePage() {
         ModuleData.getInstance().updateModules();
         ArrayList<Module> modules = ModuleData.getInstance().modules;
         updateModuleList(modules);
     }
 
+    /**
+     * @param modules modules the student joined
+     */
     private void updateModuleList(List<Module> modules) {
         DefaultListModel<Module> moduleListModel = new DefaultListModel<>();
         for (Module module : modules) {
@@ -83,6 +101,9 @@ public class ModulePage extends MyPage {
         }
     }
 
+    /**
+     * @return {@link JPanel}
+     */
     private JPanel setupSearchPanel() {
         JPanel searchPanel = new JPanel(new FlowLayout(FlowLayout.LEFT));
         searchTextField = new JTextField(20);
@@ -103,6 +124,9 @@ public class ModulePage extends MyPage {
         return searchPanel;
     }
 
+    /**
+     * search from joined modules
+     */
     private void searchModules() {
         String term = searchTextField.getText().trim();
         ArrayList<Module> modules = ModuleData.getInstance().modules;
@@ -110,6 +134,9 @@ public class ModulePage extends MyPage {
         updateModuleList(result);
     }
 
+    /**
+     * @param contentPanel content panel
+     */
     private void addBackButton(JPanel contentPanel) {
         JPanel bottomPanel = new JPanel(new BorderLayout());
 

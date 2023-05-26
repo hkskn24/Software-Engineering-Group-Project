@@ -11,11 +11,20 @@ import javax.swing.table.TableCellEditor;
 import java.awt.*;
 import java.util.List;
 
+/**
+ * Set the page to assign grades
+ *
+ * @author : Yunxin Wang
+ * @version : v4.3
+ */
 public class AssignGradesPage extends MyPage {
     private JTable table;
     private final StudentController studentController;
     private final String code;
 
+    /**
+     * @param module selected module
+     */
     public AssignGradesPage(Module module) {
         this.studentController = new StudentController();
         setTitle("Assign Grades");
@@ -28,6 +37,10 @@ public class AssignGradesPage extends MyPage {
         panel.add(setupControlPanel(panel), BorderLayout.SOUTH);
     }
 
+    /**
+     * @param panel assign grades panel
+     * @return {@link JPanel}
+     */
     private JPanel setupControlPanel(JPanel panel) {
         JPanel buttonPanel = new JPanel(new FlowLayout(FlowLayout.RIGHT));
         String[] columnNames = {"ID", "Name", "Grades"};
@@ -62,6 +75,9 @@ public class AssignGradesPage extends MyPage {
         return buttonPanel;
     }
 
+    /**
+     * save the grades to file
+     */
     private void submitGrades() {
         DefaultTableModel model = (DefaultTableModel) table.getModel();
         int rowCount = model.getRowCount();

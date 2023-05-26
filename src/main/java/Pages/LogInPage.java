@@ -15,11 +15,20 @@ import java.awt.event.ActionListener;
 import java.awt.event.ItemEvent;
 import java.io.*;
 
+/**
+ * Page for user to log in, sign up and operations with password
+ *
+ * @author : Yiyao Guo
+ * @version : v4.3
+ */
 public class LogInPage extends MyPage implements ActionListener {
     public static int userType; //student:0 lecturer:1
     final JTextField usernameField;
     final JPasswordField passwordField;
 
+    /**
+     * set up the page
+     */
     public LogInPage() {
         setTitle("LOG IN TO YOUR ACCOUNT");
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -194,11 +203,17 @@ public class LogInPage extends MyPage implements ActionListener {
         setLocationRelativeTo(null);
     }
 
+    /**
+     * @param args args
+     */
     public static void main(String[] args) {
         FlatDarculaLaf.setup();
         new LogInPage();
     }
 
+    /**
+     * @param e action event
+     */
     public void actionPerformed(ActionEvent e) {
         String username = usernameField.getText();
         String password = new String(passwordField.getPassword());

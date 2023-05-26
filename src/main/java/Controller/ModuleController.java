@@ -14,7 +14,21 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+/**
+ * Controller about the modules
+ *
+ * @author : Yunxin Wang
+ * @version : v4.3
+ */
 public class ModuleController {
+    /**
+     * Create the filters of grades page
+     *
+     * @param sorter           sorter of the modules
+     * @param semesterComboBox comboBox to choose semesters
+     * @param typeComboBox     comboBox to choose types of modules
+     * @return {@link ActionListener}
+     */
     public static ActionListener createFilterActionListener(TableRowSorter<DefaultTableModel> sorter, JComboBox<String> semesterComboBox, JComboBox<String> typeComboBox) {
         return e -> {
             String selectedSemester = (String) semesterComboBox.getSelectedItem();
@@ -25,6 +39,12 @@ public class ModuleController {
         };
     }
 
+    /**
+     * Filter the modules by semester
+     *
+     * @param semester semesters
+     * @return {@link RowFilter}<{@link Object}, {@link Object}>
+     */
     public static RowFilter<Object, Object> filterBySemester(String semester) {
         if (semester == null || semester.equals("All")) {
             return RowFilter.regexFilter(".*");
@@ -33,6 +53,12 @@ public class ModuleController {
         }
     }
 
+    /**
+     * Filter the achievements by type
+     *
+     * @param type types
+     * @return {@link RowFilter}<{@link Object}, {@link Object}>
+     */
     public static RowFilter<Object, Object> filterByType(String type) {
         if (type == null || type.equals("All")) {
             return RowFilter.regexFilter(".*");
@@ -41,6 +67,13 @@ public class ModuleController {
         }
     }
 
+    /**
+     * Search module by name from modules the user has joined
+     *
+     * @param modules user's modules
+     * @param term    search term
+     * @return {@link List}<{@link Module}>
+     */
     public static List<Module> searchMoules(List<Module> modules, String term) {
         List<Module> result = new ArrayList<>();
         for (Module module : modules) {
@@ -52,6 +85,12 @@ public class ModuleController {
         return result;
     }
 
+    /**
+     * Add new modules
+     *
+     * @param module   new module
+     * @param username the name of the user
+     */
     public static void addModule(Module module, String username) {
         String code = module.getCode();
         String path = "src/main/resources/data";
@@ -69,11 +108,22 @@ public class ModuleController {
         moduleData.addModuleToUser(module, lecturerPath);
     }
 
+    /**
+     * Search module by name from all modules
+     *
+     * @param term search term
+     * @return {@link List}<{@link Module}>
+     */
     public static List<Module> searchAllModules(String term) {
         ModuleData moduleData = ModuleData.getInstance();
         return moduleData.searchFromAllModules(term);
     }
 
+    /**
+     * Add new lecturer to a module
+     *
+     * @param module the module user want to join
+     */
     public static void joinModule(Module module) {
         String username = Config.getUsername();
         Path lecturerPath = Paths.get("src/main/resources/data/lecturers", username, "modules.json");
@@ -89,6 +139,12 @@ public class ModuleController {
         ModuleData.getInstance().updateModules();
     }
 
+    /**
+     * Check whether the code is unique
+     *
+     * @param code code of new module
+     * @return boolean
+     */
     public static boolean isCodeUnique(String code) {
         return ModuleData.getInstance().isCodeUnique(code);
     }

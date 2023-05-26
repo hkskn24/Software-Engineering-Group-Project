@@ -11,6 +11,12 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 
+/**
+ * Set page to add assessment
+ *
+ * @author : Yanshu He
+ * @version : v4.2
+ */
 public class AddAssessmentPage extends JFrame {
     private final JTextField nameTextField;
     private final JTextField moduleNameTextField;
@@ -18,6 +24,9 @@ public class AddAssessmentPage extends JFrame {
     private final JTextField typeTextField;
     private final JTextField durationTextField;
 
+    /**
+     * @param module assessment module
+     */
     public AddAssessmentPage(Module module) {
         setTitle("Add Assessment");
         setLayout(new BorderLayout());
@@ -115,6 +124,10 @@ public class AddAssessmentPage extends JFrame {
         setVisible(true);
     }
 
+    /**
+     * @param dateString assessment date
+     * @return boolean
+     */
     private boolean isValidDate(String dateString) {
         DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern("yyyy/MM/dd");
         if (dateString.matches("\\d{4}/\\d{2}/\\d{2}")) {

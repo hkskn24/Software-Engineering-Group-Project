@@ -10,14 +10,26 @@ import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.ArrayList;
 
+/**
+ * Operations about the achievement data
+ *
+ * @author : Yunxin Wang
+ * @version : v4.3
+ */
 public class AchievementData {
     private static AchievementData instance = null;
     public ArrayList<Achievement> achievements;
 
+    /**
+     * Constructor of achievement data
+     */
     private AchievementData() {
         getAchievements();
     }
 
+    /**
+     * @return {@link AchievementData}
+     */
     public static AchievementData getInstance() {
         if (instance == null) {
             instance = new AchievementData();
@@ -26,6 +38,9 @@ public class AchievementData {
         return instance;
     }
 
+    /**
+     * Get achievement instance
+     */
     private void getAchievements() {
         String username = Config.getUsername();
         String jsonStr;

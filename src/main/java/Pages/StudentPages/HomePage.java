@@ -13,7 +13,16 @@ import java.awt.event.MouseEvent;
 import java.awt.event.WindowEvent;
 import java.io.IOException;
 
+/**
+ * Home page of the students to select next operation
+ *
+ * @author : Yiyao Guo
+ * @version : v4.0
+ */
 public class HomePage extends MyPage {
+    /**
+     * set up the page
+     */
     public HomePage() {
         setTitle("HomePage");
         // Set the background image
@@ -86,7 +95,7 @@ public class HomePage extends MyPage {
                 new AchievementPage().setVisible(true);
                 dispose();
             });
-            
+
             btnAssessment.addActionListener(e -> {
                 new AssessmentPage().setVisible(true);
                 dispose();
@@ -117,7 +126,7 @@ public class HomePage extends MyPage {
             btnAchievement.setFont(buttonFont);
             btnAchievement.setBackground(btnAchievementColor);
             btnAchievement.setForeground(buttonTextColor);
-            
+
             btnAssessment.setFont(buttonFont);
             btnAssessment.setBackground(btnAssessmentColor);
             btnAssessment.setForeground(buttonTextColor);
@@ -160,6 +169,9 @@ public class HomePage extends MyPage {
 
     }
 
+    /**
+     * @param args args
+     */
     public static void main(String[] args) {
         FlatDarculaLaf.setup();
         SwingUtilities.invokeLater(() -> new HomePage().setVisible(true));

@@ -15,13 +15,25 @@ import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 
+/**
+ * Operations about the student data
+ *
+ * @author : Yunxin Wang
+ * @version : v4.3
+ */
 public class StudentData extends Data{
     private static StudentData instance = null;
     public List<Student> students;
 
+    /**
+     * Constructor
+     */
     private StudentData() {
     }
 
+    /**
+     * @return {@link StudentData}
+     */
     public static StudentData getInstance() {
         if (instance == null) {
             instance = new StudentData();
@@ -30,6 +42,10 @@ public class StudentData extends Data{
         return instance;
     }
 
+    /**
+     * @param code module code
+     * @return {@link List}<{@link Student}>
+     */
     public List<Student> getStudentList(String code) {
         String path = "src/main/resources/data/modules/" + code + "/grades.json";
         String jsonStr = readFileToString(path);
@@ -46,6 +62,10 @@ public class StudentData extends Data{
         }
     }
 
+    /**
+     * @param ID student id
+     * @return {@link Map}<{@link String}, {@link String}>
+     */
     public Map<String, String> findStudent(String ID) {
         Path path = Paths.get("students.txt");
         try {
@@ -66,6 +86,10 @@ public class StudentData extends Data{
         return null;
     }
 
+    /**
+     * @param code module code
+     * @param student new student
+     */
     public void addStudentToJson(String code, Map<String, String> student) {
         List<Student> students = getStudentList(code);
         Student newStudent = new Student();
@@ -77,6 +101,10 @@ public class StudentData extends Data{
         saveJsonToFile(path, students);
     }
 
+    /**
+     * @param studentName student name
+     * @param code module code
+     */
     public void addModuleToStudent(String studentName, String code) {
         String path = "src/main/resources/data/students/" + studentName + "/modules.json";
         List<String> modules = readJsonToList(path, new TypeToken<List<String>>(){}.getType());
@@ -84,6 +112,10 @@ public class StudentData extends Data{
         saveJsonToFile(path, modules);
     }
 
+    /**
+     * @param code module code
+     * @param ID student id
+     */
     public void deleteStudent(String code, String ID) {
         List<Student> students = getStudentList(code);
         students = students.stream().filter(student -> !student.getID().equals(ID)).collect(Collectors.toList());
@@ -91,6 +123,10 @@ public class StudentData extends Data{
         saveJsonToFile(path, students);
     }
 
+    /**
+     * @param studentName student name
+     * @param code module code
+     */
     public void removeModuleFromStudent(String studentName, String code) {
         String path = "src/main/resources/data/students/" + studentName + "/modules.json";
         List<String> modules = readJsonToList(path, new TypeToken<List<String>>(){}.getType());
@@ -98,6 +134,12 @@ public class StudentData extends Data{
         saveJsonToFile(path, modules);
     }
 
+    /**
+     * @param code module code
+     * @param ID student id
+     * @param grades grades assigned by lecturer
+     * @return boolean
+     */
     public boolean updateGrades(String code, String ID, int grades) {
         List<Student> students = getStudentList(code);
         boolean isSuccess = true;

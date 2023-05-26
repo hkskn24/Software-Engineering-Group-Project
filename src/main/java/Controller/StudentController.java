@@ -6,15 +6,26 @@ import main.java.Entity.Student;
 import java.util.List;
 import java.util.Map;
 
+/**
+ * Controller about the students
+ *
+ * @author : Yunxin Wang
+ * @version : v4.3
+ */
 public class StudentController {
-
-    public StudentController() {
-    }
-
+    /**
+     * @param code module code
+     * @return {@link List}<{@link Student}>
+     */
     public List<Student> getStudentList(String code) {
         return StudentData.getInstance().getStudentList(code);
     }
 
+    /**
+     * @param code module code
+     * @param ID student id
+     * @return int
+     */
     public int addStudent(String code, String ID) {
         Map<String, String> student = StudentData.getInstance().findStudent(ID);
         if (student == null) {
@@ -33,11 +44,16 @@ public class StudentController {
         return 2; // added successfully
     }
 
+    /**
+     * @param code module code
+     * @param ID student id of the selected student
+     * @return boolean
+     */
     public boolean deleteStudent(String code, String ID) {
         List<Student> students = StudentData.getInstance().getStudentList(code);
         boolean isFound = false;
         String studentName = null;
-        
+
         for (Student s : students) {
             if (s.getID().equals(ID)) {
                 studentName = s.getName();
@@ -55,6 +71,11 @@ public class StudentController {
         }
     }
 
+    /**
+     * @param name student name
+     * @param code module code
+     * @return int
+     */
     public int getGradesByCode(String name, String code) {
         List<Student> students = getStudentList(code);
         for (Student student : students) {
@@ -65,6 +86,12 @@ public class StudentController {
         return -1;
     }
 
+    /**
+     * @param code module code
+     * @param ID student id
+     * @param grades grades given by lecturer
+     * @return boolean
+     */
     public boolean updateGrades(String code, String ID, int grades) {
         return StudentData.getInstance().updateGrades(code, ID, grades);
     }

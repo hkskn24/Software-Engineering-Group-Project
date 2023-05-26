@@ -11,10 +11,19 @@ import java.awt.event.WindowEvent;
 import java.util.Collections;
 import java.util.List;
 
+/**
+ * Page for lecturer to join other module
+ *
+ * @author : Yunxin Wang
+ * @version : v4.0
+ */
 public class JoinPage extends JFrame {
     private JList<Module> moduleList;
     private JTextField searchTextField;
 
+    /**
+     * set up the page
+     */
     public JoinPage() {
         setTitle("Join A Module");
         setSize(1094, 729);
@@ -46,6 +55,9 @@ public class JoinPage extends JFrame {
         setVisible(true);
     }
 
+    /**
+     * @param modules search result
+     */
     private void updateSearchResult(List<Module> modules) {
         DefaultListModel<Module> moduleListModel = new DefaultListModel<>();
         for (Module module : modules) {
@@ -59,6 +71,9 @@ public class JoinPage extends JFrame {
         }
     }
 
+    /**
+     * @return {@link JPanel}
+     */
     protected JPanel setupSearchPanel() {
         JPanel searchPanel = new JPanel(new FlowLayout(FlowLayout.LEFT));
         searchTextField = new JTextField(20);
@@ -79,6 +94,9 @@ public class JoinPage extends JFrame {
         return searchPanel;
     }
 
+    /**
+     * @return {@link JPanel}
+     */
     protected JPanel setupButtonPanel() {
         JPanel buttonPanel = new JPanel(new FlowLayout(FlowLayout.RIGHT));
 
@@ -96,6 +114,9 @@ public class JoinPage extends JFrame {
         return buttonPanel;
     }
 
+    /**
+     * join selected module and feedback message
+     */
     private void joinSelectedModule() {
         Module selectedModule = moduleList.getSelectedValue();
         if (selectedModule != null) {
@@ -108,6 +129,9 @@ public class JoinPage extends JFrame {
         }
     }
 
+    /**
+     * search from all modules
+     */
     private void searchModules() {
         String term = searchTextField.getText().trim();
         if (!term.isEmpty()) {

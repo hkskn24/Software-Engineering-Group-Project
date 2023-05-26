@@ -9,7 +9,21 @@ import java.util.Arrays;
 import java.util.List;
 
 
+/**
+ * Controller about the achievement page
+ *
+ * @author : Yunxin Wang
+ * @version : v4.3
+ */
 public class AchievementController {
+    /**
+     * Create the filter of achievements
+     *
+     * @param sorter           sorter of the achievements
+     * @param semesterComboBox comboBox to choose semesters
+     * @param typeComboBox     comboBox to choose types of achievements
+     * @return {@link ActionListener}
+     */
     public static ActionListener createFilterActionListener(TableRowSorter<DefaultTableModel> sorter, JComboBox<String> semesterComboBox, JComboBox<String> typeComboBox) {
         return e -> {
             String selectedSemester = (String) semesterComboBox.getSelectedItem();
@@ -20,6 +34,12 @@ public class AchievementController {
         };
     }
 
+    /**
+     * Filter the achievements by semester
+     *
+     * @param semester semesters
+     * @return {@link RowFilter}<{@link Object}, {@link Object}>
+     */
     public static RowFilter<Object, Object> filterBySemester(String semester) {
         if (semester == null || semester.equals("All")) {
             return RowFilter.regexFilter(".*");
@@ -28,6 +48,12 @@ public class AchievementController {
         }
     }
 
+    /**
+     * Filter the achievements by type
+     *
+     * @param type types
+     * @return {@link RowFilter}<{@link Object}, {@link Object}>
+     */
     public static RowFilter<Object, Object> filterByType(String type) {
         if (type == null || type.equals("All")) {
             return RowFilter.regexFilter(".*");
@@ -36,6 +62,13 @@ public class AchievementController {
         }
     }
 
+    /**
+     * Sort the achievement table
+     *
+     * @param table       achievement table
+     * @param columnIndex index of the columns
+     * @param ascending   to choose whether ascending or not
+     */
     public static void sortTable(JTable table, int columnIndex, boolean ascending) {
         TableRowSorter<DefaultTableModel> sorter = (TableRowSorter<DefaultTableModel>) table.getRowSorter();
         List<RowSorter.SortKey> sortKeys = new ArrayList<>();

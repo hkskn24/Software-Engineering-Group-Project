@@ -7,13 +7,29 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.*;
 
+/**
+ * Operations about register
+ *
+ * @author : Yanshu He
+ * @version : v4.0
+ */
 public class RegisterActionListener implements ActionListener {
     public final int userType;
 
+    /**
+     * Constructor of the action listener
+     *
+     * @param num user type
+     */
     public RegisterActionListener(int num) {
         this.userType = num;
     }
 
+    /**
+     * Set up the register panel
+     *
+     * @param e e
+     */
     public void actionPerformed(ActionEvent e) {
         JPanel registerPanel = new JPanel();
         JFrame registerWindow = new JFrame("Sign up");
@@ -146,6 +162,11 @@ public class RegisterActionListener implements ActionListener {
         registerWindow.setVisible(true);
     }
 
+    /**
+     * Add to file
+     *
+     * @param file user information file
+     */
     private void addFile(File file) {
         if (!file.exists()) {
             FileWriter fileWriter;

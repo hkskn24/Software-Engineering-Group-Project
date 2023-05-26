@@ -9,12 +9,21 @@ import javax.swing.*;
 import java.awt.*;
 import java.util.List;
 
+/**
+ * Page shows student list with add and delete operations
+ *
+ * @author : Yunxin Wang
+ * @version : v4.0
+ */
 public class StudentListPage extends MyPage {
     private final StudentController studentController;
     private final String code;
     private final JList<String> studentList;
     private final DefaultListModel<String> listModel;
 
+    /**
+     * @param module selected module
+     */
     public StudentListPage(Module module) {
         this.studentController = new StudentController();
         setTitle("Student List");
@@ -33,6 +42,10 @@ public class StudentListPage extends MyPage {
         setVisible(true);
     }
 
+    /**
+     * @param module selected module
+     * @return {@link JPanel}
+     */
     private JPanel setupControlPanel(Module module) {
         JPanel controlPanel = new JPanel(new FlowLayout(FlowLayout.RIGHT));
 
@@ -67,6 +80,9 @@ public class StudentListPage extends MyPage {
         return controlPanel;
     }
 
+    /**
+     * @return {@link JPanel}
+     */
     private JPanel setupAddPanel() {
         JPanel addPanel = new JPanel(new FlowLayout(FlowLayout.LEFT));
         JLabel addLabel = new JLabel("Student ID: ");
@@ -94,6 +110,9 @@ public class StudentListPage extends MyPage {
         return addPanel;
     }
 
+    /**
+     * refresh the student list
+     */
     private void updateStudentList() {
         List<Student> students = studentController.getStudentList(code);
         listModel.clear();

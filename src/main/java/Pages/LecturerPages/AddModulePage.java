@@ -11,11 +11,20 @@ import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 
 
+/**
+ * Set page to add module
+ *
+ * @author : Yiyao Guo
+ * @version : v4.0
+ */
 public class AddModulePage extends MyPage {
     private final JTextField nameField, codeField, creditsField, hoursField,semesterField, typeField, lecturerField;
     private final JTextArea summaryField, aimsField, syllabusField, readingListField;
     private final JButton submitButton;
 
+    /**
+     * Basic settings
+     */
     public AddModulePage() {
 
         setTitle("Add Module");
@@ -76,6 +85,11 @@ public class AddModulePage extends MyPage {
         });
     }
 
+    /**
+     * @param panel labeled text field panel
+     * @param text text to be added
+     * @return {@link JTextField}
+     */
     private JTextField createLabeledTextField(JPanel panel, String text) {
         JPanel subPanel = new JPanel(new FlowLayout(FlowLayout.LEFT));
         JLabel label = new JLabel(text);
@@ -88,6 +102,11 @@ public class AddModulePage extends MyPage {
         return textField;
     }
 
+    /**
+     * @param panel labeled text field panel
+     * @param text text to be added
+     * @return {@link JTextArea}
+     */
     private JTextArea createLabeledTextArea(JPanel panel, String text) {
         JPanel subPanel = new JPanel(new GridBagLayout()); // Use GridBagLayout
         JLabel label = new JLabel(text);
@@ -122,6 +141,9 @@ public class AddModulePage extends MyPage {
         return textArea;
     }
 
+    /**
+     * Add module information and valid checking
+     */
     private void addActionListener() {
         submitButton.addActionListener(e -> {
             Module module = new Module();
@@ -181,48 +203,80 @@ public class AddModulePage extends MyPage {
             new HomePage().setVisible(true);
         });
     }
-    
-    //TDD用
+
+    /**
+     * @return {@link JTextField}
+     */
     public JTextField getNameField() {
         return nameField;
     }
 
+    /**
+     * @return {@link JTextField}
+     */
     public JTextField getCodeField() {
         return codeField;
     }
 
+    /**
+     * @return {@link JTextField}
+     */
     public JTextField getCreditsField() {
         return creditsField;
     }
 
+    /**
+     * @return {@link JTextField}
+     */
     public JTextField getHoursField() {
         return hoursField;
     }
 
+    /**
+     * @return {@link JTextField}
+     */
     public JTextField getSemesterField() {
         return semesterField;
     }
 
+    /**
+     * @return {@link JTextField}
+     */
     public JTextField getTypeField() {
         return typeField;
     }
 
+    /**
+     * @return {@link JTextField}
+     */
     public JTextField getLecturerField() {
         return lecturerField;
     }
 
+    /**
+     * @return {@link JTextArea}
+     */
     public JTextArea getSummaryField() {
         return summaryField;
     }
 
+    /**
+     * @return {@link JTextArea}
+     */
     public JTextArea getAimsField() {
         return aimsField;
     }
 
+    /**
+     * @return {@link JTextArea}
+     */
     public JTextArea getSyllabusField() {
         return syllabusField;
     }
 
+    /**
+     * @return {@link JTextArea}
+     */
     public JTextArea getReadingListField() {
         return readingListField;
     }

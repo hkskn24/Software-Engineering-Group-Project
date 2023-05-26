@@ -9,8 +9,18 @@ import java.lang.reflect.Type;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 
+/**
+ * Operations about files
+ *
+ * @author : Yunxin Wang
+ * @version : v4.3
+ */
 public class Data {
 
+    /**
+     * @param filePath the path of the file
+     * @return {@link String}
+     */
     protected String readFileToString(String filePath) {
         String file = null;
 
@@ -23,11 +33,20 @@ public class Data {
         return file;
     }
 
+    /**
+     * @param filePath the path of the file
+     * @param type type of the object
+     * @return {@link T}
+     */
     protected  <T> T readJsonToList(String filePath, Type type) {
         String jsonStr = readFileToString(filePath);
         return new Gson().fromJson(jsonStr, type);
     }
 
+    /**
+     * @param filePath the path of the file
+     * @param obj object
+     */
     protected void saveJsonToFile(String filePath, Object obj) {
         Gson gson = new GsonBuilder().setPrettyPrinting().create();
         try (FileWriter writer = new FileWriter(filePath)) {

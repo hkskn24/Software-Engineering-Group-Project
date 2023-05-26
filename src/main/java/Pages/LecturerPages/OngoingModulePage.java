@@ -11,9 +11,18 @@ import java.awt.event.MouseEvent;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 
+/**
+ * Page to show modules that are ongoing
+ *
+ * @author : Yunxin Wang
+ * @version : v4.0
+ */
 public class OngoingModulePage extends MyPage {
     private final JList<Module> ongoingModuleList;
 
+    /**
+     * set up the page
+     */
     public OngoingModulePage() {
         setTitle("Ongoing Modules");
         setLayout(new BorderLayout());
@@ -48,6 +57,9 @@ public class OngoingModulePage extends MyPage {
         });
     }
 
+    /**
+     * @return {@link JPanel}
+     */
     protected JPanel setupButtonPanel() {
         JPanel buttonPanel = new JPanel(new FlowLayout(FlowLayout.RIGHT));
 
@@ -74,6 +86,9 @@ public class OngoingModulePage extends MyPage {
         return buttonPanel;
     }
 
+    /**
+     * refresh the module list
+     */
     private void updateList() {
         DefaultListModel<Module> listModel = new DefaultListModel<>();
         for (Module module : ModuleData.getInstance().getOngoingModules()) {
@@ -82,6 +97,9 @@ public class OngoingModulePage extends MyPage {
         ongoingModuleList.setModel(listModel);
     }
 
+    /**
+     * change selected module's status to "completed"
+     */
     private void endSelectedModule() {
         Module selectedModule = ongoingModuleList.getSelectedValue();
         if (selectedModule != null) {

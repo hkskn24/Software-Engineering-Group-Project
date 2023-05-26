@@ -20,9 +20,18 @@ import java.time.format.DateTimeFormatter;
 import java.time.temporal.ChronoUnit;
 
 
+/**
+ * Page to show assessments
+ *
+ * @author : Yunxin Wang
+ * @version : v4.3
+ */
 public class AssessmentPage extends MyPage {
     private final JTable table;
 
+    /**
+     * set up the page
+     */
     public AssessmentPage() {
         setTitle("Student Assessments");
 
@@ -99,6 +108,9 @@ public class AssessmentPage extends MyPage {
         setVisible(true);
     }
 
+    /**
+     * get the assessments after today
+     */
     private void Assessments() {
         ModuleData moduleData = new ModuleData();
         List<Assessment> assessments = moduleData.loadAssessments();
@@ -132,11 +144,16 @@ public class AssessmentPage extends MyPage {
         table.setModel(model);
     }
 
+    /**
+     * @param args args
+     */
     public static void main(String[] args) {
         SwingUtilities.invokeLater(AssessmentPage::new);
     }
-    
-    //TDD用
+
+    /**
+     * @return {@link JTable}
+     */
     public JTable getTable() {
         return table;
     }

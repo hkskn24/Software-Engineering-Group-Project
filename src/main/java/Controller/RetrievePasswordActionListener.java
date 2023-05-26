@@ -7,13 +7,25 @@ import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
 
+/**
+ * Operations about retrieving the password
+ *
+ * @author : Yanshu He
+ * @version : v4.0
+ */
 public class RetrievePasswordActionListener implements ActionListener {
     public final int userType;
 
+    /**
+     * @param num user type
+     */
     public RetrievePasswordActionListener(int num) {
         this.userType = num;
     }
 
+    /**
+     * @param e action event
+     */
     public void actionPerformed(ActionEvent e) {
         String id = JOptionPane.showInputDialog("Please enter your ID:");
 

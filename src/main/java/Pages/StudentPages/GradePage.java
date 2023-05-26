@@ -20,10 +20,19 @@ import java.awt.event.WindowEvent;
 import java.util.ArrayList;
 
 
+/**
+ * Page to show grades user achieved
+ *
+ * @author : Yunxin Wang
+ * @version : v4.0
+ */
 public class GradePage extends MyPage {
     private TableRowSorter<DefaultTableModel> sorter;
     private StudentController studentController;
 
+    /**
+     * set up the page
+     */
     public GradePage() {
         setTitle("TransfiguringGrades");
         getContentPane().setBackground(new Color(250, 250, 250));
@@ -50,10 +59,16 @@ public class GradePage extends MyPage {
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
     }
 
+    /**
+     * @param args args
+     */
     public static void main(String[] args) {
         new GradePage();
     }
 
+    /**
+     * @return {@link JTable}
+     */
     private JTable setupTable() {
         // get data from ModuleData class
         ArrayList<Module> modules = ModuleData.getInstance().modules;
@@ -71,6 +86,10 @@ public class GradePage extends MyPage {
         return table;
     }
 
+    /**
+     * @param modules modules
+     * @return {@link UneditableTableModel}
+     */
     private UneditableTableModel createTableModel(ArrayList<Module> modules) {
         String[] columnNames = {"Name", "Code", "Credit", "Hours", "Semester", "Type", "Grades"};   //列名
         Object[][] tableValues = new Object[modules.size()][Module.getGradesAttributes().length];
@@ -89,6 +108,10 @@ public class GradePage extends MyPage {
         return new UneditableTableModel(tableValues, columnNames);
     }
 
+    /**
+     * @param sorter sorter for the modules
+     * @return {@link JPanel}
+     */
     private JPanel setupFilterPanel(TableRowSorter<DefaultTableModel> sorter) {
         JPanel filterPanel = new JPanel();
 
@@ -109,6 +132,10 @@ public class GradePage extends MyPage {
         return filterPanel;
     }
 
+    /**
+     * @param table table to show information
+     * @return {@link JPanel}
+     */
     private JPanel setupSortPanel(JTable table) {
         JPanel sortPanel = new JPanel();
 
@@ -130,6 +157,10 @@ public class GradePage extends MyPage {
         return sortPanel;
     }
 
+    /**
+     * @param filterPanel filter panel
+     * @param sortPanel sort panel
+     */
     private void setupCombinedPanel(JPanel filterPanel, JPanel sortPanel) {
         JPanel combinedPanel = new JPanel(new GridBagLayout());
         getContentPane().add(combinedPanel, BorderLayout.SOUTH);
@@ -153,6 +184,10 @@ public class GradePage extends MyPage {
         combinedPanel.setBorder(new EmptyBorder(10, 10, 10, 10));
     }
 
+    /**
+     * @param contentPanel content panel
+     * @param gbc GridBagConstraints
+     */
     private void addBackButton(JPanel contentPanel, GridBagConstraints gbc) {
         JPanel bottomPanel = new JPanel(new BorderLayout());
 

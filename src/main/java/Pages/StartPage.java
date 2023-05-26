@@ -8,8 +8,17 @@ import java.awt.*;
 import java.io.*;
 import java.util.Locale;
 
+/**
+ * Start page of the application
+ *
+ * @author : Yiyao Guo
+ * @version : v4.0
+ */
 public class StartPage extends MyPage {
 
+    /**
+     * set up the page
+     */
     public StartPage() {
         setTitle("WELCOME TO LUMOSLEARNING");
 
@@ -69,6 +78,9 @@ public class StartPage extends MyPage {
         getContentPane().add(startButton, gbc);
     }
 
+    /**
+     * @param args args
+     */
     public static void main(String[] args) {
         FlatLightLaf.install();
 

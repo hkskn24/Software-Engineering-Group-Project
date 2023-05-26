@@ -15,17 +15,17 @@ import java.awt.event.WindowEvent;
 import java.util.ArrayList;
 
 /**
- * [一句话描述该类的功能]
+ * Page shows the achievements with sort and filter operations
  *
- * @author : [${USER}]
- * @version : [v1.0]
+ * @author : Yiyao guo
+ * @version : v4.0
  */
 public class AchievementPage extends MyPage {
     private final DefaultTableModel tableModel;
     private final TableRowSorter<DefaultTableModel> sorter;
 
     /**
-     * 成就页面
+     * set up the page
      */
     public AchievementPage() {
         setTitle("Achievement");
@@ -72,7 +72,7 @@ public class AchievementPage extends MyPage {
     }
 
     /**
-     * 设置成就
+     * get user achievements
      */
     private void setupAchievement() {
         ArrayList<Achievement> achievements = AchievementData.getInstance().achievements;
@@ -82,9 +82,9 @@ public class AchievementPage extends MyPage {
     }
 
     /**
-     * 添加成就
+     * add achievement to table
      *
-     * @param achievement 成就
+     * @param achievement achievement
      */
     private void addAchievement(Achievement achievement) {
         Object[] newAchievement = {achievement.getName(), achievement.getType(), achievement.getSemester()};
@@ -92,7 +92,7 @@ public class AchievementPage extends MyPage {
     }
 
     /**
-     * 设置筛选器面板
+     * set up filter panel
      *
      * @return {@link JPanel}
      */
@@ -118,9 +118,9 @@ public class AchievementPage extends MyPage {
     }
 
     /**
-     * 设置排序面板
+     * set up sort panel
      *
-     * @param table 表
+     * @param table achievement table
      * @return {@link JPanel}
      */
     private JPanel setupSortPanel(JTable table) {
@@ -141,10 +141,10 @@ public class AchievementPage extends MyPage {
     }
 
     /**
-     * 设置面板相结合
+     * combine the filter and sort panel
      *
-     * @param filterPanel 过滤板
-     * @param sortPanel   这种面板
+     * @param filterPanel filter panel
+     * @param sortPanel   sort panel
      */
     private void setupCombinedPanel(JPanel filterPanel, JPanel sortPanel) {
         JPanel combinedPanel = new JPanel(new GridBagLayout());
@@ -170,10 +170,10 @@ public class AchievementPage extends MyPage {
     }
 
     /**
-     * 添加后退按钮
+     * add back button
      *
-     * @param contentPanel 内容面板
-     * @param gbc          gbc
+     * @param contentPanel  content panel
+     * @param gbc          GridBagConstraints
      */
     private void addBackButton(JPanel contentPanel, GridBagConstraints gbc) {
         JPanel bottomPanel = new JPanel(new BorderLayout());
@@ -192,10 +192,8 @@ public class AchievementPage extends MyPage {
         contentPanel.add(bottomPanel, gbc);
     }
 
-    /**
-     * 主要
-     *
-     * @param args arg游戏
+    /***
+     * @param args args
      */
     public static void main(String[] args) {
         SwingUtilities.invokeLater(AchievementPage::new);

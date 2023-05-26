@@ -11,7 +11,16 @@ import java.awt.event.MouseEvent;
 import java.awt.event.WindowEvent;
 import java.io.IOException;
 
+/**
+ * Home page of the lecturers to select next operation
+ *
+ * @author : Yiyao Guo
+ * @version : v4.2
+ */
 public class HomePage extends MyPage {
+    /**
+     * Home page of the lecturers to select next operation
+     */
     public HomePage() {
         setTitle("HomePage");
 

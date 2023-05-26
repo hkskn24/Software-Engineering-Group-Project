@@ -7,13 +7,27 @@ import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Operations about recovering the password
+ *
+ * @author : Yanshu He
+ * @version : v4.0
+ */
 public class RecoverPasswordActionListener implements ActionListener {
     public final int userType;
 
+    /**
+     * @param num user type
+     */
     public RecoverPasswordActionListener(int num) {
         this.userType = num;
     }
 
+    /**
+     * Operations about recovering the password
+     *
+     * @param e action event
+     */
     public void actionPerformed(ActionEvent e) {
         String id = JOptionPane.showInputDialog("Please enter your ID:");
 

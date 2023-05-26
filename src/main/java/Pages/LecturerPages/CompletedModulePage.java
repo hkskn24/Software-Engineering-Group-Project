@@ -11,9 +11,18 @@ import java.awt.event.MouseEvent;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 
+/**
+ * Page to show modules that are completed
+ *
+ * @author : Yunxin Wang
+ * @version : v4.0
+ */
 public class CompletedModulePage extends MyPage {
     private final JList<Module> completedModuleList;
 
+    /**
+     * set up the page
+     */
     public CompletedModulePage() {
         ModuleData.getInstance().updateModules();
 
@@ -48,6 +57,9 @@ public class CompletedModulePage extends MyPage {
         });
     }
 
+    /**
+     * @return {@link JPanel}
+     */
     protected JPanel setupButtonPanel() {
         JPanel buttonPanel = new JPanel(new FlowLayout(FlowLayout.RIGHT));
 
@@ -71,6 +83,9 @@ public class CompletedModulePage extends MyPage {
         return buttonPanel;
     }
 
+    /**
+     * refresh the module list
+     */
     private void updateList() {
         DefaultListModel<Module> listModel = new DefaultListModel<>();
         for (Module module : ModuleData.getInstance().getCompletedModules()) {

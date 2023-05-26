@@ -6,9 +6,18 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Locale;
 
+/**
+ * Panel to show time
+ *
+ * @author : Yanshu He
+ * @version : v4.1
+ */
 public class DateTimePanel extends JPanel {
     private final JLabel dateTimeLabel;
 
+    /**
+     * set up the panel
+     */
     public DateTimePanel() {
         // set the layout of the panel
         setLayout(new BorderLayout());
@@ -30,6 +39,9 @@ public class DateTimePanel extends JPanel {
         timer.start();
     }
 
+    /**
+     * update the time
+     */
     private void updateTimeAndDate() {
         // create a date object with the current time
         Date now = new Date();

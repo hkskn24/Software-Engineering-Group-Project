@@ -13,6 +13,12 @@ import java.text.DecimalFormat;
 import java.util.ArrayList;
 
 
+/**
+ * Page that shows grades and produces relevant calculations for various purpose
+ *
+ * @author : Yanshu He
+ * @version : v4.0
+ */
 public class GPAPage extends JFrame {
     final ArrayList<Module> modules = ModuleData.getInstance().modules;
     double totalHours = 0.0;
@@ -21,6 +27,9 @@ public class GPAPage extends JFrame {
     final JPanel panel = new JPanel();
     final StudentController studentController;
 
+    /**
+     * set up the page
+     */
     public GPAPage() {
         super("GPA Page");
         studentController = new StudentController();
@@ -53,6 +62,9 @@ public class GPAPage extends JFrame {
 
     }
 
+    /**
+     * @param args args
+     */
     public static void main(String[] args) {
         GPAPage p = new GPAPage();
         p.averageGPA();
@@ -61,6 +73,9 @@ public class GPAPage extends JFrame {
         p.perGPA();
     }
 
+    /**
+     * get average GPA
+     */
     public void averageGPA() {
         int totalCredits = 0;
         double averageGPA = 0;
@@ -84,6 +99,9 @@ public class GPAPage extends JFrame {
         }
     }
 
+    /**
+     * get total GPA
+     */
     public void totalGPA() {
         int totalCredits = 0;
         DecimalFormat df = new DecimalFormat("#.00");
@@ -104,6 +122,9 @@ public class GPAPage extends JFrame {
         }
     }
 
+    /**
+     * get GPA per semester
+     */
     public void perGPA() {
         int maxSemester = 0;
         DefaultListModel<String> listModel = new DefaultListModel<>();
@@ -163,6 +184,9 @@ public class GPAPage extends JFrame {
         }
     }
 
+    /**
+     * get GPA for Postgraduate
+     */
     public void postGPA() {
         int totalCredits = 0;
         int totalQualityPoints = 0;
@@ -193,6 +217,10 @@ public class GPAPage extends JFrame {
         }
     }
 
+    /**
+     * @param grade grades
+     * @return double
+     */
     public double gradeToGPA(int grade) {
         if (grade >= 90) {
             return 4.0;

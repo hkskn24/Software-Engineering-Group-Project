@@ -20,7 +20,6 @@ public class HomePage extends MyPage {
             JLabel backgroundImage = new JLabel(new ImageIcon(ImageIO.read(getClass().getResource("../../../resources/images/lhomepage.jpg"))));
             backgroundImage.setLayout(new GridBagLayout());
 
-            // 创建按钮并设置大小
             Dimension buttonSize = new Dimension(800, 50);
             JButton btnLec_ModulePage = new JButton("Add Module");
             btnLec_ModulePage.setPreferredSize(buttonSize);
@@ -40,7 +39,6 @@ public class HomePage extends MyPage {
                 }
             });
 
-            // 添加动态效果
             MouseAdapter mouseAdapter = new MouseAdapter() {
                 @Override
                 public void mouseEntered(MouseEvent e) {
@@ -89,7 +87,7 @@ public class HomePage extends MyPage {
                 dispose();
             });
 
-            // 设置按钮颜色和文字颜色
+            // set color and font
             Color btnLec_ModulePageColor = new Color(96, 33, 46);
             Color btnLec_StudentPageColor = new Color(179, 122, 54);
             Color btnOngoingcoursesColor = new Color(25, 60, 79);
@@ -121,7 +119,6 @@ public class HomePage extends MyPage {
             JPanel panel = new JPanel();
             panel.setLayout(new GridLayout(5, 1, 0, 10));
 
-            // 将按钮添加到窗口
             panel.add(btnLec_ModulePage);
             panel.add(btnLec_StudentPage);
             panel.add(btnOngoingcourses);

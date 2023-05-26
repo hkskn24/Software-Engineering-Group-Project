@@ -17,7 +17,7 @@ public class ModuleInfoPage extends MyPage {
 
         addBackButton(infoPanel);
 
-        // 添加滚动条
+        // add scroll panel
         JScrollPane scrollPane = new JScrollPane(infoPanel);
         scrollPane.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
         scrollPane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED);

@@ -69,8 +69,8 @@ public class LogInPage extends MyPage implements ActionListener {
         } catch (FontFormatException | IOException e) {
             e.printStackTrace();
         }
-        usernameLabel.setForeground(Color.WHITE); // 设置文本颜色为白色
-        passwordLabel.setForeground(Color.WHITE); // 设置文本颜色为白色
+        usernameLabel.setForeground(Color.WHITE); // set color as white
+        passwordLabel.setForeground(Color.WHITE);
 
         // set test field
         usernameField = new JTextField();
@@ -107,7 +107,7 @@ public class LogInPage extends MyPage implements ActionListener {
             }
             button.setBackground(buttonColor);
             button.setForeground(buttonTextColor);
-            button.setPreferredSize(new Dimension(200, 50)); // 增加按钮宽度以显示完整文本
+            button.setPreferredSize(new Dimension(200, 50));
         }
 
         // set ActionListener

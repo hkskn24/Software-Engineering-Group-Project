@@ -20,7 +20,7 @@ public class HomePage extends MyPage {
         try {
             JLabel backgroundImage = new JLabel(new ImageIcon(ImageIO.read(getClass().getResource("../../../resources/images/shomepage.jpg"))));
             backgroundImage.setLayout(new GridBagLayout());
-            // 创建按钮并设置大小
+
             Dimension buttonSize = new Dimension(200, 50);
             JButton btnModulePage = new JButton("Module");
             btnModulePage.setPreferredSize(buttonSize);
@@ -40,7 +40,7 @@ public class HomePage extends MyPage {
                 }
             });
 
-            // 添加边距
+            // border
             int margin = 10;
             btnModulePage.setBorder(BorderFactory.createEmptyBorder(margin, margin, margin, margin));
             btnGradePage.setBorder(BorderFactory.createEmptyBorder(margin, margin, margin, margin));
@@ -48,7 +48,6 @@ public class HomePage extends MyPage {
             btnAssessment.setBorder(BorderFactory.createEmptyBorder(margin, margin, margin, margin));
             btnBack.setBorder(BorderFactory.createEmptyBorder(margin, margin, margin, margin));
 
-            // 添加动态效果
             MouseAdapter mouseAdapter = new MouseAdapter() {
                 @Override
                 public void mouseEntered(MouseEvent e) {
@@ -98,7 +97,7 @@ public class HomePage extends MyPage {
                 dispose();
             });
 
-            // 设置按钮颜色和文字颜色
+            // set color and font
             Color btnModulePageColor = new Color(96, 33, 46);
             Color btnGradePageColor = new Color(179, 122, 54);
             Color btnAchievementColor = new Color(25, 60, 79);
@@ -131,7 +130,7 @@ public class HomePage extends MyPage {
 
             DateTimePanel DTpanel = new DateTimePanel();
             setLayout(new BoxLayout(getContentPane(), BoxLayout.Y_AXIS));
-            // 将按钮添加到窗口
+
             panel.add(btnModulePage);
             panel.add(btnGradePage);
             panel.add(btnAchievement);

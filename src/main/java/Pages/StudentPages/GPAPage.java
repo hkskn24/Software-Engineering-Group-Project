@@ -130,7 +130,7 @@ public class GPAPage extends JFrame {
                 }
             }
 
-            // 计算每学期 GPA
+            // GPA for per semester
             double gpa = 0;
             if (totalCredits == 0 || totalGradePoints == 0) {
                 listModel.addElement("Semester " + semester + " : No Record");

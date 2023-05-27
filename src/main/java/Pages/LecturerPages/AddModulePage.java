@@ -12,7 +12,7 @@ import java.awt.event.WindowEvent;
 
 
 public class AddModulePage extends MyPage {
-    private final JTextField nameField, codeField, creditsField, hoursField,semesterField, typeField, lecturerField;
+    private final JTextField nameField, codeField, creditsField, hoursField, semesterField, typeField, lecturerField;
     private final JTextArea summaryField, aimsField, syllabusField, readingListField;
     private final JButton submitButton;
 
@@ -181,7 +181,7 @@ public class AddModulePage extends MyPage {
             new HomePage().setVisible(true);
         });
     }
-    
+
     //TDD用
     public JTextField getNameField() {
         return nameField;

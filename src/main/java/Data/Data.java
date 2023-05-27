@@ -3,37 +3,56 @@ package main.java.Data;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
-import java.io.FileWriter;
-import java.io.IOException;
+import java.io.*;
 import java.lang.reflect.Type;
-import java.nio.file.Files;
-import java.nio.file.Paths;
+import java.nio.charset.StandardCharsets;
 
 public class Data {
 
-    protected String readFileToString(String filePath) {
-        String file = null;
+    protected String readFileToString(InputStream inputStream) {
+        String fileContent = null;
 
         try {
-            file = new String(Files.readAllBytes(Paths.get(filePath)));
+            ByteArrayOutputStream result = new ByteArrayOutputStream();
+            byte[] buffer = new byte[1024];
+            int length;
+
+            while ((length = inputStream.read(buffer)) != -1) {
+                result.write(buffer, 0, length);
+            }
+
+            fileContent = result.toString(StandardCharsets.UTF_8);
         } catch (IOException e) {
             e.printStackTrace();
+        } finally {
+            try {
+                if (inputStream != null) {
+                    inputStream.close();
+                }
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
         }
 
-        return file;
+        return fileContent;
     }
 
-    protected  <T> T readJsonToList(String filePath, Type type) {
-        String jsonStr = readFileToString(filePath);
+
+    protected <T> T readJsonToList(InputStream inputStream, Type type) {
+        String jsonStr = readFileToString(inputStream);
         return new Gson().fromJson(jsonStr, type);
     }
 
-    protected void saveJsonToFile(String filePath, Object obj) {
+
+    protected void saveJsonToFile(InputStream inputStream, Object obj) {
         Gson gson = new GsonBuilder().setPrettyPrinting().create();
-        try (FileWriter writer = new FileWriter(filePath)) {
+        try (FileOutputStream outputStream = new FileOutputStream(String.valueOf(inputStream))) {
+            OutputStreamWriter writer = new OutputStreamWriter(outputStream);
             gson.toJson(obj, writer);
+            writer.flush();
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
     }
+
 }

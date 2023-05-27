@@ -6,6 +6,7 @@ import com.google.gson.reflect.TypeToken;
 import main.java.Entity.Student;
 
 import java.io.IOException;
+import java.io.InputStream;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -15,7 +16,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 
-public class StudentData extends Data{
+public class StudentData extends Data {
     private static StudentData instance = null;
     public List<Student> students;
 
@@ -31,11 +32,12 @@ public class StudentData extends Data{
     }
 
     public List<Student> getStudentList(String code) {
-        String path = "src/main/resources/data/modules/" + code + "/grades.json";
-        String jsonStr = readFileToString(path);
+        InputStream inputStream = getClass().getResourceAsStream("/main/resources/data/modules/" + code + "/grades.json");
+        String jsonStr = readFileToString(inputStream);
 
         try {
-            students = new Gson().fromJson(jsonStr, new TypeToken<List<Student>>(){}.getType());
+            students = new Gson().fromJson(jsonStr, new TypeToken<List<Student>>() {
+            }.getType());
             if (students == null) {
                 return new ArrayList<>();
             }
@@ -73,29 +75,31 @@ public class StudentData extends Data{
         newStudent.setName(student.get("name"));
         newStudent.setGrades(-1);
         students.add(newStudent);
-        String path = "src/main/resources/data/modules/" + code + "/grades.json";
-        saveJsonToFile(path, students);
+        InputStream inputStream = getClass().getResourceAsStream("/main/resources/data/modules/" + code + "/grades.json");
+        saveJsonToFile(inputStream, students);
     }
 
     public void addModuleToStudent(String studentName, String code) {
-        String path = "src/main/resources/data/students/" + studentName + "/modules.json";
-        List<String> modules = readJsonToList(path, new TypeToken<List<String>>(){}.getType());
+        InputStream inputStream = getClass().getResourceAsStream("/main/resources/data/students/" + studentName + "/modules.json");
+        List<String> modules = readJsonToList(inputStream, new TypeToken<List<String>>() {
+        }.getType());
         modules.add(code);
-        saveJsonToFile(path, modules);
+        saveJsonToFile(inputStream, modules);
     }
 
     public void deleteStudent(String code, String ID) {
         List<Student> students = getStudentList(code);
         students = students.stream().filter(student -> !student.getID().equals(ID)).collect(Collectors.toList());
-        String path = "src/main/resources/data/modules/" + code + "/grades.json";
-        saveJsonToFile(path, students);
+        InputStream inputStream = getClass().getResourceAsStream("/main/resources/data/modules/" + code + "/grades.json");
+        saveJsonToFile(inputStream, students);
     }
 
     public void removeModuleFromStudent(String studentName, String code) {
-        String path = "src/main/resources/data/students/" + studentName + "/modules.json";
-        List<String> modules = readJsonToList(path, new TypeToken<List<String>>(){}.getType());
+        InputStream inputStream = getClass().getResourceAsStream("/main/resources/data/students/" + studentName + "/modules.json");
+        List<String> modules = readJsonToList(inputStream, new TypeToken<List<String>>() {
+        }.getType());
         modules.remove(code);
-        saveJsonToFile(path, modules);
+        saveJsonToFile(inputStream, modules);
     }
 
     public boolean updateGrades(String code, String ID, int grades) {
@@ -108,8 +112,8 @@ public class StudentData extends Data{
                 break;
             }
         }
-        String path = "src/main/resources/data/modules/" + code + "/grades.json";
-        saveJsonToFile(path, students);
+        InputStream inputStream = getClass().getResourceAsStream("/main/resources/data/modules/" + code + "/grades.json");
+        saveJsonToFile(inputStream, students);
 
         return isSuccess;
     }

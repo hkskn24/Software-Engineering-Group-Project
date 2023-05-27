@@ -6,6 +6,9 @@ import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.*;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 
 public class RegisterActionListener implements ActionListener {
     public final int userType;
@@ -45,7 +48,8 @@ public class RegisterActionListener implements ActionListener {
             String id = idField.getText().trim();
             if (userType == 0) {
                 try {
-                    BufferedReader reader = new BufferedReader(new FileReader("students.txt"));
+                    InputStream inputStream = getClass().getResourceAsStream("/students.txt");
+                    BufferedReader reader = new BufferedReader(new InputStreamReader(inputStream));
                     String line1;
                     while ((line1 = reader.readLine()) != null) {
                         String[] sparts = line1.split(" ");
@@ -60,7 +64,8 @@ public class RegisterActionListener implements ActionListener {
                 }
             } else if (userType == 1) {
                 try {
-                    BufferedReader reader = new BufferedReader(new FileReader("lecturers.txt"));
+                    InputStream inputStream = getClass().getResourceAsStream("/lecturers.txt");
+                    BufferedReader reader = new BufferedReader(new InputStreamReader(inputStream));
                     String line1;
                     while ((line1 = reader.readLine()) != null) {
                         String[] sparts = line1.split(" ");
@@ -90,21 +95,20 @@ public class RegisterActionListener implements ActionListener {
 
             // student
             if (userType == 0) {
-                File studentFolder = new File("src/main/resources/data/students/" + username);
-                if (!studentFolder.exists()) {
-                    if (!studentFolder.mkdir()) {
-                        System.out.println("Failed to create student folder.");
-                    }
-                }
-
-                // create empty json files
-                File moduleFile = new File("src/main/resources/data/students/" + username + "/modules.json");
-                File achievementFile = new File("src/main/resources/data/students/" + username + "/achievements.json");
-
-                addFile(moduleFile);
-                addFile(achievementFile);
+//                InputStream inputStream = getClass().getResourceAsStream("../../../src/main/resources/data/students/"+username);
+                Path path = Paths.get("../../../src/main/resources/data/students/" + username);
                 try {
-                    BufferedWriter writer = new BufferedWriter(new FileWriter("students.txt", true));
+                    Files.createDirectories(path);
+                    File moduleFile = new File("../../../src/main/resources/data/students/" + username + "/modules.json");
+                    File achievementFile = new File("../../../src/main/resources/data/students/" + username + "/achievements.json");
+                    moduleFile.createNewFile();
+                    achievementFile.createNewFile();
+                } catch (IOException ex) {
+                    ex.printStackTrace();
+                }
+                try {
+                    InputStream inputStream2 = getClass().getResourceAsStream("/students.txt");
+                    BufferedWriter writer = new BufferedWriter(new FileWriter(String.valueOf(inputStream2), true));
                     writer.write(username + " " + password + " " + id);
                     writer.newLine();
                     JOptionPane.showMessageDialog(registerWindow, "Registration successful!");
@@ -116,7 +120,8 @@ public class RegisterActionListener implements ActionListener {
 
             // lecturer
             else {
-                File lecturerFolder = new File("src/main/resources/data/lecturers/" + username);
+                InputStream inputStream = getClass().getResourceAsStream("/main/resources/data/lecturers/");
+                File lecturerFolder = new File(inputStream + username);
                 if (!lecturerFolder.exists()) {
                     if (!lecturerFolder.mkdir()) {
                         System.out.println("Failed to create lecturer folder.");
@@ -124,11 +129,13 @@ public class RegisterActionListener implements ActionListener {
                 }
 
                 // create empty json files
-                File moduleFile = new File("src/main/resources/data/lecturers/" + username + "/modules.json");
+                InputStream inputStreamm = getClass().getResourceAsStream("src/main/resources/data/lecturers/" + username + "/modules.json");
+                File moduleFile = new File(String.valueOf(inputStreamm));
 
                 addFile(moduleFile);
                 try {
-                    BufferedWriter writer = new BufferedWriter(new FileWriter("lecturers.txt", true));
+                    InputStream inputStream2 = getClass().getResourceAsStream("/lecturers.txt");
+                    BufferedWriter writer = new BufferedWriter(new FileWriter(String.valueOf(inputStream2), true));
                     writer.write(username + " " + password + " " + id);
                     writer.newLine();
                     JOptionPane.showMessageDialog(registerWindow, "Registration successful!");

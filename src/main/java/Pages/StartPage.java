@@ -1,11 +1,13 @@
 package main.java.Pages;
 
-import com.formdev.flatlaf.*;
+import com.formdev.flatlaf.FlatLightLaf;
 
 import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.*;
-import java.io.*;
+import java.awt.image.BufferedImage;
+import java.io.IOException;
+import java.io.InputStream;
 import java.util.Locale;
 
 public class StartPage extends MyPage {
@@ -15,10 +17,10 @@ public class StartPage extends MyPage {
 
         // Set the background image
         try {
-            JLabel backgroundImage = new JLabel();
-            ImageIcon ii = new ImageIcon(ImageIO.read(getClass().getResource("../../resources/images/startpage.jpg")));
-            ii.setImage(ii.getImage().getScaledInstance(1094, 729, Image.SCALE_DEFAULT));
-            backgroundImage.setIcon(ii);
+            InputStream inputStream = getClass().getResourceAsStream("/main/resources/images/startpage.jpg");
+            BufferedImage image = ImageIO.read(inputStream);
+            ImageIcon icon = new ImageIcon(image);
+            JLabel backgroundImage = new JLabel(icon);
             backgroundImage.setLayout(new GridBagLayout());
             setContentPane(backgroundImage);
         } catch (IOException e) {
@@ -29,8 +31,7 @@ public class StartPage extends MyPage {
 
         JLabel label = new JLabel("Welcome to LumosLearning");
         try {
-            InputStream inputStream = new BufferedInputStream(
-                    new FileInputStream("src/main/resources/fonts/ParryHotter-1.ttf"));
+            InputStream inputStream = getClass().getResourceAsStream("/main/resources/fonts/ParryHotter-1.ttf");
 
             Font font = Font.createFont(Font.TRUETYPE_FONT, inputStream);
 
@@ -51,8 +52,7 @@ public class StartPage extends MyPage {
         startButton.setBackground(startButtoncolor);
         startButton.setForeground(startButtonTextColor);
         try {
-            InputStream inputStream = new BufferedInputStream(
-                    new FileInputStream("src/main/resources/fonts/HARRYP-1.ttf"));
+            InputStream inputStream = getClass().getResourceAsStream("/main/resources/fonts/HARRYP-1.ttf");
 
             Font font = Font.createFont(Font.TRUETYPE_FONT, inputStream);
 
@@ -72,7 +72,7 @@ public class StartPage extends MyPage {
     public static void main(String[] args) {
         FlatLightLaf.install();
 
-        UIManager.put("defaultFont",  new Font("Dialog", Font.PLAIN, 18));
+        UIManager.put("defaultFont", new Font("Dialog", Font.PLAIN, 18));
 
         Locale.setDefault(Locale.ENGLISH);
 

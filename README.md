@@ -58,7 +58,9 @@ Teachers can add assessments such as exams, quizzes, or assignments to the syste
 
 ## Usage
 
-- Please run the exe program and then there will display the start page with a login button.
+- Please enter java -jar GroupProjectCode.jar in the cmd in
+  Software-Engineering-Group-Project\out\artifacts\GroupProjectCode_jar
+- Then you can see the start page and please click the start button
 - Then you are in the login page and you can do:
 
 | button | function |

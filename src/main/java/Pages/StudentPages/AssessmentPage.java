@@ -12,12 +12,11 @@ import java.awt.*;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.WindowEvent;
-import java.util.Comparator;
-import java.util.List;
-
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.temporal.ChronoUnit;
+import java.util.Comparator;
+import java.util.List;
 
 
 public class AssessmentPage extends MyPage {
@@ -63,7 +62,6 @@ public class AssessmentPage extends MyPage {
         });
 
 
-
         table.setDefaultRenderer(Object.class, new DefaultTableCellRenderer() {
             private final DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy/MM/dd");
             private final Color color3Days = new Color(85, 114, 241, 75); // Dark blue for 3 days
@@ -99,6 +97,10 @@ public class AssessmentPage extends MyPage {
         setVisible(true);
     }
 
+    public static void main(String[] args) {
+        SwingUtilities.invokeLater(AssessmentPage::new);
+    }
+
     private void Assessments() {
         ModuleData moduleData = new ModuleData();
         List<Assessment> assessments = moduleData.loadAssessments();
@@ -132,10 +134,6 @@ public class AssessmentPage extends MyPage {
         table.setModel(model);
     }
 
-    public static void main(String[] args) {
-        SwingUtilities.invokeLater(AssessmentPage::new);
-    }
-    
     //TDD用
     public JTable getTable() {
         return table;

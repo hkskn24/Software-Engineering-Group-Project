@@ -15,11 +15,11 @@ import java.util.ArrayList;
 
 public class GPAPage extends JFrame {
     final ArrayList<Module> modules = ModuleData.getInstance().modules;
-    double totalHours = 0.0;
-    double totalQualityPoints = 0;
     final JTextArea textArea = new JTextArea();
     final JPanel panel = new JPanel();
     final StudentController studentController;
+    double totalHours = 0.0;
+    double totalQualityPoints = 0;
 
     public GPAPage() {
         super("GPA Page");
@@ -75,12 +75,11 @@ public class GPAPage extends JFrame {
         double agpa = 0;
         if (totalCredits == 0) {
             textArea.append("Total credits: No Record" + "\n");
-            textArea.append("Average GPA: No Record"  + "\n");
-        }
-        else {
-                agpa = averageGPA / totalCredits;
-                textArea.append("Average GPA: " + df.format(agpa) + "\n");
-                textArea.append("Total credits: " + dw.format(totalCredits) + "\n");
+            textArea.append("Average GPA: No Record" + "\n");
+        } else {
+            agpa = averageGPA / totalCredits;
+            textArea.append("Average GPA: " + df.format(agpa) + "\n");
+            textArea.append("Total credits: " + dw.format(totalCredits) + "\n");
         }
     }
 
@@ -97,8 +96,7 @@ public class GPAPage extends JFrame {
         double gpa = 0;
         if (totalCredits == 0) {
             textArea.append("Average grade: No Record" + "\n");
-        }
-        else {
+        } else {
             gpa = totalQualityPoints / totalCredits;
             textArea.append("Average grade: " + df.format(gpa) + "\n");
         }
@@ -151,18 +149,6 @@ public class GPAPage extends JFrame {
         panel.repaint();
     }
 
-    class AlternatingColorRenderer extends DefaultListCellRenderer {
-        private static final Color COLOR1 = new Color(240, 240, 240);
-        private static final Color COLOR2 = new Color(220, 220, 220);
-
-        @Override
-        public Component getListCellRendererComponent(JList<?> list, Object value, int index, boolean isSelected, boolean cellHasFocus) {
-            Component renderer = super.getListCellRendererComponent(list, value, index, isSelected, cellHasFocus);
-            renderer.setBackground(index % 2 == 0 ? COLOR1 : COLOR2);
-            return renderer;
-        }
-    }
-
     public void postGPA() {
         int totalCredits = 0;
         int totalQualityPoints = 0;
@@ -184,8 +170,7 @@ public class GPAPage extends JFrame {
         if (totalCredits == 0) {
             textArea.append("The Postgraduate GPA is: No Record " + "\n");
             textArea.append("The average Postgraduate GPA is: No Record ");
-        }
-        else {
+        } else {
             gpa = totalQualityPoints / totalCredits;
             agpa = totalGradePoints / totalCredits;
             textArea.append("The Postgraduate GPA is: " + df.format(gpa) + "\n");
@@ -204,6 +189,18 @@ public class GPAPage extends JFrame {
             return 1.0;
         } else {
             return 0.0;
+        }
+    }
+
+    class AlternatingColorRenderer extends DefaultListCellRenderer {
+        private static final Color COLOR1 = new Color(240, 240, 240);
+        private static final Color COLOR2 = new Color(220, 220, 220);
+
+        @Override
+        public Component getListCellRendererComponent(JList<?> list, Object value, int index, boolean isSelected, boolean cellHasFocus) {
+            Component renderer = super.getListCellRendererComponent(list, value, index, isSelected, cellHasFocus);
+            renderer.setBackground(index % 2 == 0 ? COLOR1 : COLOR2);
+            return renderer;
         }
     }
 }

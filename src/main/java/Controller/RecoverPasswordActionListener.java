@@ -27,7 +27,8 @@ public class RecoverPasswordActionListener implements ActionListener {
                 String username = "";
                 String password = "";
 
-                BufferedReader reader = new BufferedReader(new FileReader("students.txt"));
+                InputStream inputStream = getClass().getClassLoader().getResourceAsStream("students.txt");
+                BufferedReader reader = new BufferedReader(new InputStreamReader(inputStream));
                 String line3;
                 List<String> list = new ArrayList<>();
                 while ((line3 = reader.readLine()) != null) {
@@ -75,8 +76,8 @@ public class RecoverPasswordActionListener implements ActionListener {
             try {
                 String username = "";
                 String password = "";
-
-                BufferedReader reader = new BufferedReader(new FileReader("lecturers.txt"));
+                InputStream inputStream = getClass().getClassLoader().getResourceAsStream("lecturers.txt");
+                BufferedReader reader = new BufferedReader(new InputStreamReader(inputStream));
                 String line3;
                 List<String> list = new ArrayList<>();
                 while ((line3 = reader.readLine()) != null) {

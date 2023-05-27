@@ -9,7 +9,9 @@ import java.awt.*;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.WindowEvent;
+import java.awt.image.BufferedImage;
 import java.io.IOException;
+import java.io.InputStream;
 
 public class HomePage extends MyPage {
     public HomePage() {
@@ -17,7 +19,10 @@ public class HomePage extends MyPage {
 
         // Set the background image
         try {
-            JLabel backgroundImage = new JLabel(new ImageIcon(ImageIO.read(getClass().getResource("../../../resources/images/lhomepage.jpg"))));
+            InputStream inputStream = getClass().getResourceAsStream("/main/resources/images/lhomepage.jpg");
+            BufferedImage image = ImageIO.read(inputStream);
+            ImageIcon icon = new ImageIcon(image);
+            JLabel backgroundImage = new JLabel(icon);
             backgroundImage.setLayout(new GridBagLayout());
 
             // 创建按钮并设置大小

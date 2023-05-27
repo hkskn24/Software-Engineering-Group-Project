@@ -62,6 +62,10 @@ public class AchievementPage extends MyPage {
         setVisible(true);
     }
 
+    public static void main(String[] args) {
+        SwingUtilities.invokeLater(AchievementPage::new);
+    }
+
     private void setupAchievement() {
         ArrayList<Achievement> achievements = AchievementData.getInstance().achievements;
         for (Achievement achievement : achievements) {
@@ -150,9 +154,5 @@ public class AchievementPage extends MyPage {
         gbc.weighty = 1.0;
         gbc.anchor = GridBagConstraints.SOUTH;
         contentPanel.add(bottomPanel, gbc);
-    }
-
-    public static void main(String[] args) {
-        SwingUtilities.invokeLater(AchievementPage::new);
     }
 }

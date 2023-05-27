@@ -37,7 +37,7 @@ public class StudentController {
         List<Student> students = StudentData.getInstance().getStudentList(code);
         boolean isFound = false;
         String studentName = null;
-        
+
         for (Student s : students) {
             if (s.getID().equals(ID)) {
                 studentName = s.getName();

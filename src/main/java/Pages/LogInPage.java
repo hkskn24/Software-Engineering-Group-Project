@@ -13,12 +13,17 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.ItemEvent;
-import java.io.*;
+import java.awt.image.BufferedImage;
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
 
 public class LogInPage extends MyPage implements ActionListener {
     public static int userType; //student:0 lecturer:1
     final JTextField usernameField;
     final JPasswordField passwordField;
+    JLabel backgroundImage;
 
     public LogInPage() {
         setTitle("LOG IN TO YOUR ACCOUNT");
@@ -45,21 +50,22 @@ public class LogInPage extends MyPage implements ActionListener {
         group.add(lecturerCheckbox);
 
         // set background
-        ImageIcon backgroundImageIcon = null;
         try {
-            backgroundImageIcon = new ImageIcon(ImageIO.read(getClass().getResource("../../resources/images/login.jpg")));
+            InputStream inputStream = getClass().getResourceAsStream("/main/resources/images/login.jpg");
+            assert inputStream != null;
+            BufferedImage image = ImageIO.read(inputStream);
+            ImageIcon icon = new ImageIcon(image);
+            backgroundImage = new JLabel(icon);
         } catch (IOException e) {
             e.printStackTrace();
         }
-        JLabel backgroundImage = new JLabel(backgroundImageIcon);
         backgroundImage.setLayout(new GridLayout(0, 2, 4, 5));
 
         // set text label
         JLabel usernameLabel = new JLabel(" Username");
         JLabel passwordLabel = new JLabel(" Password");
         try {
-            InputStream inputStream = new BufferedInputStream(
-                    new FileInputStream("src/main/resources/fonts/HARRYP-1.ttf"));
+            InputStream inputStream = getClass().getResourceAsStream("/main/resources/fonts/HARRYP-1.ttf");
 
             Font font = Font.createFont(Font.TRUETYPE_FONT, inputStream);
 
@@ -95,8 +101,7 @@ public class LogInPage extends MyPage implements ActionListener {
         JButton[] buttons = {loginButton, registerButton, retrievePasswordButton, recoverPasswordButton};
         for (JButton button : buttons) {
             try {
-                InputStream inputStream = new BufferedInputStream(
-                        new FileInputStream("src/main/resources/fonts/HARRYP-1.ttf"));
+                InputStream inputStream = getClass().getResourceAsStream("/main/resources/fonts/HARRYP-1.ttf");
 
                 Font font = Font.createFont(Font.TRUETYPE_FONT, inputStream);
 
@@ -216,10 +221,10 @@ public class LogInPage extends MyPage implements ActionListener {
             boolean loggedIn = false;
 
             if (userType == 0) {
-                BufferedReader reader = new BufferedReader(new FileReader("students.txt"));
+                InputStream inputStream = getClass().getResourceAsStream("/students.txt");
+                BufferedReader reader = new BufferedReader(new InputStreamReader(inputStream));
                 String line;
                 while ((line = reader.readLine()) != null) {
-                    //for (String line : new String(java.nio.file.Files.readAllBytes(java.nio.file.Paths.get("students.txt"))).split("\\r?\\n")) {
                     String[] parts = line.split(" ");
                     if (parts[0].equals(username) && parts[1].equals(password)) {
                         Config.setUserType("students");
@@ -229,7 +234,8 @@ public class LogInPage extends MyPage implements ActionListener {
                 }
                 reader.close();
             } else if (userType == 1) {
-                BufferedReader reader = new BufferedReader(new FileReader("lecturers.txt"));
+                InputStream inputStream = getClass().getResourceAsStream("/lecturers.txt");
+                BufferedReader reader = new BufferedReader(new InputStreamReader(inputStream));
                 String line;
                 while ((line = reader.readLine()) != null) {
                     String[] parts = line.split(" ");

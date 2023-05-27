@@ -8,6 +8,7 @@ import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableRowSorter;
 import java.awt.event.ActionListener;
+import java.io.InputStream;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.ArrayList;
@@ -54,19 +55,24 @@ public class ModuleController {
 
     public static void addModule(Module module, String username) {
         String code = module.getCode();
-        String path = "src/main/resources/data";
+        String path = "../../../src/main/resources/data";
+        System.out.println(path);
 
         Path modulesPath = Paths.get(path, "modules", code);
         Path gradesPath = Paths.get(path, "modules", code, "grades.json");
         Path indexPath = Paths.get(path, "modules", "index.json");
-        Path lecturerPath = Paths.get(path, "lecturers", username, "modules.json");
+        InputStream lecturerInputStream = ModuleController.class.getResourceAsStream("/main/resources/data/lecturers/" + username + "modules.json");
+
+        System.out.println(modulesPath);
+        System.out.println(gradesPath);
+        System.out.println(indexPath);
 
         ModuleData moduleData = ModuleData.getInstance();
         moduleData.createModuleFolder(modulesPath);
         moduleData.saveModuleInfo(module);
         moduleData.initializeGradesJson(gradesPath);
         moduleData.addModuleToIndex(module, indexPath);
-        moduleData.addModuleToUser(module, lecturerPath);
+        moduleData.addModuleToUser(module, lecturerInputStream);
     }
 
     public static List<Module> searchAllModules(String term) {
@@ -76,11 +82,12 @@ public class ModuleController {
 
     public static void joinModule(Module module) {
         String username = Config.getUsername();
-        Path lecturerPath = Paths.get("src/main/resources/data/lecturers", username, "modules.json");
+        InputStream inputStream = ModuleController.class.getResourceAsStream("/main/resources/data/lecturers/" + username + "modules.json");
+
         ModuleData moduleData = ModuleData.getInstance();
 
         // add module to lecturer's index
-        moduleData.addModuleToUser(module, lecturerPath);
+        moduleData.addModuleToUser(module, inputStream);
 
         // add lecturer to module info
         module.setLecturer(module.getLecturer() + ", " + username);

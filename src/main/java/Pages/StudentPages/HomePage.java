@@ -2,8 +2,8 @@ package main.java.Pages.StudentPages;
 
 import com.formdev.flatlaf.FlatDarculaLaf;
 import main.java.Pages.DateTimePanel;
-import main.java.Pages.MyPage;
 import main.java.Pages.LogInPage;
+import main.java.Pages.MyPage;
 
 import javax.imageio.ImageIO;
 import javax.swing.*;
@@ -11,15 +11,21 @@ import java.awt.*;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.WindowEvent;
+import java.awt.image.BufferedImage;
 import java.io.IOException;
+import java.io.InputStream;
 
 public class HomePage extends MyPage {
     public HomePage() {
         setTitle("HomePage");
         // Set the background image
         try {
-            JLabel backgroundImage = new JLabel(new ImageIcon(ImageIO.read(getClass().getResource("../../../resources/images/shomepage.jpg"))));
+            InputStream inputStream = getClass().getResourceAsStream("/main/resources/images/shomepage.jpg");
+            BufferedImage image = ImageIO.read(inputStream);
+            ImageIcon icon = new ImageIcon(image);
+            JLabel backgroundImage = new JLabel(icon);
             backgroundImage.setLayout(new GridBagLayout());
+
             // 创建按钮并设置大小
             Dimension buttonSize = new Dimension(200, 50);
             JButton btnModulePage = new JButton("Module");
@@ -87,7 +93,7 @@ public class HomePage extends MyPage {
                 new AchievementPage().setVisible(true);
                 dispose();
             });
-            
+
             btnAssessment.addActionListener(e -> {
                 new AssessmentPage().setVisible(true);
                 dispose();
@@ -118,7 +124,7 @@ public class HomePage extends MyPage {
             btnAchievement.setFont(buttonFont);
             btnAchievement.setBackground(btnAchievementColor);
             btnAchievement.setForeground(buttonTextColor);
-            
+
             btnAssessment.setFont(buttonFont);
             btnAssessment.setBackground(btnAssessmentColor);
             btnAssessment.setForeground(buttonTextColor);

@@ -12,9 +12,9 @@ import java.awt.*;
 import java.util.List;
 
 public class AssignGradesPage extends MyPage {
-    private JTable table;
     private final StudentController studentController;
     private final String code;
+    private JTable table;
 
     public AssignGradesPage(Module module) {
         this.studentController = new StudentController();

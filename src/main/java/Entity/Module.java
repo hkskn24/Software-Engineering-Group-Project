@@ -125,14 +125,14 @@ public class Module {
     public void setId(int id) {
         this.id = id;
     }
-    
-    //TDD用
-    public void setGrades(int grades) {
-        this.grades = grades;
-    }
 
     public int getGrades() {
         return grades;
+    }
+
+    //TDD用
+    public void setGrades(int grades) {
+        this.grades = grades;
     }
 
     @Override

@@ -7,10 +7,7 @@ import main.java.Config;
 import main.java.Entity.Assessment;
 import main.java.Entity.Module;
 
-import java.io.FileReader;
-import java.io.FileWriter;
-import java.io.IOException;
-import java.io.Reader;
+import java.io.*;
 import java.lang.reflect.Type;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -37,7 +34,8 @@ public class ModuleData extends Data {
     private void getUserModules() {
         String username = Config.getUsername();
         String userType = Config.getUserType();
-        List<String> moduleCodes = readJsonToList("src/main/resources/data/" + userType + "/" + username + "/modules.json", new TypeToken<ArrayList<String>>() {
+        InputStream inputStream = getClass().getResourceAsStream("/main/resources/data/" + userType + "/" + username + "/modules.json");
+        List<String> moduleCodes = readJsonToList(inputStream, new TypeToken<ArrayList<String>>() {
         }.getType());
         modules = new ArrayList<>();
 
@@ -49,12 +47,17 @@ public class ModuleData extends Data {
     }
 
     private Module loadModuleByCode(String code) {
-        String jsonStr = readFileToString("src/main/resources/data/modules/" + code + "/info.json");
-        return new Gson().fromJson(jsonStr, Module.class);
+        InputStream inputStream = getClass().getResourceAsStream("/main/resources/data/modules/" + code + "/info.json");
+        if (inputStream != null) {
+            return new Gson().fromJson(new InputStreamReader(inputStream), Module.class);
+        }
+        return null;
     }
 
     public boolean isCodeUnique(String newCode) {
-        String jsonStr = readFileToString("src/main/resources/data/modules/index.json");
+        InputStream inputStream = getClass().getResourceAsStream("/main/resources/data/modules/index.json");
+        String jsonStr = readFileToString(inputStream);
+
         ArrayList<Map<String, String>> nameToCode = new Gson().fromJson(jsonStr, new TypeToken<ArrayList<Map<String, String>>>() {
         }.getType());
 
@@ -72,7 +75,8 @@ public class ModuleData extends Data {
 
     public List<Module> searchFromAllModules(String term) {
         List<Module> result = new ArrayList<>();
-        String jsonStr = readFileToString("src/main/resources/data/modules/index.json");
+        InputStream inputStream = getClass().getResourceAsStream("/main/resources/data/modules/index.json");
+        String jsonStr = readFileToString(inputStream);
         ArrayList<Map<String, String>> nameToCode = new Gson().fromJson(jsonStr, new TypeToken<ArrayList<Map<String, String>>>() {
         }.getType());
 
@@ -101,7 +105,8 @@ public class ModuleData extends Data {
 
     public void saveModuleInfo(Module module) {
         String code = module.getCode();
-        String path = "src/main/resources/data/modules";
+        InputStream inputStream = getClass().getResourceAsStream("/main/resources/data/modules");
+        String path = String.valueOf(inputStream);
         Path infoPath = Paths.get(path, code, "info.json");
 
         Gson gson = new GsonBuilder().setPrettyPrinting().create();
@@ -147,23 +152,24 @@ public class ModuleData extends Data {
         }
     }
 
-    public void addModuleToUser(Module module, Path userPath) {
+    public void addModuleToUser(Module module, InputStream inputStream) {
         Gson gson = new GsonBuilder().setPrettyPrinting().create();
         Type listType = new TypeToken<List<String>>() {
         }.getType();
         List<String> list;
-        try (Reader reader = new FileReader(userPath.toString())) {
+        try (Reader reader = new InputStreamReader(inputStream)) {
             list = gson.fromJson(reader, listType);
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
         list.add(module.getCode());
-        try (FileWriter writer = new FileWriter(userPath.toString())) {
+        try (FileWriter writer = new FileWriter(String.valueOf(inputStream))) {
             gson.toJson(list, writer);
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
     }
+
 
     public List<Module> getOngoingModules() {
         List<Module> ongoingModules = new ArrayList<>();
@@ -202,15 +208,16 @@ public class ModuleData extends Data {
     }
 
     public List<Assessment> loadAssessments() {
-        String filePath = "src/main/resources/data/assessments.json";
-        Type type = new TypeToken<List<Assessment>>() {}.getType();
+        InputStream inputStream = getClass().getResourceAsStream("/main/resources/data/assessments.json");
+        Type type = new TypeToken<List<Assessment>>() {
+        }.getType();
 
         List<String> codes = new ArrayList<>();
         for (Module module : modules) {
             codes.add(module.getCode());
         }
 
-        List<Assessment> assessments = readJsonToList(filePath, type);
+        List<Assessment> assessments = readJsonToList(inputStream, type);
         List<Assessment> studentAssessments = new ArrayList<>();
         for (Assessment assessment : assessments) {
             if (codes.contains(assessment.getCode())) {
@@ -222,7 +229,7 @@ public class ModuleData extends Data {
     }
 
     private void saveAssessments(List<Assessment> assessments) {
-        String filePath = "src/main/resources/data/assessments.json";
-        saveJsonToFile(filePath, assessments);
+        InputStream inputStream = getClass().getResourceAsStream("/main/resources/data/assessments.json");
+        saveJsonToFile(inputStream, assessments);
     }
 }

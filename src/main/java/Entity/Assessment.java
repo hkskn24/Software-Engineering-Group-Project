@@ -6,6 +6,7 @@ public class Assessment {
     private String moduleName;
     private String type;
     private String date;
+    private int duration;   // (minutes)
 
     public String getDate() {
         return date;
@@ -14,8 +15,6 @@ public class Assessment {
     public void setDate(String date) {
         this.date = date;
     }
-
-    private int duration;   // (minutes)
 
     public String getName() {
         return name;
@@ -36,24 +35,24 @@ public class Assessment {
     public String getType() {
         return type;
     }
-    
+
+    public void setType(String type) {
+        this.type = type;
+    }
+
     public String getCode() {
         return code;
+    }
+
+    public void setCode(String code) {
+        this.code = code;
     }
 
     public int getDuration() {
         return duration;
     }
 
-    public void setType(String type) {
-        this.type = type;
-    }
-
     public void setDuration(int duration) {
         this.duration = duration;
-    }
-
-    public void setCode(String code) {
-        this.code = code;
     }
 }
